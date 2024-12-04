@@ -1,2 +1,3 @@
 #include "Gerenciador_Grafico.h"
+#include "Ente.h"
 //...
