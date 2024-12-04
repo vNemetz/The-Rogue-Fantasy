@@ -7,8 +7,10 @@ class Ente;
 namespace ger{
 class Gerenciador_Grafico{
 private:
+
     sf::RenderWindow* janela;
     sf::Texture* Fundo;
+
 protected:
 //...
 public:
@@ -17,5 +19,6 @@ public:
 
     //desenhar
     void desenharEnte(Ente* pE);
+    void setJanela();
 };
 }
