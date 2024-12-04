@@ -3,6 +3,8 @@
 
 #include "Gerenciador_Grafico.h"
 
+#include <string>
+
 class Ente{
 protected:
     //Identificação única do Ente
