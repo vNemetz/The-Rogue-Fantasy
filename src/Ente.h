@@ -1,6 +1,9 @@
 #pragma once
 #include "Jogo.h"
 
+#define HEIGHT 600
+#define WIDTH 810
+
 #include "Gerenciador_Grafico.h"
 
 class Ente{
