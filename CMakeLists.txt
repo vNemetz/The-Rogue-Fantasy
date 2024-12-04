@@ -13,7 +13,10 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(main src/main.cpp)
+# Procura de forma recursiva os arquivos .cpp na pasta src e salva em sources
+file(GLOB_RECURSE sources CONFIGURE_DEPENDS src/*.cpp)
+
+add_executable(main ${sources})
 target_link_libraries(main PRIVATE sfml-graphics sfml-audio)
 target_compile_features(main PRIVATE cxx_std_17)
 
