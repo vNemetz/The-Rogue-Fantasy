@@ -1,14 +1,23 @@
 #include "Ente.h"
+#include "Gerenciador_Grafico.h"
 
-Ente::Ente() : pSprite(NULL), pTextura(NULL){
+Ente::Ente() : id(cont++){
     pTextura = new sf::Texture();  // Aloca memória para pTextura
     pSprite = new sf::Sprite();    // Aloca memória para pSprite
     setTextura();
     setSprite();
+    setTarget();
 }
 
-Ente::Ente(ger::Gerenciador_Grafico* pGrafico = NULL) : pSprite(NULL), pTextura(NULL){
+int Ente::cont(0);
+
+Ente::Ente(ger::Gerenciador_Grafico* pGrafico = NULL) : id(cont++){
     setpGG(pGrafico);
+    pTextura = new sf::Texture();  // Aloca memória para pTextura
+    pSprite = new sf::Sprite();    // Aloca memória para pSprite
+    setTextura();
+    setSprite();
+    setTarget();
 }
 Ente::~Ente(){
     delete pTextura;  // Libera a memória alocada para pTextura
@@ -26,16 +35,20 @@ void Ente::setpGG(ger::Gerenciador_Grafico* pGrafico){ //testa e seta o pGG
 //Gráficos
 void Ente::setSprite(){
     pSprite->setTexture(*pTextura, false);
-    pSprite->setPosition(sf::Vector2f(100.f, 100.f));
+    pSprite->setPosition(sf::Vector2f((float)(rand() % 810), (float)(rand() % 600)));
 }
 
-sf::Sprite Ente::getSprite(){
+void Ente::setTarget(){
+    if(pGG){pTarget = (pGG->getJanela());}
+}
+
+sf::Sprite Ente::getSprite() const{
     return *pSprite;
 }
 
 void Ente::setTextura(){
     pTextura->loadFromFile("../assets/images/Rogue/rogue.png");
 }
-void Ente::desenhar()
-{
+void Ente::desenhar(){
+    pTarget->draw(getSprite());
 }
