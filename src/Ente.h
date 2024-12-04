@@ -1,18 +1,38 @@
 #pragma once
 #include "Jogo.h"
+
 #include "Gerenciador_Grafico.h"
 
 class Ente{
 protected:
+    //Identificação única do Ente
     int id;
-    static Gerenciador_Grafico* pGG;
-    //Figura* pFig;
+    static int cont;
+
+    //Gráficos
+    static ger::Gerenciador_Grafico* pGG;
+    sf::Texture* pTextura;
+    sf::Sprite* pSprite;
+
+    //Desenhar
+    sf::RenderTarget* pTarget; //Alvo da renderização (janela)
     //...
 
 public:
-    Ente(){}
-    ~Ente(){}
-    virtual void executar() = 0;
+    //Construtora e Destrutora
+    Ente();
+    Ente(ger::Gerenciador_Grafico* pGrafico);
+    ~Ente();
+
+    //virtual void executar() = 0;
+
+    //Gerenciador gráfico
+    void setpGG(ger::Gerenciador_Grafico* pGrafico);
+    
+    //Gráficos
+    void setTextura();
     void desenhar();
-    //...
+    void setSprite();
+    void setTarget();
+    sf::Sprite getSprite() const;
 };
