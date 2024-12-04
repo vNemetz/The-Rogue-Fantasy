@@ -47,7 +47,10 @@ sf::Sprite Ente::getSprite() const{
 }
 
 void Ente::setTextura(){
-    pTextura->loadFromFile("../assets/images/Rogue/rogue.png");
+    std::string imagePath = PROJECT_ROOT;
+    imagePath += "/assets/images/Rogue/rogue.png";
+    
+    pTextura->loadFromFile(imagePath);
 }
 void Ente::desenhar(){
     pTarget->draw(getSprite());
