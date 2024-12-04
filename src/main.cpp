@@ -1,14 +1,7 @@
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
-#include <SFML/Config.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
-
-#include <iostream>
-#include <vector>
-using namespace std;
+#include "Jogo.h"
 
 int main(){
+    Jogo j;
     cout << "Working\n";
     return 0;
 }
