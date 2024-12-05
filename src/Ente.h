@@ -40,4 +40,7 @@ public:
     void setSprite();
     void setTarget();
     sf::Sprite getSprite() const;
+
+    sf::Vector2f getPosition() const;
+    void setPosition(int x, int y);
 };
