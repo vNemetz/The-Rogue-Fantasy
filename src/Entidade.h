@@ -10,6 +10,7 @@ protected:
 public:
     //Construtora e Destrutora
     Entidade();
+    Entidade(ger::Gerenciador_Grafico* pGrafico);
     virtual ~Entidade();
 
     virtual void executar() = 0;
