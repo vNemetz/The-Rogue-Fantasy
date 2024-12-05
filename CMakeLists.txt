@@ -13,6 +13,9 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
+# Define o PROJECT_ROOT como variável global
+add_compile_definitions(PROJECT_ROOT="${CMAKE_SOURCE_DIR}")
+
 # Procura de forma recursiva os arquivos .cpp na pasta src e salva em sources
 file(GLOB_RECURSE sources CONFIGURE_DEPENDS src/*.cpp)
 
