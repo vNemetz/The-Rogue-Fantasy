@@ -13,13 +13,17 @@
 using namespace std;
 namespace ger{class Gerenciador_Grafico;}
 class Ente;
+namespace pers{class Personagem;}
 
 class Jogo{
 private:
     ger::Gerenciador_Grafico *gG;
     Ente *e;
+    pers::Personagem* p;
 public:
     Jogo();
     ~Jogo();
     void executar();
+
+    void moveEntes();
 };

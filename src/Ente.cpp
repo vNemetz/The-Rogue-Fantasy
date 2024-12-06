@@ -55,3 +55,10 @@ void Ente::setTextura(){
 void Ente::desenhar(){
     pTarget->draw(getSprite());
 }
+
+void Ente::setPosition(int x, int y){
+    pSprite->setPosition(sf::Vector2f((float)x,(float)y));
+}
+sf::Vector2f Ente::getPosition() const{
+    return pSprite->getPosition();
+}
