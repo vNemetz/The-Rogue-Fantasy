@@ -13,6 +13,9 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
+# Adiciona o diretório include ao caminho de busca dos headers
+include_directories(include)
+
 # Define o PROJECT_ROOT como variável global
 add_compile_definitions(PROJECT_ROOT="${CMAKE_SOURCE_DIR}")
 
