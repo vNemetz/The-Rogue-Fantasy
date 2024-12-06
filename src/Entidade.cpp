@@ -1,4 +1,4 @@
-#include "../include/Entidade.h"
+#include "Entidade.h"
 //...
 ent::Entidade::Entidade(){}
 

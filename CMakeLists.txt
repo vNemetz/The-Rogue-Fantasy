@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.31)
+cmake_minimum_required(VERSION 3.30.5)
 project(Jogo LANGUAGES CXX)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -12,6 +12,9 @@ FetchContent_Declare(SFML
     EXCLUDE_FROM_ALL
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
+
+# Adiciona o diretório include ao caminho de busca dos headers
+include_directories(include)
 
 # Define o PROJECT_ROOT como variável global
 add_compile_definitions(PROJECT_ROOT="${CMAKE_SOURCE_DIR}")

@@ -1,4 +1,4 @@
-#include "../include/Personagem.h"
+#include "Personagem.h"
 
 pers::Personagem::Personagem() : ent::Entidade(NULL)
 {

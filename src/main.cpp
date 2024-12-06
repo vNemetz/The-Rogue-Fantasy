@@ -1,5 +1,5 @@
-#include "../include/Jogo.h"
-#include "../include/Ente.h"
+#include "Jogo.h"
+#include "Ente.h"
 
 int main(){
     Jogo j;

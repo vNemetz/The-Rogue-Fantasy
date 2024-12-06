@@ -1,6 +1,6 @@
-#include "../include/Jogo.h"
-#include "../include/Ente.h"
-#include "../include/Gerenciador_Grafico.h"
+#include "Jogo.h"
+#include "Ente.h"
+#include "Gerenciador_Grafico.h"
 //...
 
 Jogo::Jogo(){
