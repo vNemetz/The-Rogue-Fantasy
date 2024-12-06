@@ -1,5 +1,5 @@
-#include "Gerenciador_Grafico.h"
-#include "Ente.h"
+#include "../include/Gerenciador_Grafico.h"
+#include "../include/Ente.h"
 
 ger::Gerenciador_Grafico::Gerenciador_Grafico() : pJanela(NULL){
     setVideoMode();
