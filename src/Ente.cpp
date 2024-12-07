@@ -6,7 +6,6 @@ Ente::Ente() {
     pSprite = new sf::Sprite();    // Aloca memória para pSprite
     setTextura();
     setSprite();
-    setTarget();
 }
 
 Ente::Ente(sf::Vector2f pos, sf::Vector2f tam, ID id) : id(id), posicao(pos), tamanho(tam) {

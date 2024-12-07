@@ -9,7 +9,7 @@ Jogo::Jogo(){
     srand(time(NULL));
     gG = new ger::Gerenciador_Grafico();
    // e = new Ente(gG);
-    j = new pers::Jogador (sf::Vector2f((float)(rand()%10),(float)(rand()%10)),sf::Vector2f((float)(rand()%10), (float)(rand()%10)));
+    j = new pers::Jogador (sf::Vector2f(20.f, 20.f),sf::Vector2f(20.f, 20.f), vazio);
 
     executar();
 }
@@ -41,6 +41,7 @@ void Jogo::moveEntes(){
 void Jogo::executar(){
     if(gG){
         j->setpGG(gG);
+        j->setTarget();
         while (gG->getJanela()->isOpen()) {
             sf::Event event;
             while (gG->getJanela()->pollEvent(event)) {
@@ -53,7 +54,7 @@ void Jogo::executar(){
 
             moveEntes();
             // Desenhar o sprite
-            gG->desenharEnte(j);
+            gG->desenharEnte(static_cast<Ente*>(j));
 
             // Exibir a janela
             gG->getJanela()->display();
