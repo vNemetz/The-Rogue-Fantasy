@@ -27,7 +27,12 @@ public:
     Coord<TC> operator/(Coord<TC> outra);
     Coord<TC> operator*(double escalar);
     Coord<TC> operator*(double escalar);
-}
+};
+
+typedef Coord<double> CoordD;
+typedef Coord<float> CoordF;
+typedef Coord<int> CoordI;
+typedef Coord<unigned int> CoordU;
 
 template<typename TC>
 void operator=(Coord<TC> outra){
