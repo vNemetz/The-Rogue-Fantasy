@@ -1,8 +1,8 @@
 #include "Entidade.h"
 //...
-ent::Entidade::Entidade(){}
+ent::Entidade::Entidade(): Ente(){}
 
-ent::Entidade::Entidade(ger::Gerenciador_Grafico* pGrafico = NULL): Ente(pGrafico)/*, x(rand()%WIDTH), y(rand()%HEIGHT)*/{}
+ent::Entidade::Entidade(sf::Vector2f pos, sf::Vector2f tam, ID id): Ente(pos, tam, id){}
 
 ent::Entidade::~Entidade(){/*x = 0; y = 0;*/}
 

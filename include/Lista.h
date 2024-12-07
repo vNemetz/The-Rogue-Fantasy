@@ -1,5 +1,5 @@
 #pragma once
-
+#include <iostream>
 #include "Jogo.h"
 
 /* Lista Encadeada de tipo genérico */
@@ -129,10 +129,10 @@ template <typename TL>
 void Lista<TL>::imprimir() {
     Elemento<TL>* iterador = pPrimeiro;
 
-    cout << "Lista: ";
+    std::cout << "Lista: ";
     while (iterador != nullptr) {
-        cout << *(iterador->getInfo()) << " ";
+        std::cout << *(iterador->getInfo()) << " ";
         iterador = iterador->getProximo();
     }
-    cout << endl;
+    std::cout << std::endl;
 }
