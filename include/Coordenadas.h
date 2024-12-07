@@ -34,6 +34,10 @@ typedef Coord<float> CoordF;
 typedef Coord<int> CoordI;
 typedef Coord<unigned int> CoordU;
 
+template <typename TC>
+Coord<TC>::Coord(TC xPar, TC yPar): //Cria com os parâmetros iniciais
+x(xPar), y(yPar){}
+
 template<typename TC>
 void operator=(Coord<TC> outra){
     x = outra.x;
