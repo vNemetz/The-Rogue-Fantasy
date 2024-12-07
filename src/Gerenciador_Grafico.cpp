@@ -27,3 +27,8 @@ sf::RenderWindow *ger::Gerenciador_Grafico::getJanela() const{
 void ger::Gerenciador_Grafico::desenharEnte(Ente *pE){
     if(pE){pE->desenhar();}
 }
+/*void ger::Gerenciador_Grafico::carregarTextura(const char* caminho){
+    std::string caminhoTextura = PROJECT_ROOT;
+    caminhoTextura += caminho;
+    //...
+}*/
