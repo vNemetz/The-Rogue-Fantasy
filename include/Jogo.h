@@ -7,19 +7,21 @@
 #include <cstdlib>
 #include <time.h>
 
+#include <map>
 #include <iostream>
 #include <vector>
+#include <string>
+#define CAMINHO_JOGO 
 
-using namespace std;
 namespace ger{class Gerenciador_Grafico;}
 class Ente;
-namespace pers{class Personagem;}
+namespace pers{class Jogador;}
 
 class Jogo{
 private:
     ger::Gerenciador_Grafico *gG;
     Ente *e;
-    pers::Personagem* p;
+    pers::Jogador *j;
 public:
     Jogo();
     ~Jogo();
