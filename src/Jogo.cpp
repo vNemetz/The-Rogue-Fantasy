@@ -8,17 +8,17 @@
 Jogo::Jogo(){
     srand(time(NULL));
     gG = new ger::Gerenciador_Grafico();
-    e = new Ente(gG);
-    j = new pers::Jogador(gG);
+   // e = new Ente(gG);
+    j = new pers::Jogador (sf::Vector2f((float)(rand()%10),(float)(rand()%10)),sf::Vector2f((float)(rand()%10), (float)(rand()%10)));
 
     executar();
 }
 
 Jogo::~Jogo(){
-    delete e;
-    delete gG;
+   // delete e;
     delete j;
-    e = NULL;
+    delete gG;
+    //e = NULL;
     gG = NULL;
     j = NULL;
 }
@@ -40,6 +40,7 @@ void Jogo::moveEntes(){
 
 void Jogo::executar(){
     if(gG){
+        j->setpGG(gG);
         while (gG->getJanela()->isOpen()) {
             sf::Event event;
             while (gG->getJanela()->pollEvent(event)) {

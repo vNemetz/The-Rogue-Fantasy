@@ -1,7 +1,7 @@
 #include "Ente.h"
 #include "Gerenciador_Grafico.h"
 
-Ente::Ente() : id(cont++){
+Ente::Ente() {
     pTextura = new sf::Texture();  // Aloca memória para pTextura
     pSprite = new sf::Sprite();    // Aloca memória para pSprite
     setTextura();
@@ -9,10 +9,7 @@ Ente::Ente() : id(cont++){
     setTarget();
 }
 
-int Ente::cont(0);
-
-Ente::Ente(ger::Gerenciador_Grafico* pGrafico = NULL) : id(cont++){
-    setpGG(pGrafico);
+Ente::Ente(sf::Vector2f pos, sf::Vector2f tam, ID id) : id(id), posicao(pos), tamanho(tam) {
     pTextura = new sf::Texture();  // Aloca memória para pTextura
     pSprite = new sf::Sprite();    // Aloca memória para pSprite
     setTextura();
@@ -24,6 +21,7 @@ Ente::~Ente(){
     delete pSprite;   // Libera a memória alocada para pSprite
     pSprite = NULL;
     pTextura = NULL;
+    pGG = NULL;
 }
 
 ger::Gerenciador_Grafico* Ente::pGG(NULL); //atributo static
@@ -35,7 +33,7 @@ void Ente::setpGG(ger::Gerenciador_Grafico* pGrafico){ //testa e seta o pGG
 //Gráficos
 void Ente::setSprite(){
     pSprite->setTexture(*pTextura, false);
-    pSprite->setPosition(sf::Vector2f((float)(rand() % 810), (float)(rand() % 600)));
+    pSprite->setPosition(posicao);
 }
 
 void Ente::setTarget(){
@@ -49,16 +47,22 @@ sf::Sprite Ente::getSprite() const{
 void Ente::setTextura(){
     std::string imagePath = PROJECT_ROOT;
     imagePath += "/assets/images/Rogue/rogue.png";
-    
     pTextura->loadFromFile(imagePath);
 }
 void Ente::desenhar(){
     pTarget->draw(getSprite());
 }
 
-void Ente::setPosition(int x, int y){
-    pSprite->setPosition(sf::Vector2f((float)x,(float)y));
+void Ente::setPosition(sf::Vector2f pos){
+    pSprite->setPosition(pos);
 }
 sf::Vector2f Ente::getPosition() const{
     return pSprite->getPosition();
+}
+
+void Ente::setID(ID idPar){
+    id = idPar;
+}
+ID Ente::getID(){
+    return id;
 }

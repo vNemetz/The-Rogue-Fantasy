@@ -7,11 +7,22 @@
 #include "Gerenciador_Grafico.h"
 
 
+enum ID{
+    vazio = 0,
+    jogador,
+    plataforma,
+    inimigo,
+    projetil,
+    menu,
+    fase
+};
+
 class Ente{
 protected:
     //Identificação única do Ente
-    int id;
-    static int cont;
+    ID id;
+    sf::Vector2f tamanho;
+    sf::Vector2f posicao;
 
     //Gráficos
     static ger::Gerenciador_Grafico* pGG;
@@ -25,8 +36,10 @@ protected:
 public:
     //Construtora e Destrutora
     Ente();
-    Ente(ger::Gerenciador_Grafico* pGrafico);
+    Ente(sf::Vector2f posicao, sf::Vector2f tamanho, ID id = vazio);
     ~Ente();
+    ID getID();
+    void setID(ID idPar);
 
     //virtual void executar() = 0;
 
@@ -40,6 +53,7 @@ public:
     void setTarget();
     sf::Sprite getSprite() const;
 
-    sf::Vector2f getPosition() const;
-    void setPosition(int x, int y);
+sf::Vector2f getPosition() const;
+
+    void setPosition(sf::Vector2f pos);
 };

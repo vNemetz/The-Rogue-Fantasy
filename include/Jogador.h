@@ -11,7 +11,7 @@ protected:
 //...
 public:
     Jogador();
-    Jogador(ger::Gerenciador_Grafico* pGrafico = NULL);
+    Jogador(sf::Vector2f pos, sf::Vector2f tam, ID id = vazio);
     ~Jogador();
     void executar();
 

@@ -4,14 +4,12 @@
 namespace ent{
 class Entidade : public Ente{
 protected:
-    //int x;
-    //int y;
+
     //ostream buffer;
-    sf::Vector2f position;
 public:
     //Construtora e Destrutora
     Entidade();
-    Entidade(ger::Gerenciador_Grafico* pGrafico);
+    Entidade(sf::Vector2f pos, sf::Vector2f tam, ID id = vazio);
     virtual ~Entidade();
 
     //virtual void executar() = 0;

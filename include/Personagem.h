@@ -7,7 +7,7 @@ protected:
     int num_vidas;
 public:
     Personagem();
-    Personagem(ger::Gerenciador_Grafico* pGrafico = NULL);
+    Personagem(sf::Vector2f pos, sf::Vector2f tam, ID id = vazio);
     ~Personagem();
 
     //virtual void setNum_Vidas() = 0; //Declara o número de vidas inicial

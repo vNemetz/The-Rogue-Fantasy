@@ -1,9 +1,9 @@
 #pragma once
 
-namespace mat{
-    
+namespace mat {
+
 template <typename TC>
-class Coord{
+class Coord {
 public:
     TC x;
     TC y;
@@ -11,92 +11,108 @@ public:
 public:
     Coord();
     Coord(TC x, TC y);
-    ~Coord(){}
+    ~Coord() {}
 
-    void operator=(Coord<TC> outra);
-    void operator+=(Coord<TC> outra);
-    void operator-=(Coord<TC> outra);
-    void operator/=(Coord<TC> outra);
-    void operator*=(Coord<TC> outra);
+    // Atribuição e operadores de modificação
+    void operator=(const Coord<TC>& outra);
+    void operator+=(const Coord<TC>& outra);
+    void operator-=(const Coord<TC>& outra);
+    void operator/=(const Coord<TC>& outra);
+    void operator*=(const Coord<TC>& outra);
     void operator/=(double escalar);
     void operator*=(double escalar);
 
-    Coord<TC> operator+(Coord<TC> outra);
-    Coord<TC> operator-(Coord<TC> outra);
-    Coord<TC> operator*(Coord<TC> outra);
-    Coord<TC> operator/(Coord<TC> outra);
-    Coord<TC> operator*(double escalar);
-    Coord<TC> operator*(double escalar);
+    // Operadores binários que retornam um novo objeto
+    Coord<TC> operator+(const Coord<TC>& outra) const;
+    Coord<TC> operator-(const Coord<TC>& outra) const;
+    Coord<TC> operator*(const Coord<TC>& outra) const;
+    Coord<TC> operator/(const Coord<TC>& outra) const;
+    Coord<TC> operator*(double escalar) const;
+    Coord<TC> operator/(double escalar) const;
 };
 
+// Tipos alias
 typedef Coord<double> CoordD;
 typedef Coord<float> CoordF;
 typedef Coord<int> CoordI;
-typedef Coord<unigned int> CoordU;
+typedef Coord<unsigned int> CoordU;
+
+// Implementação dos métodos da classe
 
 template <typename TC>
-Coord<TC>::Coord(TC xPar, TC yPar): //Cria com os parâmetros iniciais
-x(xPar), y(yPar){}
+Coord<TC>::Coord(TC xPar, TC yPar): x(xPar), y(yPar) {}
 
 template<typename TC>
-void operator=(Coord<TC> outra){
+void Coord<TC>::operator=(const Coord<TC>& outra) {
     x = outra.x;
     y = outra.y;
 }
-void operator+=(Coord<TC> outra){
+
+template<typename TC>
+void Coord<TC>::operator+=(const Coord<TC>& outra) {
     x += outra.x;
     y += outra.y;
 }
-void operator-=(Coord<TC> outra){
+
+template<typename TC>
+void Coord<TC>::operator-=(const Coord<TC>& outra) {
     x -= outra.x;
     y -= outra.y;
 }
-void operator/=(Coord<TC> outra){
+
+template<typename TC>
+void Coord<TC>::operator/=(const Coord<TC>& outra) {
     x /= outra.x;
     y /= outra.y;
 }
-void operator*=(Coord<TC> outra){
+
+template<typename TC>
+void Coord<TC>::operator*=(const Coord<TC>& outra) {
     x *= outra.x;
     y *= outra.y;
 }
-void operator*=(double escalar){
+
+template<typename TC>
+void Coord<TC>::operator*=(double escalar) {
     x *= escalar;
     y *= escalar;
-}void operator/=(double escalar){
+}
+
+template<typename TC>
+void Coord<TC>::operator/=(double escalar) {
     x /= escalar;
     y /= escalar;
 }
-Coord<TC> operator+(Coord<TC> outra){
-    x+=outra.x;
-    y+=outra.y;
-    return this;
-}
-Coord<TC> operator-(Coord<TC> outra){
-    x-=outra.x;
-    y-=outra.y;
-    return this;
-}
-Coord<TC> operator*(Coord<TC> outra){
-    x*=outra.x;
-    y*=outra.y;
-    return this;
-}
-Coord<TC> operator/(Coord<TC> outra){
-    x/=outra.x;
-    y/=outra.y;
-    return this;
-}
-Coord<TC> operator*(double escalar){
-    x *= escalar;
-    y *= escalar;
-    return this;
-}
-Coord<TC> operator/(double escalar){
-    x /= escalar;
-    y /= escalar;
-    return this;
+
+// Operadores binários com retorno de novo objeto
+template<typename TC>
+Coord<TC> Coord<TC>::operator+(const Coord<TC>& outra) const {
+    return Coord<TC>(x + outra.x, y + outra.y);
 }
 
+template<typename TC>
+Coord<TC> Coord<TC>::operator-(const Coord<TC>& outra) const {
+    return Coord<TC>(x - outra.x, y - outra.y);
+}
 
+template<typename TC>
+Coord<TC> Coord<TC>::operator*(const Coord<TC>& outra) const {
+    return Coord<TC>(x * outra.x, y * outra.y);
+}
+
+template<typename TC>
+Coord<TC> Coord<TC>::operator/(const Coord<TC>& outra) const {
+    return Coord<TC>(x / outra.x, y / outra.y);
+}
+
+template<typename TC>
+Coord<TC> Coord<TC>::operator*(double escalar) const {
+    return Coord<TC>(x * escalar, y * escalar);
+}
+
+template<typename TC>
+Coord<TC> Coord<TC>::operator/(double escalar) const {
+    return Coord<TC>(x / escalar, y / escalar);
+}
 
 }

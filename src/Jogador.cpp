@@ -1,8 +1,9 @@
 #include "Jogador.h"
 
-pers::Jogador::Jogador(): pers::Personagem(NULL), vivo(true){}
+pers::Jogador::Jogador(): pers::Personagem(), vivo(true){}
 
-pers::Jogador::Jogador(ger::Gerenciador_Grafico *pGrafico): pers::Personagem(pGrafico), vivo(true){
+pers::Jogador::Jogador(sf::Vector2f pos, sf::Vector2f tam, ID id): 
+pers::Personagem(pos, tam, id), vivo(true){
 
 }
 
@@ -21,8 +22,8 @@ bool pers::Jogador::getVivo(){
     return vivo;
 }
 void pers::Jogador::mover(sf::Keyboard::Key key){
-    if(key == sf::Keyboard::A){setPosition(getPosition().x -1.f, getPosition().y);}
-    else if(key == sf::Keyboard::D){setPosition(getPosition().x + 1.f, getPosition().y);}
-    else if(key == sf::Keyboard::W){setPosition(getPosition().x, getPosition().y-1.f);}
-    else if(key == sf::Keyboard::S){setPosition(getPosition().x, getPosition().y+1.f);}
+    if(key == sf::Keyboard::A){setPosition (sf::Vector2f(getPosition().x -1.f, getPosition().y));}
+    else if(key == sf::Keyboard::D){setPosition (sf::Vector2f(getPosition().x + 1.f, getPosition().y));}
+    else if(key == sf::Keyboard::W){setPosition (sf::Vector2f(getPosition().x, getPosition().y-1.f));}
+    else if(key == sf::Keyboard::S){setPosition(sf::Vector2f(getPosition().x, getPosition().y+1.f));}
 }
