@@ -4,11 +4,28 @@
 ger::Gerenciador_Grafico::Gerenciador_Grafico() : pJanela(NULL){
     setVideoMode();
     setJanela();
+    setVista();
 }
 
 ger::Gerenciador_Grafico::~Gerenciador_Grafico(){
     delete pJanela;
-    pJanela = NULL;    
+    pJanela = NULL;
+}
+
+void ger::Gerenciador_Grafico::setVista(){
+    if(pJanela){vista = pJanela->getView();}
+}
+
+void ger::Gerenciador_Grafico::setTamanhoVista(float largura, float altura){
+    vista.setSize(largura, altura);
+}
+
+void ger::Gerenciador_Grafico::setCentroVista(float largura, float altura){
+    vista.setCenter(largura, altura);
+}
+
+sf::View ger::Gerenciador_Grafico::getVista(){
+    return vista;
 }
 
 void ger::Gerenciador_Grafico::setVideoMode(){
@@ -17,7 +34,7 @@ void ger::Gerenciador_Grafico::setVideoMode(){
 }
 
 void ger::Gerenciador_Grafico::setJanela(){
-    pJanela = new sf::RenderWindow(videoMode, "oJogo", sf::Style::Default);
+    pJanela = new sf::RenderWindow(videoMode, "oJogo", sf::Style::Resize | sf::Style::Default);
 }
 
 sf::RenderWindow *ger::Gerenciador_Grafico::getJanela() const{

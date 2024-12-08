@@ -12,10 +12,18 @@ ger::Gerenciador_Eventos::~Gerenciador_Eventos() {
 
 void ger::Gerenciador_Eventos::gerenciar() {
     sf::Event evento;
-    sf::RenderWindow* janela = gerGrafico->getJanela();
+    sf::RenderWindow* pJanela = gerGrafico->getJanela();
 
-    while (janela->pollEvent(evento)) {
+    while (pJanela->pollEvent(evento)) {
         if (evento.type == sf::Event::Closed)
-            janela->close();
+            pJanela->close();
+        if (evento.type == sf::Event::Resized) {
+                // Ajusta a view (câmera) para a nova resolução
+                if(gerGrafico){
+                    gerGrafico->setTamanhoVista(static_cast<float>(evento.size.width), static_cast<float>(evento.size.height));
+                    gerGrafico->setCentroVista(static_cast<float>(evento.size.width) / 2, static_cast<float>(evento.size.height) / 2);
+                    pJanela->setView(gerGrafico->getVista());
+                }
+            }
     }
 }
