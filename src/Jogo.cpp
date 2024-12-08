@@ -1,63 +1,65 @@
 #include "Jogo.h"
 #include "Ente.h"
 #include "Gerenciador_Grafico.h"
+#include "Gerenciador_Eventos.h"
 #include "Personagem.h"
 #include "Jogador.h"
 //...
 
 Jogo::Jogo(){
     srand(time(NULL));
-    gG = new ger::Gerenciador_Grafico();
-   // e = new Ente(gG);
-    j = new pers::Jogador (sf::Vector2f(20.f, 20.f),sf::Vector2f(20.f, 20.f), vazio);
+    gerGrafico = new ger::Gerenciador_Grafico();
+    gerEventos = new ger::Gerenciador_Eventos(gerGrafico);
+   // e = new Ente(gerGrafico);
+    jogador = new pers::Jogador (sf::Vector2f(20.f, 20.f),sf::Vector2f(20.f, 20.f), vazio);
 
     executar();
 }
 
 Jogo::~Jogo(){
    // delete e;
-    delete j;
-    delete gG;
+    delete jogador;
+    delete gerGrafico;
+    delete gerEventos;
     //e = NULL;
-    gG = NULL;
-    j = NULL;
+    gerGrafico = NULL;
+    gerEventos = NULL;
+    jogador = NULL;
 }
 
 void Jogo::moveEntes(){
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
-            j->mover(sf::Keyboard::A);
+            jogador->mover(sf::Keyboard::A);
         } 
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
-            j->mover(sf::Keyboard::D);
+            jogador->mover(sf::Keyboard::D);
         } 
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
-            j->mover(sf::Keyboard::W);
+            jogador->mover(sf::Keyboard::W);
         } 
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
-            j->mover(sf::Keyboard::S);
+            jogador->mover(sf::Keyboard::S);
         }
 }
 
 void Jogo::executar(){
-    if(gG){
-        j->setpGG(gG);
-        j->setTarget();
-        while (gG->getJanela()->isOpen()) {
-            sf::Event event;
-            while (gG->getJanela()->pollEvent(event)) {
-                if (event.type == sf::Event::Closed)
-                    gG->getJanela()->close();
-            }
+    if(gerGrafico){
+        jogador->setpGG(gerGrafico);
+        jogador->setTarget();
+
+        while (gerGrafico->getJanela()->isOpen()) {
+            // Gerencia os eventos
+            gerEventos->gerenciar();
 
             // Limpar a janela
-            gG->getJanela()->clear(sf::Color::Yellow);
+            gerGrafico->getJanela()->clear(sf::Color::Yellow);
 
             moveEntes();
             // Desenhar o sprite
-            gG->desenharEnte(static_cast<Ente*>(j));
+            gerGrafico->desenharEnte(static_cast<Ente*>(jogador));
 
             // Exibir a janela
-            gG->getJanela()->display();
+            gerGrafico->getJanela()->display();
         }
     }
 
