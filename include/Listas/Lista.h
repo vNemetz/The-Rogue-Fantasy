@@ -30,9 +30,11 @@ public:
     ~Lista();
 
     void incluir(TL* p);
+    void remover(TL* p);
     void limpar();
-    void imprimir();
-    // ... (TODO)
+
+    Elemento<TL>* begin() const;
+    Elemento<TL>* end() const;
 };
 
 /* 
@@ -51,7 +53,6 @@ Lista<TL>::Elemento<TE>::Elemento()
 template <typename TL>
 template <typename TE>
 Lista<TL>::Elemento<TE>::~Elemento() {
-    delete pInfo;
     pInfo = nullptr;
     pProx = nullptr;
 }
@@ -126,13 +127,11 @@ void Lista<TL>::limpar() {
 }
 
 template <typename TL>
-void Lista<TL>::imprimir() {
-    Elemento<TL>* iterador = pPrimeiro;
+Lista<TL>::Elemento<TL>* Lista<TL>::begin() const {
+    return pPrimeiro;
+}
 
-    std::cout << "Lista: ";
-    while (iterador != nullptr) {
-        std::cout << *(iterador->getInfo()) << " ";
-        iterador = iterador->getProximo();
-    }
-    std::cout << std::endl;
+template <typename TL>
+Lista<TL>::Elemento<TL>* Lista<TL>::end() const {
+    return pUltimo;
 }
