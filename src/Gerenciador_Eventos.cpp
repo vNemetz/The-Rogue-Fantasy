@@ -12,10 +12,15 @@ ger::Gerenciador_Eventos::~Gerenciador_Eventos() {
 
 void ger::Gerenciador_Eventos::gerenciar() {
     sf::Event evento;
-    sf::RenderWindow* janela = gerGrafico->getJanela();
-
-    while (janela->pollEvent(evento)) {
-        if (evento.type == sf::Event::Closed)
-            janela->close();
+    while (gerGrafico->pesquisaEventoJanela(evento)) {
+        if (evento.type == sf::Event::Closed) {
+            gerGrafico->fechaJanela();
+        }
+        if (evento.type == sf::Event::Resized) {
+            if (gerGrafico) {
+                gerGrafico->setTamanhoVista(sf::Vector2f(static_cast<float>(evento.size.width) / 2, static_cast<float>(evento.size.height) / 2));
+                gerGrafico->setCentroVista(sf::Vector2f(static_cast<float>(evento.size.width) / 2, static_cast<float>(evento.size.height) / 2));
+            }
+        }
     }
 }
