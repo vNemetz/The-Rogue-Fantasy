@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 #include "Jogo.h"
 
 /* Lista Encadeada de tipo genérico */
@@ -7,21 +6,24 @@
 template <typename TL>
 class Lista {
 private:
+    // Classe Elemento para cada elemento individual
     template<typename TE>
     class Elemento {
-        private:
-            Elemento<TE>* pProx;
-            TE* pInfo;
-        
-        public:
-            Elemento();
-            ~Elemento();
-            void incluir(TE* p);
-            void setProx(Elemento<TE>* pE);
-            Elemento<TE>* getProximo() const;
-            TE* getInfo() const;
+    private:
+        Elemento<TE>* pProx;
+        TE* pInfo;
+    
+    public:
+        Elemento();
+        ~Elemento();
+
+        void incluir(TE* p);
+        void setProx(Elemento<TE>* pE);
+        Elemento<TE>* getProximo() const;
+        TE getInfo() const;
     };
 
+    // Ponteiros para o primeiro e último elemento da lista
     Elemento<TL>* pPrimeiro;
     Elemento<TL>* pUltimo;
 
@@ -29,19 +31,39 @@ public:
     Lista();
     ~Lista();
 
-    void incluir(TL* p);
-    void remover(TL* p);
-    void limpar();
+    void incluir(TL* p); // Adiciona 'p' no final da lista
+    void remover(TL* p); // Remove 'p' da lista
+    void limpar(); // Limpa a lista
 
-    Elemento<TL>* begin() const;
-    Elemento<TL>* end() const;
+    class Iterator {
+    private:
+        Elemento<TL>* pAtual;
+    
+    public:
+        Iterator(Elemento<TL>* pE);
+        Iterator();
+        ~Iterator();
+
+        // Avança para o próximo elemento
+        Iterator& operator++();
+
+        // Verifica se dois iteradores são diferentes
+        bool operator!=(const Iterator& outro) const;
+
+        // Retorna o valor do elemento atual
+        TL operator*() const;
+    };
+
+    // Retorna o iterador inicial (primeiro elemento)
+    Iterator begin() const;
+    
+    // Retorna um iterador para nullptr, o fim da lista
+    Iterator end() const;
 };
 
 /* 
  * Métodos de Lista<TL>::Elemento<TE>
- *
  */
-
 template <typename TL>
 template <typename TE>
 Lista<TL>::Elemento<TE>::Elemento()
@@ -77,15 +99,13 @@ Lista<TL>::Elemento<TE>* Lista<TL>::Elemento<TE>::getProximo() const {
 
 template <typename TL>
 template <typename TE>
-TE* Lista<TL>::Elemento<TE>::getInfo() const {
-    return pInfo;
+TE Lista<TL>::Elemento<TE>::getInfo() const {
+    return *pInfo;
 }
 
 /* 
  * Métodos de Lista<TL>
- *
  */
-
 template <typename TL>
 Lista<TL>::Lista()
     : pPrimeiro(nullptr)
@@ -116,6 +136,11 @@ void Lista<TL>::incluir(TL* p) {
 }
 
 template <typename TL>
+void Lista<TL>::remover(TL* p) {
+    // TODO
+}
+
+template <typename TL>
 void Lista<TL>::limpar() {
     while (pPrimeiro) {
         Elemento<TL>* aux = pPrimeiro;
@@ -127,11 +152,49 @@ void Lista<TL>::limpar() {
 }
 
 template <typename TL>
-Lista<TL>::Elemento<TL>* Lista<TL>::begin() const {
-    return pPrimeiro;
+typename Lista<TL>::Iterator Lista<TL>::begin() const {
+    return Iterator(pPrimeiro);
 }
 
 template <typename TL>
-Lista<TL>::Elemento<TL>* Lista<TL>::end() const {
-    return pUltimo;
+typename Lista<TL>::Iterator Lista<TL>::end() const {
+    return Iterator(nullptr);
+}
+
+/*
+ * Métodos de Lista<TL>::Iterator
+ */
+template <typename TL>
+Lista<TL>::Iterator::Iterator(Elemento<TL>* pE)
+    : pAtual(pE)
+{
+}
+
+template <typename TL>
+Lista<TL>::Iterator::Iterator()
+    : pAtual(nullptr)
+{
+}
+
+template <typename TL>
+Lista<TL>::Iterator::~Iterator() {
+    pAtual = nullptr;
+}
+
+template <typename TL>
+typename Lista<TL>::Iterator& Lista<TL>::Iterator::operator++() {
+    if (pAtual)
+        pAtual = pAtual->getProximo();
+
+    return *this;
+}
+
+template <typename TL>
+bool Lista<TL>::Iterator::operator!=(const Iterator& outro) const {
+    return pAtual != outro.pAtual;
+}
+
+template <typename TL>
+TL Lista<TL>::Iterator::operator*() const {
+    return pAtual->getInfo();
 }
