@@ -37,7 +37,7 @@ public:
     //Construtora e Destrutora
     Ente();
     Ente(sf::Vector2f posicao, sf::Vector2f tamanho, ID id = vazio);
-    ~Ente();
+    virtual ~Ente();
     ID getID();
     void setID(ID idPar);
 
