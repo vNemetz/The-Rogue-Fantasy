@@ -15,7 +15,6 @@ Gerenciador_Grafico* Gerenciador_Grafico::getInstancia() {
 Gerenciador_Grafico::Gerenciador_Grafico() : pJanela(NULL), clock(), mapaTexturas(), vista(){
     setVideoMode();
     setJanela();
-    setVista();
 }
 
 Gerenciador_Grafico::~Gerenciador_Grafico(){
@@ -62,9 +61,9 @@ bool Gerenciador_Grafico::pesquisaEventoJanela(sf::Event& ev){
 }
 
 //Vista
-void Gerenciador_Grafico::setVista(){
+void Gerenciador_Grafico::setVista(float x){
     if(pJanela){
-        vista.setCenter (sf::Vector2f(WIDTH/2, HEIGHT/2));
+        vista.setCenter (x, static_cast<float>(HEIGHT/2));
         vista.setSize(sf::Vector2f(WIDTH, HEIGHT));
     }
 }
@@ -84,6 +83,11 @@ sf::View Gerenciador_Grafico::getVista() const {
 
 bool Gerenciador_Grafico::getJanelaAberta() const{
     return pJanela->isOpen();
+}
+
+void Gerenciador_Grafico::centralizarVista(Ente *e){
+    vista.setCenter(e->getPosition().x, getVista().getCenter().y);
+    pJanela->setView(vista);
 }
 
 void Gerenciador_Grafico::updateDeltaTime(){
