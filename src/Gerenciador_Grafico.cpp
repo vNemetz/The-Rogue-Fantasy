@@ -1,51 +1,116 @@
 #include "Gerenciador_Grafico.h"
 #include "Ente.h"
+#include <string.h>
+namespace ger{
 
-ger::Gerenciador_Grafico::Gerenciador_Grafico() : pJanela(NULL){
+Gerenciador_Grafico* Gerenciador_Grafico::instancia(NULL);
+
+Gerenciador_Grafico* Gerenciador_Grafico::getInstancia() {
+    if(instancia == NULL){
+        instancia = new Gerenciador_Grafico();
+    }
+    return instancia;
+}
+
+Gerenciador_Grafico::Gerenciador_Grafico() : pJanela(NULL), clock(), mapaTexturas(), vista(){
     setVideoMode();
     setJanela();
     setVista();
 }
 
-ger::Gerenciador_Grafico::~Gerenciador_Grafico(){
+Gerenciador_Grafico::~Gerenciador_Grafico(){
+    std::map<const char*, sf::Texture*>::iterator it = mapaTexturas.begin();
+    while(it != mapaTexturas.end()){
+        delete it->second;
+    }
     delete pJanela;
     pJanela = NULL;
 }
+//Inicializando DeltaTime
+float Gerenciador_Grafico::deltaTime(0);
 
-void ger::Gerenciador_Grafico::setVista(){
-    if(pJanela){vista = pJanela->getView();}
+//VideoMode (Resolução)
+void Gerenciador_Grafico::setVideoMode(){
+    videoMode.height = HEIGHT;
+    videoMode.width = WIDTH;
 }
 
-void ger::Gerenciador_Grafico::setTamanhoVista(float largura, float altura){
-    vista.setSize(largura, altura);
-}
-
-void ger::Gerenciador_Grafico::setCentroVista(float largura, float altura){
-    vista.setCenter(largura, altura);
-}
-
-sf::View ger::Gerenciador_Grafico::getVista(){
-    return vista;
-}
-
-void ger::Gerenciador_Grafico::setVideoMode(){
-    videoMode.height = 600;
-    videoMode.width = 810;
-}
-
-void ger::Gerenciador_Grafico::setJanela(){
+//Janela
+void Gerenciador_Grafico::setJanela(){
     pJanela = new sf::RenderWindow(videoMode, "oJogo", sf::Style::Resize | sf::Style::Default);
 }
 
-sf::RenderWindow *ger::Gerenciador_Grafico::getJanela() const{
-    return pJanela;
+sf::RenderWindow *Gerenciador_Grafico::getJanela() const{
+    if(pJanela){return pJanela;}
+    return NULL;
 }
 
-void ger::Gerenciador_Grafico::desenharEnte(Ente *pE){
+sf::Vector2u Gerenciador_Grafico::getTamanhoJanela() const{
+    return pJanela->getSize();
+}
+
+void Gerenciador_Grafico::limpaJanela(){
+    pJanela->clear(sf::Color::Yellow);
+}
+
+void Gerenciador_Grafico::fechaJanela(){
+    pJanela->close();
+}
+
+bool Gerenciador_Grafico::pesquisaEventoJanela(sf::Event& ev){
+    return(pJanela->pollEvent(ev));
+}
+
+//Vista
+void Gerenciador_Grafico::setVista(){
+    if(pJanela){vista = pJanela->getView();}
+}
+
+void Gerenciador_Grafico::setTamanhoVista(sf::Vector2f tam){
+    vista.setSize(tam);
+}
+
+void Gerenciador_Grafico::setCentroVista(sf::Vector2f pos){
+    vista.setCenter(pos);
+    pJanela->setView(vista);
+}
+
+sf::View Gerenciador_Grafico::getVista() const {
+    return vista;
+}
+
+bool Gerenciador_Grafico::getJanelaAberta() const{
+    return pJanela->isOpen();
+}
+
+void Gerenciador_Grafico::updateDeltaTime(){
+    deltaTime = clock.getElapsedTime().asSeconds();
+    clock.restart();
+}
+
+//Texturas
+sf::Texture*  Gerenciador_Grafico::carregarTextura( const char* caminho){
+    std::map<const char*, sf::Texture*>::iterator it = mapaTexturas.begin();
+    while(it != mapaTexturas.end()){
+        if(!strcmp(it->first, caminho))
+            return it->second;
+        it++;
+
+    }
+    sf::Texture* novaTextura = new sf::Texture();
+    if (!novaTextura->loadFromFile(caminho)) {
+            std::cerr << "ERRO ao carregar arquivo" << caminho << "\n";
+            exit(1);
+    }
+    mapaTexturas.insert(std::pair<const char*, sf::Texture*>(caminho, novaTextura));
+    return novaTextura;
+}
+
+//Renderização
+void Gerenciador_Grafico::desenharEnte(Ente *pE) const{
     if(pE){pE->desenhar();}
 }
-/*void ger::Gerenciador_Grafico::carregarTextura(const char* caminho){
-    std::string caminhoTextura = PROJECT_ROOT;
-    caminhoTextura += caminho;
-    //...
-}*/
+void Gerenciador_Grafico::desenhar(sf::RectangleShape *corpo) const{
+    pJanela->draw(*corpo);
+}
+}

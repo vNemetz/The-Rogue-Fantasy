@@ -6,9 +6,9 @@
 #include "Jogador.h"
 //...
 
-Jogo::Jogo(){
+Jogo::Jogo() 
+: gerGrafico(ger::Gerenciador_Grafico::getInstancia()){
     srand(time(NULL));
-    gerGrafico = new ger::Gerenciador_Grafico();
     gerEventos = new ger::Gerenciador_Eventos(gerGrafico);
    // e = new Ente(gerGrafico);
     jogador = new pers::Jogador (sf::Vector2f(20.f, 20.f),sf::Vector2f(20.f, 20.f), vazio);
@@ -47,20 +47,19 @@ void Jogo::executar(){
         jogador->setpGG(gerGrafico);
         jogador->setTarget();
 
-        while (gerGrafico->getJanela()->isOpen()) {
+        // Loop principal do jogo
+        while (gerGrafico->getJanelaAberta()) {
             // Gerencia os eventos
             gerEventos->gerenciar();
 
             // Limpar a janela
-            gerGrafico->getJanela()->clear(sf::Color::Yellow);
-
+            gerGrafico->limpaJanela();
             moveEntes();
-            // Desenhar o sprite
+            // Desenhar o jogador (ente)
             gerGrafico->desenharEnte(static_cast<Ente*>(jogador));
 
             // Exibir a janela
             gerGrafico->getJanela()->display();
         }
     }
-
 }
