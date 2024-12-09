@@ -1,13 +1,14 @@
 #include "Gerenciador_Eventos.h"
 #include "Gerenciador_Grafico.h"
 
-ger::Gerenciador_Eventos::Gerenciador_Eventos(Gerenciador_Grafico* gG)
-    : gerGrafico(gG)
+ger::Gerenciador_Eventos::Gerenciador_Eventos(Gerenciador_Grafico* gG, pers::Jogador* jog)
+    : gerGrafico(gG), jogador(jog)
 {
 }
 
 ger::Gerenciador_Eventos::~Gerenciador_Eventos() {
     gerGrafico = nullptr;
+    jogador = nullptr;
 }
 
 void ger::Gerenciador_Eventos::gerenciar() {
@@ -18,8 +19,8 @@ void ger::Gerenciador_Eventos::gerenciar() {
         }
         if (evento.type == sf::Event::Resized) {
             if (gerGrafico) {
-                gerGrafico->setTamanhoVista(sf::Vector2f(static_cast<float>(evento.size.width) / 2, static_cast<float>(evento.size.height) / 2));
-                gerGrafico->setCentroVista(sf::Vector2f(static_cast<float>(evento.size.width) / 2, static_cast<float>(evento.size.height) / 2));
+                gerGrafico->setTamanhoVista(sf::Vector2f(static_cast<float>(evento.size.width), static_cast<float>(evento.size.height)));
+                gerGrafico->setCentroVista(jogador->getPosition());
             }
         }
     }

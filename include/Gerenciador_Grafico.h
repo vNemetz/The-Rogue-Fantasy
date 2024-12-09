@@ -31,11 +31,12 @@ public:
     void fechaJanela();
     bool pesquisaEventoJanela(sf::Event&);
     //Vista
-    void setVista();
+    void setVista(float x);
     void setTamanhoVista(sf::Vector2f tam);
     void setCentroVista(sf::Vector2f pos);
     sf::View getVista() const;
     bool getJanelaAberta() const;
+    void centralizarVista(Ente* e);
     //Clock
     void updateDeltaTime();
     //Texturas
