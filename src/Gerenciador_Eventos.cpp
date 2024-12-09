@@ -18,7 +18,7 @@ void ger::Gerenciador_Eventos::gerenciar() {
         }
         if (evento.type == sf::Event::Resized) {
             if (gerGrafico) {
-                gerGrafico->setTamanhoVista(sf::Vector2f(static_cast<float>(evento.size.width) / 2, static_cast<float>(evento.size.height) / 2));
+                gerGrafico->setTamanhoVista(sf::Vector2f(static_cast<float>(evento.size.width), static_cast<float>(evento.size.height)));
                 gerGrafico->setCentroVista(sf::Vector2f(static_cast<float>(evento.size.width) / 2, static_cast<float>(evento.size.height) / 2));
             }
         }

@@ -63,7 +63,10 @@ bool Gerenciador_Grafico::pesquisaEventoJanela(sf::Event& ev){
 
 //Vista
 void Gerenciador_Grafico::setVista(){
-    if(pJanela){vista = pJanela->getView();}
+    if(pJanela){
+        vista.setCenter (sf::Vector2f(WIDTH/2, HEIGHT/2));
+        vista.setSize(sf::Vector2f(WIDTH, HEIGHT));
+    }
 }
 
 void Gerenciador_Grafico::setTamanhoVista(sf::Vector2f tam){
