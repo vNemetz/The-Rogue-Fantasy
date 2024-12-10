@@ -91,14 +91,31 @@ void Gerenciador_Grafico::setCentroVista(sf::Vector2f pos){
 }
 
 void Gerenciador_Grafico::redimensionar(float aspect_ratio) {
-    // Define o novo tamanho da vista, levando em conta a razão de aspecto
-    sf::Vector2f tam(vista.getSize().y * aspect_ratio, static_cast<float>(vista.getSize().y));
-    setTamanhoVista(tam);
+    // Obtém o tamanho atual da janela
+    sf::Vector2u tamanhoJanela = pJanela->getSize();
 
-    // Define o novo centro da vista
-    sf::Vector2f pos(vista.getSize().x / 2.f, vista.getSize().y / 2.f);
-    setCentroVista(pos);
+    // Calcula o novo tamanho baseado na razão de aspecto fornecida
+    unsigned int novaAltura = std::max(tamanhoJanela.y, 1u); // Garante altura mínima de 1
+    unsigned int novaLargura = std::max(static_cast<unsigned int>(novaAltura * aspect_ratio), 1u); // Garante largura mínima de 1
+
+    // Ajusta o tamanho da janela
+    pJanela->setSize(sf::Vector2u(novaLargura, novaAltura));
+
+    // Atualiza a vista com o novo tamanho
+    sf::Vector2f novoTamanhoVista(static_cast<float>(novaLargura), static_cast<float>(novaAltura));
+    vista.setSize(novoTamanhoVista);
+
+    // Centraliza a vista no meio da nova janela
+    sf::Vector2f novoCentroVista(novoTamanhoVista.x / 2.f, novoTamanhoVista.y / 2.f);
+    vista.setCenter(novoCentroVista);
+
+    // Aplica a nova vista na janela
+    pJanela->setView(vista);
+
+    // Debug opcional
+    std::cout << "Janela redimensionada para: " << novaLargura << "x" << novaAltura << std::endl;
 }
+
 
 void Gerenciador_Grafico::centralizarVista(Ente *e){
     vista.setCenter(e->getPosition().x, getVista().getCenter().y);

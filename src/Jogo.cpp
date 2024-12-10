@@ -72,7 +72,7 @@ void Jogo::executar(){
             moveEntes();
             
             // Centraliza o campo de visão no jogador
-            //gerGrafico->centralizarVista(static_cast<Ente*>(jogador));
+            gerGrafico->centralizarVista(static_cast<Ente*>(jogador));
             
             // Desenhar o jogador (ente)
             gerGrafico->desenharEnte(static_cast<Ente*>(jogador));
