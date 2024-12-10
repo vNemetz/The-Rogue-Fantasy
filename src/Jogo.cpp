@@ -4,6 +4,7 @@
 #include "Gerenciador_Eventos.h"
 #include "Personagem.h"
 #include "Jogador.h"
+#include <sstream>
 //...
 
 Jogo::Jogo() 
@@ -47,19 +48,42 @@ void Jogo::executar(){
         jogador->setpGG(gerGrafico);
         jogador->setTarget();
 
+        /*
+        DEBUG:
+        sf::Font font;
+        std::string str = PROJECT_ROOT;
+        str += "/assets/fonts/Arial.ttf";
+        font.loadFromFile(str);
+        sf::Text text;
+        text.setFont(font);
+        text.setCharacterSize(50);
+        text.setFillColor(sf::Color::Black);
+        text.setPosition(0.f, 0.f);
+        */
+
         // Loop principal do jogo
         while (gerGrafico->getJanelaAberta()) {
             // Gerencia os eventos
-            gerGrafico->setVista(jogador->getPosition().x);
+            //gerGrafico->setVista(jogador->getPosition().x);
             gerEventos->gerenciar();
 
             // Limpar a janela
             gerGrafico->limpaJanela();
             moveEntes();
-            //Centraliza o campo de visão no jogador
-            gerGrafico->centralizarVista(static_cast<Ente*>(jogador));
+            
+            // Centraliza o campo de visão no jogador
+            //gerGrafico->centralizarVista(static_cast<Ente*>(jogador));
+            
             // Desenhar o jogador (ente)
             gerGrafico->desenharEnte(static_cast<Ente*>(jogador));
+
+            /*
+            DEBUG:
+            std::ostringstream oss;
+            oss << "J: (" << (int) jogador->getPosition().x << ", " << (int) jogador->getPosition().y << ")";
+            text.setString(oss.str());
+            gerGrafico->getJanela()->draw(text);
+            */
 
             // Exibir a janela
             gerGrafico->getJanela()->display();
