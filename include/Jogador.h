@@ -7,6 +7,9 @@ class Jogador : public pers::Personagem{
 private:
     int pontos;
     bool vivo;
+    // Salva para que lados o jogador está se movendo
+    std::vector<bool> movendoLados;
+
 protected:
 //...
 public:
@@ -17,6 +20,7 @@ public:
 
     void alteraVivo(); //altera o valor de "vivo"
     bool getVivo();
-    void mover(sf::Keyboard::Key key);
+    void mover(bool estado, sf::Keyboard::Key key);
+    void atualizar();
 };
 }

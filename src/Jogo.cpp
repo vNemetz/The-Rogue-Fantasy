@@ -2,7 +2,6 @@
 #include "Ente.h"
 #include "Gerenciador_Grafico.h"
 #include "Gerenciador_Eventos.h"
-#include "Personagem.h"
 #include "Jogador.h"
 #include <sstream>
 //...
@@ -29,18 +28,6 @@ Jogo::~Jogo(){
 }
 
 void Jogo::moveEntes(){
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
-            jogador->mover(sf::Keyboard::A);
-        } 
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
-            jogador->mover(sf::Keyboard::D);
-        } 
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
-            jogador->mover(sf::Keyboard::W);
-        } 
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
-            jogador->mover(sf::Keyboard::S);
-        }
 }
 
 void Jogo::executar(){
@@ -69,7 +56,8 @@ void Jogo::executar(){
 
             // Limpar a janela
             gerGrafico->limpaJanela();
-            moveEntes();
+            
+            jogador->atualizar();
             
             // Centraliza o campo de visão no jogador
             gerGrafico->centralizarVista(static_cast<Ente*>(jogador));
@@ -82,6 +70,7 @@ void Jogo::executar(){
             std::ostringstream oss;
             oss << "J: (" << (int) jogador->getPosition().x << ", " << (int) jogador->getPosition().y << ")";
             text.setString(oss.str());
+            text.setPosition(gerGrafico->getVista().getCenter().x - gerGrafico->getVista().getSize().x/2.f, gerGrafico->getVista().getCenter().y - gerGrafico->getVista().getSize().y/2.f);
             gerGrafico->getJanela()->draw(text);
             */
 
