@@ -14,16 +14,13 @@ ger::Gerenciador_Eventos::~Gerenciador_Eventos() {
 void ger::Gerenciador_Eventos::gerenciar() {
     sf::Event evento;
     while (gerGrafico->pesquisaEventoJanela(evento)) {
-        // Fechar a Janela
         if (evento.type == sf::Event::Closed) {
             gerGrafico->fechaJanela();
         }
-
-        // Redimensionar a Janela
         if (evento.type == sf::Event::Resized) {
             if (gerGrafico) {
-                float aspect_ratio = static_cast<float>(evento.size.width) / evento.size.height;
-                gerGrafico->redimensionar(aspect_ratio);
+                gerGrafico->setTamanhoVista(sf::Vector2f(static_cast<float>(evento.size.width), static_cast<float>(evento.size.height)));
+                gerGrafico->setCentroVista(jogador->getPosition());
             }
         }
     }

@@ -33,14 +33,13 @@ float Gerenciador_Grafico::deltaTime(0);
 /* Video Mode (Resolução) */
 
 void Gerenciador_Grafico::setVideoMode(){
-    videoMode.height = HEIGHT;
-    videoMode.width = WIDTH;
+    videoMode.getDesktopMode();
 }
 
 /* Janela */
 
 void Gerenciador_Grafico::setJanela(){
-    pJanela = new sf::RenderWindow(videoMode, "oJogo", sf::Style::Resize | sf::Style::Default);
+    pJanela = new sf::RenderWindow(videoMode, "oJogo", sf::Style::Fullscreen | sf::Style::Default);
 }
 
 bool Gerenciador_Grafico::getJanelaAberta() const{
@@ -72,7 +71,7 @@ bool Gerenciador_Grafico::pesquisaEventoJanela(sf::Event& ev){
 
 void Gerenciador_Grafico::setVista(float x){
     if(pJanela){
-        vista.setCenter (x, static_cast<float>(HEIGHT/2));
+        vista.setCenter (x, static_cast<float>(HEIGHT/2.f));
         vista.setSize(sf::Vector2f(WIDTH, HEIGHT));
     }
 }
@@ -89,33 +88,6 @@ void Gerenciador_Grafico::setCentroVista(sf::Vector2f pos){
     vista.setCenter(pos);
     pJanela->setView(vista);
 }
-
-void Gerenciador_Grafico::redimensionar(float aspect_ratio) {
-    // Obtém o tamanho atual da janela
-    sf::Vector2u tamanhoJanela = pJanela->getSize();
-
-    // Calcula o novo tamanho baseado na razão de aspecto fornecida
-    unsigned int novaAltura = std::max(tamanhoJanela.y, 1u); // Garante altura mínima de 1
-    unsigned int novaLargura = std::max(static_cast<unsigned int>(novaAltura * aspect_ratio), 1u); // Garante largura mínima de 1
-
-    // Ajusta o tamanho da janela
-    pJanela->setSize(sf::Vector2u(novaLargura, novaAltura));
-
-    // Atualiza a vista com o novo tamanho
-    sf::Vector2f novoTamanhoVista(static_cast<float>(novaLargura), static_cast<float>(novaAltura));
-    vista.setSize(novoTamanhoVista);
-
-    // Centraliza a vista no meio da nova janela
-    sf::Vector2f novoCentroVista(novoTamanhoVista.x / 2.f, novoTamanhoVista.y / 2.f);
-    vista.setCenter(novoCentroVista);
-
-    // Aplica a nova vista na janela
-    pJanela->setView(vista);
-
-    // Debug opcional
-    std::cout << "Janela redimensionada para: " << novaLargura << "x" << novaAltura << std::endl;
-}
-
 
 void Gerenciador_Grafico::centralizarVista(Ente *e){
     vista.setCenter(e->getPosition().x, getVista().getCenter().y);
