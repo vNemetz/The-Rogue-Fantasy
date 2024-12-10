@@ -82,6 +82,7 @@ void Jogo::executar(){
             std::ostringstream oss;
             oss << "J: (" << (int) jogador->getPosition().x << ", " << (int) jogador->getPosition().y << ")";
             text.setString(oss.str());
+            text.setPosition(gerGrafico->getVista().getCenter().x - gerGrafico->getVista().getSize().x/2.f, gerGrafico->getVista().getCenter().y - gerGrafico->getVista().getSize().y/2.f);
             gerGrafico->getJanela()->draw(text);
             */
 
