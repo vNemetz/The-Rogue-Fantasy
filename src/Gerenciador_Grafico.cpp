@@ -39,7 +39,7 @@ void Gerenciador_Grafico::setVideoMode(){
 /* Janela */
 
 void Gerenciador_Grafico::setJanela(){
-    pJanela = new sf::RenderWindow(videoMode, "oJogo", sf::Style::Fullscreen | sf::Style::Default);
+    pJanela = new sf::RenderWindow(videoMode, "oJogo", sf::Style::Fullscreen);
 }
 
 bool Gerenciador_Grafico::getJanelaAberta() const{

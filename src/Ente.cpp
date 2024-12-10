@@ -32,7 +32,7 @@ void Ente::setpGG(ger::Gerenciador_Grafico* pGrafico){ //testa e seta o pGG
 
 //Gráficos
 void Ente::setSprite(){
-    pSprite->setTexture(*pTextura, true);
+    pSprite->setTexture(*pTextura, false);
     pSprite->setPosition(posicao);
 }
 
