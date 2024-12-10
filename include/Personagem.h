@@ -16,7 +16,7 @@ public:
     //virtual void executar() = 0;
 
     //Movimento
-    virtual void mover(sf::Keyboard::Key key) = 0;
+    //virtual void mover() = 0;
 
 };   
 }
