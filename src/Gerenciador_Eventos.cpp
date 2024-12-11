@@ -3,28 +3,39 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 
-ger::Gerenciador_Eventos::Gerenciador_Eventos(Gerenciador_Grafico* gG, pers::Jogador* jog)
-: gerGrafico(gG)
-, jogador(jog)
-{
-}
+namespace ger{
 
-ger::Gerenciador_Eventos::~Gerenciador_Eventos() {
-    gerGrafico = nullptr;
+Gerenciador_Eventos::Gerenciador_Eventos(): jogador(nullptr){}
+
+Gerenciador_Eventos::~Gerenciador_Eventos(){
     jogador = nullptr;
 }
 
-void ger::Gerenciador_Eventos::gerenciar() {
+Gerenciador_Eventos* Gerenciador_Eventos::instancia(nullptr);
+
+
+Gerenciador_Eventos* Gerenciador_Eventos::getInstancia(){
+    if(instancia == nullptr){
+        instancia = new Gerenciador_Eventos();
+    }
+    return instancia;
+}
+
+void Gerenciador_Eventos::setJogador(pers::Jogador *jog){
+    jogador = jog;
+}
+
+void Gerenciador_Eventos::gerenciar() {
     sf::Event evento;
-    while (gerGrafico->pesquisaEventoJanela(evento)) {
+    while (ger::Gerenciador_Grafico::getInstancia()->pesquisaEventoJanela(evento)) {
         if (evento.type == sf::Event::Closed) {
-            gerGrafico->fechaJanela();
+            ger::Gerenciador_Grafico::getInstancia()->fechaJanela();
         }
 
         if (evento.type == sf::Event::Resized) {
-            if (gerGrafico) {
-                gerGrafico->setTamanhoVista(sf::Vector2f(static_cast<float>(evento.size.width), static_cast<float>(evento.size.height)));
-                gerGrafico->setCentroVista(jogador->getPosition());
+            if (ger::Gerenciador_Grafico::getInstancia()) {
+                ger::Gerenciador_Grafico::getInstancia()->setTamanhoVista(sf::Vector2f(static_cast<float>(evento.size.width), static_cast<float>(evento.size.height)));
+                ger::Gerenciador_Grafico::getInstancia()->setCentroVista(jogador->getPosition());
             }
         }
         
@@ -36,4 +47,5 @@ void ger::Gerenciador_Eventos::gerenciar() {
             jogador->mover(false, evento.key.code);
         }
     }
+}
 }

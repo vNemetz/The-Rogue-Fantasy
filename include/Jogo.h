@@ -13,15 +13,11 @@
 #include <vector>
 #include <string>
 
-namespace ger{class Gerenciador_Grafico; class Gerenciador_Eventos;}
 class Ente;
 namespace pers{class Jogador;}
 
 class Jogo{
 private:
-    ger::Gerenciador_Grafico *gerGrafico;
-    ger::Gerenciador_Eventos *gerEventos;
-    //Ente *e;
     pers::Jogador *jogador;
 
 public:

@@ -5,11 +5,16 @@ namespace ger {
 class Gerenciador_Eventos {
 private:
     // TODO: Gerenciador_Colisoes* gerColisoes;
-    Gerenciador_Grafico* gerGrafico;
     pers::Jogador* jogador; 
 
+    //Implementação do Singleton ao Gerenciador de Eventos:
+    Gerenciador_Eventos();
+    static ger::Gerenciador_Eventos* instancia;
 public:
-    Gerenciador_Eventos(Gerenciador_Grafico* gG, pers::Jogador* jogador);
+    static Gerenciador_Eventos* getInstancia();
+    
+    void setJogador(pers::Jogador* jog);
+    
     ~Gerenciador_Eventos();
 
     void gerenciar();

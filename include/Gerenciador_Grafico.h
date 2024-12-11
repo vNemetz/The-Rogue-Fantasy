@@ -34,6 +34,7 @@ public:
     void limpaJanela();
     void fechaJanela();
     bool pesquisaEventoJanela(sf::Event&);
+    void  display();
     
     /* Vista */
     void setVista(float x);
