@@ -2,9 +2,9 @@
 
 #include "Jogador.h"
 #include <SFML/Window/Keyboard.hpp>
+#include <SFML/Graphics.hpp>
 #include <map>
 #include <functional>
-#include <SFML/Graphics.hpp>
 
 /* Gerenciadores - Namespace */
 namespace ger {

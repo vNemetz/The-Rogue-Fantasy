@@ -2,6 +2,7 @@
 #include "Ente.h"
 #include "Gerenciador_Grafico.h"
 #include "Gerenciador_Eventos.h"
+#include "Gerenciador_Input.h"
 #include "Jogador.h"
 #include <sstream>
 //...
@@ -38,12 +39,14 @@ void Jogo::executar(){
         text.setFillColor(sf::Color::Black);
         text.setPosition(0.f, 0.f);
         */
+        
+        ger::Gerenciador_Eventos::getInstancia()->setJogador(jogador);
+        ger::Gerenciador_Input::getInstancia()->setJogador(jogador);
 
         // Loop principal do jogo
         while (ger::Gerenciador_Grafico::getInstancia()->getJanelaAberta()) {
             // Gerencia os eventos
-            //gerGrafico->setVista(jogador->getPosition().x);
-            ger::Gerenciador_Eventos::getInstancia()->setJogador(jogador);
+            //ger::Gerenciador_Grafico::getInstancia()->setVista(jogador->getPosition().x);
             ger::Gerenciador_Eventos::getInstancia()->gerenciar();
 
             // Limpar a janela
@@ -62,8 +65,8 @@ void Jogo::executar(){
             std::ostringstream oss;
             oss << "J: (" << (int) jogador->getPosition().x << ", " << (int) jogador->getPosition().y << ")";
             text.setString(oss.str());
-            text.setPosition(gerGrafico->getVista().getCenter().x - gerGrafico->getVista().getSize().x/2.f, gerGrafico->getVista().getCenter().y - gerGrafico->getVista().getSize().y/2.f);
-            gerGrafico->getJanela()->draw(text);
+            text.setPosition(ger::Gerenciador_Grafico::getInstancia()->getVista().getCenter().x - ger::Gerenciador_Grafico::getInstancia()->getVista().getSize().x/2.f, ger::Gerenciador_Grafico::getInstancia()->getVista().getCenter().y - ger::Gerenciador_Grafico::getInstancia()->getVista().getSize().y/2.f);
+            ger::Gerenciador_Grafico::getInstancia()->getJanela()->draw(text);
             */
 
             // Exibir a janela
