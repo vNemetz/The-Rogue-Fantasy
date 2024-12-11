@@ -52,7 +52,7 @@ void pers::Jogador::mover(bool estado, sf::Keyboard::Key key) {
     }
 }
 
-void pers::Jogador::atualizar() {
+void pers::Jogador::atualizarPosicao() {
     if (movendoLados[0])
         setPosition (sf::Vector2f(getPosition().x -1.f, getPosition()   .y));
     

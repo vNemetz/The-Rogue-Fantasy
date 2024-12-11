@@ -4,10 +4,10 @@
 
 namespace ger{
 /* Singleton - Padrão de Projeto */
-Gerenciador_Grafico* Gerenciador_Grafico::instancia(NULL);
+Gerenciador_Grafico* Gerenciador_Grafico::instancia(nullptr);
 
 Gerenciador_Grafico* Gerenciador_Grafico::getInstancia() {
-    if(instancia == NULL){
+    if(instancia == nullptr){
         instancia = new Gerenciador_Grafico();
     }
     return instancia;
@@ -39,7 +39,7 @@ void Gerenciador_Grafico::setVideoMode(){
 /* Janela */
 
 void Gerenciador_Grafico::setJanela(){
-    pJanela = new sf::RenderWindow(videoMode, "oJogo", sf::Style::Fullscreen | sf::Style::Default);
+    pJanela = new sf::RenderWindow(videoMode, "oJogo", sf::Style::Fullscreen);
 }
 
 bool Gerenciador_Grafico::getJanelaAberta() const{
@@ -65,6 +65,10 @@ void Gerenciador_Grafico::fechaJanela(){
 
 bool Gerenciador_Grafico::pesquisaEventoJanela(sf::Event& ev){
     return(pJanela->pollEvent(ev));
+}
+
+void Gerenciador_Grafico::display(){
+    pJanela->display();
 }
 
 /* Vista */

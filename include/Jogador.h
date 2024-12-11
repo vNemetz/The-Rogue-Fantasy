@@ -21,6 +21,6 @@ public:
     void alteraVivo(); //altera o valor de "vivo"
     bool getVivo();
     void mover(bool estado, sf::Keyboard::Key key);
-    void atualizar();
+    void atualizarPosicao();
 };
 }

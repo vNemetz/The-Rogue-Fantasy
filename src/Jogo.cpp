@@ -6,33 +6,24 @@
 #include <sstream>
 //...
 
-Jogo::Jogo() 
-: gerGrafico(ger::Gerenciador_Grafico::getInstancia()){
+Jogo::Jogo() {
     srand(time(NULL));
     jogador = new pers::Jogador (sf::Vector2f(HEIGHT/2.0, WIDTH/2.0),sf::Vector2f(20.f, 20.f), vazio);
-    gerEventos = new ger::Gerenciador_Eventos(gerGrafico, jogador);
-   // e = new Ente(gerGrafico);
+    jogador->setpGG(ger::Gerenciador_Grafico::getInstancia());
 
     executar();
 }
 
 Jogo::~Jogo(){
-   // delete e;
     delete jogador;
-    delete gerGrafico;
-    delete gerEventos;
-    //e = NULL;
-    gerGrafico = NULL;
-    gerEventos = NULL;
-    jogador = NULL;
+    jogador = nullptr;
 }
 
 void Jogo::moveEntes(){
 }
 
 void Jogo::executar(){
-    if(gerGrafico){
-        jogador->setpGG(gerGrafico);
+    if(ger::Gerenciador_Grafico::getInstancia()){
         jogador->setTarget();
 
         /*
@@ -49,21 +40,22 @@ void Jogo::executar(){
         */
 
         // Loop principal do jogo
-        while (gerGrafico->getJanelaAberta()) {
+        while (ger::Gerenciador_Grafico::getInstancia()->getJanelaAberta()) {
             // Gerencia os eventos
             //gerGrafico->setVista(jogador->getPosition().x);
-            gerEventos->gerenciar();
+            ger::Gerenciador_Eventos::getInstancia()->setJogador(jogador);
+            ger::Gerenciador_Eventos::getInstancia()->gerenciar();
 
             // Limpar a janela
-            gerGrafico->limpaJanela();
+            ger::Gerenciador_Grafico::getInstancia()->limpaJanela();
             
-            jogador->atualizar();
+            jogador->atualizarPosicao();
             
             // Centraliza o campo de visão no jogador
-            gerGrafico->centralizarVista(static_cast<Ente*>(jogador));
+            ger::Gerenciador_Grafico::getInstancia()->centralizarVista(static_cast<Ente*>(jogador));
             
             // Desenhar o jogador (ente)
-            gerGrafico->desenharEnte(static_cast<Ente*>(jogador));
+            ger::Gerenciador_Grafico::getInstancia()->desenharEnte(static_cast<Ente*>(jogador));
 
             /*
             DEBUG:
@@ -75,7 +67,7 @@ void Jogo::executar(){
             */
 
             // Exibir a janela
-            gerGrafico->getJanela()->display();
+            ger::Gerenciador_Grafico::getInstancia()->display();
         }
     }
 }
