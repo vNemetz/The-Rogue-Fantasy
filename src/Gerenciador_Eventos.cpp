@@ -1,5 +1,6 @@
 #include "Gerenciador_Eventos.h"
 #include "Gerenciador_Grafico.h"
+#include "Gerenciador_Input.h"
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 
@@ -40,11 +41,11 @@ void Gerenciador_Eventos::gerenciar() {
         }
         
         if (evento.type == sf::Event::KeyPressed) {
-            jogador->mover(true, evento.key.code);
+            Gerenciador_Input::getInstancia()->teclaApertada(evento.key.code);
         }
 
         if (evento.type == sf::Event::KeyReleased) {
-            jogador->mover(false, evento.key.code);
+            Gerenciador_Input::getInstancia()->teclaSoltada(evento.key.code);
         }
     }
 }
