@@ -25,7 +25,7 @@ public:
     static Gerenciador_Input* getInstancia();
 
     void setJogador(pers::Jogador* jog);
-    void incluir_tecla(sf::Keyboard::Key, std::function<void(bool)>);
+    void incluir_tecla(sf::Keyboard::Key tecla, std::function<void(bool)> funcaoTecla);
     
     void teclaApertada(sf::Keyboard::Key tecla);
     void teclaSoltada(sf::Keyboard::Key tecla);
