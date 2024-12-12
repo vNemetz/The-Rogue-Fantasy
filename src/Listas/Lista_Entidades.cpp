@@ -1,5 +1,5 @@
 #include "Listas/Lista_Entidades.h"
-#include "Entidade.h"
+#include "Entidades/Entidade.h"
 
 namespace lis {
 Lista_Entidades::Lista_Entidades()

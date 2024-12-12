@@ -1,7 +1,7 @@
 #include "Jogo.h"
 #include "Ente.h"
 #include "Gerenciadores/Gerenciador_Input.h"
-#include "Jogador.h"
+#include "Entidades/Jogador.h"
 #include "DebugText.h"
 //...
 
@@ -12,7 +12,7 @@ Jogo::Jogo()
 {
     srand(time(NULL));
 
-    jogador = new pers::Jogador (sf::Vector2f(HEIGHT/2.0, WIDTH/2.0),sf::Vector2f(20.f, 20.f), vazio);
+    jogador = new ent::pers::Jogador (sf::Vector2f(HEIGHT/2.0, WIDTH/2.0),sf::Vector2f(20.f, 20.f), vazio);
     jogador->setpGG(gerGrafico);
     
     inicializaEntidades();

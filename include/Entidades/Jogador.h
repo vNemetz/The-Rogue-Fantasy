@@ -1,9 +1,11 @@
 #pragma once
-#include "Personagem.h"
+#include "Entidades/Personagem.h"
 
 
-namespace pers{
-class Jogador : public pers::Personagem{
+namespace ent {
+namespace pers {
+
+class Jogador : public Personagem {
 private:
     int pontos;
     bool vivo;
@@ -23,4 +25,5 @@ public:
     void mover(bool estado, sf::Keyboard::Key key);
     void atualizarPosicao();
 };
+}
 }

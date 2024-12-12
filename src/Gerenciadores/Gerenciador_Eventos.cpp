@@ -22,7 +22,7 @@ Gerenciador_Eventos* Gerenciador_Eventos::getInstancia(){
     return instancia;
 }
 
-void Gerenciador_Eventos::setJogador(pers::Jogador *jog){
+void Gerenciador_Eventos::setJogador(ent::pers::Jogador *jog){
     jogador = jog;
 }
 

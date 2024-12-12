@@ -18,7 +18,7 @@ private:
     ger::Gerenciador_Eventos* gerEventos;
     
     lis::Lista_Entidades listaEntidades;
-    pers::Jogador* jogador;
+    ent::pers::Jogador* jogador;
 
 public:
     Jogo();

@@ -1,12 +1,15 @@
 #pragma once
 #include "Ente.h"
 
-namespace ent{
+namespace ent {
 
 class Entidade : public Ente{
 protected:
-
     //ostream buffer;
+    //int x
+    //int y
+    //...
+    
 public:
     //Construtora e Destrutora
     Entidade();

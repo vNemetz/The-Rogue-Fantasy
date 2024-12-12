@@ -1,10 +1,13 @@
 #pragma once
-#include "Entidade.h"
+#include "Entidades/Entidade.h"
 
+namespace ent {
 namespace pers{
-class Personagem : public ent::Entidade{
+
+class Personagem : public Entidade {
 protected:
     int num_vidas;
+    
 public:
     Personagem();
     Personagem(sf::Vector2f pos, sf::Vector2f tam, ID id = vazio);
@@ -18,5 +21,6 @@ public:
     //Movimento
     //virtual void mover() = 0;
 
-};   
+};
+}
 }

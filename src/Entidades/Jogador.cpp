@@ -1,6 +1,8 @@
-#include "Jogador.h"
+#include "Entidades/Jogador.h"
 #include <SFML/Window/Keyboard.hpp>
 
+namespace ent {
+namespace pers {
 pers::Jogador::Jogador()
 : pers::Personagem()
 , vivo(true)
@@ -65,4 +67,6 @@ void pers::Jogador::atualizarPosicao() {
     
     if (movendoLados[3])
         setPosition (sf::Vector2f(getPosition().x, getPosition().y + 1.f));
+}
+}
 }

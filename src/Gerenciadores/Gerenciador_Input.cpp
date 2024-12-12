@@ -1,5 +1,5 @@
 #include "Gerenciadores/Gerenciador_Input.h"
-#include "Jogador.h"
+#include "Entidades/Jogador.h"
 #include <SFML/Window/Keyboard.hpp>
 
 namespace ger {
@@ -41,7 +41,7 @@ Gerenciador_Input* Gerenciador_Input::getInstancia() {
 }
 
 /* Gerenciador de Input */
-void Gerenciador_Input::setJogador(pers::Jogador* jog) {
+void Gerenciador_Input::setJogador(ent::pers::Jogador* jog) {
     jogador = jog;
 }
 
