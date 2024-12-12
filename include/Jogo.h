@@ -13,6 +13,7 @@
 #include <vector>
 #include <string>
 
+
 class Ente;
 namespace pers{class Jogador;}
 

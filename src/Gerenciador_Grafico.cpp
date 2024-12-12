@@ -101,8 +101,15 @@ void Gerenciador_Grafico::centralizarVista(Ente *e){
 /* Clock */
 
 void Gerenciador_Grafico::updateDeltaTime(){
-    deltaTime = clock.getElapsedTime().asSeconds();
-    clock.restart();
+    deltaTime = clock.restart().asSeconds();
+}
+
+float Gerenciador_Grafico::getDeltaTime(){
+    return deltaTime;
+}
+
+float Gerenciador_Grafico::reiniciarClock(){
+    return(clock.restart().asSeconds());
 }
 
 /* Texturas */

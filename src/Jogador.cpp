@@ -10,8 +10,11 @@ pers::Jogador::Jogador()
 pers::Jogador::Jogador(sf::Vector2f pos, sf::Vector2f tam, ID id)
 : pers::Personagem(pos, tam, id)
 , vivo(true)
-, movendoLados(4, false)
-{
+, movendoLados(4, false){
+    setTextura();
+    setSprite();
+     animacao = ElementosGraficos::Animacao(pTextura, sf::Vector2u(7,3), 0.16f);
+    pTarget = nullptr;
 }
 
 pers::Jogador::~Jogador() {
@@ -64,4 +67,32 @@ void pers::Jogador::atualizarPosicao() {
     
     if (movendoLados[3])
         setPosition (sf::Vector2f(getPosition().x, getPosition().y + 1.f));
+}
+
+void pers::Jogador::setTextura(){
+    std::string imagePath = PROJECT_ROOT;
+    imagePath += "/assets/images/Rogue/spritesheet-rogue.png";
+    pTextura->loadFromFile(imagePath);
+}
+
+void pers::Jogador::setCorpo() {
+    if (pSprite) {
+        sf::IntRect corpoAnimacao = animacao.getCorpo();
+        pSprite->setOrigin(corpoAnimacao.width / 2.0f, corpoAnimacao.height / 2.0f);
+        pSprite->setTextureRect(corpoAnimacao);
+    }
+}
+
+
+
+void pers::Jogador::desenhar(){
+    if(pTarget && pSprite)
+        pTarget->draw(*pSprite);
+}
+
+/*Animação*/
+
+void pers::Jogador::atualizaAnimacao(ElementosGraficos::tipoAnimacao tipo){
+    animacao.atualizar(tipo, ger::Gerenciador_Grafico::getInstancia()->getDeltaTime());
+    setCorpo();
 }

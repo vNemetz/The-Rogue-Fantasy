@@ -45,13 +45,14 @@ void Jogo::executar(){
 
         // Loop principal do jogo
         while (ger::Gerenciador_Grafico::getInstancia()->getJanelaAberta()) {
+            ger::Gerenciador_Grafico::getInstancia()->updateDeltaTime();
             // Gerencia os eventos
             //ger::Gerenciador_Grafico::getInstancia()->setVista(jogador->getPosition().x);
             ger::Gerenciador_Eventos::getInstancia()->gerenciar();
 
             // Limpar a janela
             ger::Gerenciador_Grafico::getInstancia()->limpaJanela();
-            
+            jogador->atualizaAnimacao(ElementosGraficos::andando);
             jogador->atualizarPosicao();
             
             // Centraliza o campo de visão no jogador

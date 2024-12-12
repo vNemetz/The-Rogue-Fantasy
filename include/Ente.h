@@ -5,6 +5,7 @@
 #define WIDTH 1080
 
 #include "Gerenciador_Grafico.h"
+#include "Animacao_Composta.h"
 
 
 enum ID{
@@ -50,13 +51,13 @@ public:
     void setpGG(ger::Gerenciador_Grafico* pGrafico);
     
     //Gráficos
-    void setTextura();
-    void desenhar();
+    virtual void setTextura();
+    virtual void desenhar();
     void setSprite();
     void setTarget();
     sf::Sprite getSprite() const;
 
-sf::Vector2f getPosition() const;
+    sf::Vector2f getPosition() const;
 
     void setPosition(sf::Vector2f pos);
 };
