@@ -1,7 +1,7 @@
 #pragma once
-#include "Jogo.h"
-class Ente;
+#include <SFML/Graphics.hpp>
 
+class Ente;
 
 /* Gerenciadores - Namespace */
 namespace ger{

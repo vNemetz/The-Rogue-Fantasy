@@ -19,6 +19,7 @@ pers::Jogador::~Jogador() {
 }
 
 void pers::Jogador::executar() {
+    atualizarPosicao();
 }
 
 void pers::Jogador::alteraVivo() {

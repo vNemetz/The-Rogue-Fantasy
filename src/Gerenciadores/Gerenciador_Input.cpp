@@ -1,4 +1,4 @@
-#include "Gerenciador_Input.h"
+#include "Gerenciadores/Gerenciador_Input.h"
 #include "Jogador.h"
 #include <SFML/Window/Keyboard.hpp>
 

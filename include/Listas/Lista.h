@@ -1,5 +1,4 @@
 #pragma once
-#include "Jogo.h"
 
 /* Lista Encadeada de tipo genérico */
 
@@ -20,12 +19,14 @@ private:
         void incluir(TE* p);
         void setProx(Elemento<TE>* pE);
         Elemento<TE>* getProximo() const;
-        TE getInfo() const;
+        TE* getInfo() const;
     };
 
     // Ponteiros para o primeiro e último elemento da lista
     Elemento<TL>* pPrimeiro;
     Elemento<TL>* pUltimo;
+
+    int tamanho;
 
 public:
     Lista();
@@ -34,6 +35,15 @@ public:
     void incluir(TL* p); // Adiciona 'p' no final da lista
     void remover(TL* p); // Remove 'p' da lista
     void limpar(); // Limpa a lista
+    int getTamanho() const {return tamanho;}
+
+    TL* operator[](int pos) {
+        Elemento<TL>* aux = pPrimeiro;
+        for(int i = 0; i < pos; i++){
+            aux = aux->getProximo();
+        }
+        return aux->getInfo();
+    }
 
     class Iterator {
     private:
@@ -93,14 +103,14 @@ void Lista<TL>::Elemento<TE>::setProx(Elemento<TE>* pE) {
 
 template <typename TL>
 template <typename TE>
-Lista<TL>::Elemento<TE>* Lista<TL>::Elemento<TE>::getProximo() const {
+typename Lista<TL>::template Elemento<TE>* Lista<TL>::Elemento<TE>::getProximo() const {
     return pProx;
 }
 
 template <typename TL>
 template <typename TE>
-TE Lista<TL>::Elemento<TE>::getInfo() const {
-    return *pInfo;
+TE* Lista<TL>::Elemento<TE>::getInfo() const {
+    return pInfo;
 }
 
 /* 
@@ -110,6 +120,7 @@ template <typename TL>
 Lista<TL>::Lista()
     : pPrimeiro(nullptr)
     , pUltimo(nullptr)
+    , tamanho(0)
 {
 }
 
@@ -133,11 +144,37 @@ void Lista<TL>::incluir(TL* p) {
         pPrimeiro = pNovo;
         pUltimo = pNovo;
     }
+
+    tamanho++;
 }
 
 template <typename TL>
 void Lista<TL>::remover(TL* p) {
-    // TODO
+    Elemento<TL>* atual = pPrimeiro;
+    Elemento<TL>* anterior = nullptr;
+    
+    while (atual != nullptr && atual->getInfo() != p) {
+        anterior = atual;
+        atual = atual->getProximo();
+    }
+
+    if (atual->getInfo() == p) {
+        if (atual == pPrimeiro)
+            pPrimeiro = atual->getProximo();
+        
+        else if (atual == pUltimo)
+            pUltimo = anterior;
+
+        else
+            anterior->setProx(atual->getProximo());
+
+        delete atual;
+        
+        tamanho--;
+    }
+
+    atual = nullptr;
+    anterior = nullptr;
 }
 
 template <typename TL>
@@ -149,6 +186,7 @@ void Lista<TL>::limpar() {
     }
 
     pUltimo = nullptr;
+    tamanho = 0;
 }
 
 template <typename TL>

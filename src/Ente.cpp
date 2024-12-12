@@ -1,5 +1,5 @@
 #include "Ente.h"
-#include "Gerenciador_Grafico.h"
+#include "Gerenciadores/Gerenciador_Grafico.h"
 
 Ente::Ente() {
     pTextura = new sf::Texture();  // Aloca memória para pTextura

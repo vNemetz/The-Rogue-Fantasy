@@ -1,10 +1,11 @@
 #pragma once
-#include "Jogo.h"
+
+#include <SFML/Graphics.hpp>
+
+#include "Gerenciadores/Gerenciador_Grafico.h"
 
 #define HEIGHT 1920
 #define WIDTH 1080
-
-#include "Gerenciador_Grafico.h"
 
 
 enum ID{
