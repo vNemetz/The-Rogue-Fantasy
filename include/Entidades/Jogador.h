@@ -16,7 +16,7 @@ protected:
 //...
 public:
     Jogador();
-    Jogador(sf::Vector2f pos, sf::Vector2f tam, ID id = vazio);
+    Jogador(sf::Vector2f pos, sf::Vector2f tam);
     ~Jogador();
     void executar();
 

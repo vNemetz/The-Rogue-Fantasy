@@ -10,7 +10,7 @@
 #include "Gerenciadores/Gerenciador_Grafico.h"
 #include "Gerenciadores/Gerenciador_Eventos.h"
 
-namespace pers{class Jogador;}
+namespace ent {namespace pers{class Jogador; class Inimigo;}}
 
 class Jogo{
 private:
@@ -19,6 +19,7 @@ private:
     
     lis::Lista_Entidades listaEntidades;
     ent::pers::Jogador* jogador;
+    ent::pers::Inimigo* inimigo;
 
 public:
     Jogo();

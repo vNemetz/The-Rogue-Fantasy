@@ -1,11 +1,25 @@
 #include "Entidades/Entidade.h"
 
 namespace ent {
-ent::Entidade::Entidade(): Ente(){}
+Entidade::Entidade()
+    : Ente()
+    , velocidade(0.f, 0.f)
+{
+}
 
-ent::Entidade::Entidade(sf::Vector2f pos, sf::Vector2f tam, ID id): Ente(pos, tam, id){}
+Entidade::Entidade(sf::Vector2f pos, sf::Vector2f tam, ID id)
+    : Ente(pos, tam, id)
+    , velocidade(0.f, 0.f)
+{
+}
 
-ent::Entidade::~Entidade(){}
+Entidade::~Entidade()
+{
+}
+
+void Entidade::setVelocidade(sf::Vector2f vel) {
+    velocidade = vel;
+}
 
 
 void ent::Entidade::salvarDataBuffer()

@@ -51,13 +51,13 @@ public:
     void setpGG(ger::Gerenciador_Grafico* pGrafico);
     
     //Gráficos
-    void setTextura();
+    void setTextura(sf::Texture* pTex);
     void desenhar();
     void setSprite();
     void setTarget();
     sf::Sprite getSprite() const;
 
-sf::Vector2f getPosition() const;
+    sf::Vector2f getPosition() const;
 
     void setPosition(sf::Vector2f pos);
 };

@@ -3,36 +3,39 @@
 
 namespace ent {
 namespace pers {
-pers::Jogador::Jogador()
-: pers::Personagem()
-, vivo(true)
+Jogador::Jogador()
+    : Personagem()
+    , vivo(true)
+    , pontos(0)
 {
 }
 
-pers::Jogador::Jogador(sf::Vector2f pos, sf::Vector2f tam, ID id)
-: pers::Personagem(pos, tam, id)
-, vivo(true)
-, movendoLados(4, false)
+Jogador::Jogador(sf::Vector2f pos, sf::Vector2f tam)
+    : Personagem(pos, tam, jogador)
+    , vivo(true)
+    , pontos(0)
+    , movendoLados(4, false)
 {
 }
 
-pers::Jogador::~Jogador() {
+Jogador::~Jogador() {
     vivo = false;
+    pontos = 0;
 }
 
-void pers::Jogador::executar() {
+void Jogador::executar() {
     atualizarPosicao();
 }
 
-void pers::Jogador::alteraVivo() {
+void Jogador::alteraVivo() {
     vivo = !vivo;
 }
 
-bool pers::Jogador::getVivo() {
+bool Jogador::getVivo() {
     return vivo;
 }
 
-void pers::Jogador::mover(bool estado, sf::Keyboard::Key key) {
+void Jogador::mover(bool estado, sf::Keyboard::Key key) {
     switch (key) {
         case sf::Keyboard::A:
             movendoLados[0] = estado;
@@ -55,18 +58,18 @@ void pers::Jogador::mover(bool estado, sf::Keyboard::Key key) {
     }
 }
 
-void pers::Jogador::atualizarPosicao() {
+void Jogador::atualizarPosicao() {
     if (movendoLados[0])
-        setPosition (sf::Vector2f(getPosition().x -1.f, getPosition()   .y));
+        setPosition (sf::Vector2f(getPosition().x -velocidade.x, getPosition().y));
     
     if (movendoLados[1])
-        setPosition (sf::Vector2f(getPosition().x + 1.f, getPosition().y));
+        setPosition (sf::Vector2f(getPosition().x + velocidade.x, getPosition().y));
     
     if (movendoLados[2])
-        setPosition (sf::Vector2f(getPosition().x, getPosition().y - 1.f));
+        setPosition (sf::Vector2f(getPosition().x, getPosition().y - velocidade.y));
     
     if (movendoLados[3])
-        setPosition (sf::Vector2f(getPosition().x, getPosition().y + 1.f));
+        setPosition (sf::Vector2f(getPosition().x, getPosition().y + velocidade.y));
 }
 }
 }
