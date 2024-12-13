@@ -1,10 +1,13 @@
 #pragma once
-#include "Entidade.h"
+#include "Entidades/Entidade.h"
 
+namespace ent {
 namespace pers{
-class Personagem : public ent::Entidade{
+
+class Personagem : public Entidade {
 protected:
     int num_vidas;
+    
 public:
     Personagem();
     Personagem(sf::Vector2f pos, sf::Vector2f tam, ID id = vazio);
@@ -13,10 +16,11 @@ public:
     //virtual void setNum_Vidas() = 0; //Declara o número de vidas inicial
     //virtual void operator --() = 0; //Diminui a vida
     //virtual void operator ++() = 0; //Incrementa a vida
-    //virtual void executar() = 0;
+    virtual void executar() = 0;
 
     //Movimento
     //virtual void mover() = 0;
 
-};   
+};
+}
 }

@@ -1,76 +1,84 @@
 #include "Jogo.h"
 #include "Ente.h"
-#include "Gerenciador_Grafico.h"
-#include "Gerenciador_Eventos.h"
-#include "Gerenciador_Input.h"
-#include "Jogador.h"
-#include <sstream>
+#include "Entidades/Entidade.h"
+#include "Entidades/Inimigo.h"
+#include "Gerenciadores/Gerenciador_Input.h"
+#include "Entidades/Jogador.h"
+#include <SFML/System/Vector2.hpp>
 //...
 
-Jogo::Jogo() {
+Jogo::Jogo()
+: gerGrafico(ger::Gerenciador_Grafico::getInstancia())
+, gerEventos((ger::Gerenciador_Eventos::getInstancia()))
+, listaEntidades()
+{
     srand(time(NULL));
-    jogador = new pers::Jogador (sf::Vector2f(HEIGHT/2.0, WIDTH/2.0),sf::Vector2f(20.f, 20.f), vazio);
-    jogador->setpGG(ger::Gerenciador_Grafico::getInstancia());
+
+    jogador = new ent::pers::Jogador (sf::Vector2f(HEIGHT/2.0, WIDTH/2.0),sf::Vector2f(20.f, 20.f));
+    
+    inimigo = new ent::pers::Inimigo(sf::Vector2f(HEIGHT/2.0+600.f, WIDTH/2.0),sf::Vector2f(20.f, 20.f), jogador);
+    
+    inicializaEntidades();
 
     executar();
 }
 
-Jogo::~Jogo(){
+Jogo::~Jogo() {
+    listaEntidades.limpar();
+    
     delete jogador;
+    delete inimigo;
+
+    inimigo = nullptr;
     jogador = nullptr;
+    gerGrafico = nullptr;
+    gerEventos = nullptr;
 }
 
-void Jogo::moveEntes(){
+void Jogo::inicializaEntidades() {
+    jogador->setpGG(gerGrafico);
+    jogador->setTarget();
+    jogador->setTextura(gerGrafico->carregarTextura("/assets/images/Rogue/rogue.png"));
+    jogador->setVelocidade(sf::Vector2f(0.125f, 0.125f));
+
+    inimigo->setpGG(gerGrafico);
+    inimigo->setTarget();
+    inimigo->setTextura(gerGrafico->carregarTextura("/assets/images/Goblin/0goblin.png"));
+    inimigo->setVelocidade(sf::Vector2f (0.05f, 0.05f));
+
+    listaEntidades.incluir(static_cast<ent::Entidade*>(jogador));
+    listaEntidades.incluir(static_cast<ent::Entidade*>(inimigo));
+}
+
+void Jogo::atualizaEntidades() {
+    listaEntidades.percorrer();
 }
 
 void Jogo::executar(){
-    if(ger::Gerenciador_Grafico::getInstancia()){
-        jogador->setTarget();
+    
+    // Inclui jogador nos gerenciadores
+    gerEventos->setJogador(jogador);
+    ger::Gerenciador_Input::getInstancia()->setJogador(jogador);
 
-        /*
-        DEBUG:
-        sf::Font font;
-        std::string str = PROJECT_ROOT;
-        str += "/assets/fonts/Arial.ttf";
-        font.loadFromFile(str);
-        sf::Text text;
-        text.setFont(font);
-        text.setCharacterSize(50);
-        text.setFillColor(sf::Color::Black);
-        text.setPosition(0.f, 0.f);
-        */
+    // Loop principal do jogo
+    while (gerGrafico->getJanelaAberta()) {
+        // Gerencia os eventos
+        gerEventos->gerenciar();
+
+        // Limpar a janela
+        gerGrafico->limpaJanela();
         
-        ger::Gerenciador_Eventos::getInstancia()->setJogador(jogador);
-        ger::Gerenciador_Input::getInstancia()->setJogador(jogador);
+        // Atualiza as Entidades
+        atualizaEntidades();
+        
+        // Centraliza o campo de visão no jogador
+        gerGrafico->centralizarVista(static_cast<Ente*>(jogador));
+        
+        // Desenhar o jogador (ente)
+        gerGrafico->desenharEnte(static_cast<Ente*>(jogador));
+        gerGrafico->desenharEnte(static_cast<Ente*>(inimigo));
 
-        // Loop principal do jogo
-        while (ger::Gerenciador_Grafico::getInstancia()->getJanelaAberta()) {
-            // Gerencia os eventos
-            //ger::Gerenciador_Grafico::getInstancia()->setVista(jogador->getPosition().x);
-            ger::Gerenciador_Eventos::getInstancia()->gerenciar();
-
-            // Limpar a janela
-            ger::Gerenciador_Grafico::getInstancia()->limpaJanela();
-            
-            jogador->atualizarPosicao();
-            
-            // Centraliza o campo de visão no jogador
-            ger::Gerenciador_Grafico::getInstancia()->centralizarVista(static_cast<Ente*>(jogador));
-            
-            // Desenhar o jogador (ente)
-            ger::Gerenciador_Grafico::getInstancia()->desenharEnte(static_cast<Ente*>(jogador));
-
-            /*
-            DEBUG:
-            std::ostringstream oss;
-            oss << "J: (" << (int) jogador->getPosition().x << ", " << (int) jogador->getPosition().y << ")";
-            text.setString(oss.str());
-            text.setPosition(ger::Gerenciador_Grafico::getInstancia()->getVista().getCenter().x - ger::Gerenciador_Grafico::getInstancia()->getVista().getSize().x/2.f, ger::Gerenciador_Grafico::getInstancia()->getVista().getCenter().y - ger::Gerenciador_Grafico::getInstancia()->getVista().getSize().y/2.f);
-            ger::Gerenciador_Grafico::getInstancia()->getJanela()->draw(text);
-            */
-
-            // Exibir a janela
-            ger::Gerenciador_Grafico::getInstancia()->display();
-        }
+        // Exibir a janela
+        gerGrafico->display();
     }
 }
