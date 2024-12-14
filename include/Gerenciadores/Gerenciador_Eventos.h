@@ -1,13 +1,12 @@
 #pragma once
-#include "Gerenciador_Input.h"
-#include "Jogo.h"
-#include "Jogador.h"
+#include "Gerenciadores/Gerenciador_Input.h"
+#include "Entidades/Jogador.h"
 
 namespace ger {
 class Gerenciador_Eventos {
 private:
     // TODO: Gerenciador_Colisoes* gerColisoes;
-    pers::Jogador* jogador;
+    ent::pers::Jogador* jogador;
     Gerenciador_Input* gerInput;
 
     // Implementação do Singleton ao Gerenciador de Eventos:
@@ -21,7 +20,7 @@ public:
     
     ~Gerenciador_Eventos();
     
-    void setJogador(pers::Jogador* jog);
+    void setJogador(ent::pers::Jogador* jog);
 
     void gerenciar();
 };

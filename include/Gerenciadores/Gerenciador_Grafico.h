@@ -1,7 +1,7 @@
 #pragma once
-#include "Jogo.h"
-class Ente;
+#include <SFML/Graphics.hpp>
 
+class Ente;
 
 /* Gerenciadores - Namespace */
 namespace ger{
@@ -11,7 +11,7 @@ private:
     sf::VideoMode videoMode;    // Guarda altura e largura da tela
     sf::RenderWindow* pJanela;  // Ponteiro para a janela onde tudo será renderizado
     sf::View vista;  // Para modularizar o tamanho da janela
-    std::map<const char*, sf::Texture*> mapaTexturas;   // Mapa de texturas
+    std::map<std::string, sf::Texture*> mapaTexturas;   // Mapa de texturas
     sf::Clock clock;
     static float deltaTime;
 
@@ -50,7 +50,7 @@ public:
     float reiniciarClock();
     
     /* Texturas */
-    sf::Texture* carregarTextura(const char* caminho);
+    sf::Texture* carregarTextura(const char* caminhoImagem);
     
     /* Renderização */
     void desenharEnte(Ente* pE) const;

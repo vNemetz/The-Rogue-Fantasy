@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Jogo.h"
-#include "Gerenciador_Grafico.h"
+#include "Gerenciadores/Gerenciador_Grafico.h"
 
 namespace ElementosGraficos{
 class Animacao_Simples{

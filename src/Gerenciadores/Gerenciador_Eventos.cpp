@@ -1,6 +1,6 @@
-#include "Gerenciador_Eventos.h"
-#include "Gerenciador_Grafico.h"
-#include "Gerenciador_Input.h"
+#include "Gerenciadores/Gerenciador_Eventos.h"
+#include "Gerenciadores/Gerenciador_Grafico.h"
+#include "Gerenciadores/Gerenciador_Input.h"
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 
@@ -22,7 +22,7 @@ Gerenciador_Eventos* Gerenciador_Eventos::getInstancia(){
     return instancia;
 }
 
-void Gerenciador_Eventos::setJogador(pers::Jogador *jog){
+void Gerenciador_Eventos::setJogador(ent::pers::Jogador *jog){
     jogador = jog;
 }
 

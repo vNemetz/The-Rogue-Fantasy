@@ -1,11 +1,11 @@
 #pragma once
-#include "Jogo.h"
+
+#include <SFML/Graphics.hpp>
+
+#include "Gerenciadores/Gerenciador_Grafico.h"
 
 #define HEIGHT 1920
 #define WIDTH 1080
-
-#include "Gerenciador_Grafico.h"
-#include "Animacao_Composta.h"
 
 
 enum ID{
@@ -51,8 +51,8 @@ public:
     void setpGG(ger::Gerenciador_Grafico* pGrafico);
     
     //Gráficos
-    virtual void setTextura();
-    virtual void desenhar();
+    void setTextura(sf::Texture* pTex);
+    void desenhar();
     void setSprite();
     void setTarget();
     sf::Sprite getSprite() const;

@@ -1,5 +1,6 @@
-#include "Gerenciador_Grafico.h"
+#include "Gerenciadores/Gerenciador_Grafico.h"
 #include "Ente.h"
+#include <iostream>
 #include <string.h>
 
 namespace ger{
@@ -13,13 +14,21 @@ Gerenciador_Grafico* Gerenciador_Grafico::getInstancia() {
     return instancia;
 }
 
-Gerenciador_Grafico::Gerenciador_Grafico() : pJanela(NULL), clock(), mapaTexturas(), vista(){
+Gerenciador_Grafico::Gerenciador_Grafico()
+    : pJanela(NULL)
+    , clock()
+    , mapaTexturas()
+    , vista()
+{
     setVideoMode();
     setJanela();
+
+    carregarTextura("/assets/images/Rogue/rogue.png");
+    carregarTextura("/assets/images/Goblin/0goblin.png");
 }
 
 Gerenciador_Grafico::~Gerenciador_Grafico(){
-    std::map<const char*, sf::Texture*>::iterator it = mapaTexturas.begin();
+    std::map<std::string, sf::Texture*>::iterator it = mapaTexturas.begin();
     while(it != mapaTexturas.end()){
         delete it->second;
     }
@@ -113,7 +122,10 @@ float Gerenciador_Grafico::reiniciarClock(){
 }
 
 /* Texturas */
-sf::Texture* Gerenciador_Grafico::carregarTextura(const char* caminho){
+sf::Texture* Gerenciador_Grafico::carregarTextura(const char* caminhoImagem) {
+    std::string caminho = PROJECT_ROOT;
+    caminho += caminhoImagem;
+
     if (mapaTexturas.find(caminho) != mapaTexturas.end()) {
         return mapaTexturas[caminho];
     }
@@ -123,7 +135,7 @@ sf::Texture* Gerenciador_Grafico::carregarTextura(const char* caminho){
             std::cerr << "ERRO ao carregar arquivo" << caminho << "\n";
             exit(1);
     }
-    mapaTexturas.insert(std::pair<const char*, sf::Texture*>(caminho, novaTextura));
+    mapaTexturas.insert(std::pair<std::string, sf::Texture*>(caminho, novaTextura));
     return novaTextura;
 }
 

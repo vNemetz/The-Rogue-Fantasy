@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Jogador.h"
+#include "Entidades/Jogador.h"
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Graphics.hpp>
 #include <map>
@@ -11,7 +11,7 @@ namespace ger {
 class Gerenciador_Input {
 private:
     std::map<sf::Keyboard::Key, std::function<void(bool)>> mapaTeclas;
-    pers::Jogador* jogador;
+    ent::pers::Jogador* jogador;
 
     /* Singleton - Padrão de Projeto */
     static Gerenciador_Input* instancia;
@@ -24,7 +24,7 @@ public:
 
     static Gerenciador_Input* getInstancia();
 
-    void setJogador(pers::Jogador* jog);
+    void setJogador(ent::pers::Jogador* jog);
     void incluir_tecla(sf::Keyboard::Key tecla, std::function<void(bool)> funcaoTecla);
     
     void teclaApertada(sf::Keyboard::Key tecla);
