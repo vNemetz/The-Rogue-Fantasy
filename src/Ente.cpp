@@ -52,14 +52,17 @@ void Ente::setTextura(sf::Texture* pTex) {
     setSprite();
 }
 
-void Ente::desenhar(){
+void Ente::desenhar() {
     pTarget->draw(getSprite());
 }
 
-void Ente::setPosition(sf::Vector2f pos){
+void Ente::setPosition(sf::Vector2f pos) {
+    if (pos.y < 0)
+        pos.y = getPosition().y;
+
     pSprite->setPosition(pos);
 }
-sf::Vector2f Ente::getPosition() const{
+sf::Vector2f Ente::getPosition() const {
     return pSprite->getPosition();
 }
 
