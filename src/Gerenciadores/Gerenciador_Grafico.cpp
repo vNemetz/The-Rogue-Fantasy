@@ -64,7 +64,7 @@ sf::Vector2u Gerenciador_Grafico::getTamanhoJanela() const{
     return pJanela->getSize();
 }
 
-void Gerenciador_Grafico::limpaJanela(){
+void Gerenciador_Grafico::limpaJanela() {
     pJanela->clear(sf::Color::Yellow);
 }
 

@@ -1,7 +1,7 @@
 #include "Jogo.h"
 #include "Ente.h"
 #include "Entidades/Entidade.h"
-#include "Entidades/Inimigo.h"
+#include "Entidades/Goblin.h"
 #include "Gerenciadores/Gerenciador_Input.h"
 #include "Entidades/Jogador.h"
 #include <SFML/System/Vector2.hpp>
@@ -16,7 +16,7 @@ Jogo::Jogo()
 
     jogador = new ent::pers::Jogador (sf::Vector2f(HEIGHT/2.0, WIDTH/2.0),sf::Vector2f(20.f, 20.f));
     
-    inimigo = new ent::pers::Inimigo(sf::Vector2f(HEIGHT/2.0+600.f, WIDTH/2.0),sf::Vector2f(20.f, 20.f), jogador);
+    goblin = new ent::pers::Goblin(sf::Vector2f(HEIGHT/2.0+600.f, WIDTH/2.0),sf::Vector2f(20.f, 20.f), jogador);
     
     inicializaEntidades();
 
@@ -27,9 +27,9 @@ Jogo::~Jogo() {
     listaEntidades.limpar();
     
     delete jogador;
-    delete inimigo;
+    delete goblin;
 
-    inimigo = nullptr;
+    goblin = nullptr;
     jogador = nullptr;
     gerGrafico = nullptr;
     gerEventos = nullptr;
@@ -41,13 +41,13 @@ void Jogo::inicializaEntidades() {
     jogador->setTextura(gerGrafico->carregarTextura("/assets/images/Rogue/rogue.png"));
     jogador->setVelocidade(sf::Vector2f(0.125f, 0.125f));
 
-    inimigo->setpGG(gerGrafico);
-    inimigo->setTarget();
-    inimigo->setTextura(gerGrafico->carregarTextura("/assets/images/Goblin/0goblin.png"));
-    inimigo->setVelocidade(sf::Vector2f (0.05f, 0.05f));
+    goblin->setpGG(gerGrafico);
+    goblin->setTarget();
+    goblin->setTextura(gerGrafico->carregarTextura("/assets/images/Goblin/0goblin.png"));
+    goblin->setVelocidade(sf::Vector2f (0.05f, 0.05f));
 
     listaEntidades.incluir(static_cast<ent::Entidade*>(jogador));
-    listaEntidades.incluir(static_cast<ent::Entidade*>(inimigo));
+    listaEntidades.incluir(static_cast<ent::Entidade*>(goblin));
 }
 
 void Jogo::atualizaEntidades() {
@@ -76,7 +76,7 @@ void Jogo::executar(){
         
         // Desenhar o jogador (ente)
         gerGrafico->desenharEnte(static_cast<Ente*>(jogador));
-        gerGrafico->desenharEnte(static_cast<Ente*>(inimigo));
+        gerGrafico->desenharEnte(static_cast<Ente*>(goblin));
 
         // Exibir a janela
         gerGrafico->display();
