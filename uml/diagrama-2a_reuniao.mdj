@@ -10226,7 +10226,7 @@
 											"parentStyle": true,
 											"left": 1661,
 											"top": 797,
-											"width": 298.08587646484375,
+											"width": 286.8388671875,
 											"height": 11,
 											"text": "«Entidade - Abstrata»"
 										},
@@ -10242,7 +10242,7 @@
 											"parentStyle": true,
 											"left": 1661,
 											"top": 810,
-											"width": 298.08587646484375,
+											"width": 286.8388671875,
 											"height": 11,
 											"text": "Personagem"
 										},
@@ -10285,7 +10285,7 @@
 									"parentStyle": true,
 									"left": 1656,
 									"top": 792,
-									"width": 308.08587646484375,
+									"width": 296.8388671875,
 									"height": 34,
 									"stereotypeLabel": {
 										"$ref": "1uymcqx1k0et1/n+OD7JwgAA"
@@ -10325,7 +10325,7 @@
 											"parentStyle": true,
 											"left": 1661,
 											"top": 831,
-											"width": 298.08587646484375,
+											"width": 286.8388671875,
 											"height": 11,
 											"text": "#num_vidas: int",
 											"horizontalAlignment": 0
@@ -10337,7 +10337,7 @@
 									"parentStyle": true,
 									"left": 1656,
 									"top": 826,
-									"width": 308.08587646484375,
+									"width": 296.8388671875,
 									"height": 21
 								},
 								{
@@ -10365,7 +10365,7 @@
 											"parentStyle": true,
 											"left": 1661,
 											"top": 852,
-											"width": 298.08587646484375,
+											"width": 286.8388671875,
 											"height": 11,
 											"text": "«create»+Personagem()",
 											"horizontalAlignment": 0
@@ -10385,7 +10385,7 @@
 											"parentStyle": true,
 											"left": 1661,
 											"top": 865,
-											"width": 298.08587646484375,
+											"width": 286.8388671875,
 											"height": 11,
 											"text": "«create»+Personagem(pos: Vector2f, tam: Vector2f, id: ID)",
 											"horizontalAlignment": 0
@@ -10405,7 +10405,7 @@
 											"parentStyle": true,
 											"left": 1661,
 											"top": 878,
-											"width": 298.08587646484375,
+											"width": 286.8388671875,
 											"height": 11,
 											"text": "«destroy»+Personagem()",
 											"horizontalAlignment": 0
@@ -10425,7 +10425,7 @@
 											"parentStyle": true,
 											"left": 1661,
 											"top": 891,
-											"width": 298.08587646484375,
+											"width": 286.8388671875,
 											"height": 11,
 											"text": "+salvarDataBuffer()",
 											"horizontalAlignment": 0
@@ -10445,7 +10445,7 @@
 											"parentStyle": true,
 											"left": 1661,
 											"top": 904,
-											"width": 298.08587646484375,
+											"width": 286.8388671875,
 											"height": 11,
 											"text": "+mover(): virtual void",
 											"horizontalAlignment": 0
@@ -10465,7 +10465,7 @@
 											"parentStyle": true,
 											"left": 1661,
 											"top": 917,
-											"width": 298.08587646484375,
+											"width": 286.8388671875,
 											"height": 11,
 											"text": "+executar(): virtual void = 0",
 											"horizontalAlignment": 0
@@ -10506,7 +10506,7 @@
 											"parentStyle": true,
 											"left": 1661,
 											"top": 930,
-											"width": 298.08587646484375,
+											"width": 286.8388671875,
 											"height": 11,
 											"text": "+mover(): virtual void = 0",
 											"horizontalAlignment": 0
@@ -10518,7 +10518,7 @@
 									"parentStyle": true,
 									"left": 1656,
 									"top": 847,
-									"width": 308.08587646484375,
+									"width": 296.8388671875,
 									"height": 99
 								},
 								{
@@ -10547,7 +10547,7 @@
 							"parentStyle": false,
 							"left": 1656,
 							"top": 792,
-							"width": 307.08587646484375,
+							"width": 295.8388671875,
 							"height": 184,
 							"showProperty": false,
 							"nameCompartment": {
@@ -18193,7 +18193,7 @@
 									"parentStyle": false,
 									"left": 2098,
 									"top": 976,
-									"width": 18.4798583984375,
+									"width": 18.34765625,
 									"height": 11,
 									"alpha": -0.7853985919010296,
 									"distance": 15.556349186104045,
@@ -23207,7 +23207,7 @@
 									"parentStyle": false,
 									"left": 2179,
 									"top": 1062,
-									"width": 18.4798583984375,
+									"width": 18.34765625,
 									"height": 11,
 									"alpha": -0.7853985919010296,
 									"distance": 15.556349186104045,
