@@ -65,7 +65,7 @@ sf::Vector2u Gerenciador_Grafico::getTamanhoJanela() const{
 }
 
 void Gerenciador_Grafico::limpaJanela() {
-    pJanela->clear(sf::Color::Yellow);
+    pJanela->clear(sf::Color::Black);
 }
 
 void Gerenciador_Grafico::fechaJanela(){
@@ -140,8 +140,10 @@ sf::Texture* Gerenciador_Grafico::carregarTextura(const char* caminhoImagem) {
 }
 
 /* Renderização */
-void Gerenciador_Grafico::desenharEnte(Ente *pE) const{
-    if(pE){pE->desenhar();}
+void Gerenciador_Grafico::desenharEnte(Ente *pE) const {
+    if(pE) {
+        pJanela->draw(pE->getSprite());
+    }
 }
 
 void Gerenciador_Grafico::desenhar(sf::RectangleShape *corpo) const{

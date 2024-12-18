@@ -29,9 +29,7 @@ protected:
     static ger::Gerenciador_Grafico* pGG;
     sf::Texture* pTextura;
     sf::Sprite* pSprite;
-
-    //Desenhar
-    sf::RenderTarget* pTarget; //Alvo da renderização (janela)
+    
     //...
 
 public:
@@ -52,9 +50,7 @@ public:
     
     //Gráficos
     void setTextura(sf::Texture* pTex);
-    void desenhar();
     void setSprite();
-    void setTarget();
     sf::Sprite getSprite() const;
 
     sf::Vector2f getPosition() const;

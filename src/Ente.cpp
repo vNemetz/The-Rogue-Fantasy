@@ -13,8 +13,6 @@ Ente::Ente(sf::Vector2f pos, sf::Vector2f tam, ID id)
 {
     pTextura = new sf::Texture();  // Aloca memória para pTextura
     pSprite = new sf::Sprite();    // Aloca memória para pSprite
-
-    setTarget();
 }
 
 Ente::~Ente() {
@@ -38,10 +36,6 @@ void Ente::setSprite(){
     pSprite->setPosition(posicao);
 }
 
-void Ente::setTarget(){
-    if(pGG){pTarget = (pGG->getJanela());}
-}
-
 sf::Sprite Ente::getSprite() const{
     return *pSprite;
 }
@@ -50,10 +44,6 @@ void Ente::setTextura(sf::Texture* pTex) {
     pTextura = pTex;
 
     setSprite();
-}
-
-void Ente::desenhar() {
-    pTarget->draw(getSprite());
 }
 
 void Ente::setPosition(sf::Vector2f pos) {
