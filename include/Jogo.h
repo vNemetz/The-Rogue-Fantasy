@@ -9,17 +9,18 @@
 #include "Listas/Lista_Entidades.h"
 #include "Gerenciadores/Gerenciador_Grafico.h"
 #include "Gerenciadores/Gerenciador_Eventos.h"
+#include "Entidades/Plataforma.h"
 
-namespace ent {namespace pers{class Jogador; class Goblin;}}
 
-class Jogo{
+namespace ent { namespace pers { class Jogador; class Goblin; } }
+
+class Jogo {
 private:
     ger::Gerenciador_Grafico* gerGrafico;
     ger::Gerenciador_Eventos* gerEventos;
     
     lis::Lista_Entidades listaEntidades;
     ent::pers::Jogador* jogador;
-    ent::pers::Goblin* goblin;
 
 public:
     Jogo();

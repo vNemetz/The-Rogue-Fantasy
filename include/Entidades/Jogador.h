@@ -25,12 +25,11 @@ public:
     bool getVivo();
     void mover(bool estado, sf::Keyboard::Key key);
     void atualizarPosicao();
-    void setTextura();
     void setCorpo();
     void desenhar();
 
-   /*Animação*/
-    void atualizaAnimacao(ElementosGraficos::tipoAnimacao tipo);
+    /*Animação*/
+    //void atualizaAnimacao(ElementosGraficos::tipoAnimacao tipo);
 };
 }
 }

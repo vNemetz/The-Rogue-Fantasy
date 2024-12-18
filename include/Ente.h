@@ -49,7 +49,8 @@ public:
     void setpGG(ger::Gerenciador_Grafico* pGrafico);
     
     //Gráficos
-    void setTextura(sf::Texture* pTex);
+    void setTextura(const char *caminhoImagem);
+    void desenhar();
     void setSprite();
     sf::Sprite getSprite() const;
 

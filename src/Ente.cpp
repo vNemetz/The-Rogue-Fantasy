@@ -40,11 +40,17 @@ sf::Sprite Ente::getSprite() const{
     return *pSprite;
 }
 
-void Ente::setTextura(sf::Texture* pTex) {
-    pTextura = pTex;
+void Ente::setTextura(const char *caminhoImagem) {
+    pTextura = pGG->carregarTextura(caminhoImagem); 
 
     setSprite();
 }
+
+
+void Ente::desenhar() {
+    pGG->desenharEnte(this);
+}
+
 
 void Ente::setPosition(sf::Vector2f pos) {
     if (pos.y < 0)
