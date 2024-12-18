@@ -46,6 +46,8 @@ public:
     
     /* Clock */
     void updateDeltaTime();
+    float getDeltaTime();
+    float reiniciarClock();
     
     /* Texturas */
     sf::Texture* carregarTextura(const char* caminhoImagem);
