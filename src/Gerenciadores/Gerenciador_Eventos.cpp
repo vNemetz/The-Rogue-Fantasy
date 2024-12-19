@@ -1,4 +1,5 @@
 #include "Gerenciadores/Gerenciador_Eventos.h"
+#include "Gerenciadores/Gerenciador_Colisoes.h"
 #include "Gerenciadores/Gerenciador_Grafico.h"
 #include "Gerenciadores/Gerenciador_Input.h"
 #include <SFML/Window/Event.hpp>
@@ -6,7 +7,12 @@
 
 namespace ger{
 
-Gerenciador_Eventos::Gerenciador_Eventos(): jogador(nullptr){}
+Gerenciador_Eventos::Gerenciador_Eventos()
+    : jogador(nullptr)
+{
+    gerColisoes = Gerenciador_Colisoes::getInstancia();
+    gerInput = Gerenciador_Input::getInstancia();
+}
 
 Gerenciador_Eventos::~Gerenciador_Eventos(){
     jogador = nullptr;

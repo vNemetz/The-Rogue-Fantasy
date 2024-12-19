@@ -25,6 +25,7 @@ Gerenciador_Grafico::Gerenciador_Grafico()
 
     carregarTextura("/assets/images/Rogue/rogue.png");
     carregarTextura("/assets/images/Goblin/0goblin.png");
+    carregarTextura("/assets/images/Tiles/Ground_grass_0001_tile.png");
 }
 
 Gerenciador_Grafico::~Gerenciador_Grafico(){
@@ -65,7 +66,7 @@ sf::Vector2u Gerenciador_Grafico::getTamanhoJanela() const{
 }
 
 void Gerenciador_Grafico::limpaJanela() {
-    pJanela->clear(sf::Color::Yellow);
+    pJanela->clear(sf::Color::Black);
 }
 
 void Gerenciador_Grafico::fechaJanela(){
@@ -140,8 +141,10 @@ sf::Texture* Gerenciador_Grafico::carregarTextura(const char* caminhoImagem) {
 }
 
 /* Renderização */
-void Gerenciador_Grafico::desenharEnte(Ente *pE) const{
-    if(pE){pE->desenhar();}
+void Gerenciador_Grafico::desenharEnte(Ente *pE) const {
+    if(pE) {
+        pJanela->draw(pE->getSprite());
+    }
 }
 
 void Gerenciador_Grafico::desenhar(sf::RectangleShape *corpo) const{

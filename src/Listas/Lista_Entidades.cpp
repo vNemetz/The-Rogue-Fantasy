@@ -29,6 +29,7 @@ void Lista_Entidades::percorrer() {
     for(int i = 0; i < getTamanho(); i++){
         aux = LEs.operator[](i);
         aux->executar();
+        aux->desenhar();
     }
 }
 
