@@ -992,11 +992,9 @@
 							"_parent": {
 								"$ref": "dPwA/0a44ECqH3st+2zcFwAA"
 							},
-							"name": "pJog1",
+							"name": "jogador",
 							"visibility": "private",
-							"type": {
-								"$ref": "EIPygiAPBka8vuqR9VvCnQAA"
-							}
+							"type": "*Jogador"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -2098,7 +2096,7 @@
 											"fillColor": "#C0C0C0",
 											"font": "Arial;11;0",
 											"parentStyle": true,
-											"left": 336,
+											"left": 320,
 											"top": 600,
 											"height": 11
 										},
@@ -2112,7 +2110,7 @@
 											"fillColor": "#C0C0C0",
 											"font": "Arial;11;1",
 											"parentStyle": true,
-											"left": 749,
+											"left": 741,
 											"top": 654,
 											"width": 2095,
 											"height": 11,
@@ -2129,7 +2127,7 @@
 											"fillColor": "#C0C0C0",
 											"font": "Arial;11;0",
 											"parentStyle": true,
-											"left": 336,
+											"left": 320,
 											"top": 600,
 											"width": 111.627197265625,
 											"height": 11,
@@ -2146,7 +2144,7 @@
 											"fillColor": "#C0C0C0",
 											"font": "Arial;11;0",
 											"parentStyle": true,
-											"left": 336,
+											"left": 320,
 											"top": 600,
 											"height": 11
 										}
@@ -2155,7 +2153,7 @@
 									"fillColor": "#C0C0C0",
 									"font": "Arial;11;0",
 									"parentStyle": true,
-									"left": 744,
+									"left": 736,
 									"top": 647,
 									"width": 2105,
 									"height": 23,
@@ -2177,7 +2175,7 @@
 							"fillColor": "#C0C0C0",
 							"font": "Arial;11;0",
 							"parentStyle": false,
-							"left": 744,
+							"left": 736,
 							"top": 632,
 							"width": 2104,
 							"height": 1096,
@@ -16584,7 +16582,7 @@
 									},
 									"visible": false,
 									"lineColor": "#800000",
-									"fillColor": "#FF8282",
+									"fillColor": "#FFFFB9",
 									"font": "Arial;11;0",
 									"parentStyle": true,
 									"left": 456,
@@ -16609,7 +16607,7 @@
 												"$ref": "yXUo9Vx/ek+qrm9THZSGowAA"
 											},
 											"lineColor": "#800000",
-											"fillColor": "#FF8282",
+											"fillColor": "#FFFFB9",
 											"font": "Arial;11;0",
 											"parentStyle": true,
 											"left": 1493,
@@ -16625,7 +16623,7 @@
 												"$ref": "yXUo9Vx/ek+qrm9THZSGowAA"
 											},
 											"lineColor": "#800000",
-											"fillColor": "#FF8282",
+											"fillColor": "#FFFFB9",
 											"font": "Arial;11;1",
 											"parentStyle": true,
 											"left": 1493,
@@ -16642,7 +16640,7 @@
 											},
 											"visible": false,
 											"lineColor": "#800000",
-											"fillColor": "#FF8282",
+											"fillColor": "#FFFFB9",
 											"font": "Arial;11;0",
 											"parentStyle": true,
 											"left": 640,
@@ -16659,7 +16657,7 @@
 											},
 											"visible": false,
 											"lineColor": "#800000",
-											"fillColor": "#FF8282",
+											"fillColor": "#FFFFB9",
 											"font": "Arial;11;0",
 											"parentStyle": true,
 											"left": 640,
@@ -16668,7 +16666,7 @@
 										}
 									],
 									"lineColor": "#800000",
-									"fillColor": "#FF8282",
+									"fillColor": "#FFFFB9",
 									"font": "Arial;11;0",
 									"parentStyle": true,
 									"left": 1488,
@@ -16708,7 +16706,7 @@
 												"$ref": "auUb2fS/2Uu6S8mhf+JABwAA"
 											},
 											"lineColor": "#800000",
-											"fillColor": "#FF8282",
+											"fillColor": "#FFFFB9",
 											"font": "Arial;11;0",
 											"parentStyle": true,
 											"left": 1493,
@@ -16728,7 +16726,7 @@
 												"$ref": "QlKvKHZGX06zErFl0Z9K7QAA"
 											},
 											"lineColor": "#800000",
-											"fillColor": "#FF8282",
+											"fillColor": "#FFFFB9",
 											"font": "Arial;11;0",
 											"parentStyle": true,
 											"left": 1493,
@@ -16748,7 +16746,7 @@
 												"$ref": "mWWEbhuGm0CaaAhkeHIWDAAA"
 											},
 											"lineColor": "#800000",
-											"fillColor": "#FF8282",
+											"fillColor": "#FFFFB9",
 											"font": "Arial;11;0",
 											"parentStyle": true,
 											"left": 1493,
@@ -16768,14 +16766,14 @@
 												"$ref": "Q1dM+86v2kWpikVB2IbpVQAA"
 											},
 											"lineColor": "#800000",
-											"fillColor": "#FF8282",
+											"fillColor": "#FFFFB9",
 											"font": "Arial;11;0",
 											"parentStyle": true,
 											"left": 1493,
 											"top": 238,
 											"width": 351,
 											"height": 11,
-											"text": "-pJog1: Jogador",
+											"text": "-jogador: *Jogador",
 											"horizontalAlignment": 0
 										},
 										{
@@ -16788,7 +16786,7 @@
 												"$ref": "6HifiCdmYka+IBB2BrXIrQAA"
 											},
 											"lineColor": "#800000",
-											"fillColor": "#FF8282",
+											"fillColor": "#FFFFB9",
 											"font": "Arial;11;0",
 											"parentStyle": true,
 											"left": 1493,
@@ -16800,7 +16798,7 @@
 										}
 									],
 									"lineColor": "#800000",
-									"fillColor": "#FF8282",
+									"fillColor": "#FFFFB9",
 									"font": "Arial;11;0",
 									"parentStyle": true,
 									"left": 1488,
@@ -16828,7 +16826,7 @@
 												"$ref": "YmJFNqKP2ECfpL0GHw7HrwAA"
 											},
 											"lineColor": "#800000",
-											"fillColor": "#FF8282",
+											"fillColor": "#FFFFB9",
 											"font": "Arial;11;0",
 											"parentStyle": true,
 											"left": 1493,
@@ -16848,7 +16846,7 @@
 												"$ref": "VC0Fg1TRJUWFpb4wMgBKBgAA"
 											},
 											"lineColor": "#800000",
-											"fillColor": "#FF8282",
+											"fillColor": "#FFFFB9",
 											"font": "Arial;11;0",
 											"parentStyle": true,
 											"left": 1493,
@@ -16868,7 +16866,7 @@
 												"$ref": "YwDoljeKPkSORxGGueMJ6wAA"
 											},
 											"lineColor": "#800000",
-											"fillColor": "#FF8282",
+											"fillColor": "#FFFFB9",
 											"font": "Arial;11;0",
 											"parentStyle": true,
 											"left": 1493,
@@ -16888,7 +16886,7 @@
 												"$ref": "MmGs4DhNaEmHu9GIedYBqAAA"
 											},
 											"lineColor": "#800000",
-											"fillColor": "#FF8282",
+											"fillColor": "#FFFFB9",
 											"font": "Arial;11;0",
 											"parentStyle": true,
 											"left": 1493,
@@ -16908,7 +16906,7 @@
 												"$ref": "HaPfAlpM7EuFn1EJ6bV89AAA"
 											},
 											"lineColor": "#800000",
-											"fillColor": "#FF8282",
+											"fillColor": "#FFFFB9",
 											"font": "Arial;11;0",
 											"parentStyle": true,
 											"left": 1493,
@@ -16928,7 +16926,7 @@
 												"$ref": "hlaYfRBnvUmQVRI+4yaW+QAA"
 											},
 											"lineColor": "#800000",
-											"fillColor": "#FF8282",
+											"fillColor": "#FFFFB9",
 											"font": "Arial;11;0",
 											"parentStyle": true,
 											"left": 1493,
@@ -16948,7 +16946,7 @@
 												"$ref": "qnqnaHD8VUuk9gQTN/T5SAAA"
 											},
 											"lineColor": "#800000",
-											"fillColor": "#FF8282",
+											"fillColor": "#FFFFB9",
 											"font": "Arial;11;0",
 											"parentStyle": true,
 											"left": 1493,
@@ -16968,7 +16966,7 @@
 												"$ref": "GSPiXD+ttU2HrqAb4PSyzgAA"
 											},
 											"lineColor": "#800000",
-											"fillColor": "#FF8282",
+											"fillColor": "#FFFFB9",
 											"font": "Arial;11;0",
 											"parentStyle": true,
 											"left": 1493,
@@ -16988,7 +16986,7 @@
 												"$ref": "8bCHj2NIyUCXRWBE0yiDfQAA"
 											},
 											"lineColor": "#800000",
-											"fillColor": "#FF8282",
+											"fillColor": "#FFFFB9",
 											"font": "Arial;11;0",
 											"parentStyle": true,
 											"left": 1493,
@@ -17000,7 +16998,7 @@
 										}
 									],
 									"lineColor": "#800000",
-									"fillColor": "#FF8282",
+									"fillColor": "#FFFFB9",
 									"font": "Arial;11;0",
 									"parentStyle": true,
 									"left": 1488,
@@ -17019,7 +17017,7 @@
 									},
 									"visible": false,
 									"lineColor": "#800000",
-									"fillColor": "#FF8282",
+									"fillColor": "#FFFFB9",
 									"font": "Arial;11;0",
 									"parentStyle": true,
 									"left": 456,
@@ -17029,7 +17027,7 @@
 								}
 							],
 							"lineColor": "#800000",
-							"fillColor": "#FF8282",
+							"fillColor": "#FFFFB9",
 							"font": "Arial;11;0",
 							"parentStyle": false,
 							"left": 1488,
