@@ -1,4 +1,5 @@
 #include "Entidades/Jogador.h"
+#include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Keyboard.hpp>
 
 namespace ent {
@@ -31,11 +32,11 @@ void Jogador::alteraVivo() {
     vivo = !vivo;
 }
 
-bool Jogador::getVivo() {
+bool Jogador::getVivo() const {
     return vivo;
 }
 
-void Jogador::mover(bool estado, sf::Keyboard::Key key) {
+void Jogador::atualizarEstado(bool estado, sf::Keyboard::Key key) {
     switch (key) {
         case sf::Keyboard::A:
             movendoLados[0] = estado;
@@ -59,17 +60,21 @@ void Jogador::mover(bool estado, sf::Keyboard::Key key) {
 }
 
 void Jogador::atualizarPosicao() {
+    sf::Vector2f novaPosicao = getPosition();
+
     if (movendoLados[0])
-        setPosition (sf::Vector2f(getPosition().x -velocidade.x, getPosition().y));
+        novaPosicao.x -= velocidade.x;
     
     if (movendoLados[1])
-        setPosition (sf::Vector2f(getPosition().x + velocidade.x, getPosition().y));
+        novaPosicao.x += velocidade.x;
     
     if (movendoLados[2])
-        setPosition (sf::Vector2f(getPosition().x, getPosition().y - velocidade.y));
+        novaPosicao.y -= velocidade.y;
     
     if (movendoLados[3])
-        setPosition (sf::Vector2f(getPosition().x, getPosition().y + velocidade.y));
+        novaPosicao.y += velocidade.y;
+
+    mover(novaPosicao);
 }
 }
 }

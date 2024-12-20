@@ -7,6 +7,7 @@ namespace ent {
 class Entidade : public Ente {
 protected:
     sf::Vector2f velocidade;
+    float dt;
     //ostream buffer;
     //int x
     //int y
@@ -18,10 +19,13 @@ public:
     Entidade(sf::Vector2f pos, sf::Vector2f tam, ID id = vazio);
     virtual ~Entidade();
 
-    void setVelocidade(sf::Vector2f vel);
-
     virtual void executar() = 0;
     //virtual void salvar() = 0;
+
+    sf::Vector2f getVelocidade() const;
+
+    void setVelocidade(sf::Vector2f vel);
+
     void salvarDataBuffer();
     //...
 

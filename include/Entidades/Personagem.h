@@ -19,7 +19,7 @@ public:
     virtual void executar() = 0;
 
     //Movimento
-    //virtual void mover() = 0;
+    virtual void mover(sf::Vector2f novaPosicao);
 
 };
 }
