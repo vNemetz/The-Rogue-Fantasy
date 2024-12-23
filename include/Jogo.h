@@ -9,17 +9,19 @@
 #include "Listas/Lista_Entidades.h"
 #include "Gerenciadores/Gerenciador_Grafico.h"
 #include "Gerenciadores/Gerenciador_Eventos.h"
+#include "Gerenciadores/Gerenciador_Colisoes.h"
 
-namespace ent {namespace pers{class Jogador; class Inimigo;}}
 
-class Jogo{
+namespace ent { namespace pers { class Jogador; } }
+
+class Jogo {
 private:
     ger::Gerenciador_Grafico* gerGrafico;
     ger::Gerenciador_Eventos* gerEventos;
+    ger::Gerenciador_Colisoes* gerColisoes;
     
     lis::Lista_Entidades listaEntidades;
     ent::pers::Jogador* jogador;
-    ent::pers::Inimigo* inimigo;
 
 public:
     Jogo();

@@ -28,8 +28,8 @@ public:
     void setCorpo();
     void desenhar();
 
-   /*Animação*/
-    void atualizaAnimacao(ElementosGraficos::tipoAnimacao tipo);
+    /*Animação*/
+    //void atualizaAnimacao(ElementosGraficos::tipoAnimacao tipo);
 };
 }
 }
