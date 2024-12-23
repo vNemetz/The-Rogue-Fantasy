@@ -1,6 +1,6 @@
 #pragma once
 #include "Entidades/Personagem.h"
-
+#include "Animacao_Composta.h"
 
 namespace ent {
 namespace pers {
@@ -25,7 +25,6 @@ public:
     bool getVivo();
     void mover(bool estado, sf::Keyboard::Key key);
     void atualizarPosicao();
-    void setTextura();
     void setCorpo();
     void desenhar();
 

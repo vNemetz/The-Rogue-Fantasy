@@ -1,4 +1,6 @@
-#include "Jogo.h"
+#include <SFML/Config.hpp>
+#include <SFML/System.hpp>
+#include <SFML/Graphics.hpp>
 
 namespace ElementosGraficos{
 
