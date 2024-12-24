@@ -28,7 +28,7 @@ Gerenciador_Colisoes* Gerenciador_Colisoes::getInstancia() {
 }
 
 void Gerenciador_Colisoes::executar() {
-    // Verificar as colisões dos inimigos entre si e entre o jogador
+    /* Verificar colisões dos inimigos entre si e entre o jogador */
     for (int i = 0; i < listaInimigos.size(); i++) {
         ent::Entidade* pe1 = listaInimigos[i];
         
@@ -36,17 +36,17 @@ void Gerenciador_Colisoes::executar() {
             ent::Entidade* pe2 = listaInimigos[j];
 
             if (verificarColisao(pe1, pe2)) {
-                std::cout << "Colisão entre Inimigo e Inimigo\n";
+                std::cout << "Colisão entre Inimigo e Inimigo\n"; // Entre Inimigo e Inimigo
             }
         }
 
         ent::Entidade* pe2 = jogador;
         if (verificarColisao(pe1, pe2)) {
-                std::cout << "Colisão entre Inimigo e Jogador\n";
+                std::cout << "Colisão entre Inimigo e Jogador\n"; // Entre Inimigo e Jogador
         }
     }
 
-    // Verificar as colisões dos obstáculos entre inimigos e entre o jogador
+    /* Verificar colisões dos obstáculos entre inimigos e entre o jogador */
     for (auto obstaculo : listaObstaculos) {
         ent::Entidade* pe1 = obstaculo;
         
@@ -54,20 +54,20 @@ void Gerenciador_Colisoes::executar() {
             ent::Entidade* pe2 = inimigo;
 
             if (verificarColisao(pe1, pe2)) {
-                obstaculo->emColisao(pe2);
+                obstaculo->emColisao(pe2); // Entre Obstáculo e Inimigo
             }
         }
 
         ent::Entidade* pe2 = jogador;
         if (verificarColisao(pe1, pe2)) {
-            obstaculo->emColisao(pe2);
+            obstaculo->emColisao(pe2); // Entre Obstáculo e Jogador
         }
     }
 }
 
 const bool Gerenciador_Colisoes::verificarColisao(ent::Entidade* pe1, ent::Entidade* pe2) const {
-    sf::FloatRect l1 = pe1->getSprite().getGlobalBounds();
-    sf::FloatRect l2 = pe2->getSprite().getGlobalBounds();
+    sf::FloatRect l1 = pe1->getSprite()->getGlobalBounds();
+    sf::FloatRect l2 = pe2->getSprite()->getGlobalBounds();
 
     return l1.intersects(l2);
 }

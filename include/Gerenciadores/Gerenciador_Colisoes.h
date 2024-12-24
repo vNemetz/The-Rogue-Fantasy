@@ -31,6 +31,7 @@ public:
 
     void incluirInimigo(ent::pers::Inimigo* pi);
     void incluirObstaculo(ent::obs::Obstaculo* po);
+    
     void setJogador(ent::pers::Jogador* jog);
 
     void tratarColisoesJogsObstacs();

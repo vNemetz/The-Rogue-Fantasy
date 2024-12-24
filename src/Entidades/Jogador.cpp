@@ -8,6 +8,7 @@ Jogador::Jogador()
     : Personagem()
     , vivo(true)
     , pontos(0)
+    , pulando(false)
 {
 }
 
@@ -15,7 +16,7 @@ Jogador::Jogador(sf::Vector2f pos, sf::Vector2f tam)
     : Personagem(pos, tam, jogador)
     , vivo(true)
     , pontos(0)
-    , movendoLados(4, false)
+    , pulando(false)
 {
 }
 
@@ -39,19 +40,15 @@ bool Jogador::getVivo() const {
 void Jogador::atualizarEstado(bool estado, sf::Keyboard::Key key) {
     switch (key) {
         case sf::Keyboard::A:
-            movendoLados[0] = estado;
+            movendoEsquerda = estado;
             break;
         
         case sf::Keyboard::D:
-            movendoLados[1] = estado;
+            movendoDireita = estado;
             break;
 
         case sf::Keyboard::W:
-            movendoLados[2] = estado;
-            break;
-
-        case sf::Keyboard::S:
-            movendoLados[3] = estado;
+            pulando = estado;
             break;
 
         default:
@@ -60,21 +57,16 @@ void Jogador::atualizarEstado(bool estado, sf::Keyboard::Key key) {
 }
 
 void Jogador::atualizarPosicao() {
-    sf::Vector2f novaPosicao = getPosition();
+    if (pulando && noChao)
+        pular();
 
-    if (movendoLados[0])
-        novaPosicao.x -= velocidade.x;
-    
-    if (movendoLados[1])
-        novaPosicao.x += velocidade.x;
-    
-    if (movendoLados[2])
-        novaPosicao.y -= velocidade.y;
-    
-    if (movendoLados[3])
-        novaPosicao.y += velocidade.y;
-
-    mover(novaPosicao);
+    mover();
 }
+
+void Jogador::pular() {
+    velocidade.y = -600.f;
+    noChao = false;
+}
+
 }
 }

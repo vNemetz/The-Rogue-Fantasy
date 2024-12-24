@@ -7,6 +7,10 @@ namespace pers{
 class Personagem : public Entidade {
 protected:
     int num_vidas;
+
+    /* Movimentação - Atributos */
+    bool movendoEsquerda;
+    bool movendoDireita;
     
 public:
     Personagem();
@@ -19,7 +23,7 @@ public:
     virtual void executar() = 0;
 
     //Movimento
-    virtual void mover(sf::Vector2f novaPosicao);
+    virtual void mover();
 
 };
 }

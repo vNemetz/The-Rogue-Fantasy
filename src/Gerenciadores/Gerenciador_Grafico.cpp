@@ -23,12 +23,13 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     setVideoMode();
     setJanela();
 
+    carregarTextura("/assets/images/Backgrounds/Forest.png");
     carregarTextura("/assets/images/Rogue/rogue.png");
     carregarTextura("/assets/images/Goblin/0goblin.png");
     carregarTextura("/assets/images/Tiles/Ground_grass_0001_tile.png");
 }
 
-Gerenciador_Grafico::~Gerenciador_Grafico(){
+Gerenciador_Grafico::~Gerenciador_Grafico() {
     std::map<std::string, sf::Texture*>::iterator it = mapaTexturas.begin();
     while(it != mapaTexturas.end()){
         delete it->second;
@@ -42,26 +43,26 @@ float Gerenciador_Grafico::deltaTime(0);
 
 /* Video Mode (Resolução) */
 
-void Gerenciador_Grafico::setVideoMode(){
+void Gerenciador_Grafico::setVideoMode() {
     videoMode.getDesktopMode();
 }
 
 /* Janela */
 
-void Gerenciador_Grafico::setJanela(){
+void Gerenciador_Grafico::setJanela() {
     pJanela = new sf::RenderWindow(videoMode, "oJogo", sf::Style::Fullscreen);
 }
 
-bool Gerenciador_Grafico::getJanelaAberta() const{
+bool Gerenciador_Grafico::getJanelaAberta() const {
     return pJanela->isOpen();
 }
 
-sf::RenderWindow *Gerenciador_Grafico::getJanela() const{
+sf::RenderWindow *Gerenciador_Grafico::getJanela() const {
     if(pJanela){return pJanela;}
     return NULL;
 }
 
-sf::Vector2u Gerenciador_Grafico::getTamanhoJanela() const{
+sf::Vector2u Gerenciador_Grafico::getTamanhoJanela() const {
     return pJanela->getSize();
 }
 
@@ -73,17 +74,17 @@ void Gerenciador_Grafico::fechaJanela(){
     pJanela->close();
 }
 
-bool Gerenciador_Grafico::pesquisaEventoJanela(sf::Event& ev){
+bool Gerenciador_Grafico::pesquisaEventoJanela(sf::Event& ev) {
     return(pJanela->pollEvent(ev));
 }
 
-void Gerenciador_Grafico::display(){
+void Gerenciador_Grafico::display() {
     pJanela->display();
 }
 
 /* Vista */
 
-void Gerenciador_Grafico::setVista(float x){
+void Gerenciador_Grafico::setVista(float x) {
     if(pJanela){
         vista.setCenter (x, static_cast<float>(HEIGHT/2.f));
         vista.setSize(sf::Vector2f(WIDTH, HEIGHT));
@@ -94,31 +95,31 @@ sf::View Gerenciador_Grafico::getVista() const {
     return vista;
 }
 
-void Gerenciador_Grafico::setTamanhoVista(sf::Vector2f tam){
+void Gerenciador_Grafico::setTamanhoVista(sf::Vector2f tam) {
     vista.setSize(tam);
 }
 
-void Gerenciador_Grafico::setCentroVista(sf::Vector2f pos){
+void Gerenciador_Grafico::setCentroVista(sf::Vector2f pos) {
     vista.setCenter(pos);
     pJanela->setView(vista);
 }
 
-void Gerenciador_Grafico::centralizarVista(Ente *e){
-    vista.setCenter(e->getPosition().x + e->getSprite().getTexture()->getSize().x/2.f, getVista().getCenter().y);
+void Gerenciador_Grafico::centralizarVista(Ente *e) {
+    vista.setCenter(e->getPosition().x + e->getSprite()->getTexture()->getSize().x/2.f, getVista().getCenter().y);
     pJanela->setView(vista);
 }
 
 /* Clock */
 
-void Gerenciador_Grafico::updateDeltaTime(){
+void Gerenciador_Grafico::updateDeltaTime() {
     deltaTime = clock.restart().asSeconds();
 }
 
-float Gerenciador_Grafico::getDeltaTime(){
+float Gerenciador_Grafico::getDeltaTime() {
     return deltaTime;
 }
 
-float Gerenciador_Grafico::reiniciarClock(){
+float Gerenciador_Grafico::reiniciarClock() {
     return(clock.restart().asSeconds());
 }
 
@@ -143,11 +144,11 @@ sf::Texture* Gerenciador_Grafico::carregarTextura(const char* caminhoImagem) {
 /* Renderização */
 void Gerenciador_Grafico::desenharEnte(Ente *pE) const {
     if(pE) {
-        pJanela->draw(pE->getSprite());
+        pJanela->draw(*pE->getSprite());
     }
 }
 
-void Gerenciador_Grafico::desenhar(sf::RectangleShape *corpo) const{
+void Gerenciador_Grafico::desenhar(sf::RectangleShape *corpo) const {
     pJanela->draw(*corpo);
 }
 }

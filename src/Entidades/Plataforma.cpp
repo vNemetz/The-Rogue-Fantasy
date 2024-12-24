@@ -35,8 +35,8 @@ void Plataforma::emColisao(Entidade* pE) {
 
         sf::Vector2f novaPosicao = pPers->getPosition();
 
-        sf::FloatRect limitesEntidade = pE->getSprite().getGlobalBounds();
-        sf::FloatRect limitesPlataforma = getSprite().getGlobalBounds();
+        sf::FloatRect limitesEntidade = pE->getSprite()->getGlobalBounds();
+        sf::FloatRect limitesPlataforma = getSprite()->getGlobalBounds();
 
         if (limitesEntidade.intersects(limitesPlataforma)) {
             // Calcula a sobreposição em cada eixo
@@ -47,7 +47,7 @@ void Plataforma::emColisao(Entidade* pE) {
                                 - std::max(limitesEntidade.top, limitesPlataforma.top);
 
 
-            // Decide o eixo de correção (prioriza o eixo com menor sobreposição)
+            /* Decide o eixo de correção (prioriza o eixo com menor sobreposição) */
             
             if (sobreposicaoX < sobreposicaoY) {
                 // Correção no eixo X
@@ -64,6 +64,8 @@ void Plataforma::emColisao(Entidade* pE) {
                 // Correção no eixo Y
                 if (limitesEntidade.top < limitesPlataforma.top) {
                     novaPosicao += sf::Vector2f(0.0f, -sobreposicaoY); // Empurrar para cima
+                    
+                    pPers->setNoChao(true); // Colidindo com a parte de cima da plataforma, então está no chão
                 }
                 
                 else {
@@ -72,7 +74,7 @@ void Plataforma::emColisao(Entidade* pE) {
             }
         }
 
-        pPers->mover(novaPosicao);
+        pPers->setPosition(novaPosicao);
     }
 }
 
