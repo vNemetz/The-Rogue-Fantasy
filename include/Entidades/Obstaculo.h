@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Entidades/Jogador.h"
+#include <SFML/System/Vector2.hpp>
 
 namespace ent {
 namespace obs {
@@ -17,6 +18,7 @@ public:
 
     virtual void executar() = 0;
     virtual void obstacular(pers::Jogador* p) = 0;
+    virtual void emColisao(Entidade* pE) = 0;
     // ...
 };
 

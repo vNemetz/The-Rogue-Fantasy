@@ -22,9 +22,5 @@ Inimigo::Inimigo(sf::Vector2f pos, sf::Vector2f tam, Jogador* jog)
 Inimigo::~Inimigo() {
 }
 
-void Inimigo::movimentoAleatorio() {
-    // TODO
-}
-
 }
 }

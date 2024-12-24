@@ -17,6 +17,7 @@ public:
 
     void executar();
     void obstacular(pers::Jogador* p);
+    void emColisao(Entidade* pE);
     // ...
 };
 

@@ -15,7 +15,7 @@ public:
     ~Goblin();
 
     void executar();
-    void persegueJogador();
+    sf::Vector2f persegueJogador();
     //void danificar(Jogador* p);
 };
 }

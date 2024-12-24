@@ -18,13 +18,13 @@ enum ID{
     fase
 };
 
-class Ente{
+class Ente {
 protected:
     //Identificação única do Ente
     ID id;
-    sf::Vector2f escala;
-    sf::Vector2f tamanho;
     sf::Vector2f posicao;
+    sf::Vector2f tamanho;
+    sf::Vector2f escala;
 
     //Gráficos
     static ger::Gerenciador_Grafico* pGG;
@@ -41,7 +41,7 @@ public:
 
     virtual void executar() = 0;
 
-    ID getID();
+    ID getID() const;
     void setID(ID idPar);
 
     //virtual void executar() = 0;
@@ -52,11 +52,11 @@ public:
     //Gráficos
     void setTextura(const char *caminhoImagem);
     void desenhar();
-    void setSprite();
-    sf::Sprite getSprite() const;
-
-    sf::Vector2f getPosition() const;
-    sf::Vector2f getTamanho() const;
+    void carregarSprite();
+    sf::Sprite* getSprite() const;
 
     void setPosition(sf::Vector2f pos);
+    sf::Vector2f getPosition() const;
+
+    sf::Vector2f getTamanho() const;
 };

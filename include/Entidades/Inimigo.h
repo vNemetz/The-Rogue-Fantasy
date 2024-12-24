@@ -10,8 +10,6 @@ class Inimigo : public Personagem {
 protected:
     int nivel_maldade;
     Jogador* jogador;
-    short moveAleatorio;
-    void inicializa();
 
 public:
     Inimigo();
@@ -19,7 +17,6 @@ public:
     ~Inimigo();
 
     virtual void executar() = 0;
-    void movimentoAleatorio();
 
     //virtual void danificar(Jogador* p) = 0;
     //void salvarDataBuffer();
