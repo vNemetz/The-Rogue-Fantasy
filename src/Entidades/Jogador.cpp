@@ -10,7 +10,7 @@ Jogador::Jogador()
     , vivo(true)
     , pontos(0)
     , corpo()
-    , animacao(sf::Vector2u(6,1), 0.16f)
+    , animacao(sf::Vector2u(6,1), 0.025f)
     , pulando(false)
 {
 }
@@ -19,8 +19,7 @@ Jogador::Jogador(sf::Vector2f pos, sf::Vector2f tam)
     : Personagem(pos, tam, jogador)
     , vivo(true)
     , pontos(0)
-    , movendoLados(4, false)
-    , animacao(sf::Vector2u(6, 1), 0.16f)
+    , animacao(sf::Vector2u(6, 1), 0.025f)
     , corpo()
     , pulando(false)
 {
