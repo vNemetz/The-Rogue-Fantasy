@@ -22,11 +22,11 @@ private:
 
 public:
     Animacao();
-    Animacao(sf::Texture* textura, sf::Vector2u numSprites, float tempoAnimacao);
+    Animacao( sf::Vector2u numSprites, float tempoAnimacao);
     ~Animacao();
 
-    void setTextura(sf::Texture pTex);
-    void atualizar(tipoAnimacao tipo, float deltaTime);
+    void setCorpo(sf::Texture* textura);
+    void atualizar(/*tipoAnimacao tipo,*/ float deltaTime);
     
     sf::IntRect getCorpo() const;
     

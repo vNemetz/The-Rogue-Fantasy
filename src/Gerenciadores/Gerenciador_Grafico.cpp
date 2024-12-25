@@ -24,6 +24,7 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     setJanela();
 
     carregarTextura("/assets/images/Rogue/rogue.png");
+    carregarTextura("/assets/images/Rogue/rogue-walk.png");
     carregarTextura("/assets/images/Goblin/0goblin.png");
     carregarTextura("/assets/images/Tiles/Ground_grass_0001_tile.png");
 }

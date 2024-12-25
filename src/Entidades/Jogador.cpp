@@ -1,5 +1,6 @@
 #include "Entidades/Jogador.h"
 #include <SFML/Window/Keyboard.hpp>
+#include <iostream>
 
 namespace ent {
 namespace pers {
@@ -7,6 +8,8 @@ Jogador::Jogador()
     : Personagem()
     , vivo(true)
     , pontos(0)
+    , corpo()
+    , animacao(sf::Vector2u(6,1), 0.16f)
 {
 }
 
@@ -15,7 +18,10 @@ Jogador::Jogador(sf::Vector2f pos, sf::Vector2f tam)
     , vivo(true)
     , pontos(0)
     , movendoLados(4, false)
+    , animacao(sf::Vector2u(6, 1), 0.16f)
+    , corpo()
 {
+
 }
 
 Jogador::~Jogador() {
@@ -71,5 +77,31 @@ void Jogador::atualizarPosicao() {
     if (movendoLados[3])
         setPosition (sf::Vector2f(getPosition().x, getPosition().y + velocidade.y));
 }
+}
+void pers::Jogador::desenhar(){
+    if(pSprite){
+        std::cout << "IntRect: "
+                  << animacao.getCorpo().left << ", "
+                  << animacao.getCorpo().top << ", "
+                  << animacao.getCorpo().width << ", "
+                  << animacao.getCorpo().height << std::endl;
+        pGG->desenharEnte(this);
+    }
+    else{std::cerr << "Sprite vazio\n";}
+}
+
+void pers::Jogador::setCorpo(){
+    if(pSprite){pSprite->setTextureRect(animacao.getCorpo());}
+}
+
+void pers::Jogador::setCorpoAnimacao(){
+        if(pTextura){
+        animacao.setCorpo(pTextura);
+    }
+}
+void pers::Jogador::atualizaAnimacao(float dt)
+{
+    animacao.atualizar(/*static_cast<ElementosGraficos::tipoAnimacao> (1),*/ dt);
+    setCorpo();
 }
 }

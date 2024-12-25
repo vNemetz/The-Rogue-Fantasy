@@ -51,7 +51,7 @@ public:
     
     //Gráficos
     void setTextura(const char *caminhoImagem);
-    void desenhar();
+    virtual void desenhar();
     void setSprite();
     sf::Sprite getSprite() const;
 

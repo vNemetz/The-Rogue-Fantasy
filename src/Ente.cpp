@@ -1,4 +1,5 @@
 #include "Ente.h"
+#include <iostream>
 #include "Gerenciadores/Gerenciador_Grafico.h"
 
 Ente::Ente() {
@@ -33,6 +34,7 @@ void Ente::setpGG(ger::Gerenciador_Grafico* pGrafico){ //testa e seta o pGG
 
 //Gráficos
 void Ente::setSprite() {
+    if(pTextura){
     pSprite->setTexture(*pTextura, false);
     pSprite->setPosition(posicao);
     
@@ -40,6 +42,7 @@ void Ente::setSprite() {
 
     tamanho.x = pTextura->getSize().x * escala.x;
     tamanho.y = pTextura->getSize().y * escala.y;
+    }
 }
 
 sf::Sprite Ente::getSprite() const{

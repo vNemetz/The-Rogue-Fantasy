@@ -34,7 +34,7 @@ Jogo::~Jogo() {
 void Jogo::inicializaEntidades() {
     jogador = new ent::pers::Jogador (sf::Vector2f(WIDTH/2.0, HEIGHT/2.0),sf::Vector2f(1.7f, 1.7f));
     jogador->setpGG(gerGrafico);
-    jogador->setTextura("/assets/images/Rogue/rogue.png");
+    jogador->setTextura("/assets/images/Rogue/rogue-walk.png");
     jogador->setVelocidade(sf::Vector2f(0.125f, 0.125f));
 
     /* Inclui jogador nos gerenciadores */
@@ -66,16 +66,20 @@ void Jogo::atualizaEntidades() {
 
 void Jogo::executar() {
     while (gerGrafico->getJanelaAberta()) {
+        float deltaTime = gerGrafico->reiniciarClock();
+        
+
         gerEventos->gerenciar(); // Gerencia os eventos
 
         gerColisoes->executar(); // Detecta as colisões
 
         gerGrafico->limpaJanela(); // Limpa a janela
-        
+        jogador->setCorpoAnimacao();
         atualizaEntidades(); // Atualiza e Desenha as Entidades
+        jogador->atualizaAnimacao(deltaTime);
 
         gerGrafico->centralizarVista(jogador); // Centraliza o campo de visão no jogador
-
+ 
         gerGrafico->display(); // Exibe a janela
     }
 }

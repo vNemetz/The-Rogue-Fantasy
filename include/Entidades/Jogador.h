@@ -12,6 +12,7 @@ private:
     // Salva para que lados o jogador está se movendo
     std::vector<bool> movendoLados;
     sf::IntRect corpo;
+    ElementosGraficos::Animacao animacao;
 
 protected:
 //...
@@ -25,11 +26,12 @@ public:
     bool getVivo();
     void mover(bool estado, sf::Keyboard::Key key);
     void atualizarPosicao();
-    void setCorpo();
     void desenhar();
 
     /*Animação*/
-    //void atualizaAnimacao(ElementosGraficos::tipoAnimacao tipo);
+    void setCorpo();
+    void setCorpoAnimacao();
+    void atualizaAnimacao(float dt );
 };
 }
 }
