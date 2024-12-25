@@ -1,23 +1,28 @@
 #include "Animacao_Composta.h"
+#include <iostream>
 
 namespace ElementosGraficos{
 Animacao::Animacao(){}
-Animacao::Animacao(sf::Texture *textura, sf::Vector2u numSprites, float tempoAnimacao)
+Animacao::Animacao( sf::Vector2u numSprites, float tempoAnimacao)
 : nSprites(numSprites), tempoPorAnimacao(tempoAnimacao), tempoTotal(0.0f), spriteAtual(0,0){
-    corpo.width = static_cast<float>(textura->getSize().x / numSprites.x); 
-    corpo.height = static_cast<float>(textura->getSize().y / numSprites.y); 
 }
 Animacao::~Animacao(){
 
 }
 
-
-void Animacao::atualizar(tipoAnimacao tipo, float deltaTime)
+void Animacao::setCorpo(sf::Texture* textura){
+    if(textura){
+    corpo.width = static_cast<float>(textura->getSize().x / nSprites.x); 
+    corpo.height = static_cast<float>(textura->getSize().y / nSprites.y); 
+    }
+}
+void Animacao::atualizar(/*tipoAnimacao tipo,*/ float deltaTime)
 {
-    spriteAtual.y = tipo;
+    spriteAtual.y = 0;
     tempoTotal += deltaTime;
-
+    std::cout << tempoTotal << "\n";
     if(tempoTotal >= tempoPorAnimacao){
+        std::cout << "Entrou no tempo\n";
         tempoTotal -= tempoPorAnimacao; // "-=" para deixar a animação mais "suave"
         spriteAtual.x++;
         if(spriteAtual.x >= nSprites.x){spriteAtual.x = 0;} //Para voltar ao começo da spritesheet

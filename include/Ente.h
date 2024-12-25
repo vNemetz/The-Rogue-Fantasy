@@ -51,9 +51,10 @@ public:
     
     //Gráficos
     void setTextura(const char *caminhoImagem);
-    void desenhar();
+    virtual void desenhar();
     void carregarSprite();
     sf::Sprite* getSprite() const;
+  
 
     void setPosition(sf::Vector2f pos);
     sf::Vector2f getPosition() const;

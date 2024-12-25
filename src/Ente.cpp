@@ -1,4 +1,5 @@
 #include "Ente.h"
+#include <iostream>
 #include "Gerenciadores/Gerenciador_Grafico.h"
 
 Ente::Ente() {
@@ -32,6 +33,7 @@ void Ente::setpGG(ger::Gerenciador_Grafico* pGrafico){ //testa e seta o pGG
 }
 
 //Gráficos
+
 void Ente::carregarSprite() {
     pSprite->setTexture(*pTextura, false);
     pSprite->setPosition(posicao);

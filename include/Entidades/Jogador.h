@@ -1,6 +1,6 @@
 #pragma once
 #include "Entidades/Personagem.h"
-
+#include "Animacao_Composta.h"
 
 namespace ent {
 namespace pers {
@@ -11,6 +11,7 @@ private:
     bool vivo;
     bool pulando;
     sf::IntRect corpo;
+    ElementosGraficos::Animacao animacao;
 
 protected:
 //...
@@ -25,11 +26,14 @@ public:
     bool getVivo() const;
     void atualizarEstado(bool estado, sf::Keyboard::Key key);
     void atualizarPosicao();
-
+    void desenhar();
     void pular();
 
+
     /*Animação*/
-    //void atualizaAnimacao(ElementosGraficos::tipoAnimacao tipo);
+    void setCorpo();
+    void setCorpoAnimacao();
+    void atualizaAnimacao(float dt );
 };
 }
 }
