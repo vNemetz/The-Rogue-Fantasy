@@ -1,4 +1,5 @@
 #include "Entidades/Jogador.h"
+#include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <iostream>
 
@@ -10,6 +11,7 @@ Jogador::Jogador()
     , pontos(0)
     , corpo()
     , animacao(sf::Vector2u(6,1), 0.16f)
+    , pulando(false)
 {
 }
 
@@ -20,6 +22,7 @@ Jogador::Jogador(sf::Vector2f pos, sf::Vector2f tam)
     , movendoLados(4, false)
     , animacao(sf::Vector2u(6, 1), 0.16f)
     , corpo()
+    , pulando(false)
 {
 
 }
@@ -37,26 +40,22 @@ void Jogador::alteraVivo() {
     vivo = !vivo;
 }
 
-bool Jogador::getVivo() {
+bool Jogador::getVivo() const {
     return vivo;
 }
 
-void Jogador::mover(bool estado, sf::Keyboard::Key key) {
+void Jogador::atualizarEstado(bool estado, sf::Keyboard::Key key) {
     switch (key) {
         case sf::Keyboard::A:
-            movendoLados[0] = estado;
+            movendoEsquerda = estado;
             break;
         
         case sf::Keyboard::D:
-            movendoLados[1] = estado;
+            movendoDireita = estado;
             break;
 
         case sf::Keyboard::W:
-            movendoLados[2] = estado;
-            break;
-
-        case sf::Keyboard::S:
-            movendoLados[3] = estado;
+            pulando = estado;
             break;
 
         default:
@@ -65,18 +64,17 @@ void Jogador::mover(bool estado, sf::Keyboard::Key key) {
 }
 
 void Jogador::atualizarPosicao() {
-    if (movendoLados[0])
-        setPosition (sf::Vector2f(getPosition().x -velocidade.x, getPosition().y));
-    
-    if (movendoLados[1])
-        setPosition (sf::Vector2f(getPosition().x + velocidade.x, getPosition().y));
-    
-    if (movendoLados[2])
-        setPosition (sf::Vector2f(getPosition().x, getPosition().y - velocidade.y));
-    
-    if (movendoLados[3])
-        setPosition (sf::Vector2f(getPosition().x, getPosition().y + velocidade.y));
+    if (pulando && noChao)
+        pular();
+
+    mover();
 }
+
+void Jogador::pular() {
+    velocidade.y = -600.f;
+    noChao = false;
+}
+
 }
 void pers::Jogador::desenhar(){
     if(pSprite){

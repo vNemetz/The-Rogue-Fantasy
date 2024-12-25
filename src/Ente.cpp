@@ -33,26 +33,24 @@ void Ente::setpGG(ger::Gerenciador_Grafico* pGrafico){ //testa e seta o pGG
 }
 
 //Gráficos
-void Ente::setSprite() {
-    if(pTextura){
+
+void Ente::carregarSprite() {
     pSprite->setTexture(*pTextura, false);
     pSprite->setPosition(posicao);
-    
     pSprite->setScale(escala.x, escala.y);
-
-    tamanho.x = pTextura->getSize().x * escala.x;
-    tamanho.y = pTextura->getSize().y * escala.y;
-    }
 }
 
-sf::Sprite Ente::getSprite() const{
-    return *pSprite;
+sf::Sprite* Ente::getSprite() const {
+    return pSprite;
 }
 
 void Ente::setTextura(const char *caminhoImagem) {
-    pTextura = pGG->carregarTextura(caminhoImagem); 
+    pTextura = pGG->carregarTextura(caminhoImagem);
 
-    setSprite();
+    tamanho.x = pTextura->getSize().x * escala.x;
+    tamanho.y = pTextura->getSize().y * escala.y;
+
+    carregarSprite();
 }
 
 
@@ -64,7 +62,8 @@ void Ente::desenhar() {
 void Ente::setPosition(sf::Vector2f pos) {
     if ((pos.y < 0) || (pos.y + tamanho.y > HEIGHT))
         pos.y = getPosition().y;
-
+    
+    posicao = pos;
     pSprite->setPosition(pos);
 }
 
@@ -79,6 +78,6 @@ sf::Vector2f Ente::getTamanho() const {
 void Ente::setID(ID idPar){
     id = idPar;
 }
-ID Ente::getID(){
+ID Ente::getID() const {
     return id;
 }

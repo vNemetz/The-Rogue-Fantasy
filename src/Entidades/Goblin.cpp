@@ -27,29 +27,33 @@ void Goblin::executar() {
     sf::Vector2f dist = posJogador - posInimigo;
     float moduloDist = sqrt(pow((dist.x),2) + pow(dist.y, 2));
 
+    sf::Vector2f novaPosicao = posInimigo;
+
     if (moduloDist <= raio)
-        persegueJogador();
+        novaPosicao = persegueJogador();
+
+    // TODO Se não: Faz um movimento aleatório
+
+    mover();
 }
 
-void Goblin::persegueJogador() {
+sf::Vector2f Goblin::persegueJogador() {
     sf::Vector2f posJogador = jogador->getPosition();
     sf::Vector2f posInimigo = getPosition();
     
     sf::Vector2f novaPosicao = posInimigo;
 
-    if (posJogador.x > posInimigo.x)
-        novaPosicao.x += velocidade.x;
+    if (posJogador.x > posInimigo.x) {
+        movendoDireita = true;
+        movendoEsquerda = false;
+    }
 
-    else
-        novaPosicao.x -= velocidade.x;
+    else {
+        movendoDireita = false;
+        movendoEsquerda = true;
+    }
 
-    if (posJogador.y > posInimigo.y)
-        novaPosicao.y += velocidade.y;
-
-    else
-        novaPosicao.y -= velocidade.y;
-
-    setPosition(novaPosicao);
+    return novaPosicao;
 }
 
 }

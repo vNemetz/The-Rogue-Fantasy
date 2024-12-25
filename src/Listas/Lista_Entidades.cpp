@@ -30,6 +30,7 @@ void Lista_Entidades::percorrer() {
         aux = LEs.operator[](i);
         aux->executar();
         aux->desenhar();
+        aux->setNoChao(false); // Setta noChao como false (se estiver colidindo com chão, fica true depois)
     }
 }
 

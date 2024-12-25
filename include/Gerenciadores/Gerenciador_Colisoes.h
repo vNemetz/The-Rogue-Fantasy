@@ -9,12 +9,11 @@ namespace ger {
 
 class Gerenciador_Colisoes {
 private:
-    std::vector<ent::pers::Inimigo*> LIs;
-    std::list<ent::obs::Obstaculo*> LOs;
+    std::vector<ent::pers::Inimigo*> listaInimigos;
+    std::list<ent::obs::Obstaculo*> listaObstaculos;
     //std::set<ent::Projetil*> LPs;
 
     ent::pers::Jogador* jogador;
-    // ...
 
     /* Singleton - Padrão de Projeto */
     static ger::Gerenciador_Colisoes* instancia;
@@ -28,21 +27,19 @@ public:
     ~Gerenciador_Colisoes();
     
     void executar();
-    sf::Vector2f calcularColisao(ent::Entidade* pe1, ent::Entidade* pe2) const;
     const bool verificarColisao(ent::Entidade* pe1, ent::Entidade* pe2) const;
+
+    void incluirInimigo(ent::pers::Inimigo* pi);
+    void incluirObstaculo(ent::obs::Obstaculo* po);
+    
+    void setJogador(ent::pers::Jogador* jog);
 
     void tratarColisoesJogsObstacs();
     void tratarColisoesJogsInimgs();
-    
-    void incluirInimigo(ent::pers::Inimigo* pi);
-    void incluirObstaculo(ent::obs::Obstaculo* po);
-
-    void setJogador(ent::pers::Jogador* jog);
 
     /*
     void tratarColisoesJogsProjeteis();
     void incluirProjetil(ent::Projetil* pj);
-    ...()
     */
 };
 
