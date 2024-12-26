@@ -86,17 +86,12 @@ void Jogo::executar() {
 
 
     while (gerGrafico->getJanelaAberta()) {
-        float deltaTime = gerGrafico->reiniciarClock();
-        
-
         gerEventos->gerenciar(); // Gerencia os eventos
 
         gerColisoes->executar(); // Detecta as colisões
 
         gerGrafico->limpaJanela(); // Limpa a janela
-        jogador->atualizaTempoAnimacao(deltaTime);
-
- 
+        jogador->atualizaTempoAnimacao(gerGrafico->getDeltaTime());
 
         gerGrafico->getJanela()->setView(gerGrafico->getJanela()->getDefaultView());
         gerGrafico->getJanela()->draw(backgroundSprite);
