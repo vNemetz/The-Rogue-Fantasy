@@ -54,6 +54,7 @@ public:
     virtual void desenhar();
     void carregarSprite();
     sf::Sprite* getSprite() const;
+    virtual sf::IntRect getCorpo() const;
   
 
     void setPosition(sf::Vector2f pos);

@@ -105,8 +105,8 @@ void Gerenciador_Grafico::setCentroVista(sf::Vector2f pos) {
     pJanela->setView(vista);
 }
 
-void Gerenciador_Grafico::centralizarVista(Ente *e) {
-    vista.setCenter(e->getPosition().x + e->getSprite()->getTexture()->getSize().x/2.f, getVista().getCenter().y);
+void Gerenciador_Grafico::centralizarVista(Ente *e) { /*TO DO*/
+    vista.setCenter(e->getPosition().x + e->getCorpo().getSize().x/2.f, getVista().getCenter().y);
     pJanela->setView(vista);
 }
 

@@ -26,6 +26,7 @@ public:
     ~Animacao();
 
     void setCorpo(sf::Texture* textura);
+    void atualizarSpritesheet(sf::Texture* novaTextura, sf::Vector2u tamanho, float novoTempo);
     void atualizar(/*tipoAnimacao tipo,*/ float deltaTime);
     
     sf::IntRect getCorpo() const;

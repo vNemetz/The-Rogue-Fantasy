@@ -94,8 +94,7 @@ void Jogo::executar() {
         gerColisoes->executar(); // Detecta as colisões
 
         gerGrafico->limpaJanela(); // Limpa a janela
-        jogador->setCorpoAnimacao();
-        jogador->atualizaAnimacao(deltaTime);
+        jogador->atualizaTempoAnimacao(deltaTime);
 
  
 

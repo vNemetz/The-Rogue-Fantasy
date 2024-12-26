@@ -1,4 +1,4 @@
-#include "Animacao_Composta.h"
+#include "Animacao.h"
 #include <iostream>
 
 namespace ElementosGraficos{
@@ -16,13 +16,21 @@ void Animacao::setCorpo(sf::Texture* textura){
     corpo.height = static_cast<float>(textura->getSize().y / nSprites.y); 
     }
 }
+void Animacao::atualizarSpritesheet(sf::Texture *novaTextura, sf::Vector2u tamanho, float novoTempo){
+    nSprites.x = tamanho.x;
+    nSprites.y = tamanho.y; //Atualiza o número de sprites a serem considerados na spritesheet
+
+    if(novaTextura){
+        setCorpo(novaTextura);  //Atualiza o tamanho do corpo
+    }
+    tempoPorAnimacao = novoTempo;
+}
+
 void Animacao::atualizar(/*tipoAnimacao tipo,*/ float deltaTime)
 {
     spriteAtual.y = 0;
     tempoTotal += deltaTime;
-    std::cout << tempoTotal << "\n";
     if(tempoTotal >= tempoPorAnimacao){
-        std::cout << "Entrou no tempo\n";
         tempoTotal -= tempoPorAnimacao; // "-=" para deixar a animação mais "suave"
         spriteAtual.x++;
         if(spriteAtual.x >= nSprites.x){spriteAtual.x = 0;} //Para voltar ao começo da spritesheet

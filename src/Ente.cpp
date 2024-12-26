@@ -44,6 +44,11 @@ sf::Sprite* Ente::getSprite() const {
     return pSprite;
 }
 
+sf::IntRect Ente::getCorpo() const
+{
+    return pSprite->getTextureRect();
+}
+
 void Ente::setTextura(const char *caminhoImagem) {
     pTextura = pGG->carregarTextura(caminhoImagem);
 

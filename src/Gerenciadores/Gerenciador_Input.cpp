@@ -12,18 +12,22 @@ Gerenciador_Input::Gerenciador_Input()
     
     incluir_tecla(sf::Keyboard::Key::A, [this](bool pressionado) {
         jogador->atualizarEstado(pressionado, sf::Keyboard::A);
+        jogador->setEstado(ent::pers::andando);
     });
 
     incluir_tecla(sf::Keyboard::Key::D, [this](bool pressionado) {
         jogador->atualizarEstado(pressionado, sf::Keyboard::D);
+        jogador->setEstado(ent::pers::andando);
     });
 
     incluir_tecla(sf::Keyboard::Key::W, [this](bool pressionado) {
         jogador->atualizarEstado(pressionado, sf::Keyboard::W);
+        jogador->setEstado(ent::pers::pulado);
     });
 
     incluir_tecla(sf::Keyboard::Key::S, [this](bool pressionado) {
         jogador->atualizarEstado(pressionado, sf::Keyboard::S);
+        jogador->setEstado(ent::pers::parado);
     });
 }
 

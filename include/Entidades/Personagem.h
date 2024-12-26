@@ -4,9 +4,18 @@
 namespace ent {
 namespace pers{
 
+enum estado{
+    parado = 0,
+    andando,
+    atacando,
+    pulado,
+    morrendo
+};    
+
 class Personagem : public Entidade {
 protected:
     int num_vidas;
+    estado est;
 
     /* Movimentação - Atributos */
     bool movendoEsquerda;

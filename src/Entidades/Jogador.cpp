@@ -10,20 +10,21 @@ Jogador::Jogador()
     , vivo(true)
     , pontos(0)
     , corpo()
-    , animacao(sf::Vector2u(6,1), 0.025f)
+    , animacao(sf::Vector2u(6,1), 0.03f)
     , pulando(false)
 {
+    est = parado;
 }
 
 Jogador::Jogador(sf::Vector2f pos, sf::Vector2f tam)
     : Personagem(pos, tam, jogador)
     , vivo(true)
     , pontos(0)
-    , animacao(sf::Vector2u(6, 1), 0.025f)
+    , animacao(sf::Vector2u(6, 1), 0.03f)
     , corpo()
     , pulando(false)
 {
-
+    est = parado;
 }
 
 Jogador::~Jogador() {
@@ -74,21 +75,24 @@ void Jogador::pular() {
     noChao = false;
 }
 
+void Jogador::setEstado(estado es){
+    est = es;
+}
 }
 void pers::Jogador::desenhar(){
     if(pSprite){
-        std::cout << "IntRect: "
-                  << animacao.getCorpo().left << ", "
-                  << animacao.getCorpo().top << ", "
-                  << animacao.getCorpo().width << ", "
-                  << animacao.getCorpo().height << std::endl;
         pGG->desenharEnte(this);
     }
     else{std::cerr << "Sprite vazio\n";}
 }
 
 void pers::Jogador::setCorpo(){
+    setCorpoAnimacao();
     if(pSprite){pSprite->setTextureRect(animacao.getCorpo());}
+}
+
+sf::IntRect pers::Jogador::getCorpo(){
+    return corpo;
 }
 
 void pers::Jogador::setCorpoAnimacao(){
@@ -96,9 +100,29 @@ void pers::Jogador::setCorpoAnimacao(){
         animacao.setCorpo(pTextura);
     }
 }
-void pers::Jogador::atualizaAnimacao(float dt)
+void pers::Jogador::atualizaTempoAnimacao(float dt)
 {
-    animacao.atualizar(/*static_cast<ElementosGraficos::tipoAnimacao> (1),*/ dt);
+    animacao.atualizar(dt);
+    atualizaElementosAnimacao();
+}
+
+void pers::Jogador::atualizaElementosAnimacao(){
+    if(est == andando){
+        setTextura("/assets/images/Rogue/rogue-walk.png");
+        animacao.atualizarSpritesheet(pTextura, sf::Vector2u(6,1), 0.03f);
+    }
+    else if(est == atacando){
+        setTextura("/assets/images/Rogue/rogue-attack.png");
+        animacao.atualizarSpritesheet(pTextura, sf::Vector2u(7,1), 0.03f);
+    }
+    else if(est == pulado){
+        setTextura("/assets/images/Rogue/rogue-jump.png");
+        animacao.atualizarSpritesheet(pTextura, sf::Vector2u(7,1), 0.06f);
+    }
+    else if(est == parado){
+        setTextura("/assets/images/Rogue/rogue-idle.png");
+        animacao.atualizarSpritesheet(pTextura, sf::Vector2u(1,1), 0.03f);
+    }
     setCorpo();
 }
 }

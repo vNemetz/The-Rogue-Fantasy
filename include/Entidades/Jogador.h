@@ -1,6 +1,6 @@
 #pragma once
 #include "Entidades/Personagem.h"
-#include "Animacao_Composta.h"
+#include "Animacao.h"
 
 namespace ent {
 namespace pers {
@@ -28,12 +28,15 @@ public:
     void atualizarPosicao();
     void desenhar();
     void pular();
+    void setEstado(estado es);
 
 
     /*Animação*/
     void setCorpo();
+    sf::IntRect getCorpo();
     void setCorpoAnimacao();
-    void atualizaAnimacao(float dt );
+    void atualizaTempoAnimacao(float dt);
+    void atualizaElementosAnimacao();
 };
 }
 }
