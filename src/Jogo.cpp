@@ -34,7 +34,7 @@ Jogo::~Jogo() {
 void Jogo::inicializaEntidades() {
     jogador = new ent::pers::Jogador (sf::Vector2f(WIDTH/2.0, HEIGHT/2.0),sf::Vector2f(1.7f, 1.7f));
     jogador->setpGG(gerGrafico);
-    jogador->setTextura("/assets/images/Rogue/rogue-walk.png");
+    jogador->setTextura("/assets/images/Rogue/rogue.png");
 
     jogador->setVelocidade(sf::Vector2f(600.f, 600.f));
 
@@ -94,7 +94,7 @@ void Jogo::executar() {
         gerColisoes->executar(); // Detecta as colisões
 
         gerGrafico->limpaJanela(); // Limpa a janela
-        jogador->atualizaTempoAnimacao(deltaTime);
+        //jogador->atualizaTempoAnimacao(deltaTime);
 
  
 
