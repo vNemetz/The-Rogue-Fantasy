@@ -120,7 +120,7 @@ void pers::Jogador::atualizaElementosAnimacao(){
         animacao.atualizarSpritesheet(pTextura, sf::Vector2u(7,1), 0.06f);
     }
     else if(est == parado){
-        setTextura("/assets/images/Rogue/rogue-idle.png");
+        setTextura("/assets/images/Rogue/rogue.png");
         animacao.atualizarSpritesheet(pTextura, sf::Vector2u(1,1), 0.03f);
     }
     setCorpo();
