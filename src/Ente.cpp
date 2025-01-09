@@ -1,6 +1,4 @@
 #include "Ente.h"
-#include <iostream>
-#include "Gerenciadores/Gerenciador_Grafico.h"
 
 Ente::Ente() {
     pTextura = new sf::Texture();  // Aloca memória para pTextura
@@ -24,15 +22,27 @@ Ente::~Ente() {
     pSprite = NULL;
     pTextura = NULL;
     pGG = NULL;
-}  
+}
 
 ger::Gerenciador_Grafico* Ente::pGG(NULL); //atributo static
 
-void Ente::setpGG(ger::Gerenciador_Grafico* pGrafico){ //testa e seta o pGG
-    if(pGrafico){pGG = pGrafico;}
+/* ID */
+
+void Ente::setID(ID id) {
+    this->id = id;
 }
 
-//Gráficos
+ID Ente::getID() const {
+    return id;
+}
+
+/* Gráficos */
+
+void Ente::setpGG(ger::Gerenciador_Grafico* pGrafico) {
+    if(pGrafico) {
+        pGG = pGrafico;
+    }
+}
 
 void Ente::carregarSprite() {
     pSprite->setTexture(*pTextura, false);
@@ -40,17 +50,8 @@ void Ente::carregarSprite() {
     pSprite->setScale(escala.x, escala.y);
 }
 
-sf::Sprite* Ente::getSprite() const {
-    return pSprite;
-}
-
-sf::IntRect Ente::getCorpo() const
-{
-    return pSprite->getTextureRect();
-}
-
-void Ente::setTextura(const char *caminhoImagem) {
-    pTextura = pGG->carregarTextura(caminhoImagem);
+void Ente::setTextura(const char *nomeImagem) {
+    pTextura = pGG->getTextura(nomeImagem);
 
     tamanho.x = pTextura->getSize().x * escala.x;
     tamanho.y = pTextura->getSize().y * escala.y;
@@ -58,11 +59,17 @@ void Ente::setTextura(const char *caminhoImagem) {
     carregarSprite();
 }
 
-
 void Ente::desenhar() {
     pGG->desenharEnte(this);
 }
 
+sf::Sprite* Ente::getSprite() const {
+    return pSprite;
+}
+
+sf::IntRect Ente::getCorpo() const {
+    return pSprite->getTextureRect();
+}
 
 void Ente::setPosition(sf::Vector2f pos) {
     if ((pos.y < 0) || (pos.y + tamanho.y > HEIGHT))
@@ -78,11 +85,4 @@ sf::Vector2f Ente::getPosition() const {
 
 sf::Vector2f Ente::getTamanho() const {
     return tamanho;
-}
-
-void Ente::setID(ID idPar){
-    id = idPar;
-}
-ID Ente::getID() const {
-    return id;
 }

@@ -28,6 +28,7 @@ public:
     
     void executar();
     const bool verificarColisao(ent::Entidade* pe1, ent::Entidade* pe2) const;
+    sf::Vector2f calcularColisao(ent::Entidade* pe1, ent::Entidade* pe2) const;
 
     void incluirInimigo(ent::pers::Inimigo* pi);
     void incluirObstaculo(ent::obs::Obstaculo* po);

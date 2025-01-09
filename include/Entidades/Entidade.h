@@ -24,10 +24,11 @@ public:
     void salvarDataBuffer();
 
     sf::Vector2f getVelocidade() const;
-    void setVelocidade(sf::Vector2f vel);
-
+    void setVelocidade(sf::Vector2f velocidade);
+    void setVelocidadeVertical(float vy);
     
-    void setNoChao(bool estado);
+    bool getNoChao() const;
+    void setNoChao(bool noChao);
     //...
 
 };

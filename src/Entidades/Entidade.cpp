@@ -3,10 +3,7 @@
 namespace ent {
 
 Entidade::Entidade()
-    : Ente()
-    , velocidade(0.f, 0.f)
-    , dt(0.f)
-    , noChao(false)
+    : Entidade(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f), vazio)
 {
 }
 
@@ -26,8 +23,12 @@ sf::Vector2f Entidade::getVelocidade() const {
     return velocidade;
 }
 
-void Entidade::setVelocidade(sf::Vector2f vel) {
-    velocidade = vel;
+void Entidade::setVelocidade(sf::Vector2f velocidade) {
+    this->velocidade = velocidade;
+}
+
+void Entidade::setVelocidadeVertical(float vy) {
+    velocidade.y = vy;
 }
 
 
@@ -35,8 +36,12 @@ void Entidade::salvarDataBuffer()
 {
 }
 
-void Entidade::setNoChao(bool estado) {
-    noChao = estado;
+bool Entidade::getNoChao() const {
+    return noChao;
+}
+
+void Entidade::setNoChao(bool noChao) {
+    this->noChao = noChao;
 }
 
 }
