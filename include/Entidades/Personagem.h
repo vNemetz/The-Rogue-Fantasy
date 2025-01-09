@@ -4,12 +4,13 @@
 namespace ent {
 namespace pers{
 
-enum estado{
-    parado = 0,
+enum estado {
+    parado,
     andando,
+    pulando,
     atacando,
-    pulado,
-    morrendo
+    morrendo,
+    ausente
 };    
 
 class Personagem : public Entidade {
@@ -17,9 +18,12 @@ protected:
     int num_vidas;
     estado est;
 
+    float tempoParado;
+
     /* Movimentação - Atributos */
     bool movendoEsquerda;
     bool movendoDireita;
+    bool olhandoDireita;
     
 public:
     Personagem();
@@ -31,9 +35,13 @@ public:
     //virtual void operator ++() = 0; //Incrementa a vida
     virtual void executar() = 0;
 
-    //Movimento
+    /* Movimentação */
     virtual void mover();
-
+    
+    /* Estado */
+    void atualizarEstado();
+    void setEstado(estado est);
+    estado getEstado() const;
 };
 }
 }

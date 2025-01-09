@@ -23,11 +23,17 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     setVideoMode();
     setJanela();
 
-    carregarTextura("/assets/images/Backgrounds/Forest.png");
-    carregarTextura("/assets/images/Rogue/rogue.png");
-    carregarTextura("/assets/images/Rogue/rogue-walk.png");
-    carregarTextura("/assets/images/Goblin/0goblin.png");
-    carregarTextura("/assets/images/Tiles/Ground_grass_0001_tile.png");
+    carregarTextura("/assets/images/Backgrounds/Forest.png", "Forest");
+    carregarTextura("/assets/images/Tiles/Ground_grass_0001_tile.png", "Grass0001");
+
+    /* Rogue Textures */
+    carregarTextura("/assets/images/Rogue/rogue-walk.png", "Rogue-Walk");
+    carregarTextura("/assets/images/Rogue/rogue-attack.png", "Rogue-Attack");
+    carregarTextura("/assets/images/Rogue/rogue-jump.png", "Rogue-Jump");
+    carregarTextura("/assets/images/Rogue/rogue-idle2.png", "Rogue-Idle");
+    carregarTextura("/assets/images/Rogue/rogue-stand.png", "Rogue-Stand");
+
+    carregarTextura("/assets/images/Goblin/0goblin.png", "Goblin");
 }
 
 Gerenciador_Grafico::~Gerenciador_Grafico() {
@@ -58,8 +64,8 @@ bool Gerenciador_Grafico::getJanelaAberta() const {
     return pJanela->isOpen();
 }
 
-sf::RenderWindow *Gerenciador_Grafico::getJanela() const {
-    if(pJanela){return pJanela;}
+sf::RenderWindow* Gerenciador_Grafico::getJanela() const {
+    if(pJanela) {return pJanela;}
     return NULL;
 }
 
@@ -86,7 +92,7 @@ void Gerenciador_Grafico::display() {
 /* Vista */
 
 void Gerenciador_Grafico::setVista(float x) {
-    if(pJanela){
+    if(pJanela) {
         vista.setCenter (x, static_cast<float>(HEIGHT/2.f));
         vista.setSize(sf::Vector2f(WIDTH, HEIGHT));
     }
@@ -105,8 +111,21 @@ void Gerenciador_Grafico::setCentroVista(sf::Vector2f pos) {
     pJanela->setView(vista);
 }
 
-void Gerenciador_Grafico::centralizarVista(Ente *e) { /*TO DO*/
-    vista.setCenter(e->getPosition().x + e->getCorpo().getSize().x/2.f, getVista().getCenter().y);
+void Gerenciador_Grafico::centralizarVista(Ente *e) {
+    sf::Vector2i tamanho = e->getCorpo().getSize();
+
+    sf::Vector2f posicao;
+    posicao.y = getVista().getCenter().y;
+
+    posicao.x = e->getPosition().x;
+
+    if (tamanho.x > 0)
+        posicao.x += tamanho.x / 2.f;
+
+    else
+        posicao.x -= tamanho.x / 2.f;
+    
+    vista.setCenter(posicao);
     pJanela->setView(vista);
 }
 
@@ -125,21 +144,31 @@ float Gerenciador_Grafico::reiniciarClock() {
 }
 
 /* Texturas */
-sf::Texture* Gerenciador_Grafico::carregarTextura(const char* caminhoImagem) {
+sf::Texture* Gerenciador_Grafico::carregarTextura(const char* caminhoImagem, const char* nomeImagem) {
     std::string caminho = PROJECT_ROOT;
     caminho += caminhoImagem;
 
-    if (mapaTexturas.find(caminho) != mapaTexturas.end()) {
-        return mapaTexturas[caminho];
+    if (mapaTexturas.find(nomeImagem) != mapaTexturas.end()) {
+        return mapaTexturas[nomeImagem];
     }
     
     sf::Texture* novaTextura = new sf::Texture();
     if (!novaTextura->loadFromFile(caminho)) {
-            std::cerr << "ERRO ao carregar arquivo" << caminho << "\n";
+            std::cerr << "ERRO ao carregar arquivo: " << caminho << "\n";
             exit(1);
     }
-    mapaTexturas.insert(std::pair<std::string, sf::Texture*>(caminho, novaTextura));
+
+    mapaTexturas.insert(std::pair<std::string, sf::Texture*>(nomeImagem, novaTextura));
     return novaTextura;
+}
+
+sf::Texture* Gerenciador_Grafico::getTextura(const char* nomeImagem) {
+    if (mapaTexturas.find(nomeImagem) != mapaTexturas.end()) {
+        return mapaTexturas[nomeImagem];
+    }
+    
+    std::cerr << "ERRO ao achar imagem: " << nomeImagem << '\n';
+    exit(1);
 }
 
 /* Renderização */
