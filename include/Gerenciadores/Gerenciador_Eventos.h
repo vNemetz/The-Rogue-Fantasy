@@ -1,7 +1,7 @@
 #pragma once
 #include "Gerenciadores/Gerenciador_Input.h"
 #include "Gerenciadores/Gerenciador_Colisoes.h"
-#include "Entidades/Jogador.h"
+#include "Entidades/Personagens/Jogador.h"
 
 namespace ger {
 class Gerenciador_Eventos {

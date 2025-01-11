@@ -1,5 +1,5 @@
 #pragma once
-#include "Entidades/Personagem.h"
+#include "Entidades/Personagens/Personagem.h"
 #include "Animacao.h"
 
 namespace ent {

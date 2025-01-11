@@ -1,11 +1,11 @@
 #include "Jogo.h"
 #include "Ente.h"
 #include "Entidades/Entidade.h"
-#include "Entidades/Goblin.h"
+#include "Entidades/Personagens/Goblin.h"
 #include "Entidades/Plataforma.h"
 #include "Gerenciadores/Gerenciador_Colisoes.h"
 #include "Gerenciadores/Gerenciador_Input.h"
-#include "Entidades/Jogador.h"
+#include "Entidades/Personagens/Jogador.h"
 #include <SFML/System/Vector2.hpp>
 
 Jogo::Jogo()

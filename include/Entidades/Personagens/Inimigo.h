@@ -1,5 +1,5 @@
 #pragma once
-#include "Entidades/Jogador.h"
+#include "Entidades/Personagens/Jogador.h"
 #include "Personagem.h"
 #include <SFML/System/Vector2.hpp>
 

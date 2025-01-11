@@ -1,4 +1,4 @@
-#include "Entidades/Jogador.h"
+#include "Entidades/Personagens/Jogador.h"
 #include <iostream>
 
 namespace ent {

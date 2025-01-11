@@ -1,4 +1,4 @@
-#include "Entidades/Inimigo.h"
+#include "Entidades/Personagens/Inimigo.h"
 #include <SFML/System/Vector2.hpp>
 #include <cmath>
 

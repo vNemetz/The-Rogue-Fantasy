@@ -1,5 +1,5 @@
 #pragma once
-#include "Entidades/Inimigo.h"
+#include "Entidades/Personagens/Inimigo.h"
 #include <cmath>
 
 namespace ent {

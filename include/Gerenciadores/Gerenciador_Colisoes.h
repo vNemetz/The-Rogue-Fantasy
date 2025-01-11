@@ -1,6 +1,6 @@
 #pragma once
-#include "Entidades/Inimigo.h"
-#include "Entidades/Jogador.h"
+#include "Entidades/Personagens/Inimigo.h"
+#include "Entidades/Personagens/Jogador.h"
 #include "Entidades/Obstaculo.h"
 #include <vector>
 #include <list>

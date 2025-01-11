@@ -1,5 +1,5 @@
 #include "Entidades/Plataforma.h"
-#include "Entidades/Personagem.h"
+#include "Entidades/Personagens/Personagem.h"
 
 namespace ent {
 namespace obs {
