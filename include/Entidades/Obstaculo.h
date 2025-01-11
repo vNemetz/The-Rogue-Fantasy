@@ -18,7 +18,7 @@ public:
 
     virtual void executar() = 0;
     virtual void obstacular(pers::Jogador* p) = 0;
-    virtual void emColisao(Entidade* pE) = 0;
+    virtual void emColisao(Entidade* pE, sf::Vector2f ds) = 0;
     // ...
 };
 

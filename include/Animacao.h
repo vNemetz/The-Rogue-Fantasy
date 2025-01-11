@@ -4,32 +4,37 @@
 
 namespace ElementosGraficos{
 
-enum tipoAnimacao{
-    estatico = 1,
-    andando = 3,
-    atacando = 2
+enum tipoAnimacao {
+    inicial,
+    estatico,
+    atacando,
+    andando,
+    pulando,
+    parado
 };
 
-class Animacao{
+class Animacao {
 private:
-    sf::Vector2u nSprites;  //Número de sprites da spritesheet
+    sf::Vector2u numSprites; // Número de sprites da Spritesheet
     sf::Vector2u spriteAtual;
-    tipoAnimacao tipo;  //Tipo da animação
 
-    float tempoTotal; //Tempo total decorrido
+    sf::IntRect corpo; // Pedaço do Spritesheet que contém o sprite atual
+
+    tipoAnimacao tipo;
+
     float tempoPorAnimacao;
-    sf::IntRect corpo; //O retângulo que fica sobre o sprite da spritesheet que queremos usar no momento
+    float tempoTotal;
 
 public:
     Animacao();
-    Animacao( sf::Vector2u numSprites, float tempoAnimacao);
+    Animacao(sf::Vector2u nSprites, float tempoAnimacao);
     ~Animacao();
 
+    void atualizar(float deltaTime, bool olhandoDireita);
+    void atualizarSpritesheet(sf::Texture* novaTextura, sf::Vector2u nSprites, float tempoAnimacao, tipoAnimacao novoTipo);
+    
     void setCorpo(sf::Texture* textura);
-    void atualizarSpritesheet(sf::Texture* novaTextura, sf::Vector2u tamanho, float novoTempo);
-    void atualizar(/*tipoAnimacao tipo,*/ float deltaTime);
-    
     sf::IntRect getCorpo() const;
-    
 };
+
 }

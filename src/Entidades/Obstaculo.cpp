@@ -3,9 +3,8 @@
 namespace ent {
 namespace obs {
 
-Obstaculo::Obstaculo() 
-    : Entidade()
-    , danoso(false)
+Obstaculo::Obstaculo()
+    : Obstaculo(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f), false, vazio)
 {
 }
 

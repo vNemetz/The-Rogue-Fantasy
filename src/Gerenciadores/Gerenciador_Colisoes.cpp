@@ -1,6 +1,5 @@
 #include "Gerenciadores/Gerenciador_Colisoes.h"
 #include <cmath>
-#include <iostream>
 
 namespace ger {
 
@@ -36,16 +35,16 @@ void Gerenciador_Colisoes::executar() {
             ent::Entidade* pe2 = listaInimigos[j];
 
             if (verificarColisao(pe1, pe2)) {
-                std::cout << "Colisão entre Inimigo e Inimigo\n"; // Entre Inimigo e Inimigo
+                // Entre Inimigo e Inimigo
             }
         }
 
         ent::Entidade* pe2 = jogador;
         if (verificarColisao(pe1, pe2)) {
-                std::cout << "Colisão entre Inimigo e Jogador\n"; // Entre Inimigo e Jogador
+            // Entre Inimigo e Jogador
         }
     }
-
+    
     /* Verificar colisões dos obstáculos entre inimigos e entre o jogador */
     for (auto obstaculo : listaObstaculos) {
         ent::Entidade* pe1 = obstaculo;
@@ -54,22 +53,43 @@ void Gerenciador_Colisoes::executar() {
             ent::Entidade* pe2 = inimigo;
 
             if (verificarColisao(pe1, pe2)) {
-                obstaculo->emColisao(pe2); // Entre Obstáculo e Inimigo
+                obstaculo->emColisao(pe2, calcularColisao(pe1, pe2)); // Entre Obstáculo e Inimigo
             }
         }
 
         ent::Entidade* pe2 = jogador;
         if (verificarColisao(pe1, pe2)) {
-            obstaculo->emColisao(pe2); // Entre Obstáculo e Jogador
+            obstaculo->emColisao(pe2, calcularColisao(pe1, pe2)); // Entre Obstáculo e Jogador
         }
     }
 }
 
 const bool Gerenciador_Colisoes::verificarColisao(ent::Entidade* pe1, ent::Entidade* pe2) const {
-    sf::FloatRect l1 = pe1->getSprite()->getGlobalBounds();
-    sf::FloatRect l2 = pe2->getSprite()->getGlobalBounds();
+    sf::Vector2f ds = calcularColisao(pe1, pe2);
 
-    return l1.intersects(l2);
+    return (ds.x < 0.f && ds.y < 0.f);
+}
+
+sf::Vector2f Gerenciador_Colisoes::calcularColisao(ent::Entidade* pe1, ent::Entidade* pe2) const {
+    sf::Vector2f pos1 = pe1->getPosition();
+    sf::Vector2f pos2 = pe2->getPosition();
+
+    sf::Vector2f tam1 = pe1->getTamanho();
+    sf::Vector2f tam2 = pe2->getTamanho();
+
+    sf::Vector2f distanciaEntreCentros(
+        fabs((pos1.x + tam1.x/2.f) - (pos2.x + tam2.x/2.f)),
+        fabs((pos1.y + tam1.y/2.f) - (pos2.y + tam2.y/2.f))
+    );
+
+    sf::Vector2f somaMetadeRetangulo(tam1.x/2.f + tam2.x/2.f, tam1.y/2.f + tam2.y/2.f);
+    
+    sf::Vector2f ds(
+        (distanciaEntreCentros.x - somaMetadeRetangulo.x),
+        (distanciaEntreCentros.y - somaMetadeRetangulo.y)
+    );
+
+    return ds;
 }
 
 void Gerenciador_Colisoes::incluirInimigo(ent::pers::Inimigo* pi) {

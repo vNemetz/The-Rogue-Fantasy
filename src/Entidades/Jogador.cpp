@@ -1,50 +1,35 @@
 #include "Entidades/Jogador.h"
-#include <SFML/System/Vector2.hpp>
-#include <SFML/Window/Keyboard.hpp>
 #include <iostream>
 
 namespace ent {
 namespace pers {
 Jogador::Jogador()
-    : Personagem()
-    , vivo(true)
-    , pontos(0)
-    , corpo()
-    , animacao(sf::Vector2u(6,1), 0.03f)
-    , pulando(false)
+    : Jogador(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f))
 {
-    est = parado;
 }
 
 Jogador::Jogador(sf::Vector2f pos, sf::Vector2f tam)
     : Personagem(pos, tam, jogador)
-    , vivo(true)
     , pontos(0)
+    , vivo(true)
     , animacao(sf::Vector2u(6, 1), 0.03f)
-    , corpo()
-    , pulando(false)
+    , saltando(false)
 {
-    est = parado;
 }
 
-Jogador::~Jogador() {
-    vivo = false;
-    pontos = 0;
+Jogador::~Jogador()
+{
 }
 
 void Jogador::executar() {
     atualizarPosicao();
+
+    atualizarEstado();
+    
+    atualizarAnimacao();
 }
 
-void Jogador::alteraVivo() {
-    vivo = !vivo;
-}
-
-bool Jogador::getVivo() const {
-    return vivo;
-}
-
-void Jogador::atualizarEstado(bool estado, sf::Keyboard::Key key) {
+void Jogador::atualizarMovimentacao(bool estado, sf::Keyboard::Key key) {
     switch (key) {
         case sf::Keyboard::A:
             movendoEsquerda = estado;
@@ -55,7 +40,7 @@ void Jogador::atualizarEstado(bool estado, sf::Keyboard::Key key) {
             break;
 
         case sf::Keyboard::W:
-            pulando = estado;
+            saltando = estado;
             break;
 
         default:
@@ -64,9 +49,9 @@ void Jogador::atualizarEstado(bool estado, sf::Keyboard::Key key) {
 }
 
 void Jogador::atualizarPosicao() {
-    if (pulando && noChao)
+    if (saltando && noChao)
         pular();
-
+    
     mover();
 }
 
@@ -75,24 +60,23 @@ void Jogador::pular() {
     noChao = false;
 }
 
-void Jogador::setEstado(estado es){
-    est = es;
-}
-}
-void pers::Jogador::desenhar(){
-    if(pSprite){
+void Jogador::desenhar() {
+    if (pSprite) {
         pGG->desenharEnte(this);
     }
-    else{std::cerr << "Sprite vazio\n";}
+
+    else {
+        std::cerr << "Sprite do Jogador vazio!\n";
+        exit(1);
+    }
 }
 
-void pers::Jogador::setCorpo(){
-    setCorpoAnimacao();
-    if(pSprite){pSprite->setTextureRect(animacao.getCorpo());}
-}
+/* Animação */
 
-sf::IntRect pers::Jogador::getCorpo(){
-    return corpo;
+void Jogador::atualizarAnimacao() {
+    atualizarElementosAnimacao();
+    
+    animacao.atualizar(pGG->getDeltaTime(), olhandoDireita);
 }
 
 void pers::Jogador::setCorpoAnimacao(){

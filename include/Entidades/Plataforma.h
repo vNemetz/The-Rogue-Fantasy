@@ -17,7 +17,8 @@ public:
 
     void executar();
     void obstacular(pers::Jogador* p);
-    void emColisao(Entidade* pE);
+    void emColisao(Entidade* pE, sf::Vector2f ds);
+    void emColisaoPersonagem(pers::Personagem* pPers, sf::Vector2f ds);
     // ...
 };
 
