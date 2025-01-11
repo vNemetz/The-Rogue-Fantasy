@@ -79,34 +79,84 @@ void Jogador::atualizarAnimacao() {
     animacao.atualizar(pGG->getDeltaTime(), olhandoDireita);
 }
 
-void pers::Jogador::setCorpoAnimacao(){
-        if(pTextura){
-        animacao.setCorpo(pTextura);
+void Jogador::atualizarElementosAnimacao() {
+    switch (est) {
+        case pulando:
+            setTextura("Rogue-Jump");
+            animacao.atualizarSpritesheet(pTextura, sf::Vector2u(7,1), 0.2f, ElementosGraficos::pulando);
+            break;
+        
+        case andando:
+            setTextura("Rogue-Walk");
+            animacao.atualizarSpritesheet(pTextura, sf::Vector2u(6,1), 0.16f, ElementosGraficos::andando);
+            break;
+        
+        case parado:
+            setTextura("Rogue-Stand");
+            animacao.atualizarSpritesheet(pTextura, sf::Vector2u(1, 1), 0.001f, ElementosGraficos::parado);
+            break;
+
+        case ausente:
+            setTextura("Rogue-Idle");
+            animacao.atualizarSpritesheet(pTextura, sf::Vector2u(17,1), 0.16f, ElementosGraficos::estatico);
+            break;
+        
+        default:
+            break;
     }
-}
-void pers::Jogador::atualizaTempoAnimacao(float dt)
-{
-    animacao.atualizar(dt);
-    atualizaElementosAnimacao();
+
+    setCorpo();
 }
 
-void pers::Jogador::atualizaElementosAnimacao(){
-    if(est == andando){
-        setTextura("/assets/images/Rogue/rogue-walk.png");
-        animacao.atualizarSpritesheet(pTextura, sf::Vector2u(6,1), 0.03f);
+void Jogador::setCorpo() {
+    if (pSprite) {
+        /* Do corpo inteiro, frame pega apenas a parte em que há textura de fato */
+        sf::IntRect frame = animacao.getCorpo();
+
+        if (frame.width > 0) {
+            frame.left += 15;
+            frame.width = 56;
+        }
+
+        else {
+            frame.left -= 56;
+            frame.width += 66;
+        }
+
+        frame.top += 52;
+        frame.height -= 52;
+
+        pSprite->setTextureRect(frame);
+
+        tamanho = sf::Vector2f(frame.width*escala.x, frame.height*escala.y);
+        
+        if (frame.width <= 0)
+            tamanho.x = -tamanho.x;
+
+        /* HITBOX DEBUG */
+        /*
+        sf::RectangleShape debugShape;
+        debugShape.setSize(sf::Vector2f(tamanho.x, tamanho.y));
+        debugShape.setPosition(pSprite->getPosition());
+        debugShape.setOutlineColor(sf::Color::Red);
+        debugShape.setOutlineThickness(1);
+        debugShape.setFillColor(sf::Color::Transparent);
+        pGG->getJanela()->draw(debugShape);
+        */
     }
-    else if(est == atacando){
-        setTextura("/assets/images/Rogue/rogue-attack.png");
-        animacao.atualizarSpritesheet(pTextura, sf::Vector2u(7,1), 0.03f);
-    }
-    else if(est == pulado){
-        setTextura("/assets/images/Rogue/rogue-jump.png");
-        animacao.atualizarSpritesheet(pTextura, sf::Vector2u(7,1), 0.06f);
-    }
-    else if(est == parado){
-        setTextura("/assets/images/Rogue/rogue.png");
-        animacao.atualizarSpritesheet(pTextura, sf::Vector2u(1,1), 0.03f);
-    }
-    setCorpo();
+}
+
+sf::IntRect Jogador::getCorpo() {
+    return corpo;
+}
+
+void Jogador::setVivo(bool vivo) {
+    this->vivo = vivo;
+}
+
+bool Jogador::getVivo() const {
+    return vivo;
+}
+
 }
 }
