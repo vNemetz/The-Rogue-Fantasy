@@ -6,17 +6,22 @@ namespace ent {
 
 class Entidade : public Ente {
 protected:
+    sf::Texture* pTextura;
+    sf::Sprite* pSprite;
+
+    sf::Vector2f posicao;
+    sf::Vector2f tamanho;
+    sf::Vector2f escala;
+    
     sf::Vector2f velocidade;
     float dt;
     bool noChao;
+
     //ostream buffer;
-    //int x
-    //int y
-    //...
     
 public:
     Entidade();
-    Entidade(sf::Vector2f pos, sf::Vector2f tam, ID id = vazio);
+    Entidade(sf::Vector2f pos, sf::Vector2f esc, ID id = vazio);
     virtual ~Entidade();
 
     virtual void executar() = 0;
@@ -29,7 +34,19 @@ public:
     
     bool getNoChao() const;
     void setNoChao(bool noChao);
-    //...
+    
+    /* Gráficos */
+    void setTextura(const char *nomeImagem);
+    virtual void desenhar();
+    
+    void carregarSprite();
+    sf::Sprite* getSprite() const;
+    
+    virtual sf::IntRect getCorpo() const;
 
+    sf::Vector2f getPosition() const;
+    void setPosition(sf::Vector2f pos);
+
+    sf::Vector2f getTamanho() const;
 };
 }

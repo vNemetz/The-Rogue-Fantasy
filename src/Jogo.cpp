@@ -15,6 +15,7 @@ Jogo::Jogo()
     , listaEntidades()
 {
     srand(time(NULL));
+    Ente::setPGG(gerGrafico);
 
     inicializaEntidades();
 
@@ -32,9 +33,7 @@ Jogo::~Jogo() {
 
 void Jogo::inicializaEntidades() {
     jogador = new ent::pers::Jogador (sf::Vector2f(WIDTH/2.0, HEIGHT/2.0),sf::Vector2f(1.7f, 1.7f));
-    jogador->setpGG(gerGrafico);
     jogador->setTextura("Rogue-Jump");
-
     jogador->setVelocidade(sf::Vector2f(600.f, 600.f));
 
     /* Inclui jogador nos gerenciadores */

@@ -9,7 +9,6 @@ namespace obs {
 class Obstaculo : public Entidade {
 protected:
     bool danoso;
-    // ...
 
 public:
     Obstaculo();
@@ -17,9 +16,7 @@ public:
     ~Obstaculo();
 
     virtual void executar() = 0;
-    virtual void obstacular(pers::Jogador* p) = 0;
     virtual void emColisao(Entidade* pE, sf::Vector2f ds) = 0;
-    // ...
 };
 
 }

@@ -8,7 +8,6 @@ namespace obs {
 class Plataforma : public Obstaculo {
 private:
     int altura;
-    // ...
 
 public:
     Plataforma();
@@ -16,10 +15,8 @@ public:
     ~Plataforma();
 
     void executar();
-    void obstacular(pers::Jogador* p);
     void emColisao(Entidade* pE, sf::Vector2f ds);
     void emColisaoPersonagem(pers::Personagem* pPers, sf::Vector2f ds);
-    // ...
 };
 
 }

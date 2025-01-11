@@ -32,7 +32,7 @@ public:
     void atualizarElementosAnimacao();
     
     void setCorpo();
-    sf::IntRect getCorpo();
+    sf::IntRect getCorpo() const;
 
     void setVivo(bool vivo);
     bool getVivo() const;

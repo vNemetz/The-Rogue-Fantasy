@@ -1,8 +1,5 @@
 #include "Entidades/Plataforma.h"
-#include "Entidades/Jogador.h"
-#include "Entidades/Obstaculo.h"
 #include "Entidades/Personagem.h"
-#include <SFML/System/Vector2.hpp>
 
 namespace ent {
 namespace obs {
@@ -24,9 +21,6 @@ Plataforma::~Plataforma()
 }
 
 void Plataforma::executar() {
-}
-
-void Plataforma::obstacular(pers::Jogador* p) {
 }
 
 void Plataforma::emColisao(Entidade* pE, sf::Vector2f ds) {

@@ -15,8 +15,8 @@ enum estado {
 
 class Personagem : public Entidade {
 protected:
-    int num_vidas;
     estado est;
+    int num_vidas;
 
     float tempoParado;
 

@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-class Ente;
+namespace ent {class Entidade;}
 
 /* Gerenciadores - Namespace */
 namespace ger{
@@ -41,7 +41,7 @@ public:
     sf::View getVista() const;
     void setTamanhoVista(sf::Vector2f tam);
     void setCentroVista(sf::Vector2f pos);
-    void centralizarVista(Ente* e);
+    void centralizarVista(ent::Entidade* e);
     void redimensionar(float aspect_ratio); // Redimensiona pJanela
     
     /* Clock */
@@ -54,7 +54,7 @@ public:
     sf::Texture* getTextura(const char* nomeImagem);
 
     /* Renderização */
-    void desenharEnte(Ente* pE) const;
+    void desenharEntidade(ent::Entidade* pE) const;
     void desenhar(sf::RectangleShape* corpo) const;
 };
 }
