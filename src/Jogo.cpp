@@ -97,8 +97,10 @@ void Jogo::executar() {
         gerGrafico->getJanela()->setView(gerGrafico->getVista());
         atualizaEntidades(); // Atualiza e Desenha as Entidades  
 
-        gerGrafico->centralizarVista(jogador); // Centraliza o campo de visã.o no jogador
-        gerGrafico->updateDeltaTime();
+        gerColisoes->executar(); // Detecta as colisões
+
+        gerGrafico->centralizarVista(jogador); // Centraliza o campo de visão no jogador
+            gerGrafico->updateDeltaTime();
 
         gerGrafico->display(); // Exibe a janela
     }
