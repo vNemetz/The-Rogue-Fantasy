@@ -97,7 +97,7 @@ void Jogo::executar() {
         gerColisoes->executar(); // Detecta as colisões
 
         gerGrafico->centralizarVista(jogador); // Centraliza o campo de visão no jogador
-        gerGrafico->updateDeltaTime();
+            gerGrafico->updateDeltaTime();
 
         gerGrafico->display(); // Exibe a janela
     }
