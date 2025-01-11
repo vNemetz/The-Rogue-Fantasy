@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Entidades/Jogador.h"
+#include "Entidades/Entidade.h"
 #include <SFML/System/Vector2.hpp>
 
 namespace ent {

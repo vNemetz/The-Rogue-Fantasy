@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Entidades/Personagem.h"
 #include "Entidades/Obstaculo.h"
 
 namespace ent {
