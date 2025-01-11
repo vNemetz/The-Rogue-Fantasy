@@ -1,13 +1,14 @@
-#include "Fase2.h"
+#include "Fases/Fase2.h"
 
-Fase::FaseDois::FaseDois()
+Fases::FaseDois::FaseDois(ger::Gerenciador_Colisoes gC):
+Fase(gC)
 {
 }
 
-Fase::FaseDois::~FaseDois()
+Fases::FaseDois::~FaseDois()
 {
 }
 
-void Fase::FaseDois::executar()
+void Fases::FaseDois::executar()
 {
 }

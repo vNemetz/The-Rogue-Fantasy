@@ -33,7 +33,7 @@ Jogo::~Jogo() {
 void Jogo::inicializaEntidades() {
     jogador = new ent::pers::Jogador (sf::Vector2f(WIDTH/2.0, HEIGHT/2.0),sf::Vector2f(1.7f, 1.7f));
     jogador->setpGG(gerGrafico);
-    jogador->setTextura("/assets/images/Rogue/rogue.png");
+    jogador->setTextura("Rogue-Jump");
 
     jogador->setVelocidade(sf::Vector2f(600.f, 600.f));
 
@@ -87,20 +87,17 @@ void Jogo::executar() {
         gerEventos->gerenciar(); // Gerencia os eventos
 
         gerGrafico->limpaJanela(); // Limpa a janela
-        //jogador->atualizaTempoAnimacao(deltaTime);
-
- 
 
         gerGrafico->getJanela()->setView(gerGrafico->getJanela()->getDefaultView());
         gerGrafico->getJanela()->draw(backgroundSprite);
         
         gerGrafico->getJanela()->setView(gerGrafico->getVista());
-        atualizaEntidades(); // Atualiza e Desenha as Entidades  
+        atualizaEntidades(); // Atualiza e Desenha as Entidades
 
         gerColisoes->executar(); // Detecta as colisões
 
         gerGrafico->centralizarVista(jogador); // Centraliza o campo de visão no jogador
-            gerGrafico->updateDeltaTime();
+        gerGrafico->updateDeltaTime();
 
         gerGrafico->display(); // Exibe a janela
     }

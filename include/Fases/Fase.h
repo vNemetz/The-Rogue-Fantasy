@@ -8,7 +8,8 @@ protected:
     ger::Gerenciador_Colisoes gColisoes;
     int numeroFase;
 public:
-    Fase(int nFase = 1);
+    Fase();
+    Fase(ger::Gerenciador_Colisoes gC, int nFase = 1);
     ~Fase();
     
     virtual void executar() = 0;

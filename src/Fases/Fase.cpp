@@ -1,9 +1,8 @@
-#include "Fase.h"
+#include "Fases/Fase.h"
 
-Fases::Fase::Fase(int nFase):
-numeroFase(nFase)
+Fases::Fase::Fase(ger::Gerenciador_Colisoes gC, int nFase) : gColisoes(gC)
 {
-
+    numeroFase = nFase;
 }
 
 Fases::Fase::~Fase(){

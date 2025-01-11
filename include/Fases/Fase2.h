@@ -1,15 +1,15 @@
 #pragma once
 #include "Fases/Fase.h"
 
-namespace Fase{
+namespace Fases{
 
 class FaseDois : public Fase{
 private:
 
 public:
-    FaseDois();
+    FaseDois(ger::Gerenciador_Colisoes gC);
     ~FaseDois();
-    
+
     virtual void executar();
 };
 }
