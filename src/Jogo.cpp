@@ -2,7 +2,7 @@
 #include "Ente.h"
 #include "Entidades/Entidade.h"
 #include "Entidades/Personagens/Goblin.h"
-#include "Entidades/Plataforma.h"
+#include "Entidades/Obstáculos/Plataforma.h"
 #include "Gerenciadores/Gerenciador_Colisoes.h"
 #include "Gerenciadores/Gerenciador_Input.h"
 #include "Entidades/Personagens/Jogador.h"
