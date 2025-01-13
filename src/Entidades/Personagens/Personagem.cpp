@@ -1,4 +1,4 @@
-#include "Entidades/Personagem.h"
+#include "Entidades/Personagens/Personagem.h"
 
 namespace ent {
 namespace pers {
@@ -10,8 +10,8 @@ Personagem::Personagem()
 
 Personagem::Personagem(sf::Vector2f pos, sf::Vector2f tam, ID id)
     : Entidade(pos, tam, id)
-    , num_vidas(0)
     , est(parado)
+    , num_vidas(3)
     , movendoEsquerda(false)
     , movendoDireita(false)
     , olhandoDireita(true)

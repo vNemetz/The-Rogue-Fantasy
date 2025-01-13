@@ -1,11 +1,11 @@
 #include "Jogo.h"
 #include "Ente.h"
 #include "Entidades/Entidade.h"
-#include "Entidades/Goblin.h"
-#include "Entidades/Plataforma.h"
+#include "Entidades/Personagens/Goblin.h"
+#include "Entidades/Obstáculos/Plataforma.h"
 #include "Gerenciadores/Gerenciador_Colisoes.h"
 #include "Gerenciadores/Gerenciador_Input.h"
-#include "Entidades/Jogador.h"
+#include "Entidades/Personagens/Jogador.h"
 #include <SFML/System/Vector2.hpp>
 
 Jogo::Jogo()
@@ -15,6 +15,7 @@ Jogo::Jogo()
     , listaEntidades()
 {
     srand(time(NULL));
+    Ente::setPGG(gerGrafico);
 
     inicializaEntidades();
 
@@ -32,9 +33,7 @@ Jogo::~Jogo() {
 
 void Jogo::inicializaEntidades() {
     jogador = new ent::pers::Jogador (sf::Vector2f(WIDTH/2.0, HEIGHT/2.0),sf::Vector2f(1.7f, 1.7f));
-    jogador->setpGG(gerGrafico);
     jogador->setTextura("Rogue-Jump");
-
     jogador->setVelocidade(sf::Vector2f(600.f, 600.f));
 
     /* Inclui jogador nos gerenciadores */

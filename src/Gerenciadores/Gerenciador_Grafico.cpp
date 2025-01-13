@@ -1,5 +1,5 @@
 #include "Gerenciadores/Gerenciador_Grafico.h"
-#include "Ente.h"
+#include "Entidades/Entidade.h"
 #include <iostream>
 #include <string.h>
 
@@ -111,7 +111,7 @@ void Gerenciador_Grafico::setCentroVista(sf::Vector2f pos) {
     pJanela->setView(vista);
 }
 
-void Gerenciador_Grafico::centralizarVista(Ente *e) {
+void Gerenciador_Grafico::centralizarVista(ent::Entidade *e) {
     sf::Vector2i tamanho = e->getCorpo().getSize();
 
     sf::Vector2f posicao;
@@ -172,7 +172,7 @@ sf::Texture* Gerenciador_Grafico::getTextura(const char* nomeImagem) {
 }
 
 /* Renderização */
-void Gerenciador_Grafico::desenharEnte(Ente *pE) const {
+void Gerenciador_Grafico::desenharEntidade(ent::Entidade *pE) const {
     if(pE) {
         pJanela->draw(*pE->getSprite());
     }

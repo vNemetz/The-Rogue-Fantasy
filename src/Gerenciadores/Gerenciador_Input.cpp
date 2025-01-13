@@ -1,5 +1,5 @@
 #include "Gerenciadores/Gerenciador_Input.h"
-#include "Entidades/Jogador.h"
+#include "Entidades/Personagens/Jogador.h"
 #include <SFML/Window/Keyboard.hpp>
 
 namespace ger {

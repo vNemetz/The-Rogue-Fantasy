@@ -1,4 +1,4 @@
-#include "Entidades/Jogador.h"
+#include "Entidades/Personagens/Jogador.h"
 #include <iostream>
 
 namespace ent {
@@ -62,7 +62,7 @@ void Jogador::pular() {
 
 void Jogador::desenhar() {
     if (pSprite) {
-        pGG->desenharEnte(this);
+        pGG->desenharEntidade(this);
     }
 
     else {
@@ -146,7 +146,7 @@ void Jogador::setCorpo() {
     }
 }
 
-sf::IntRect Jogador::getCorpo() {
+sf::IntRect Jogador::getCorpo() const {
     return corpo;
 }
 

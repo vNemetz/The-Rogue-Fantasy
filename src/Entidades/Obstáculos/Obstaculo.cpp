@@ -1,4 +1,4 @@
-#include "Entidades/Obstaculo.h"
+#include "Entidades/Obstáculos/Obstaculo.h"
 
 namespace ent {
 namespace obs {

@@ -1,4 +1,4 @@
-#include "Entidades/Goblin.h"
+#include "Entidades/Personagens/Goblin.h"
 #include <SFML/System/Vector2.hpp>
 
 namespace ent {

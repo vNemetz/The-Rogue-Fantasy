@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Entidades/Jogador.h"
+#include "Entidades/Personagens/Jogador.h"
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Graphics.hpp>
 #include <map>
