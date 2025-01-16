@@ -39,6 +39,7 @@ public:
     /* Gráficos */
     void setTextura(const char *nomeImagem);
     virtual void desenhar();
+    void desenharHitbox();
     
     void carregarSprite();
     sf::Sprite* getSprite() const;

@@ -165,17 +165,6 @@ void Jogador::setCorpo() {
         
         if (frame.width <= 0)
             tamanho.x = -tamanho.x;
-
-        /* HITBOX DEBUG */
-        /*
-        sf::RectangleShape debugShape;
-        debugShape.setSize(sf::Vector2f(tamanho.x, tamanho.y));
-        debugShape.setPosition(pSprite->getPosition());
-        debugShape.setOutlineColor(sf::Color::Red);
-        debugShape.setOutlineThickness(1);
-        debugShape.setFillColor(sf::Color::Transparent);
-        pGG->getJanela()->draw(debugShape);
-        */
     }
 }
 
