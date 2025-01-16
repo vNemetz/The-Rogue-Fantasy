@@ -35,13 +35,14 @@ void Gerenciador_Colisoes::executar() {
             ent::Entidade* pe2 = listaInimigos[j];
 
             if (verificarColisao(pe1, pe2)) {
-                // Entre Inimigo e Inimigo
+                ent::pers::Personagem* pP1 = static_cast<ent::pers::Personagem*>(pe1);
+                pP1->emColisaoInimigo(static_cast<ent::pers::Inimigo*>(pe2), calcularColisao(pe1,pe2));
             }
         }
 
         ent::Entidade* pe2 = jogador;
         if (verificarColisao(pe1, pe2)) {
-            // Entre Inimigo e Jogador
+            jogador->emColisaoInimigo(static_cast<ent::pers::Inimigo*>(pe1), calcularColisao(pe1,pe2));
         }
     }
     

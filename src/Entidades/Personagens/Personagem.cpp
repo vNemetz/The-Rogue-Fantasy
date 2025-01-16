@@ -11,11 +11,13 @@ Personagem::Personagem()
 Personagem::Personagem(sf::Vector2f pos, sf::Vector2f tam, ID id)
     : Entidade(pos, tam, id)
     , est(parado)
-    , num_vidas(3)
+    , numVidas(3)
+    , tempoParado(0.f)
+    , tempoDano(0.f)
     , movendoEsquerda(false)
     , movendoDireita(false)
     , olhandoDireita(true)
-    , tempoParado(0.f)
+    , levandoDano(false)
 {
 }
 
@@ -25,24 +27,28 @@ Personagem::~Personagem(){
 /* Movimentação */
 
 void Personagem::mover() {
-    sf::Vector2f ds(0.f, 0.f);
-
+    sf::Vector2f ds(0.f, 0.f); // Guarda a variação de movimento atual
     dt = pGG->getDeltaTime(); // Guarda os segundos passados em dt
 
     /* Atualiza o movimento horizontal */
-    if (movendoDireita) {
-        ds.x += velocidade.x * dt;
+    if (levandoDano) {
+        if (noChao)
+            levandoDano = false;
     }
 
-    if (movendoEsquerda) {
-        ds.x -= velocidade.x * dt;
+    else if (movendoDireita && !movendoEsquerda) {
+        velocidade.x = velocidadeMaxima.x;
     }
 
-    /* Aplica a gravidade quando o personagem está no ar */
-    const float GRAVIDADE_REAL = 9.8f; // m/s^2
-    const float ESCALA_GRAVIDADE_PIXEL = 100.f; // pixels/m
-    const float GRAVIDADE = GRAVIDADE_REAL * ESCALA_GRAVIDADE_PIXEL; // pixels/s^2
+    else if (movendoEsquerda && !movendoDireita) {
+        velocidade.x = -velocidadeMaxima.x;
+    }
 
+    else {
+        velocidade.x = 0.f;
+    }
+
+    /* Atualiza o movimento vertical (aplica gravidade) */
     if (!noChao) {
         velocidade.y += GRAVIDADE * dt;
     }
@@ -51,7 +57,7 @@ void Personagem::mover() {
         velocidade.y = 0.f;
     }
 
-    ds.y += velocidade.y * dt;
+    ds += velocidade * dt;
     
     /* Define para que lado está olhando */
     if (ds.x > 0.f) {
@@ -69,7 +75,22 @@ void Personagem::mover() {
 /* Estado */
 
 void Personagem::atualizarEstado() {
-    if (!noChao && velocidade.y != 0.f) {
+    estado estadoAntigo = est;
+
+    if (levandoDano) {
+        est = sofrendo;
+
+        tempoParado = 0.f;
+        tempoDano += pGG->getDeltaTime();
+
+        /* Se acabar o tempo de invulnerabilidade */
+        if (tempoDano >= duracaoInvulneravel) {
+            levandoDano = false;
+            tempoDano = 0.f;
+        }
+    }
+
+    else if (!noChao && velocidade.y != 0.f) {
         est = pulando;
 
         tempoParado = 0.f;
@@ -86,11 +107,12 @@ void Personagem::atualizarEstado() {
 
         tempoParado += pGG->getDeltaTime();
 
-        /* Se o personagem ficar parado por mais de 4 segundos, está ausente */
-        if (tempoParado >= 1.8) {
+        /* Se o personagem ficar parado por mais disto, está ausente */
+        if (tempoParado >= duracaoAusente) {
             est = ausente;
+            estadoAntigo = ausente;
         }
-    }    
+    }
 }
 
 void Personagem::setEstado(estado est) {

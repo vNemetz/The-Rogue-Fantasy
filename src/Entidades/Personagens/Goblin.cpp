@@ -56,5 +56,38 @@ sf::Vector2f Goblin::persegueJogador() {
     return novaPosicao;
 }
 
+void Goblin::emColisaoInimigo(Inimigo* pI, sf::Vector2f ds) {
+    sf::Vector2f posicaoInimigo = pI->getPosition();
+    sf::Vector2f tamanhoPers = pI->getTamanho();
+    sf::Vector2f velocidadeInimigo = pI->getVelocidade();
+
+    if (ds.x < 0.f && ds.y < 0.f) {
+        // Se a colisão é no eixo x
+        if (ds.x > ds.y) {
+            if (posicaoInimigo.x < posicao.x)
+                posicaoInimigo.x += ds.x;
+
+            else
+                posicaoInimigo.x -= ds.x;
+        }
+        
+        // Se a colisão é no eixo y
+        else {
+            if (posicaoInimigo.y < posicao.y) {
+                posicaoInimigo.y += ds.y;
+            }
+
+            else {
+                posicaoInimigo.y -= ds.y;
+            }
+
+            velocidadeInimigo.y = 0;
+        }
+    }
+
+    pI->setPosition(posicaoInimigo);
+    pI->setVelocidade(velocidadeInimigo);
+}
+
 }
 }

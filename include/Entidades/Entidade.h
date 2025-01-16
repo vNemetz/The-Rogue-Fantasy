@@ -14,6 +14,7 @@ protected:
     sf::Vector2f escala;
     
     sf::Vector2f velocidade;
+    sf::Vector2f velocidadeMaxima;
     float dt;
     bool noChao;
 
@@ -30,7 +31,7 @@ public:
 
     sf::Vector2f getVelocidade() const;
     void setVelocidade(sf::Vector2f velocidade);
-    void setVelocidadeVertical(float vy);
+    void setVelocidadeMaxima(sf::Vector2f velocidadeMaxima);
     
     bool getNoChao() const;
     void setNoChao(bool noChao);

@@ -32,6 +32,7 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     carregarTextura("/assets/images/Rogue/rogue-jump.png", "Rogue-Jump");
     carregarTextura("/assets/images/Rogue/rogue-idle2.png", "Rogue-Idle");
     carregarTextura("/assets/images/Rogue/rogue-stand.png", "Rogue-Stand");
+    carregarTextura("/assets/images/Rogue/rogue-hurt.png", "Rogue-Hurt");
 
     carregarTextura("/assets/images/Goblin/0goblin.png", "Goblin");
 }

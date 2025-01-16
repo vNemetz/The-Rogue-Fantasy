@@ -10,7 +10,8 @@ enum tipoAnimacao {
     atacando,
     andando,
     pulando,
-    parado
+    parado,
+    sofrendo
 };
 
 class Animacao {

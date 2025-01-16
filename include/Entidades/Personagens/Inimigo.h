@@ -21,6 +21,7 @@ public:
     //virtual void danificar(Jogador* p) = 0;
     //void salvarDataBuffer();
     // ...
+    virtual void emColisaoInimigo(Inimigo* pI, sf::Vector2f ds) = 0;
 };
 }
 }

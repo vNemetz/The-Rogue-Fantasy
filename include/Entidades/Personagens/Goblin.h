@@ -17,6 +17,7 @@ public:
     void executar();
     sf::Vector2f persegueJogador();
     //void danificar(Jogador* p);
+    void emColisaoInimigo(Inimigo* pI, sf::Vector2f ds);
 };
 }
 }

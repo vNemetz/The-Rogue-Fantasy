@@ -32,9 +32,9 @@ Jogo::~Jogo() {
 }
 
 void Jogo::inicializaEntidades() {
-    jogador = new ent::pers::Jogador (sf::Vector2f(WIDTH/2.0, HEIGHT/2.0),sf::Vector2f(1.7f, 1.7f));
+    jogador = new ent::pers::Jogador (sf::Vector2f(WIDTH/2.0-500.f, HEIGHT/2.0),sf::Vector2f(1.7f, 1.7f));
     jogador->setTextura("Rogue-Jump");
-    jogador->setVelocidade(sf::Vector2f(600.f, 600.f));
+    jogador->setVelocidadeMaxima(sf::Vector2f(600.f, 600.f));
 
     /* Inclui jogador nos gerenciadores */
     gerEventos->setJogador(jogador);
@@ -42,24 +42,21 @@ void Jogo::inicializaEntidades() {
     ger::Gerenciador_Input::getInstancia()->setJogador(jogador);
 
     /* Criação do Goblin */
-    ent::pers::Goblin* goblin = new ent::pers::Goblin(sf::Vector2f(WIDTH/2.0+100.f, HEIGHT/2.0),sf::Vector2f(1.7f, 1.7f), jogador);
+    ent::pers::Goblin* goblin = new ent::pers::Goblin(sf::Vector2f(WIDTH/2.0+300.f, 0.f),sf::Vector2f(1.7f, 1.7f), jogador);
     goblin->setTextura("Goblin");
-    goblin->setVelocidade(sf::Vector2f (350.f, 350.f));
+    goblin->setVelocidadeMaxima(sf::Vector2f (200.f, 200.f));
 
     /* Criação da Plataforma */
-    ent::obs::Plataforma* obstaculo = new ent::obs::Plataforma(sf::Vector2f(WIDTH/2.0, HEIGHT/2.0+250.f), sf::Vector2f(1.7f, 1.7f), false, 50);
-    obstaculo->setTextura("Grass0001");
-
-    ent::obs::Plataforma* obstaculo2 = new ent::obs::Plataforma(sf::Vector2f(WIDTH/2.0+obstaculo->getTamanho().x, HEIGHT/2.0+250.f), sf::Vector2f(1.7f, 1.7f), false, 50);
-    obstaculo2->setTextura("Grass0001");
+    for (int i = -50; i < 50; i++) {
+        ent::obs::Plataforma* obstaculo = new ent::obs::Plataforma(sf::Vector2f(WIDTH/2.0+i*obstaculo->getTamanho().x, HEIGHT/2.0+250.f), sf::Vector2f(1.7f, 1.7f), false, 50);
+        obstaculo->setTextura("Grass0001");
+        gerColisoes->incluirObstaculo(static_cast<ent::obs::Obstaculo*>(obstaculo));
+        listaEntidades.incluir(static_cast<ent::Entidade*>(obstaculo));
+    }
 
     /* Inclui as entidades no Ger. Colisões e na Lista de Entidades*/
     gerColisoes->incluirInimigo(static_cast<ent::pers::Inimigo*>(goblin));
-    gerColisoes->incluirObstaculo(static_cast<ent::obs::Obstaculo*>(obstaculo));
-    gerColisoes->incluirObstaculo(static_cast<ent::obs::Obstaculo*>(obstaculo2));
 
-    listaEntidades.incluir(static_cast<ent::Entidade*>(obstaculo));
-    listaEntidades.incluir(static_cast<ent::Entidade*>(obstaculo2));
     listaEntidades.incluir(static_cast<ent::Entidade*>(jogador));
     listaEntidades.incluir(static_cast<ent::Entidade*>(goblin));
 }

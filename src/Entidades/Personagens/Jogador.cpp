@@ -1,5 +1,7 @@
 #include "Entidades/Personagens/Jogador.h"
+#include "Entidades/Personagens/Inimigo.h"
 #include <iostream>
+#include <cmath>
 
 namespace ent {
 namespace pers {
@@ -49,7 +51,7 @@ void Jogador::atualizarMovimentacao(bool estado, sf::Keyboard::Key key) {
 }
 
 void Jogador::atualizarPosicao() {
-    if (saltando && noChao)
+    if (saltando && noChao && !levandoDano)
         pular();
     
     mover();
@@ -68,6 +70,22 @@ void Jogador::desenhar() {
     else {
         std::cerr << "Sprite do Jogador vazio!\n";
         exit(1);
+    }
+}
+
+void Jogador::emColisaoInimigo(Inimigo* pI, sf::Vector2f ds) {
+    if (!levandoDano) {
+        levandoDano = true;
+        tempoDano = 0.f;
+        numVidas--;
+
+        /* Knockback */
+        setPosition(posicao + sf::Vector2f(0.f, -15.f));
+        velocidade = sf::Vector2f(knockbackHorizontal, -knockbackVertical);
+
+        if (!pI->getOlhandoDireita()) {
+            velocidade.x *= -1; // Direção do Knockback vai depender da visão do inimigo
+        }
     }
 }
 
@@ -100,6 +118,10 @@ void Jogador::atualizarElementosAnimacao() {
             setTextura("Rogue-Idle");
             animacao.atualizarSpritesheet(pTextura, sf::Vector2u(17,1), 0.16f, ElementosGraficos::estatico);
             break;
+
+        case sofrendo:
+            setTextura("Rogue-Hurt");
+            animacao.atualizarSpritesheet(pTextura, sf::Vector2u(4, 1), 0.2f, ElementosGraficos::sofrendo);
         
         default:
             break;

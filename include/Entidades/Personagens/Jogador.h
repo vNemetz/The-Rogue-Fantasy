@@ -4,12 +4,16 @@
 
 namespace ent {
 namespace pers {
+class Inimigo;
 
 class Jogador : public Personagem {
 private:
     int pontos;
     bool vivo;
     bool saltando;
+
+    const float knockbackHorizontal = 700.f;
+    const float knockbackVertical = 300.f;
 
     sf::IntRect corpo;
     ElementosGraficos::Animacao animacao;
@@ -26,6 +30,8 @@ public:
 
     void pular();
     void desenhar();
+    
+    void emColisaoInimigo(Inimigo* pI, sf::Vector2f ds);
     
     /* Animação */
     void atualizarAnimacao();
