@@ -9,6 +9,7 @@ enum tipoAnimacao {
     estatico,
     atacando,
     andando,
+    correndo,
     pulando,
     parado,
     sofrendo

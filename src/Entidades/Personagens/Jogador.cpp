@@ -1,5 +1,6 @@
 #include "Entidades/Personagens/Jogador.h"
 #include "Entidades/Personagens/Inimigo.h"
+#include <SFML/Window/Keyboard.hpp>
 #include <iostream>
 #include <cmath>
 
@@ -43,6 +44,10 @@ void Jogador::atualizarMovimentacao(bool estado, sf::Keyboard::Key key) {
 
         case sf::Keyboard::W:
             saltando = estado;
+            break;
+
+        case sf::Keyboard::LShift:
+            correndo = estado;
             break;
 
         default:
@@ -122,6 +127,12 @@ void Jogador::atualizarElementosAnimacao() {
         case sofrendo:
             setTextura("Rogue-Hurt");
             animacao.atualizarSpritesheet(pTextura, sf::Vector2u(4, 1), 0.2f, ElementosGraficos::sofrendo);
+            break;
+
+        case estado::correndo:
+            setTextura("Rogue-Run");
+            animacao.atualizarSpritesheet(pTextura, sf::Vector2u(8, 1), 0.1f, ElementosGraficos::correndo);
+            break;
         
         default:
             break;

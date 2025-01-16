@@ -28,6 +28,7 @@ Gerenciador_Grafico::Gerenciador_Grafico()
 
     /* Rogue Textures */
     carregarTextura("/assets/images/Rogue/rogue-walk.png", "Rogue-Walk");
+    carregarTextura("/assets/images/Rogue/rogue-run.png", "Rogue-Run");
     carregarTextura("/assets/images/Rogue/rogue-attack.png", "Rogue-Attack");
     carregarTextura("/assets/images/Rogue/rogue-jump.png", "Rogue-Jump");
     carregarTextura("/assets/images/Rogue/rogue-idle2.png", "Rogue-Idle");

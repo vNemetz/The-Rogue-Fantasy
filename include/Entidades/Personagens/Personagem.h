@@ -7,6 +7,7 @@ namespace pers{
 enum estado {
     parado,
     andando,
+    correndo,
     pulando,
     atacando,
     morrendo,
@@ -37,6 +38,7 @@ protected:
     bool movendoDireita;
     bool olhandoDireita;
 
+    bool correndo;
     bool levandoDano;
     
 public:

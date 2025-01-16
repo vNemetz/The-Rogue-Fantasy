@@ -17,6 +17,7 @@ Personagem::Personagem(sf::Vector2f pos, sf::Vector2f tam, ID id)
     , movendoEsquerda(false)
     , movendoDireita(false)
     , olhandoDireita(true)
+    , correndo(false)
     , levandoDano(false)
 {
 }
@@ -37,11 +38,19 @@ void Personagem::mover() {
     }
 
     else if (movendoDireita && !movendoEsquerda) {
-        velocidade.x = velocidadeMaxima.x;
+        if (correndo)
+            velocidade.x = velocidadeMaxima.x * 1.4f;
+        
+        else
+            velocidade.x = velocidadeMaxima.x;
     }
 
     else if (movendoEsquerda && !movendoDireita) {
-        velocidade.x = -velocidadeMaxima.x;
+        if (correndo)
+            velocidade.x = -velocidadeMaxima.x * 1.4f;
+        
+        else
+            velocidade.x = -velocidadeMaxima.x;
     }
 
     else {
@@ -98,6 +107,9 @@ void Personagem::atualizarEstado() {
 
     else if ((movendoDireita && !movendoEsquerda) || (movendoEsquerda && !movendoDireita)) {
         est = andando;
+
+        if (correndo)
+            est = estado::correndo;
 
         tempoParado = 0.f;
     }
