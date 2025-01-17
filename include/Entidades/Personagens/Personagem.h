@@ -1,5 +1,6 @@
 #pragma once
 #include "Entidades/Entidade.h"
+#include "Animacao.h"
 
 namespace ent {
 namespace pers{
@@ -19,14 +20,15 @@ class Inimigo;
 
 class Personagem : public Entidade {
 protected:
-    estado est;
+    bool vivo;
     int numVidas;
 
-    const float duracaoInvulneravel = 1.8f;
-    const float duracaoAusente = 1.8f;
-
+    /* Estado */
+    estado est;
     float tempoParado;
+    const float duracaoAusente = 1.8f;
     float tempoDano;
+    const float duracaoInvulneravel = 1.8f;
 
     /* Gravidade - Constantes */
     const float GRAVIDADE_REAL = 9.8f; // metros por segundo ao quadrado (m/s^2)
@@ -37,9 +39,11 @@ protected:
     bool movendoEsquerda;
     bool movendoDireita;
     bool olhandoDireita;
-
     bool correndo;
     bool levandoDano;
+
+    /* Animação */
+    ElementosGraficos::Animacao animacao;
     
 public:
     Personagem();
@@ -50,18 +54,22 @@ public:
 
     /* Movimentação */
     virtual void mover();
-
-    bool getOlhandoDireita() const {return olhandoDireita;}
+    bool getOlhandoDireita() const;
+    virtual void emColisaoInimigo(Inimigo* pI, sf::Vector2f ds) = 0;
     
     /* Estado */
     void atualizarEstado();
     void setEstado(estado est);
     estado getEstado() const;
 
-    void setNumVidas(int numVidas) {this->numVidas = numVidas;}
-    int getNumVidas() const {return numVidas;}
+    void setVivo(bool vivo);
+    bool getVivo() const;
+    void setNumVidas(int numVidas);
+    int getNumVidas() const;
 
-    virtual void emColisaoInimigo(Inimigo* pI, sf::Vector2f ds) = 0;
+    /* Animação */
+    void atualizarAnimacao();
+    virtual void atualizarElementosAnimacao() = 0;
 };
 }
 }

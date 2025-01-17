@@ -4,44 +4,48 @@
 namespace ent {
 namespace pers {
 
-Goblin::Goblin() 
-    : Inimigo()
-    , raio(800)
+Goblin::Goblin()
+    : Goblin(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f), nullptr)
 {
 }
 
 Goblin::Goblin(sf::Vector2f pos, sf::Vector2f tam, Jogador* jog)
     : Inimigo(pos, tam, jog)
-    , raio(800)
+    , raioDetect(600)
+    , tempoSemDetectar(0.f)
+    , estadoIdle(PARADO)
 {
 }
 
-Goblin::~Goblin() {
-
+Goblin::~Goblin()
+{
 }
 
 void Goblin::executar() {
-    sf::Vector2f posJogador = jogador->getPosition();
-    sf::Vector2f posInimigo = getPosition();
-
-    sf::Vector2f dist = posJogador - posInimigo;
+    sf::Vector2f dist = jogador->getPosition() - posicao;
     float moduloDist = sqrt(pow((dist.x),2) + pow(dist.y, 2));
 
-    sf::Vector2f novaPosicao = posInimigo;
+    if (moduloDist <= raioDetect) {
+        persegueJogador();
+        tempoSemDetectar = 0.f;
+    }
 
-    if (moduloDist <= raio)
-        novaPosicao = persegueJogador();
-
-    // TODO Se não: Faz um movimento aleatório
+    else {
+        movimentoAleatorio();
+    }
 
     mover();
+
+    atualizarEstado();
+
+    atualizarAnimacao();
 }
 
-sf::Vector2f Goblin::persegueJogador() {
+/* Movimentação */
+
+void Goblin::persegueJogador() {
     sf::Vector2f posJogador = jogador->getPosition();
     sf::Vector2f posInimigo = getPosition();
-    
-    sf::Vector2f novaPosicao = posInimigo;
 
     if (posJogador.x > posInimigo.x) {
         movendoDireita = true;
@@ -52,8 +56,48 @@ sf::Vector2f Goblin::persegueJogador() {
         movendoDireita = false;
         movendoEsquerda = true;
     }
+}
 
-    return novaPosicao;
+void Goblin::movimentoAleatorio() {
+    /* Movimento aleatório se não detectar nada */
+    tempoSemDetectar += pGG->getDeltaTime();
+    
+    switch (estadoIdle) {
+        case PARADO:
+            if (tempoSemDetectar >= 2.5f) {
+                /* Decide aleatoriamente o próximo movimento */
+                int roll = rand() % 100;
+                if (roll % 2 == 0) {
+                    estadoIdle = DIREITA;
+                }
+                
+                else {
+                    estadoIdle = ESQUERDA;
+                }
+                tempoSemDetectar = 0.f; // Reseta o temporizador
+            }
+            movendoDireita = false;
+            movendoEsquerda = false;
+            break;
+
+        case DIREITA:
+            if (tempoSemDetectar >= 1.5f) {
+                estadoIdle = PARADO; // Após 1 segundo, volta para o estado parado
+                tempoSemDetectar = 0.f; // Reseta o temporizador
+            }
+            movendoDireita = true;
+            movendoEsquerda = false;
+            break;
+
+        case ESQUERDA:
+            if (tempoSemDetectar >= 1.5f) {
+                estadoIdle = PARADO; // Após 1 segundo, volta para o estado parado
+                tempoSemDetectar = 0.f; // Reseta o temporizador
+            }
+            movendoDireita = false;
+            movendoEsquerda = true;
+            break;
+    }
 }
 
 void Goblin::emColisaoInimigo(Inimigo* pI, sf::Vector2f ds) {
@@ -87,6 +131,53 @@ void Goblin::emColisaoInimigo(Inimigo* pI, sf::Vector2f ds) {
 
     pI->setPosition(posicaoInimigo);
     pI->setVelocidade(velocidadeInimigo);
+}
+
+/* Animação */
+
+void Goblin::atualizarElementosAnimacao() {
+    switch (est) {
+        case parado:
+            setTextura("Goblin-Idle");
+            animacao.atualizarSpritesheet(pTextura, sf::Vector2u(4, 1), 0.20f, ElementosGraficos::parado);
+            break;
+
+        case andando:
+            setTextura("Goblin-Walk");
+            animacao.atualizarSpritesheet(pTextura, sf::Vector2u(6, 1), 0.16f, ElementosGraficos::andando);
+            break;
+        
+        default:
+            break;
+    }
+
+    setCorpo();
+}
+
+void Goblin::setCorpo() {
+    if (pSprite) {
+        sf::IntRect frame = animacao.getCorpo();
+
+        frame.top += 32;
+        frame.height = 89 - 32;
+
+        if (frame.width > 0) {
+            frame.left += 30;
+            frame.width = 70;
+        }
+
+        else {
+            frame.left -= 28;
+            frame.width = -70;
+        }
+
+        pSprite->setTextureRect(frame);
+
+        tamanho = sf::Vector2f(frame.width*escala.x, frame.height*escala.y);
+
+        if (frame.width <= 0)
+            tamanho.x = -tamanho.x;
+    }
 }
 
 }

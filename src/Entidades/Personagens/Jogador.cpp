@@ -14,9 +14,7 @@ Jogador::Jogador()
 Jogador::Jogador(sf::Vector2f pos, sf::Vector2f tam)
     : Personagem(pos, tam, jogador)
     , pontos(0)
-    , vivo(true)
-    , animacao(sf::Vector2u(6, 1), 0.03f)
-    , saltando(false)
+    , pulando(false)
 {
 }
 
@@ -32,6 +30,19 @@ void Jogador::executar() {
     atualizarAnimacao();
 }
 
+void Jogador::desenhar() {
+    if (pSprite) {
+        pGG->desenharEntidade(this);
+    }
+
+    else {
+        std::cerr << "Sprite do Jogador vazio!\n";
+        exit(1);
+    }
+}
+
+/* Movimentação */
+
 void Jogador::atualizarMovimentacao(bool estado, sf::Keyboard::Key key) {
     switch (key) {
         case sf::Keyboard::A:
@@ -43,7 +54,7 @@ void Jogador::atualizarMovimentacao(bool estado, sf::Keyboard::Key key) {
             break;
 
         case sf::Keyboard::W:
-            saltando = estado;
+            pulando = estado;
             break;
 
         case sf::Keyboard::LShift:
@@ -56,7 +67,7 @@ void Jogador::atualizarMovimentacao(bool estado, sf::Keyboard::Key key) {
 }
 
 void Jogador::atualizarPosicao() {
-    if (saltando && noChao && !levandoDano)
+    if (pulando && noChao && !levandoDano)
         pular();
     
     mover();
@@ -65,17 +76,6 @@ void Jogador::atualizarPosicao() {
 void Jogador::pular() {
     velocidade.y = -600.f;
     noChao = false;
-}
-
-void Jogador::desenhar() {
-    if (pSprite) {
-        pGG->desenharEntidade(this);
-    }
-
-    else {
-        std::cerr << "Sprite do Jogador vazio!\n";
-        exit(1);
-    }
 }
 
 void Jogador::emColisaoInimigo(Inimigo* pI, sf::Vector2f ds) {
@@ -96,15 +96,9 @@ void Jogador::emColisaoInimigo(Inimigo* pI, sf::Vector2f ds) {
 
 /* Animação */
 
-void Jogador::atualizarAnimacao() {
-    atualizarElementosAnimacao();
-    
-    animacao.atualizar(pGG->getDeltaTime(), olhandoDireita);
-}
-
 void Jogador::atualizarElementosAnimacao() {
     switch (est) {
-        case pulando:
+        case estado::pulando:
             setTextura("Rogue-Jump");
             animacao.atualizarSpritesheet(pTextura, sf::Vector2u(7,1), 0.2f, ElementosGraficos::pulando);
             break;
@@ -146,6 +140,9 @@ void Jogador::setCorpo() {
         /* Do corpo inteiro, frame pega apenas a parte em que há textura de fato */
         sf::IntRect frame = animacao.getCorpo();
 
+        frame.top += 52;
+        frame.height -= 52;
+        
         if (frame.width > 0) {
             frame.left += 15;
             frame.width = 56;
@@ -153,11 +150,8 @@ void Jogador::setCorpo() {
 
         else {
             frame.left -= 56;
-            frame.width += 66;
+            frame.width = -56;
         }
-
-        frame.top += 52;
-        frame.height -= 52;
 
         pSprite->setTextureRect(frame);
 
@@ -166,18 +160,6 @@ void Jogador::setCorpo() {
         if (frame.width <= 0)
             tamanho.x = -tamanho.x;
     }
-}
-
-sf::IntRect Jogador::getCorpo() const {
-    return corpo;
-}
-
-void Jogador::setVivo(bool vivo) {
-    this->vivo = vivo;
-}
-
-bool Jogador::getVivo() const {
-    return vivo;
 }
 
 }

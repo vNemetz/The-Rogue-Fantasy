@@ -10,8 +10,9 @@ Personagem::Personagem()
 
 Personagem::Personagem(sf::Vector2f pos, sf::Vector2f tam, ID id)
     : Entidade(pos, tam, id)
-    , est(parado)
+    , vivo(true)
     , numVidas(3)
+    , est(parado)
     , tempoParado(0.f)
     , tempoDano(0.f)
     , movendoEsquerda(false)
@@ -19,10 +20,12 @@ Personagem::Personagem(sf::Vector2f pos, sf::Vector2f tam, ID id)
     , olhandoDireita(true)
     , correndo(false)
     , levandoDano(false)
+    , animacao()
 {
 }
 
-Personagem::~Personagem(){
+Personagem::~Personagem()
+{
 }
 
 /* Movimentação */
@@ -81,6 +84,10 @@ void Personagem::mover() {
     setPosition((ds + posicao));
 }
 
+bool Personagem::getOlhandoDireita() const {
+    return olhandoDireita;
+}
+
 /* Estado */
 
 void Personagem::atualizarEstado() {
@@ -133,6 +140,30 @@ void Personagem::setEstado(estado est) {
 
 estado Personagem::getEstado() const {
     return est;
+}
+
+void Personagem::setVivo(bool vivo) {
+    this->vivo = vivo;
+}
+
+bool Personagem::getVivo() const {
+    return vivo;
+}
+
+void Personagem::setNumVidas(int numVidas) {
+    this->numVidas = numVidas;
+}
+
+int Personagem::getNumVidas() const {
+    return numVidas;
+}
+
+/* Animação */
+
+void Personagem::atualizarAnimacao() {
+    atualizarElementosAnimacao();
+
+    animacao.atualizar(pGG->getDeltaTime(), olhandoDireita);
 }
 
 }

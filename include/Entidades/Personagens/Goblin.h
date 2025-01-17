@@ -4,10 +4,19 @@
 
 namespace ent {
 namespace pers {
+
+enum EstadoIdle {
+    PARADO,
+    DIREITA,
+    ESQUERDA
+};
+
 class Goblin : public Inimigo {
 private:
-    float raio;
-    // ...
+    float raioDetect;
+    float tempoSemDetectar;
+
+    EstadoIdle estadoIdle; // Salva o estado da patrulha
 
 public:
     Goblin();
@@ -15,9 +24,16 @@ public:
     ~Goblin();
 
     void executar();
-    sf::Vector2f persegueJogador();
-    //void danificar(Jogador* p);
+
+    /* Movimentação */
+    void persegueJogador();
+    void movimentoAleatorio();
+
     void emColisaoInimigo(Inimigo* pI, sf::Vector2f ds);
+    
+    /* Animação */
+    void atualizarElementosAnimacao();
+    void setCorpo();
 };
 }
 }

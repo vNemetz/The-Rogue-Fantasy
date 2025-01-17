@@ -17,11 +17,11 @@ public:
     ~Inimigo();
 
     virtual void executar() = 0;
+    virtual void atualizarElementosAnimacao() = 0;
+    virtual void emColisaoInimigo(Inimigo* pI, sf::Vector2f ds) = 0;
 
     //virtual void danificar(Jogador* p) = 0;
     //void salvarDataBuffer();
-    // ...
-    virtual void emColisaoInimigo(Inimigo* pI, sf::Vector2f ds) = 0;
 };
 }
 }

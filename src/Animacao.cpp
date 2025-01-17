@@ -60,6 +60,10 @@ void Animacao::atualizarSpritesheet(sf::Texture *novaTextura, sf::Vector2u numSp
 
         setCorpo(novaTextura); // Atualiza o tamanho do corpo
 
+        /* Reinicialização da Animação a cada vez que muda */
+        tempoTotal = 0.f;
+        spriteAtual = sf::Vector2u(0, 0);
+
         tipo = novoTipo;
     }
 }
