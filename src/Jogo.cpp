@@ -13,6 +13,7 @@ Jogo::Jogo()
     , gerEventos(ger::Gerenciador_Eventos::getInstancia())
     , gerColisoes(ger::Gerenciador_Colisoes::getInstancia())
     , listaEntidades()
+    , faseFloresta(ger::Gerenciador_Colisoes::getInstancia())
 {
     srand(time(NULL));
     Ente::setPGG(gerGrafico);

@@ -1,35 +1,41 @@
 #include "Fases/Fase.h"
 
-Fases::Fase::Fase(ger::Gerenciador_Colisoes gC, int nFase) : gColisoes(gC)
+fases::Fase::Fase(ger::Gerenciador_Colisoes* pGC, int nFase) :  
+Ente(fase)
+,pColisoes(ger::Gerenciador_Colisoes::getInstancia())
+,listaEntidades()
+,numeroFase(nFase)
 {
-    numeroFase = nFase;
 }
 
-Fases::Fase::~Fase(){
-
-}
-
-/*Criação de Entidades*/
-void Fases::Fase::criarInimigosFaceis(){
+fases::Fase::~Fase(){
 
 }
 
-void Fases::Fase::criarInimigosMedios(){
-
+void fases::Fase::criarPersonagem(sf::Vector2f posicao){
+    
 }
 
-void Fases::Fase::criarPlataformas(){
-
+void fases::Fase::criarInimigos()
+{
 }
 
-void Fases::Fase::criarInimigos(){
-
+void fases::Fase::criarPlataformas()
+{
 }
 
-void Fases::Fase::criarObstaculos(){
-
+void fases::Fase::criarObstaculos()
+{
 }
 
-void Fases::Fase::criarCenario(){
+void fases::Fase::criarEntidade(char l, const sf::Vector2i pos)
+{
+}
 
+void fases::Fase::executar()
+{
+}
+
+void fases::Fase::desenhar()
+{
 }

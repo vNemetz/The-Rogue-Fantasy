@@ -1,27 +1,36 @@
 #pragma once
-#include "Jogo.h"
+#include <SFML/Graphics.hpp>
+#include <Gerenciadores/Gerenciador_Colisoes.h>
+#include "Listas/Lista_Entidades.h"
+#include "Ente.h"
 
-namespace Fases{
 
-class Fase{
+namespace fases{
+
+class Fase : public Ente{
 protected:
-    ger::Gerenciador_Colisoes gColisoes;
+    ger::Gerenciador_Colisoes* pColisoes;
+    lis::Lista_Entidades listaEntidades;
+    sf::Texture* pFundo; //Textura do plano de fundo (background)
     int numeroFase;
 public:
     Fase();
-    Fase(ger::Gerenciador_Colisoes gC, int nFase = 1);
+    Fase(ger::Gerenciador_Colisoes* pGC, int nFase = 1);
     ~Fase();
     
-    virtual void executar() = 0;
     void gerenciarColisoes();
 
     /*Criação de entidades: */
-    void criarInimigosFaceis();
-    void criarInimigosMedios();
-    void criarPlataformas();
+    void criarPersonagem(sf::Vector2f posicao);
     void criarInimigos();
+    void criarPlataformas();
     void criarObstaculos();
-    void criarCenario();
+    virtual void criarFundo() = 0;
+    virtual void criarMapa() = 0;
+    void criarEntidade(char l, const sf::Vector2i pos);
+    void executar();
+    void desenhar();
+    
 
 };
 }

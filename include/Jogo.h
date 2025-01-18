@@ -10,7 +10,7 @@
 #include "Gerenciadores/Gerenciador_Grafico.h"
 #include "Gerenciadores/Gerenciador_Eventos.h"
 #include "Gerenciadores/Gerenciador_Colisoes.h"
-
+#include "Fases/Floresta.h"
 
 namespace ent { namespace pers { class Jogador; } }
 
@@ -22,6 +22,8 @@ private:
     
     lis::Lista_Entidades listaEntidades;
     ent::pers::Jogador* jogador;
+
+    fases::Floresta faseFloresta;
 
 public:
     Jogo();
