@@ -29,6 +29,8 @@ protected:
     const float duracaoAusente = 1.8f;
     float tempoDano;
     const float duracaoInvulneravel = 1.8f;
+    float tempoAtaque;
+    const float duracaoAtaque = 0.35f; // Duração Total do Ataque
 
     /* Gravidade - Constantes */
     const float GRAVIDADE_REAL = 9.8f; // metros por segundo ao quadrado (m/s^2)
@@ -41,6 +43,11 @@ protected:
     bool olhandoDireita;
     bool correndo;
     bool levandoDano;
+    bool atacando;
+
+    /* Knockback - Constantes */
+    const float knockbackHorizontal = 500.f;
+    const float knockbackVertical = 300.f;
 
     /* Animação */
     ElementosGraficos::Animacao animacao;
@@ -54,6 +61,7 @@ public:
 
     /* Movimentação */
     virtual void mover();
+    void sofrerDano(Personagem* atacante);
     bool getOlhandoDireita() const;
     virtual void emColisaoInimigo(Inimigo* pI, sf::Vector2f ds) = 0;
     

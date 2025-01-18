@@ -11,10 +11,6 @@ private:
     int pontos;
     bool pulando;
 
-    /* Knockback - Constantes */
-    const float knockbackHorizontal = 700.f;
-    const float knockbackVertical = 300.f;
-
 public:
     Jogador();
     Jogador(sf::Vector2f pos, sf::Vector2f tam);

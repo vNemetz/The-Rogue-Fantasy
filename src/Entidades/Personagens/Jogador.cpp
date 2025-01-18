@@ -1,5 +1,6 @@
 #include "Entidades/Personagens/Jogador.h"
 #include "Entidades/Personagens/Inimigo.h"
+#include "Entidades/Personagens/Personagem.h"
 #include <SFML/Window/Keyboard.hpp>
 #include <iostream>
 #include <cmath>
@@ -61,6 +62,11 @@ void Jogador::atualizarMovimentacao(bool estado, sf::Keyboard::Key key) {
             correndo = estado;
             break;
 
+        case sf::Keyboard::Space:
+            if (estado)
+                atacando = estado;
+            break;
+
         default:
             break;
     }
@@ -70,7 +76,8 @@ void Jogador::atualizarPosicao() {
     if (pulando && noChao && !levandoDano)
         pular();
     
-    mover();
+    if (vivo)
+        mover();
 }
 
 void Jogador::pular() {
@@ -80,16 +87,18 @@ void Jogador::pular() {
 
 void Jogador::emColisaoInimigo(Inimigo* pI, sf::Vector2f ds) {
     if (!levandoDano) {
-        levandoDano = true;
-        tempoDano = 0.f;
-        numVidas--;
+        bool inimigoADireita = pI->getPosition().x > posicao.x;
 
-        /* Knockback */
-        setPosition(posicao + sf::Vector2f(0.f, -15.f));
-        velocidade = sf::Vector2f(knockbackHorizontal, -knockbackVertical);
+        // Se está atacando e acertando,
+        // além da colisão ser horizontal, dá dano
+        if (atacando && ((olhandoDireita && inimigoADireita) || (!olhandoDireita && !inimigoADireita)) && (ds.x > ds.y)) {
+            pI->sofrerDano(static_cast<Personagem*>(this));
+        }
 
-        if (!pI->getOlhandoDireita()) {
-            velocidade.x *= -1; // Direção do Knockback vai depender da visão do inimigo
+        // Se não está atacando ou errando o ataque,
+        // e o inimigo não está sofrendo, leva dano
+        else if (pI->getEstado() != sofrendo) {
+            sofrerDano(static_cast<Personagem*>(pI));
         }
     }
 }
@@ -120,12 +129,22 @@ void Jogador::atualizarElementosAnimacao() {
 
         case sofrendo:
             setTextura("Rogue-Hurt");
-            animacao.atualizarSpritesheet(pTextura, sf::Vector2u(4, 1), 0.2f, ElementosGraficos::sofrendo);
+            animacao.atualizarSpritesheet(pTextura, sf::Vector2u(4, 1), 0.15f, ElementosGraficos::sofrendo);
             break;
 
         case estado::correndo:
             setTextura("Rogue-Run");
             animacao.atualizarSpritesheet(pTextura, sf::Vector2u(8, 1), 0.1f, ElementosGraficos::correndo);
+            break;
+
+        case estado::atacando:
+            setTextura("Rogue-Attack");
+            animacao.atualizarSpritesheet(pTextura, sf::Vector2u(7, 1), duracaoAtaque / 7.f, ElementosGraficos::atacando);
+            break;
+
+        case estado::morrendo:
+            setTextura("Rogue-Death");
+            animacao.atualizarSpritesheet(pTextura, sf::Vector2u(10, 1), 0.15f, ElementosGraficos::morrendo);
             break;
         
         default:
@@ -151,6 +170,15 @@ void Jogador::setCorpo() {
         else {
             frame.left -= 56;
             frame.width = -56;
+        }
+
+        if (est == estado::atacando) {
+            if (frame.width > 0) {
+                frame.width += 10;
+            }
+            else {
+                frame.left += 10;
+            }
         }
 
         pSprite->setTextureRect(frame);

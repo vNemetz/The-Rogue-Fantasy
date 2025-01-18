@@ -1,4 +1,5 @@
 #include "Entidades/Personagens/Goblin.h"
+#include "Entidades/Personagens/Personagem.h"
 #include <SFML/System/Vector2.hpp>
 
 namespace ent {
@@ -27,7 +28,9 @@ void Goblin::executar() {
 
     if (moduloDist <= raioDetect) {
         persegueJogador();
+
         tempoSemDetectar = 0.f;
+        estadoIdle = PARADO;
     }
 
     else {
@@ -145,6 +148,11 @@ void Goblin::atualizarElementosAnimacao() {
         case andando:
             setTextura("Goblin-Walk");
             animacao.atualizarSpritesheet(pTextura, sf::Vector2u(6, 1), 0.16f, ElementosGraficos::andando);
+            break;
+
+        case sofrendo:
+            setTextura("Goblin-Hurt");
+            animacao.atualizarSpritesheet(pTextura, sf::Vector2u(3, 1), 0.13f, ElementosGraficos::sofrendo);
             break;
         
         default:

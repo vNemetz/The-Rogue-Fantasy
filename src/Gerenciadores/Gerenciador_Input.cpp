@@ -29,6 +29,10 @@ Gerenciador_Input::Gerenciador_Input()
     incluir_tecla(sf::Keyboard::Key::LShift, [this](bool pressionado) {
         jogador->atualizarMovimentacao(pressionado, sf::Keyboard::LShift);
     });
+
+    incluir_tecla(sf::Keyboard::Key::Space, [this](bool pressionado) {
+        jogador->atualizarMovimentacao(pressionado, sf::Keyboard::Space);
+    });
 }
 
 Gerenciador_Input::~Gerenciador_Input() {

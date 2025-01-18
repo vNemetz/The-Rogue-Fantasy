@@ -15,11 +15,13 @@ Personagem::Personagem(sf::Vector2f pos, sf::Vector2f tam, ID id)
     , est(parado)
     , tempoParado(0.f)
     , tempoDano(0.f)
+    , tempoAtaque(0.f)
     , movendoEsquerda(false)
     , movendoDireita(false)
     , olhandoDireita(true)
     , correndo(false)
     , levandoDano(false)
+    , atacando(false)
     , animacao()
 {
 }
@@ -80,8 +82,25 @@ void Personagem::mover() {
         olhandoDireita = false;
     }
 
+    if (est == sofrendo)
+        olhandoDireita = !olhandoDireita; // Se está levando dano, é ao contrário
+
     /* Atualiza a posição do sprite */
     setPosition((ds + posicao));
+}
+
+void Personagem::sofrerDano(Personagem* atacante) {
+    levandoDano = true;
+    tempoDano = 0.f;
+    numVidas--;
+
+    /* Knockback */
+    setPosition(posicao + sf::Vector2f(0.f, -15.f));
+    velocidade = sf::Vector2f(knockbackHorizontal, -knockbackVertical);
+
+    if (!atacante->getOlhandoDireita()) {
+        velocidade.x *= -1; // Direção do Knockback vai depender da visão do atacante
+    }
 }
 
 bool Personagem::getOlhandoDireita() const {
@@ -92,11 +111,10 @@ bool Personagem::getOlhandoDireita() const {
 
 void Personagem::atualizarEstado() {
     estado estadoAntigo = est;
-
+    
     if (levandoDano) {
         est = sofrendo;
 
-        tempoParado = 0.f;
         tempoDano += pGG->getDeltaTime();
 
         /* Se acabar o tempo de invulnerabilidade */
@@ -106,19 +124,32 @@ void Personagem::atualizarEstado() {
         }
     }
 
+    else if (atacando) {
+        est = estado::atacando;
+
+        tempoAtaque += pGG->getDeltaTime();
+        if (tempoAtaque >= duracaoAtaque) {
+            tempoAtaque = 0.f;
+            atacando = false;
+        }
+    }
+
     else if (!noChao && velocidade.y != 0.f) {
         est = pulando;
-
-        tempoParado = 0.f;
     }
 
     else if ((movendoDireita && !movendoEsquerda) || (movendoEsquerda && !movendoDireita)) {
         est = andando;
 
-        if (correndo)
+        if (correndo) {
             est = estado::correndo;
 
-        tempoParado = 0.f;
+            // RUN_ATTACK
+        }
+
+        else if (atacando) {
+            // WALK_ATTACK
+        }
     }
 
     else {
@@ -131,6 +162,16 @@ void Personagem::atualizarEstado() {
             est = ausente;
             estadoAntigo = ausente;
         }
+    }
+
+    /* Reinicia o tempo */
+    if (est != estado::atacando) {
+        tempoAtaque = 0.f;
+        atacando = false;
+    }
+
+    if (est != estado::parado && est != estado::ausente) {
+        tempoParado = 0.f;
     }
 }
 

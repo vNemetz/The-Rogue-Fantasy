@@ -17,8 +17,6 @@ protected:
     sf::Vector2f velocidadeMaxima;
     float dt;
     bool noChao;
-
-    //ostream buffer;
     
 public:
     Entidade();

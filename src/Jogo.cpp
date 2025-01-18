@@ -32,7 +32,7 @@ Jogo::~Jogo() {
 }
 
 void Jogo::inicializaEntidades() {
-    jogador = new ent::pers::Jogador (sf::Vector2f(WIDTH/2.0+300.f, HEIGHT/2.0),sf::Vector2f(1.7f, 1.7f));
+    jogador = new ent::pers::Jogador (sf::Vector2f(WIDTH/2.0-500.f, HEIGHT/2.0),sf::Vector2f(1.7f, 1.7f));
     jogador->setTextura("Rogue-Stand");
     jogador->setVelocidadeMaxima(sf::Vector2f(600.f, 600.f));
 
@@ -42,7 +42,7 @@ void Jogo::inicializaEntidades() {
     ger::Gerenciador_Input::getInstancia()->setJogador(jogador);
 
     /* Criação do Goblin */
-    ent::pers::Goblin* goblin = new ent::pers::Goblin(sf::Vector2f(WIDTH/2.0, HEIGHT/2.0),sf::Vector2f(1.7f, 1.7f), jogador);
+    ent::pers::Goblin* goblin = new ent::pers::Goblin(sf::Vector2f(WIDTH/2.0+300.f, HEIGHT/2.0),sf::Vector2f(1.7f, 1.7f), jogador);
     goblin->setTextura("Goblin-Idle");
     goblin->setVelocidadeMaxima(sf::Vector2f (250.f, 250.f));
 

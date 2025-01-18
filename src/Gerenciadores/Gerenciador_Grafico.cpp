@@ -25,6 +25,7 @@ Gerenciador_Grafico::Gerenciador_Grafico()
 
     carregarTextura("/assets/images/Backgrounds/Forest.png", "Forest");
     carregarTextura("/assets/images/Tiles/Ground_grass_0001_tile.png", "Grass0001");
+    carregarTextura("/assets/images/Attack/white-slash.png", "White-Slash");
 
     /* Rogue Textures */
     carregarTextura("/assets/images/Rogue/rogue-stand.png", "Rogue-Stand");
@@ -32,12 +33,16 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     carregarTextura("/assets/images/Rogue/rogue-run.png", "Rogue-Run");
     carregarTextura("/assets/images/Rogue/rogue-jump.png", "Rogue-Jump");
     carregarTextura("/assets/images/Rogue/rogue-attack.png", "Rogue-Attack");
+    carregarTextura("/assets/images/Rogue/rogue-walk-attack.png", "Rogue-Walk-Attack");
+    carregarTextura("/assets/images/Rogue/rogue-run-attack.png", "Rogue-Run-Attack");
     carregarTextura("/assets/images/Rogue/rogue-hurt.png", "Rogue-Hurt");
+    carregarTextura("/assets/images/Rogue/rogue-death.png", "Rogue-Death");
     carregarTextura("/assets/images/Rogue/rogue-idle.png", "Rogue-Idle");
 
     /* Goblin Textures */
     carregarTextura("/assets/images/Goblin/goblin-idle.png", "Goblin-Idle");
     carregarTextura("/assets/images/Goblin/goblin-walk.png", "Goblin-Walk");
+    carregarTextura("/assets/images/Goblin/goblin-hurt.png", "Goblin-Hurt");
 }
 
 Gerenciador_Grafico::~Gerenciador_Grafico() {
