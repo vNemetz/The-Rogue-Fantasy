@@ -24,13 +24,16 @@ void Lista_Entidades::limpar() {
 }
 
 void Lista_Entidades::percorrer() {
-    ent::Entidade* aux = nullptr;
-    
-    for(int i = 0; i < getTamanho(); i++){
-        aux = LEs.operator[](i);
+    Lista<ent::Entidade>::Iterator it = begin();
+
+    while (it != end()) {
+        ent::Entidade* aux = *it;
+        
         aux->executar();
         aux->desenhar();
         aux->setNoChao(false); // Setta noChao como false (se estiver colidindo com chão, fica true depois)
+        //aux->desenharHitbox(); // Para Debug
+        ++it;
     }
 }
 
