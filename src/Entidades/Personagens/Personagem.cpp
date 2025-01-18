@@ -10,39 +10,59 @@ Personagem::Personagem()
 
 Personagem::Personagem(sf::Vector2f pos, sf::Vector2f tam, ID id)
     : Entidade(pos, tam, id)
+    , vivo(true)
+    , numVidas(3)
     , est(parado)
-    , num_vidas(3)
+    , tempoParado(0.f)
+    , tempoDano(0.f)
+    , tempoAtaque(0.f)
     , movendoEsquerda(false)
     , movendoDireita(false)
     , olhandoDireita(true)
-    , tempoParado(0.f)
+    , correndo(false)
+    , levandoDano(false)
+    , atacando(false)
+    , animacao()
 {
 }
 
-Personagem::~Personagem(){
+Personagem::~Personagem()
+{
 }
 
 /* Movimentação */
 
 void Personagem::mover() {
-    sf::Vector2f ds(0.f, 0.f);
-
+    sf::Vector2f ds(0.f, 0.f); // Guarda a variação de movimento atual
     dt = pGG->getDeltaTime(); // Guarda os segundos passados em dt
 
     /* Atualiza o movimento horizontal */
-    if (movendoDireita) {
-        ds.x += velocidade.x * dt;
+    if (levandoDano) {
+        if (noChao)
+            levandoDano = false;
     }
 
-    if (movendoEsquerda) {
-        ds.x -= velocidade.x * dt;
+    else if (movendoDireita && !movendoEsquerda) {
+        if (correndo)
+            velocidade.x = velocidadeMaxima.x * 1.4f;
+        
+        else
+            velocidade.x = velocidadeMaxima.x;
     }
 
-    /* Aplica a gravidade quando o personagem está no ar */
-    const float GRAVIDADE_REAL = 9.8f; // m/s^2
-    const float ESCALA_GRAVIDADE_PIXEL = 100.f; // pixels/m
-    const float GRAVIDADE = GRAVIDADE_REAL * ESCALA_GRAVIDADE_PIXEL; // pixels/s^2
+    else if (movendoEsquerda && !movendoDireita) {
+        if (correndo)
+            velocidade.x = -velocidadeMaxima.x * 1.4f;
+        
+        else
+            velocidade.x = -velocidadeMaxima.x;
+    }
 
+    else {
+        velocidade.x = 0.f;
+    }
+
+    /* Atualiza o movimento vertical (aplica gravidade) */
     if (!noChao) {
         velocidade.y += GRAVIDADE * dt;
     }
@@ -51,7 +71,7 @@ void Personagem::mover() {
         velocidade.y = 0.f;
     }
 
-    ds.y += velocidade.y * dt;
+    ds += velocidade * dt;
     
     /* Define para que lado está olhando */
     if (ds.x > 0.f) {
@@ -62,23 +82,74 @@ void Personagem::mover() {
         olhandoDireita = false;
     }
 
+    if (est == sofrendo)
+        olhandoDireita = !olhandoDireita; // Se está levando dano, é ao contrário
+
     /* Atualiza a posição do sprite */
     setPosition((ds + posicao));
+}
+
+void Personagem::sofrerDano(Personagem* atacante) {
+    levandoDano = true;
+    tempoDano = 0.f;
+    numVidas--;
+
+    /* Knockback */
+    setPosition(posicao + sf::Vector2f(0.f, -15.f));
+    velocidade = sf::Vector2f(knockbackHorizontal, -knockbackVertical);
+
+    if (!atacante->getOlhandoDireita()) {
+        velocidade.x *= -1; // Direção do Knockback vai depender da visão do atacante
+    }
+}
+
+bool Personagem::getOlhandoDireita() const {
+    return olhandoDireita;
 }
 
 /* Estado */
 
 void Personagem::atualizarEstado() {
-    if (!noChao && velocidade.y != 0.f) {
-        est = pulando;
+    estado estadoAntigo = est;
+    
+    if (levandoDano) {
+        est = sofrendo;
 
-        tempoParado = 0.f;
+        tempoDano += pGG->getDeltaTime();
+
+        /* Se acabar o tempo de invulnerabilidade */
+        if (tempoDano >= duracaoInvulneravel) {
+            levandoDano = false;
+            tempoDano = 0.f;
+        }
+    }
+
+    else if (atacando) {
+        est = estado::atacando;
+
+        tempoAtaque += pGG->getDeltaTime();
+        if (tempoAtaque >= duracaoAtaque) {
+            tempoAtaque = 0.f;
+            atacando = false;
+        }
+    }
+
+    else if (!noChao && velocidade.y != 0.f) {
+        est = pulando;
     }
 
     else if ((movendoDireita && !movendoEsquerda) || (movendoEsquerda && !movendoDireita)) {
         est = andando;
 
-        tempoParado = 0.f;
+        if (correndo) {
+            est = estado::correndo;
+
+            // RUN_ATTACK
+        }
+
+        else if (atacando) {
+            // WALK_ATTACK
+        }
     }
 
     else {
@@ -86,11 +157,22 @@ void Personagem::atualizarEstado() {
 
         tempoParado += pGG->getDeltaTime();
 
-        /* Se o personagem ficar parado por mais de 4 segundos, está ausente */
-        if (tempoParado >= 1.8) {
+        /* Se o personagem ficar parado por mais disto, está ausente */
+        if (tempoParado >= duracaoAusente) {
             est = ausente;
+            estadoAntigo = ausente;
         }
-    }    
+    }
+
+    /* Reinicia o tempo */
+    if (est != estado::atacando) {
+        tempoAtaque = 0.f;
+        atacando = false;
+    }
+
+    if (est != estado::parado && est != estado::ausente) {
+        tempoParado = 0.f;
+    }
 }
 
 void Personagem::setEstado(estado est) {
@@ -99,6 +181,30 @@ void Personagem::setEstado(estado est) {
 
 estado Personagem::getEstado() const {
     return est;
+}
+
+void Personagem::setVivo(bool vivo) {
+    this->vivo = vivo;
+}
+
+bool Personagem::getVivo() const {
+    return vivo;
+}
+
+void Personagem::setNumVidas(int numVidas) {
+    this->numVidas = numVidas;
+}
+
+int Personagem::getNumVidas() const {
+    return numVidas;
+}
+
+/* Animação */
+
+void Personagem::atualizarAnimacao() {
+    atualizarElementosAnimacao();
+
+    animacao.atualizar(pGG->getDeltaTime(), olhandoDireita);
 }
 
 }

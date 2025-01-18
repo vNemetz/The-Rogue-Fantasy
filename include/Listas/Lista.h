@@ -2,6 +2,8 @@
 
 /* Lista Encadeada de tipo genérico */
 
+namespace lis {
+
 template <typename TL>
 class Lista {
 private:
@@ -22,29 +24,14 @@ private:
         TE* getInfo() const;
     };
 
+private:
     // Ponteiros para o primeiro e último elemento da lista
     Elemento<TL>* pPrimeiro;
     Elemento<TL>* pUltimo;
 
-    int tamanho;
+    unsigned int tamanho;
 
 public:
-    Lista();
-    ~Lista();
-
-    void incluir(TL* p); // Adiciona 'p' no final da lista
-    void remover(TL* p); // Remove 'p' da lista
-    void limpar(); // Limpa a lista
-    int getTamanho() const {return tamanho;}
-
-    TL* operator[](int pos) {
-        Elemento<TL>* aux = pPrimeiro;
-        for(int i = 0; i < pos; i++){
-            aux = aux->getProximo();
-        }
-        return aux->getInfo();
-    }
-
     class Iterator {
     private:
         Elemento<TL>* pAtual;
@@ -61,14 +48,23 @@ public:
         bool operator!=(const Iterator& outro) const;
 
         // Retorna o valor do elemento atual
-        TL operator*() const;
+        TL* operator*() const;
+
+        // Retorna o ponteiro do elemento atual
+        Elemento<TL>* getElemento() const {return pAtual;}
     };
 
-    // Retorna o iterador inicial (primeiro elemento)
-    Iterator begin() const;
-    
-    // Retorna um iterador para nullptr, o fim da lista
-    Iterator end() const;
+public:
+    Lista();
+    ~Lista();
+
+    void incluir(TL* p); // Adiciona 'p' no final da lista
+    void remover(TL* p); // Remove 'p' da lista
+    void limpar(); // Limpa a lista
+    unsigned int getTamanho() const {return tamanho;}
+
+    Iterator begin() const; // Retorna o iterador inicial (primeiro elemento)
+    Iterator end() const; // Retorna um iterador para nullptr, o fim da lista
 };
 
 /* 
@@ -136,55 +132,57 @@ void Lista<TL>::incluir(TL* p) {
     Elemento<TL>* pNovo = new Elemento<TL>();
     pNovo->incluir(p);
 
-    if (pUltimo) {
-        pUltimo->setProx(pNovo);
-        pUltimo = pNovo;
-    }
-    else {
+    if (tamanho == 0) {
         pPrimeiro = pNovo;
         pUltimo = pNovo;
     }
-
+    
+    else {
+        pUltimo->setProx(pNovo);
+        pUltimo = pNovo;
+    }
+    
     tamanho++;
 }
 
 template <typename TL>
 void Lista<TL>::remover(TL* p) {
-    Elemento<TL>* atual = pPrimeiro;
-    Elemento<TL>* anterior = nullptr;
-    
-    while (atual != nullptr && atual->getInfo() != p) {
-        anterior = atual;
-        atual = atual->getProximo();
+    Iterator it = begin();
+    Iterator anterior = end(); // Representa o iterador anterior como inválido inicialmente
+
+    while (it != end() && *it != p) {
+        anterior = it;
+        ++it;
     }
 
-    if (atual->getInfo() == p) {
+    if (it != end()) {
+        Elemento<TL>* atual = it.getElemento();
+
         if (atual == pPrimeiro)
             pPrimeiro = atual->getProximo();
-        
+
         else if (atual == pUltimo)
-            pUltimo = anterior;
+            pUltimo = anterior.getElemento();
 
         else
-            anterior->setProx(atual->getProximo());
+            (anterior.getElemento())->setProx(atual->getProximo());
 
         delete atual;
-        
         tamanho--;
     }
-
-    atual = nullptr;
-    anterior = nullptr;
 }
 
 template <typename TL>
 void Lista<TL>::limpar() {
-    while (pPrimeiro) {
-        Elemento<TL>* aux = pPrimeiro;
-        pPrimeiro = pPrimeiro->getProximo();
+    Iterator it = begin();
+
+    while (it != end()) {
+        Elemento<TL>* aux = it.getElemento();
+        ++it;
         delete aux;
     }
 
+    pPrimeiro = nullptr;
     pUltimo = nullptr;
     tamanho = 0;
 }
@@ -233,6 +231,8 @@ bool Lista<TL>::Iterator::operator!=(const Iterator& outro) const {
 }
 
 template <typename TL>
-TL Lista<TL>::Iterator::operator*() const {
+TL* Lista<TL>::Iterator::operator*() const {
     return pAtual->getInfo();
+}
+
 }

@@ -14,10 +14,9 @@ protected:
     sf::Vector2f escala;
     
     sf::Vector2f velocidade;
+    sf::Vector2f velocidadeMaxima;
     float dt;
     bool noChao;
-
-    //ostream buffer;
     
 public:
     Entidade();
@@ -30,7 +29,7 @@ public:
 
     sf::Vector2f getVelocidade() const;
     void setVelocidade(sf::Vector2f velocidade);
-    void setVelocidadeVertical(float vy);
+    void setVelocidadeMaxima(sf::Vector2f velocidadeMaxima);
     
     bool getNoChao() const;
     void setNoChao(bool noChao);
@@ -38,6 +37,7 @@ public:
     /* Gráficos */
     void setTextura(const char *nomeImagem);
     virtual void desenhar();
+    void desenharHitbox();
     
     void carregarSprite();
     sf::Sprite* getSprite() const;

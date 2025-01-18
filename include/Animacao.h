@@ -7,10 +7,13 @@ namespace ElementosGraficos{
 enum tipoAnimacao {
     inicial,
     estatico,
-    atacando,
     andando,
+    correndo,
+    atacando,
     pulando,
-    parado
+    parado,
+    sofrendo,
+    morrendo
 };
 
 class Animacao {

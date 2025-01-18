@@ -49,9 +49,7 @@ void Plataforma::emColisaoPersonagem(pers::Personagem* pPers, sf::Vector2f ds) {
             if (posicaoPers.y < posicao.y) {
                 posicaoPers.y += ds.y;
 
-                if (pPers->getID() == jogador) {
-                    pPers->setNoChao(true);
-                }
+                pPers->setNoChao(true);
             }
 
             else {

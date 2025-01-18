@@ -10,6 +10,7 @@ Entidade::Entidade()
 Entidade::Entidade(sf::Vector2f pos, sf::Vector2f esc, ID id)
     : Ente(id)
     , velocidade(0.f, 0.f)
+    , velocidadeMaxima(0.f, 0.f)
     , dt(0.f)
     , noChao(false)
     , posicao(pos)
@@ -36,10 +37,10 @@ void Entidade::setVelocidade(sf::Vector2f velocidade) {
     this->velocidade = velocidade;
 }
 
-void Entidade::setVelocidadeVertical(float vy) {
-    velocidade.y = vy;
+void Entidade::setVelocidadeMaxima(sf::Vector2f velocidadeMaxima) {
+    this->velocidadeMaxima = velocidadeMaxima;
+    velocidade.y = velocidadeMaxima.y;
 }
-
 
 void Entidade::salvarDataBuffer()
 {
@@ -66,6 +67,16 @@ void Entidade::setTextura(const char *nomeImagem) {
 
 void Entidade::desenhar() {
     pGG->desenharEntidade(this);
+}
+
+void Entidade::desenharHitbox() {
+    sf::RectangleShape debugShape;
+    debugShape.setSize(sf::Vector2f(tamanho.x, tamanho.y));
+    debugShape.setPosition(pSprite->getPosition());
+    debugShape.setOutlineColor(sf::Color::Red);
+    debugShape.setOutlineThickness(1);
+    debugShape.setFillColor(sf::Color::Transparent);
+    pGG->getJanela()->draw(debugShape);
 }
 
 void Entidade::carregarSprite() {
