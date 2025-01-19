@@ -23,8 +23,10 @@ void fases::Floresta::criarFundo(){
 void fases::Floresta::criarMapa(){
     std::ifstream arquivoMapa;
     std::string linha;
+    std::string caminho = PROJECT_ROOT;
+    caminho += "/maps/mapaFloresta.txt";
 
-    arquivoMapa.open("../maps/mapaFloresta.txt");
+    arquivoMapa.open(caminho);
     if(!arquivoMapa.is_open()){
         std::cerr << "Erro ao abrir o arquivo de Mapa da Floresta\n";
     }
