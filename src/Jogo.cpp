@@ -59,8 +59,6 @@ void Jogo::executar() {
         gerGrafico->limpaJanela(); // Limpa a janela
 
         gerGrafico->getJanela()->setView(gerGrafico->getJanela()->getDefaultView());
-        
-        gerGrafico->getJanela()->setView(gerGrafico->getVista());
         faseFloresta->executar();
         gerGrafico->centralizarVista(faseFloresta->getJogador()); // Centraliza o campo de visão no jogador
         gerGrafico->updateDeltaTime();

@@ -32,7 +32,7 @@ void Lista_Entidades::percorrer() {
         aux->executar();
         aux->desenhar();
         aux->setNoChao(false); // Setta noChao como false (se estiver colidindo com chão, fica true depois)
-        aux->desenharHitbox(); // Para Debug
+        //aux->desenharHitbox(); // Para Debug
         ++it;
     }
 }

@@ -61,6 +61,7 @@ void fases::Fase::criarObstaculos()
 
 void fases::Fase::desenharFundo(){
     ger::Gerenciador_Grafico::getInstancia()->getJanela()->draw(spriteFundo);
+            ger::Gerenciador_Grafico::getInstancia()->getJanela()->setView(ger::Gerenciador_Grafico::getInstancia()->getVista());
 }
 void fases::Fase::criarEntidade(char simbolo, const sf::Vector2i pos)
 {
@@ -72,13 +73,13 @@ void fases::Fase::criarEntidade(char simbolo, const sf::Vector2i pos)
             criarPersonagens(sf::Vector2f(pos.x * 50.0f, pos.y * 50.0f), jogador);
             break;
         case('#'):
-            criarPlataformas(sf::Vector2f(pos.x * 55.5f, pos.y * 55.5f), 1);
+            criarPlataformas(sf::Vector2f(pos.x * 54.2f, pos.y * 54.2f), 1);
             break;
         case('/'):
-            criarPlataformas(sf::Vector2f(pos.x * 55.5f, pos.y * 55.5f), 0);
+            criarPlataformas(sf::Vector2f(pos.x * 54.2f, pos.y * 54.2f), 0);
             break;
         case(';'):
-            criarPlataformas(sf::Vector2f(pos.x * 55.5f, pos.y * 55.5f), 2);
+            criarPlataformas(sf::Vector2f(pos.x * 54.2f, pos.y * 54.2f), 2);
             break;
         default: 
             break;

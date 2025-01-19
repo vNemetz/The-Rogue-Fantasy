@@ -19,7 +19,6 @@ void fases::Floresta::criarFundo(){
         static_cast<float>(tamanhoJanela.x) / tamanhoFundo.x,
         static_cast<float>(tamanhoJanela.y) / tamanhoFundo.y
     );
-    spriteFundo.setPosition(-200,-500);
 }
 void fases::Floresta::criarMapa(){
     std::ifstream arquivoMapa;
