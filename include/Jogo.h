@@ -18,18 +18,19 @@ class Jogo {
 private:
     ger::Gerenciador_Grafico* gerGrafico;
     ger::Gerenciador_Eventos* gerEventos;
-    ger::Gerenciador_Colisoes* gerColisoes;
+    //ger::Gerenciador_Colisoes* gerColisoes;
     
-    lis::Lista_Entidades listaEntidades;
-    ent::pers::Jogador* jogador;
+    //lis::Lista_Entidades listaEntidades;
+    //ent::pers::Jogador* jogador;
 
-    fases::Floresta faseFloresta;
+    fases::Floresta* faseFloresta;
 
 public:
     Jogo();
     ~Jogo();
 
     void executar();
+    void criarFase();
 
     void inicializaEntidades();
     void atualizaEntidades();

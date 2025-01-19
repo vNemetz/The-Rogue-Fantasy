@@ -25,6 +25,8 @@ Gerenciador_Grafico::Gerenciador_Grafico()
 
     carregarTextura("/assets/images/Backgrounds/Forest.png", "Forest");
     carregarTextura("/assets/images/Tiles/Ground_grass_0001_tile.png", "Grass0001");
+    carregarTextura("/assets/images/Tiles/Ground_grass_0002_tile.png", "Grass0002");
+    carregarTextura("/assets/images/Tiles/Ground_grass_0000_tile.png", "Grass0000");
     carregarTextura("/assets/images/Attack/white-slash.png", "White-Slash");
 
     /* Rogue Textures */

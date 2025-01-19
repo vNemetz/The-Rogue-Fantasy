@@ -1,17 +1,27 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <Gerenciadores/Gerenciador_Colisoes.h>
-#include "Listas/Lista_Entidades.h"
-#include "Ente.h"
+#include <iostream>
+#include <fstream>
 
+#include "Gerenciadores/Gerenciador_Colisoes.h"
+#include "Gerenciadores/Gerenciador_Eventos.h"
+#include "Listas/Lista_Entidades.h"
+#include "Entidades/Obstáculos/Plataforma.h"
+#include "Entidades/Personagens/Jogador.h"
+#include "Entidades/Personagens/Goblin.h"
+#include "Ente.h"
+#include "Entidades/Entidade.h"
 
 namespace fases{
 
 class Fase : public Ente{
 protected:
     ger::Gerenciador_Colisoes* pColisoes;
-    lis::Lista_Entidades listaEntidades;
+    lis::Lista_Entidades listaPersonagens;
+    lis::Lista_Entidades listaObstaculos;
     sf::Texture* pFundo; //Textura do plano de fundo (background)
+    ent::pers::Jogador* pJog;
+    sf::Sprite spriteFundo;
     int numeroFase;
 public:
     Fase();
@@ -21,16 +31,17 @@ public:
     void gerenciarColisoes();
 
     /*Criação de entidades: */
-    void criarPersonagem(sf::Vector2f posicao);
-    void criarInimigos();
-    void criarPlataformas();
+    void criarPersonagens(sf::Vector2f posicao, ID id);
+    void criarPlataformas(sf::Vector2f pos, int tipo);
     void criarObstaculos();
     virtual void criarFundo() = 0;
+    void desenharFundo();
     virtual void criarMapa() = 0;
-    void criarEntidade(char l, const sf::Vector2i pos);
+    void criarEntidade(char simbolo, const sf::Vector2i pos);
     void executar();
-    void desenhar();
-    
+    ent::pers::Jogador* getJogador();
+    void atualizaPersonagens();
+    void atualizaObstaculos();
 
 };
 }
