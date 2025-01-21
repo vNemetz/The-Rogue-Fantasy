@@ -1,5 +1,6 @@
 #include "Entidades/Obstáculos/Plataforma.h"
 #include "Entidades/Personagens/Personagem.h"
+#include <cmath>
 
 namespace ent {
 namespace obs {
@@ -37,6 +38,7 @@ void Plataforma::emColisaoPersonagem(pers::Personagem* pPers, sf::Vector2f ds) {
     if (ds.x < 0.f && ds.y < 0.f) {
         // Se a colisão é no eixo x
         if (ds.x > ds.y) {
+            ds.x = ceil(ds.x);
             if (posicaoPers.x < posicao.x)
                 posicaoPers.x += ds.x;
 
@@ -46,17 +48,17 @@ void Plataforma::emColisaoPersonagem(pers::Personagem* pPers, sf::Vector2f ds) {
         
         // Se a colisão é no eixo y
         else {
+            ds.y = ceil(ds.y);
             if (posicaoPers.y < posicao.y) {
                 posicaoPers.y += ds.y;
 
+                velocidadePers.y = 0;
                 pPers->setNoChao(true);
             }
 
             else {
                 posicaoPers.y -= ds.y;
             }
-
-            velocidadePers.y = 0;
         }
     }
 
