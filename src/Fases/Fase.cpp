@@ -76,10 +76,10 @@ void fases::Fase::criarEntidade(char simbolo, const sf::Vector2i pos)
             criarPlataformas(sf::Vector2f(pos.x * 54.2f, pos.y * 54.2f), 1);
             break;
         case('/'):
-            criarPlataformas(sf::Vector2f(pos.x * 54.2f, pos.y * 54.2f), 0);
+            criarPlataformas(sf::Vector2f(pos.x * 53.5f, pos.y * 54.0f), 0);
             break;
         case(';'):
-            criarPlataformas(sf::Vector2f(pos.x * 54.2f, pos.y * 54.2f), 2);
+            criarPlataformas(sf::Vector2f(pos.x * 54.5f, pos.y * 54.0f), 2);
             break;
         default: 
             break;
