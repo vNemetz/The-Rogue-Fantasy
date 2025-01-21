@@ -18,9 +18,6 @@ class Jogo {
 private:
     ger::Gerenciador_Grafico* gerGrafico;
     ger::Gerenciador_Eventos* gerEventos;
-    //ger::Gerenciador_Colisoes* gerColisoes;
-    
-    //lis::Lista_Entidades listaEntidades;
     //ent::pers::Jogador* jogador;
 
     fases::Floresta* faseFloresta;

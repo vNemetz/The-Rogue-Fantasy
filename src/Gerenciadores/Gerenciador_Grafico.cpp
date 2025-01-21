@@ -27,7 +27,9 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     carregarTextura("/assets/images/Tiles/Ground_grass_0001_tile.png", "Grass0001");
     carregarTextura("/assets/images/Tiles/Ground_grass_0002_tile.png", "Grass0002");
     carregarTextura("/assets/images/Tiles/Ground_grass_0000_tile.png", "Grass0000");
-    carregarTextura("/assets/images/Attack/white-slash.png", "White-Slash");
+    carregarTextura("/assets/images/Tiles/Ground_grass_0003_tile.png", "Grass0003");
+    carregarTextura("/assets/images/Tiles/Ground_grass_0004_tile.png", "Grass0004");
+    carregarTextura("/assets/images/Tiles/Ground_grass_0005_tile.png", "Grass0005");
 
     /* Rogue Textures */
     carregarTextura("/assets/images/Rogue/rogue-stand.png", "Rogue-Stand");

@@ -6,9 +6,10 @@ Fase(pGC)
 {
 }
 
-fases::Floresta::~Floresta(){
-
+fases::Floresta::~Floresta()
+{
 }
+
 void fases::Floresta::criarFundo(){
     pFundo = ger::Gerenciador_Grafico::getInstancia()->getTextura("Forest");
     spriteFundo.setTexture(*pFundo);
@@ -20,6 +21,7 @@ void fases::Floresta::criarFundo(){
         static_cast<float>(tamanhoJanela.y) / tamanhoFundo.y
     );
 }
+
 void fases::Floresta::criarMapa(){
     std::ifstream arquivoMapa;
     std::string linha;
@@ -39,5 +41,6 @@ void fases::Floresta::criarMapa(){
         }
         j++;
     }
+    
     arquivoMapa.close();
 }
