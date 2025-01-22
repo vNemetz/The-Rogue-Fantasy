@@ -23,14 +23,16 @@ Goblin::~Goblin()
 }
 
 void Goblin::executar() {
-    sf::Vector2f dist = jogador->getPosition() - posicao;
-    float moduloDist = sqrt(pow((dist.x),2) + pow(dist.y, 2));
+    if (jogador) {
+        sf::Vector2f dist = jogador->getPosition() - posicao;
+        float moduloDist = sqrt(pow((dist.x),2) + pow(dist.y, 2));
 
-    if (moduloDist <= raioDetect) {
-        persegueJogador();
+        if (moduloDist <= raioDetect) {
+            persegueJogador();
 
-        tempoSemDetectar = 0.f;
-        estadoIdle = PARADO;
+            tempoSemDetectar = 0.f;
+            estadoIdle = PARADO;
+        }
     }
 
     else {
@@ -108,7 +110,7 @@ void Goblin::emColisaoInimigo(Inimigo* pI, sf::Vector2f ds) {
     sf::Vector2f tamanhoPers = pI->getTamanho();
     sf::Vector2f velocidadeInimigo = pI->getVelocidade();
 
-    if (ds.x < 0.f && ds.y < 0.f) {
+    if (ds.x != 0.f && ds.y != 0.f) {
         // Se a colisão é no eixo x
         if (ds.x > ds.y) {
             if (posicaoInimigo.x < posicao.x)

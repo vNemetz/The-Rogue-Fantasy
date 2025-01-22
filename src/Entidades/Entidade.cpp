@@ -98,7 +98,7 @@ sf::Vector2f Entidade::getPosition() const {
 }
 
 void Entidade::setPosition(sf::Vector2f pos) {
-    if ((pos.y < 0) || (pos.y + tamanho.y > HEIGHT))
+    if ((pos.y < 0) || (pos.y + tamanho.y > 975))
         pos.y = getPosition().y;
     
     posicao = pos;

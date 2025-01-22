@@ -5,7 +5,7 @@ namespace fases{
 
 class Floresta : public Fase{
 private:
-
+    bool faseFinalizada;
 public:
     Floresta(ger::Gerenciador_Colisoes* pGC);
     ~Floresta();
