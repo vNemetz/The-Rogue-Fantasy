@@ -9,7 +9,7 @@ Gerenciador_Input::Gerenciador_Input()
 , jogador(nullptr)
 {
     /* Inicializa os comandos do jogo */
-    
+    /* Jogador 1 - Comandos*/
     incluir_tecla(sf::Keyboard::Key::A, [this](bool pressionado) {
         jogador->atualizarMovimentacao(pressionado, sf::Keyboard::A);
     });
@@ -32,6 +32,27 @@ Gerenciador_Input::Gerenciador_Input()
 
     incluir_tecla(sf::Keyboard::Key::Space, [this](bool pressionado) {
         jogador->atualizarMovimentacao(pressionado, sf::Keyboard::Space);
+    });
+
+    /* Jogador 2 - Comandos */
+    incluir_tecla(sf::Keyboard::Key::Left, [this](bool pressionado) {
+        jogador->atualizarMovimentacao(pressionado, sf::Keyboard::Left);
+    });
+
+    incluir_tecla(sf::Keyboard::Key::Right, [this](bool pressionado) {
+        jogador->atualizarMovimentacao(pressionado, sf::Keyboard::Right);
+    });
+
+    incluir_tecla(sf::Keyboard::Key::Up, [this](bool pressionado) {
+        jogador->atualizarMovimentacao(pressionado, sf::Keyboard::Up);
+    });
+
+    incluir_tecla(sf::Keyboard::Key::K, [this](bool pressionado) {
+        jogador->atualizarMovimentacao(pressionado, sf::Keyboard::K);
+    });
+
+    incluir_tecla(sf::Keyboard::Key::L, [this](bool pressionado) {
+        jogador->atualizarMovimentacao(pressionado, sf::Keyboard::L);
     });
 }
 
