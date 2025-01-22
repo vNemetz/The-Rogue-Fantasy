@@ -16,6 +16,11 @@ Jogador::Jogador(sf::Vector2f pos, sf::Vector2f tam)
     : Personagem(pos, tam, jogador)
     , pontos(0)
     , pulando(false)
+    , botaoEsquerda(sf::Keyboard::A)
+    , botaoDireita()
+    , botaoPular()
+    , botaoCorrer()
+    , botaoAtacar()
 {
 }
 
@@ -45,30 +50,25 @@ void Jogador::desenhar() {
 /* Movimentação */
 
 void Jogador::atualizarMovimentacao(bool estado, sf::Keyboard::Key key) {
-    switch (key) {
-        case sf::Keyboard::A:
-            movendoEsquerda = estado;
-            break;
-        
-        case sf::Keyboard::D:
-            movendoDireita = estado;
-            break;
+    if (key == botaoEsquerda) {
+        movendoEsquerda = estado;
+    }
 
-        case sf::Keyboard::W:
-            pulando = estado;
-            break;
+    else if (key == botaoDireita) {
+        movendoDireita = estado;
+    }
 
-        case sf::Keyboard::LShift:
-            correndo = estado;
-            break;
+    else if (key == botaoPular) {
+        pulando = estado;
+    }
 
-        case sf::Keyboard::Space:
-            if (estado)
-                atacando = estado;
-            break;
+    else if (key == botaoCorrer) {
+        correndo = estado;
+    }
 
-        default:
-            break;
+    else if (key == botaoAtacar) {
+        if (estado)
+            atacando = estado;
     }
 }
 
@@ -100,6 +100,24 @@ void Jogador::emColisaoInimigo(Inimigo* pI, sf::Vector2f ds) {
         else if (pI->getEstado() != sofrendo) {
             sofrerDano(static_cast<Personagem*>(pI));
         }
+    }
+}
+
+void Jogador::carregarControles(bool jogador1) {
+    if (jogador1) {
+        botaoEsquerda = sf::Keyboard::A;
+        botaoDireita = sf::Keyboard::D;
+        botaoPular = sf::Keyboard::W;
+        botaoCorrer = sf::Keyboard::LShift;
+        botaoAtacar = sf::Keyboard::Space;
+    }
+
+    else {
+        botaoEsquerda = sf::Keyboard::Left;
+        botaoDireita = sf::Keyboard::Right;
+        botaoPular = sf::Keyboard::Up;
+        botaoCorrer = sf::Keyboard::K;
+        botaoAtacar = sf::Keyboard::L;
     }
 }
 

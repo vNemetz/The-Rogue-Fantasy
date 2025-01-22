@@ -1,5 +1,6 @@
 #pragma once
 #include "Entidades/Personagens/Personagem.h"
+#include <SFML/Window/Keyboard.hpp>
 
 namespace ent {
 namespace pers {
@@ -10,6 +11,12 @@ class Jogador : public Personagem {
 private:
     int pontos;
     bool pulando;
+
+    sf::Keyboard::Key botaoEsquerda;
+    sf::Keyboard::Key botaoDireita;
+    sf::Keyboard::Key botaoPular;
+    sf::Keyboard::Key botaoCorrer;
+    sf::Keyboard::Key botaoAtacar;
 
 public:
     Jogador();
@@ -24,6 +31,7 @@ public:
     void atualizarPosicao();
     void pular();
     void emColisaoInimigo(Inimigo* pI, sf::Vector2f ds);
+    void carregarControles(bool jogador1);
     
     /* Animação */
     void atualizarElementosAnimacao();
