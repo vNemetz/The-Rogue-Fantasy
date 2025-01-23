@@ -23,18 +23,20 @@ Jogo::Jogo()
 }
 
 Jogo::~Jogo() {
-    
     gerGrafico = nullptr;
     gerEventos = nullptr;
     delete faseFloresta;
 }
 
 void Jogo::inicializaEntidades() {
+    ent::pers::Jogador* jogador = new ent::pers::Jogador(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.7f, 1.7f));
+    jogador->setTextura("Rogue-Stand");
+    jogador->setVelocidadeMaxima(sf::Vector2f(600.f, 600.f));
 
     /* Inclui jogador nos gerenciadores */
-
     gerEventos->setJogador(faseFloresta->getJogador());
     ger::Gerenciador_Input::getInstancia()->setJogador(faseFloresta->getJogador());
+    ger::Gerenciador_Colisoes::getInstancia()->setJogador(jogador);
 
 }
 
@@ -57,12 +59,12 @@ void Jogo::executar() {
         gerEventos->gerenciar(); // Gerencia os eventos
 
         gerGrafico->limpaJanela(); // Limpa a janela
-
         gerGrafico->getJanela()->setView(gerGrafico->getJanela()->getDefaultView());
+        
         faseFloresta->executar();
-        gerGrafico->centralizarVista(faseFloresta->getJogador()); // Centraliza o campo de visão no jogador
-        gerGrafico->updateDeltaTime();
 
+        gerGrafico->centralizarVista(faseFloresta->getJogador()); // Centraliza o campo de visão no jogador
+        gerGrafico->updateDeltaTime(); // Atualiza o tempo
         gerGrafico->display(); // Exibe a janela
     }
 }

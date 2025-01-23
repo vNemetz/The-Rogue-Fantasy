@@ -33,6 +33,11 @@ Gerenciador_Input::Gerenciador_Input()
     incluir_tecla(sf::Keyboard::Key::Space, [this](bool pressionado) {
         jogador->atualizarMovimentacao(pressionado, sf::Keyboard::Space);
     });
+
+    /*Teclas de Mudança de Estado*/
+    /*incluir_tecla(sf::Keyboard::Key::Escape, [this](bool pressionado){
+        estado->alterarEstado();
+    });*/
 }
 
 Gerenciador_Input::~Gerenciador_Input() {
