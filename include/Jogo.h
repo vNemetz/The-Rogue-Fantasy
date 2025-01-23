@@ -10,7 +10,7 @@
 #include "Gerenciadores/Gerenciador_Grafico.h"
 #include "Gerenciadores/Gerenciador_Eventos.h"
 #include "Gerenciadores/Gerenciador_Colisoes.h"
-#include "Fases/Floresta.h"
+#include "Estados/Fases/Floresta.h"
 
 namespace ent { namespace pers { class Jogador; } }
 

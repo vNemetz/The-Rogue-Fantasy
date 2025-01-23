@@ -5,6 +5,7 @@
 
 #include "Gerenciadores/Gerenciador_Colisoes.h"
 #include "Gerenciadores/Gerenciador_Eventos.h"
+#include "Gerenciadores/Gerenciador_Estados.h"
 #include "Listas/Lista_Entidades.h"
 #include "Entidades/Obstáculos/Plataforma.h"
 #include "Entidades/Personagens/Jogador.h"
@@ -14,7 +15,7 @@
 
 namespace fases{
 
-class Fase : public Ente{
+class Fase : public Ente, public Estado{
 protected:
     ger::Gerenciador_Colisoes* pColisoes;
     lis::Lista_Entidades listaPersonagens;
@@ -38,10 +39,11 @@ public:
     void desenharFundo();
     virtual void criarMapa() = 0;
     void criarEntidade(char simbolo, const sf::Vector2i pos);
-    void executar();
     ent::pers::Jogador* getJogador();
     void atualizaPersonagens();
     void atualizaObstaculos();
-
+    
+    void executar();
+    //virtual void alterarEstado();
 };
 }

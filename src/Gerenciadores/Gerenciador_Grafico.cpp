@@ -1,6 +1,6 @@
 #include "Gerenciadores/Gerenciador_Grafico.h"
 #include "Entidades/Entidade.h"
-#include "Fases/Fase.h"
+#include "Estados/Fases/Fase.h"
 #include <iostream>
 #include <string.h>
 

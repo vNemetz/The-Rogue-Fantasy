@@ -1,9 +1,10 @@
-#include "Fases/Fase.h"
+#include "Estados/Fases/Fase.h"
 #include "Entidades/Obstáculos/Plataforma.h"
 
 
 fases::Fase::Fase(ger::Gerenciador_Colisoes* pGC, int nFase) :  
 Ente(fase)
+,Estado()
 ,pColisoes(ger::Gerenciador_Colisoes::getInstancia())
 ,listaPersonagens()
 ,listaObstaculos()
@@ -144,3 +145,7 @@ void fases::Fase::atualizaPersonagens(){
 void fases::Fase::atualizaObstaculos(){
     listaObstaculos.percorrer();
 }
+
+/*void fases::Fase::alterarParaMenu(){
+    ger::Gerenciador_Estados::getInstancia()->setEstadoAtual(menuPausa);
+}*/
