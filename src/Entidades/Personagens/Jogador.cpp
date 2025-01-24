@@ -4,24 +4,22 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <iostream>
 #include <cmath>
+#include <stdexcept>
 
 namespace ent {
 namespace pers {
 Jogador::Jogador()
-    : Jogador(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f))
+    : Jogador(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f), true)
 {
 }
 
-Jogador::Jogador(sf::Vector2f pos, sf::Vector2f tam)
+Jogador::Jogador(sf::Vector2f pos, sf::Vector2f tam, bool jog)
     : Personagem(pos, tam, jogador)
     , pontos(0)
     , pulando(false)
-    , botaoEsquerda(sf::Keyboard::A)
-    , botaoDireita()
-    , botaoPular()
-    , botaoCorrer()
-    , botaoAtacar()
+    , jogador1(jog)
 {
+    carregarControles();
 }
 
 Jogador::~Jogador()
@@ -37,19 +35,22 @@ void Jogador::executar() {
 }
 
 void Jogador::desenhar() {
-    if (pSprite) {
-        pGG->desenharEntidade(this);
-    }
+    try {
+        if (pSprite)
+            pGG->desenharEntidade(this);
 
-    else {
-        std::cerr << "Sprite do Jogador vazio!\n";
+        else
+            throw std::runtime_error("Sprite do Jogador vazio!");
+    }
+    catch (const std::runtime_error& e) {
+        std::cerr << "ERRO: " << e.what() << std::endl;
         exit(1);
     }
 }
 
 /* Movimentação */
 
-void Jogador::atualizarMovimentacao(bool estado, sf::Keyboard::Key key) {
+void Jogador::atualizarMovimentacao(bool estado, std::string key) {
     if (key == botaoEsquerda) {
         movendoEsquerda = estado;
     }
@@ -103,65 +104,67 @@ void Jogador::emColisaoInimigo(Inimigo* pI, sf::Vector2f ds) {
     }
 }
 
-void Jogador::carregarControles(bool jogador1) {
+void Jogador::carregarControles() {
     if (jogador1) {
-        botaoEsquerda = sf::Keyboard::A;
-        botaoDireita = sf::Keyboard::D;
-        botaoPular = sf::Keyboard::W;
-        botaoCorrer = sf::Keyboard::LShift;
-        botaoAtacar = sf::Keyboard::Space;
+        botaoEsquerda = "A";
+        botaoDireita = "D";
+        botaoPular = "W";
+        botaoCorrer = "LShift";
+        botaoAtacar = "Space";
     }
 
     else {
-        botaoEsquerda = sf::Keyboard::Left;
-        botaoDireita = sf::Keyboard::Right;
-        botaoPular = sf::Keyboard::Up;
-        botaoCorrer = sf::Keyboard::K;
-        botaoAtacar = sf::Keyboard::L;
+        botaoEsquerda = "Left";
+        botaoDireita = "Right";
+        botaoPular = "Up";
+        botaoCorrer = "K";
+        botaoAtacar = "L";
     }
 }
 
 /* Animação */
 
 void Jogador::atualizarElementosAnimacao() {
+    std::string sufixo = (jogador1) ? "" : "2";
+
     switch (est) {
         case estado::pulando:
-            setTextura("Rogue-Jump");
+            setTextura("Rogue-Jump" + sufixo);
             animacao.atualizarSpritesheet(pTextura, sf::Vector2u(7,1), 0.2f, ElementosGraficos::pulando);
             break;
         
         case andando:
-            setTextura("Rogue-Walk");
+            setTextura("Rogue-Walk" + sufixo);
             animacao.atualizarSpritesheet(pTextura, sf::Vector2u(6,1), 0.16f, ElementosGraficos::andando);
             break;
         
         case parado:
-            setTextura("Rogue-Stand");
+            setTextura("Rogue-Stand" + sufixo);
             animacao.atualizarSpritesheet(pTextura, sf::Vector2u(1, 1), 0.001f, ElementosGraficos::parado);
             break;
 
         case ausente:
-            setTextura("Rogue-Idle");
+            setTextura("Rogue-Idle" + sufixo);
             animacao.atualizarSpritesheet(pTextura, sf::Vector2u(17,1), 0.16f, ElementosGraficos::estatico);
             break;
 
         case sofrendo:
-            setTextura("Rogue-Hurt");
+            setTextura("Rogue-Hurt" + sufixo);
             animacao.atualizarSpritesheet(pTextura, sf::Vector2u(4, 1), 0.15f, ElementosGraficos::sofrendo);
             break;
 
         case estado::correndo:
-            setTextura("Rogue-Run");
+            setTextura("Rogue-Run" + sufixo);
             animacao.atualizarSpritesheet(pTextura, sf::Vector2u(8, 1), 0.1f, ElementosGraficos::correndo);
             break;
 
         case estado::atacando:
-            setTextura("Rogue-Attack");
+            setTextura("Rogue-Attack" + sufixo);
             animacao.atualizarSpritesheet(pTextura, sf::Vector2u(7, 1), duracaoAtaque / 7.f, ElementosGraficos::atacando);
             break;
 
         case estado::morrendo:
-            setTextura("Rogue-Death");
+            setTextura("Rogue-Death" + sufixo);
             animacao.atualizarSpritesheet(pTextura, sf::Vector2u(10, 1), 0.15f, ElementosGraficos::morrendo);
             break;
         
