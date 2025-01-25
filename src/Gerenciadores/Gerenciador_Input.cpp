@@ -56,6 +56,11 @@ Gerenciador_Input::Gerenciador_Input()
         if (jogador2)
             jogador2->atualizarMovimentacao(pressionado, "L");
     });
+
+    /*Teclas de Mudança de Estado*/
+    /*incluir_tecla(sf::Keyboard::Key::Escape, [this](bool pressionado){
+        estado->alterarEstado();
+    });*/
 }
 
 Gerenciador_Input::~Gerenciador_Input() {

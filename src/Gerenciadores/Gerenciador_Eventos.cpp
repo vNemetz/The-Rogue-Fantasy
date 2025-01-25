@@ -1,7 +1,6 @@
 #include "Gerenciadores/Gerenciador_Eventos.h"
 #include "Gerenciadores/Gerenciador_Colisoes.h"
 #include "Gerenciadores/Gerenciador_Grafico.h"
-#include "Gerenciadores/Gerenciador_Input.h"
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 

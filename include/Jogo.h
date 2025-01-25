@@ -7,7 +7,7 @@
 #include <cstdlib>
 #include "Gerenciadores/Gerenciador_Grafico.h"
 #include "Gerenciadores/Gerenciador_Eventos.h"
-#include "Fases/Floresta.h"
+#include "Estados/Fases/Floresta.h"
 
 namespace ent { namespace pers { class Jogador; } }
 

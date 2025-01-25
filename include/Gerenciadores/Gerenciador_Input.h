@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Entidades/Personagens/Jogador.h"
+#include "Gerenciador_Estados.h"
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Graphics.hpp>
 #include <map>
@@ -13,6 +14,7 @@ private:
     std::map<sf::Keyboard::Key, std::function<void(bool)>> mapaTeclas;
     ent::pers::Jogador* jogador1;
     ent::pers::Jogador* jogador2;
+    Estado* estado;
 
     /* Singleton - Padrão de Projeto */
     static Gerenciador_Input* instancia;
