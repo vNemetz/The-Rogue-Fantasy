@@ -16,6 +16,7 @@ Entidade::Entidade(sf::Vector2f pos, sf::Vector2f esc, ID id)
     , posicao(pos)
     , escala(esc)
     , tamanho()
+    , tamanhoFase(INT_MAX)
 {
     pTextura = new sf::Texture();  // Aloca memória para pTextura
     pSprite = new sf::Sprite();    // Aloca memória para pSprite
@@ -100,6 +101,9 @@ sf::Vector2f Entidade::getPosition() const {
 void Entidade::setPosition(sf::Vector2f pos) {
     if ((pos.y < 0) || (pos.y + tamanho.y > 975))
         pos.y = getPosition().y;
+
+    if ((pos.x < 0) || (pos.x + tamanho.x) > tamanhoFase)
+        pos.x = getPosition().x;
     
     posicao = pos;
     pSprite->setPosition(pos);
@@ -107,6 +111,10 @@ void Entidade::setPosition(sf::Vector2f pos) {
 
 sf::Vector2f Entidade::getTamanho() const {
     return tamanho;
+}
+
+void Entidade::setTamanhoFase(float tamanhoFase) {
+    this->tamanhoFase = tamanhoFase;
 }
 
 }

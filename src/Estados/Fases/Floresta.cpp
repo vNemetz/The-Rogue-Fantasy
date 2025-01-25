@@ -2,10 +2,11 @@
 #include <iostream>
 #include <fstream>
 
-fases::Floresta::Floresta(ger::Gerenciador_Colisoes* pGC):
-Fase(pGC)
-,faseFinalizada(false)
+fases::Floresta::Floresta(ger::Gerenciador_Colisoes* pGC)
+    : Fase(pGC, 1)
+    , faseFinalizada(false)
 {
+    tamanhoFase = 5311.f;
 }
 
 fases::Floresta::~Floresta()

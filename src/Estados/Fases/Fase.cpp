@@ -5,7 +5,11 @@
 #include "Gerenciadores/Gerenciador_Input.h"
 #include "Entidades/Personagens/Goblin.h"
 #include "Entidades/Obstáculos/Plataforma.h"
+#include <iostream>
 
+fases::Fase::Fase() : Fase(nullptr, 0)
+{
+}
 
 fases::Fase::Fase(ger::Gerenciador_Colisoes* pGC, int nFase)
     : Ente(fase)
@@ -16,6 +20,7 @@ fases::Fase::Fase(ger::Gerenciador_Colisoes* pGC, int nFase)
     , numeroFase(nFase)
     , pJog1(nullptr)
     , pJog2(nullptr)
+    , tamanhoFase(0.f)
 {
     ent::pers::Jogador* jogador1 = new ent::pers::Jogador(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.7f, 1.7f), true);
     jogador1->setTextura("Rogue-Stand");
@@ -52,6 +57,7 @@ void fases::Fase::criarPersonagens(sf::Vector2f posicao, ID id) {
         ent::pers::Goblin* goblin = new ent::pers::Goblin(sf::Vector2f(posicao),sf::Vector2f(1.7f, 1.7f), getJogador1());
         goblin->setTextura("Goblin-Idle");
         goblin->setVelocidadeMaxima(sf::Vector2f (250.f, 250.f));
+        goblin->setTamanhoFase(tamanhoFase);
             
         listaPersonagens.incluir(static_cast<ent::Entidade*>(goblin));
         pColisoes->incluirInimigo(goblin);
@@ -59,14 +65,18 @@ void fases::Fase::criarPersonagens(sf::Vector2f posicao, ID id) {
 
     else if (id == jogador) {
         pJog1->setPosition(posicao);
+        pJog1->setTamanhoFase(tamanhoFase);
 
-        if (doisJogadores)
+        if (doisJogadores) {
             pJog2->setPosition(posicao + sf::Vector2f(200.f, 0.f));
+            pJog2->setTamanhoFase(tamanhoFase);
+        }
     }
 }
 
 void fases::Fase::criarPlataformas(sf::Vector2f pos, int tipo) {
     ent::obs::Plataforma* plataforma = new ent::obs::Plataforma(sf::Vector2f(pos), sf::Vector2f(1.7f, 1.7f), false, 50);
+    plataforma->setTamanhoFase(tamanhoFase);
 
     switch (tipo) {
         case (0):
@@ -112,7 +122,7 @@ void fases::Fase::desenharFundo() {
 
 void fases::Fase::criarEntidade(char simbolo, const sf::Vector2i pos) {
     switch(simbolo) {
-        case ('i'):
+        case ('g'):
             criarPersonagens(sf::Vector2f(pos.x * 54.0f, pos.y * 54.0f), inimigo);
             break;
 
@@ -153,6 +163,7 @@ void fases::Fase::executar() {
     desenharFundo();
     atualizaObstaculos();
     atualizaPersonagens();
+    std::cout << pJog1->getPosition().x << '\n';
     pColisoes->executar();
 }
 
@@ -170,6 +181,10 @@ void fases::Fase::atualizaPersonagens(){
 
 void fases::Fase::atualizaObstaculos(){
     listaObstaculos.percorrer();
+}
+
+float fases::Fase::getTamanhoFase() {
+    return tamanhoFase;
 }
 
 /*void fases::Fase::alterarParaMenu(){

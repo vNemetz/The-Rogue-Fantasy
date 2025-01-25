@@ -137,7 +137,7 @@ void Gerenciador_Grafico::setCentroVista(sf::Vector2f pos) {
     pJanela->setView(vista);
 }
 
-void Gerenciador_Grafico::centralizarVista(ent::Entidade *e) {
+void Gerenciador_Grafico::centralizarVista(ent::Entidade *e, float tamanhoFase) {
     vista.setSize((sf::Vector2f(static_cast<float>(WIDTH), static_cast<float>(HEIGHT))));
     sf::Vector2i tamanho = e->getCorpo().getSize();
 
@@ -152,8 +152,8 @@ void Gerenciador_Grafico::centralizarVista(ent::Entidade *e) {
     else
         posicao.x -= tamanho.x / 2.f;
 
-    float limiteEsquerdo = getVista().getSize().x / 2.f + 11.f;
-    float limiteDireito = - getVista().getSize().x / 2.f + 11.f + 5582.6f;
+    float limiteEsquerdo = 12.f + getVista().getSize().x / 2.f;
+    float limiteDireito = tamanhoFase - getVista().getSize().x / 2.f;
 
     if (posicao.x < limiteEsquerdo)
         posicao.x = limiteEsquerdo;

@@ -37,7 +37,7 @@ void Jogo::executar() {
         
         faseFloresta->executar(); // Executa a fase
 
-        gerGrafico->centralizarVista(faseFloresta->getJogador1()); // Centraliza o campo de visão no jogador
+        gerGrafico->centralizarVista(faseFloresta->getJogador1(), faseFloresta->getTamanhoFase()); // Centraliza o campo de visão no jogador
         gerGrafico->updateDeltaTime(); // Atualiza o tempo
         gerGrafico->display(); // Exibe a janela
     }

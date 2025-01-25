@@ -41,7 +41,7 @@ public:
     sf::View getVista() const;
     void setTamanhoVista(sf::Vector2f tam);
     void setCentroVista(sf::Vector2f pos);
-    void centralizarVista(ent::Entidade* e);
+    void centralizarVista(ent::Entidade* e, float tamanhoFase);
     void redimensionar(float aspect_ratio); // Redimensiona pJanela
     
     /* Clock */

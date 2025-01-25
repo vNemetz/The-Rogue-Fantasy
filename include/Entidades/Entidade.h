@@ -1,6 +1,7 @@
 #pragma once
 #include "Ente.h"
 #include <SFML/System/Vector2.hpp>
+#include <climits>
 
 namespace ent {
 
@@ -17,6 +18,7 @@ protected:
     sf::Vector2f velocidadeMaxima;
     float dt;
     bool noChao;
+    float tamanhoFase;
     
 public:
     Entidade();
@@ -48,5 +50,7 @@ public:
     void setPosition(sf::Vector2f pos);
 
     sf::Vector2f getTamanho() const;
+
+    void setTamanhoFase(float tamanhoFase);
 };
 }

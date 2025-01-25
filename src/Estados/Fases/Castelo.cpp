@@ -1,7 +1,7 @@
 #include "Estados/Fases/Castelo.h"
 
 fases::Castelo::Castelo(ger::Gerenciador_Colisoes* pGC):
-Fase(pGC)
+Fase(pGC, 2)
 {
 }
 

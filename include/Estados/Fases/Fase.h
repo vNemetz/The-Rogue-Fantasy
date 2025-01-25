@@ -21,10 +21,11 @@ protected:
 
     sf::Sprite spriteFundo;
     int numeroFase;
+    float tamanhoFase;
 
 public:
     Fase();
-    Fase(ger::Gerenciador_Colisoes* pGC, int nFase = 1);
+    Fase(ger::Gerenciador_Colisoes* pGC, int nFase);
     ~Fase();
     
     void gerenciarColisoes();
@@ -41,6 +42,7 @@ public:
     ent::pers::Jogador* getJogador2();
     void atualizaPersonagens();
     void atualizaObstaculos();
+    float getTamanhoFase();
     
     void executar();
     //virtual void alterarEstado();
