@@ -1,5 +1,5 @@
 #pragma once
-#include "Fases/Fase.h"
+#include "Fase.h"
 
 namespace fases{
 

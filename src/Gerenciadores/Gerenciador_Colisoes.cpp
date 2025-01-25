@@ -6,14 +6,13 @@ namespace ger {
 Gerenciador_Colisoes::Gerenciador_Colisoes() {
     listaInimigos.clear();
     listaObstaculos.clear();
-    jogador = nullptr;
+    listaJogadores.clear();
 }
 
 Gerenciador_Colisoes::~Gerenciador_Colisoes() {
     listaInimigos.clear();
     listaObstaculos.clear();
-
-    jogador = nullptr;
+    listaJogadores.clear();
 }
 
 Gerenciador_Colisoes* Gerenciador_Colisoes::instancia(nullptr);
@@ -38,11 +37,17 @@ void Gerenciador_Colisoes::executar() {
                 ent::pers::Personagem* pP1 = static_cast<ent::pers::Personagem*>(pe1);
                 pP1->emColisaoInimigo(static_cast<ent::pers::Inimigo*>(pe2), calcularColisao(pe1,pe2));
             }
-        }
 
-        ent::Entidade* pe2 = jogador;
-        if (verificarColisao(pe1, pe2)) {
-            jogador->emColisaoInimigo(static_cast<ent::pers::Inimigo*>(pe1), calcularColisao(pe1,pe2));
+            else if (pe1->getPosition() == pe2->getPosition()) {
+                pe1->setPosition(pe1->getPosition() - sf::Vector2f(0.f, 0.5f));
+            }
+        }
+        
+        for (auto jogador: listaJogadores) {
+            ent::Entidade* pe2 = jogador;
+            if (verificarColisao(pe1, pe2)) {
+                jogador->emColisaoInimigo(static_cast<ent::pers::Inimigo*>(pe1), calcularColisao(pe1,pe2));
+            }
         }
     }
     
@@ -58,9 +63,11 @@ void Gerenciador_Colisoes::executar() {
             }
         }
 
-        ent::Entidade* pe2 = jogador;
-        if (verificarColisao(pe1, pe2)) {
-            obstaculo->emColisao(pe2, calcularColisao(pe1, pe2)); // Entre Obstáculo e Jogador
+        for (auto jogador: listaJogadores) {
+            ent::Entidade* pe2 = jogador;
+            if (verificarColisao(pe1, pe2)) {
+                obstaculo->emColisao(pe2, calcularColisao(pe1, pe2)); // Entre Obstáculo e Jogador
+            }
         }
     }
 }
@@ -101,8 +108,8 @@ void Gerenciador_Colisoes::incluirObstaculo(ent::obs::Obstaculo* po) {
     listaObstaculos.push_back(po);
 }
 
-void Gerenciador_Colisoes::setJogador(ent::pers::Jogador* jog) {
-    jogador = jog;
+void Gerenciador_Colisoes::incluirJogador(ent::pers::Jogador* jog) {
+    listaJogadores.push_back(jog);
 }
 
 }

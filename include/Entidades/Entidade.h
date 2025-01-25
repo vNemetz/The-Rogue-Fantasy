@@ -35,7 +35,7 @@ public:
     void setNoChao(bool noChao);
     
     /* Gráficos */
-    void setTextura(const char *nomeImagem);
+    void setTextura(std::string nomeImagem);
     virtual void desenhar();
     void desenharHitbox();
     

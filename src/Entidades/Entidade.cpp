@@ -56,7 +56,7 @@ void Entidade::setNoChao(bool noChao) {
 
 /* Gráficos */
 
-void Entidade::setTextura(const char *nomeImagem) {
+void Entidade::setTextura(std::string nomeImagem) {
     pTextura = pGG->getTextura(nomeImagem);
 
     tamanho.x = pTextura->getSize().x * escala.x;
