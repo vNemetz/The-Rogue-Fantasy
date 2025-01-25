@@ -12,8 +12,7 @@ enum ID {
     plataforma,
     inimigo,
     projetil,
-    menu,
-    fase
+
 };
 
 class Ente {
@@ -27,7 +26,7 @@ public:
     Ente(ID id);
     virtual ~Ente();
     
-    virtual void executar() = 0;
+    //virtual void executar() = 0;
 
     ID getID() const;
     void setID(ID id);

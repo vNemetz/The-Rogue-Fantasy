@@ -3,8 +3,8 @@
 
 
 fases::Fase::Fase(ger::Gerenciador_Colisoes* pGC, int nFase) :  
-Ente(fase)
-,Estado()
+Ente()
+,Estado(ger::Gerenciador_Estados::getInstancia())
 ,pColisoes(ger::Gerenciador_Colisoes::getInstancia())
 ,listaPersonagens()
 ,listaObstaculos()

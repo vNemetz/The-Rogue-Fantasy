@@ -4,6 +4,8 @@ fases::Floresta::Floresta(ger::Gerenciador_Colisoes* pGC):
 Fase(pGC)
 ,faseFinalizada(false)
 {
+        faseFloresta->criarMapa();
+        faseFloresta->criarFundo(); 
 }
 
 fases::Floresta::~Floresta()

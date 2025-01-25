@@ -7,6 +7,7 @@
 #include <cstdlib>
 
 #include "Listas/Lista_Entidades.h"
+#include "Gerenciadores/Gerenciador_Estados.h"
 #include "Gerenciadores/Gerenciador_Grafico.h"
 #include "Gerenciadores/Gerenciador_Eventos.h"
 #include "Gerenciadores/Gerenciador_Colisoes.h"
@@ -18,6 +19,7 @@ class Jogo {
 private:
     ger::Gerenciador_Grafico* gerGrafico;
     ger::Gerenciador_Eventos* gerEventos;
+    ger::Gerenciador_Estados* gerEstados;
     //ent::pers::Jogador* jogador;
 
     fases::Floresta* faseFloresta;

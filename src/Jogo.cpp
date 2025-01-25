@@ -12,6 +12,7 @@
 Jogo::Jogo()
     : gerGrafico(ger::Gerenciador_Grafico::getInstancia())
     , gerEventos(ger::Gerenciador_Eventos::getInstancia())
+    , gerEstados(ger::Gerenciador_Estados::getInstancia())
     , faseFloresta(nullptr)
 {
     srand(time(NULL));
@@ -25,6 +26,7 @@ Jogo::Jogo()
 Jogo::~Jogo() {
     gerGrafico = nullptr;
     gerEventos = nullptr;
+    gerEstados = nullptr;
     delete faseFloresta;
 }
 
