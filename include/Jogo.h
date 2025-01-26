@@ -17,6 +17,7 @@ class Jogo {
 private:
     ger::Gerenciador_Grafico* gerGrafico;
     ger::Gerenciador_Eventos* gerEventos;
+    ger::Gerenciador_Estados* gerEstados;
 
     fases::Floresta* faseFloresta;
 

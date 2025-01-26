@@ -1,7 +1,10 @@
 #include "Gerenciadores/Gerenciador_Estados.h"
+#include "Estados/Estado.h"
+Estado::Estado()
+{
+}   
 
-
-Estado::Estado(tipoEstado tipo, ger::Gerenciador_Estados *pGE):
+Estado::Estado(tipoEstado tipo, ger::Gerenciador_Estados *pGE) : 
 id(tipo)
 , pGEstados(pGE)
 {

@@ -3,7 +3,7 @@
 namespace menus{
 class Menu_Principal : public Estado{
 private:
-
+    
 public:
     Menu_Principal();
     ~Menu_Principal();

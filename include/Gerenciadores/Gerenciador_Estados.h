@@ -2,7 +2,6 @@
 #include "Ente.h"
 #include <map>
 #include "Estados/Estado.h"
-#include "Estados/Fases/Floresta.h"
 #include "Estados/Menus/Menu_Principal.h"
 /*Usando o padrão de projeto "State" da referência bibliográfica "Design Patterns" - Gamma, Helm, Johnson, Vlissides*/
 

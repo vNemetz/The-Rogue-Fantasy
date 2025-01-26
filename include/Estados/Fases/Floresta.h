@@ -3,7 +3,7 @@
 
 namespace fases{
 
-class Floresta {
+class Floresta :public Fase{
 private:
     bool faseFinalizada;
 public:

@@ -1,4 +1,5 @@
 #include "Gerenciadores/Gerenciador_Estados.h"
+#include "Estados/Fases/Floresta.h"
 
 namespace ger{
 Gerenciador_Estados::Gerenciador_Estados():
@@ -23,8 +24,8 @@ Gerenciador_Estados* Gerenciador_Estados::getInstancia(){
 }
 void Gerenciador_Estados::inicializarEstados()
 {
-    Floresta* faseFloresta = new Floresta(ger::Gerenciador_Colisoes::getInstancia());
-    mapaEstados.insert(fase, faseFloresta);
+    fases::Floresta* faseFloresta = new fases::Floresta(ger::Gerenciador_Colisoes::getInstancia());
+    mapaEstados.insert(std::pair<tipoEstado, Estado*>(fase, static_cast<Estado*>(faseFloresta) ) );
 }
 void Gerenciador_Estados::requererEstado() 
 {
