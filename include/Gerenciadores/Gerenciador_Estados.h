@@ -9,7 +9,6 @@
 /* Classe abstrata de Estado, que será classe base de Fase, Menu, Placar e Menu de Pausa */
 
 
-
 namespace ger{
 
 /* Classe "Context"  */

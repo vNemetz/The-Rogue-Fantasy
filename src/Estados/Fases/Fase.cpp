@@ -9,7 +9,8 @@ Ente()
 ,listaPersonagens()
 ,listaObstaculos()
 ,numeroFase(nFase)
-, pJog(nullptr)
+, pJog1(nullptr)
+,pJog2(nullptr)
 {
     ent::pers::Jogador* jogador = new ent::pers::Jogador(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.7f, 1.7f));
     jogador->setTextura("Rogue-Stand");

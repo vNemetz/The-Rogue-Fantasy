@@ -1,5 +1,4 @@
 #include "Gerenciadores/Gerenciador_Estados.h"
-#include "Gerenciador_Estados.h"
 
 namespace ger{
 Gerenciador_Estados::Gerenciador_Estados():
