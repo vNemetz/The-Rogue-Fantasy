@@ -1,6 +1,6 @@
 #pragma once
-#include "Gerenciadores/Gerenciador_Input.h"
 #include "Gerenciadores/Gerenciador_Colisoes.h"
+#include "Gerenciadores/Gerenciador_Input.h"
 #include "Entidades/Personagens/Jogador.h"
 
 namespace ger {

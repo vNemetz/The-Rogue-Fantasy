@@ -1,6 +1,6 @@
 #include "Gerenciadores/Gerenciador_Grafico.h"
+#include "Ente.h"
 #include "Entidades/Entidade.h"
-#include "Estados/Fases/Fase.h"
 #include <iostream>
 #include <string.h>
 
@@ -43,6 +43,18 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     carregarTextura("/assets/images/Rogue/rogue-hurt.png", "Rogue-Hurt");
     carregarTextura("/assets/images/Rogue/rogue-death.png", "Rogue-Death");
     carregarTextura("/assets/images/Rogue/rogue-idle.png", "Rogue-Idle");
+
+    /* Rogue 2 Textures */
+    carregarTextura("/assets/images/Rogue2/rogue-stand.png", "Rogue-Stand2");
+    carregarTextura("/assets/images/Rogue2/rogue-walk.png", "Rogue-Walk2");
+    carregarTextura("/assets/images/Rogue2/rogue-run.png", "Rogue-Run2");
+    carregarTextura("/assets/images/Rogue2/rogue-jump.png", "Rogue-Jump2");
+    carregarTextura("/assets/images/Rogue2/rogue-attack.png", "Rogue-Attack2");
+    carregarTextura("/assets/images/Rogue2/rogue-walk-attack.png", "Rogue-Walk-Attack2");
+    carregarTextura("/assets/images/Rogue2/rogue-run-attack.png", "Rogue-Run-Attack2");
+    carregarTextura("/assets/images/Rogue2/rogue-hurt.png", "Rogue-Hurt2");
+    carregarTextura("/assets/images/Rogue2/rogue-death.png", "Rogue-Death2");
+    carregarTextura("/assets/images/Rogue2/rogue-idle.png", "Rogue-Idle2");
 
     /* Goblin Textures */
     carregarTextura("/assets/images/Goblin/goblin-idle.png", "Goblin-Idle");
@@ -126,6 +138,7 @@ void Gerenciador_Grafico::setCentroVista(sf::Vector2f pos) {
 }
 
 void Gerenciador_Grafico::centralizarVista(ent::Entidade *e) {
+    vista.setSize((sf::Vector2f(static_cast<float>(WIDTH), static_cast<float>(HEIGHT))));
     sf::Vector2i tamanho = e->getCorpo().getSize();
 
     sf::Vector2f posicao;
@@ -167,7 +180,7 @@ float Gerenciador_Grafico::reiniciarClock() {
 }
 
 /* Texturas */
-sf::Texture* Gerenciador_Grafico::carregarTextura(const char* caminhoImagem, const char* nomeImagem) {
+sf::Texture* Gerenciador_Grafico::carregarTextura(std::string caminhoImagem, std::string nomeImagem) {
     std::string caminho = PROJECT_ROOT;
     caminho += caminhoImagem;
 
@@ -185,7 +198,7 @@ sf::Texture* Gerenciador_Grafico::carregarTextura(const char* caminhoImagem, con
     return novaTextura;
 }
 
-sf::Texture* Gerenciador_Grafico::getTextura(const char* nomeImagem) {
+sf::Texture* Gerenciador_Grafico::getTextura(std::string nomeImagem) {
     if (mapaTexturas.find(nomeImagem) != mapaTexturas.end()) {
         return mapaTexturas[nomeImagem];
     }

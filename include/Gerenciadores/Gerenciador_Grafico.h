@@ -50,8 +50,8 @@ public:
     float reiniciarClock();
     
     /* Texturas */
-    sf::Texture* carregarTextura(const char* caminhoImagem, const char* nomeImagem);
-    sf::Texture* getTextura(const char* nomeImagem);
+    sf::Texture* carregarTextura(std::string caminhoImagem, std::string nomeImagem);
+    sf::Texture* getTextura(std::string nomeImagem);
 
     /* Renderização */
     void desenharEntidade(ent::Entidade* pE) const;

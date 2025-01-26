@@ -11,9 +11,8 @@ class Gerenciador_Colisoes {
 private:
     std::vector<ent::pers::Inimigo*> listaInimigos;
     std::list<ent::obs::Obstaculo*> listaObstaculos;
-    //std::set<ent::Projetil*> LPs;
-
-    ent::pers::Jogador* jogador;
+    std::vector<ent::pers::Jogador*> listaJogadores;
+    //std::set<ent::Projetil*> listaProjeteis;
 
     /* Singleton - Padrão de Projeto */
     static ger::Gerenciador_Colisoes* instancia;
@@ -32,16 +31,12 @@ public:
 
     void incluirInimigo(ent::pers::Inimigo* pi);
     void incluirObstaculo(ent::obs::Obstaculo* po);
-    
-    void setJogador(ent::pers::Jogador* jog);
+    void incluirJogador(ent::pers::Jogador* jog);
+    // void incluirProjetil(ent::Projetil* pj);
 
     void tratarColisoesJogsObstacs();
     void tratarColisoesJogsInimgs();
-
-    /*
-    void tratarColisoesJogsProjeteis();
-    void incluirProjetil(ent::Projetil* pj);
-    */
+    // void tratarColisoesJogsProjeteis();
 };
 
 }
