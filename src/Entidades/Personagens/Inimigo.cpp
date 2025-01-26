@@ -6,20 +6,22 @@ namespace ent {
 namespace pers {
 
 Inimigo::Inimigo()
-    : Personagem()
-    , jogador(nullptr)
-    , nivel_maldade(1)
+    : Inimigo(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f))
 {
 }
 
-Inimigo::Inimigo(sf::Vector2f pos, sf::Vector2f tam, Jogador* jog) 
+Inimigo::Inimigo(sf::Vector2f pos, sf::Vector2f tam) 
     : Personagem(pos, tam, inimigo)
-    , jogador(jog)
     , nivel_maldade(1)
 {
 }
 
-Inimigo::~Inimigo() {
+Inimigo::~Inimigo()
+{
+}
+
+void Inimigo::incluirJogador(Jogador* jogador) {
+    jogadores.push_back(jogador);
 }
 
 }

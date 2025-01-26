@@ -5,7 +5,6 @@
 #include "Gerenciadores/Gerenciador_Input.h"
 #include "Entidades/Personagens/Goblin.h"
 #include "Entidades/Obstáculos/Plataforma.h"
-#include <iostream>
 
 fases::Fase::Fase() : Fase(nullptr, 0)
 {
@@ -54,10 +53,14 @@ fases::Fase::~Fase() {
 void fases::Fase::criarPersonagens(sf::Vector2f posicao, ID id) {
     if (id == inimigo) {
         /* Criação do Goblin */
-        ent::pers::Goblin* goblin = new ent::pers::Goblin(sf::Vector2f(posicao),sf::Vector2f(1.7f, 1.7f), getJogador1());
+        ent::pers::Goblin* goblin = new ent::pers::Goblin(sf::Vector2f(posicao),sf::Vector2f(1.7f, 1.7f));
         goblin->setTextura("Goblin-Idle");
         goblin->setVelocidadeMaxima(sf::Vector2f (250.f, 250.f));
         goblin->setTamanhoFase(tamanhoFase);
+        goblin->incluirJogador(getJogador1());
+        
+        if (doisJogadores)
+            goblin->incluirJogador(getJogador2());
             
         listaPersonagens.incluir(static_cast<ent::Entidade*>(goblin));
         pColisoes->incluirInimigo(goblin);
@@ -163,7 +166,6 @@ void fases::Fase::executar() {
     desenharFundo();
     atualizaObstaculos();
     atualizaPersonagens();
-    std::cout << pJog1->getPosition().x << '\n';
     pColisoes->executar();
 }
 

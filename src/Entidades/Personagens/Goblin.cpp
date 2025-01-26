@@ -6,12 +6,12 @@ namespace ent {
 namespace pers {
 
 Goblin::Goblin()
-    : Goblin(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f), nullptr)
+    : Goblin(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f))
 {
 }
 
-Goblin::Goblin(sf::Vector2f pos, sf::Vector2f tam, Jogador* jog)
-    : Inimigo(pos, tam, jog)
+Goblin::Goblin(sf::Vector2f pos, sf::Vector2f tam)
+    : Inimigo(pos, tam)
     , raioDetect(600)
     , tempoSemDetectar(0.f)
     , estadoIdle(PARADO)
@@ -23,12 +23,26 @@ Goblin::~Goblin()
 }
 
 void Goblin::executar() {
-    if (jogador) {
-        sf::Vector2f dist = jogador->getPosition() - posicao;
-        float moduloDist = sqrt(pow((dist.x),2) + pow(dist.y, 2));
+    if (jogadores.size() > 0) {
+        // Se há jogadores, selecionar o que está mais próximo
+        // e então se mover a ele
 
-        if (moduloDist <= raioDetect) {
-            persegueJogador();
+        float menorDist = INT_MAX;
+        int jogadorMaisProximo = 0;
+
+        for (int i = 0; i < jogadores.size(); i++) {
+            Jogador* jogador = jogadores[i];
+            sf::Vector2f dist = jogador->getPosition() - posicao;
+            float moduloDist = sqrt(pow((dist.x),2) + pow(dist.y, 2));
+
+            if (moduloDist < menorDist) {
+                jogadorMaisProximo = i;
+                menorDist = moduloDist;
+            }
+        }
+
+        if (menorDist <= raioDetect) {
+            persegueJogador(jogadorMaisProximo);
 
             tempoSemDetectar = 0.f;
             estadoIdle = PARADO;
@@ -48,7 +62,9 @@ void Goblin::executar() {
 
 /* Movimentação */
 
-void Goblin::persegueJogador() {
+void Goblin::persegueJogador(int idx) {
+    Jogador* jogador = jogadores[idx];
+
     sf::Vector2f posJogador = jogador->getPosition();
     sf::Vector2f posInimigo = getPosition();
 
