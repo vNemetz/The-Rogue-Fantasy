@@ -60,6 +60,12 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     carregarTextura("/assets/images/Goblin/goblin-idle.png", "Goblin-Idle");
     carregarTextura("/assets/images/Goblin/goblin-walk.png", "Goblin-Walk");
     carregarTextura("/assets/images/Goblin/goblin-hurt.png", "Goblin-Hurt");
+
+    /*GUI Textures*/
+    carregarTextura("/assets/images/User-interface/leaderboard-button.png", "Leaderboard-Button");
+    carregarTextura("/assets/images/User-interface/main-menu-bg.png", "Main-Menu-Bg");
+    carregarTextura("/assets/images/User-interface/yellow-button.png", "Yellow-Button");
+
 }
 
 Gerenciador_Grafico::~Gerenciador_Grafico() {
@@ -217,4 +223,11 @@ void Gerenciador_Grafico::desenharEntidade(ent::Entidade *pE) const {
 void Gerenciador_Grafico::desenhar(sf::RectangleShape *corpo) const {
     pJanela->draw(*corpo);
 }
+}
+
+void ger::Gerenciador_Grafico::desenharSprite(sf::Sprite *pS) const
+{
+    if(pS){
+        pJanela->draw(*pS);
+    }
 }

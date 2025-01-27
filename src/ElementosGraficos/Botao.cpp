@@ -1,5 +1,6 @@
 #include "ElementosGraficos/Botao.h"
 
+
 ElementosGraficos::Botao::Botao(std::string nomeImg):
 pTextura(nullptr)
 ,pSprite(nullptr)
@@ -50,7 +51,20 @@ void ElementosGraficos::Botao::setSprite()
     pSprite->setTexture(*pTextura, false);
 }
 
+sf::Sprite *ElementosGraficos::Botao::getSprite() const
+{
+    if(pSprite){
+        return pSprite;
+    }
+    return nullptr;
+}
+
 void ElementosGraficos::Botao::setPosicao(sf::Vector2f pos)
 {
     pSprite->setPosition(pos);
+}
+
+void ElementosGraficos::Botao::checarApertado() const
+{
+
 }

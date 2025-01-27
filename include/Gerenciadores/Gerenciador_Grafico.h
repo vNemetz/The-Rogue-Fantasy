@@ -56,5 +56,6 @@ public:
     /* Renderização */
     void desenharEntidade(ent::Entidade* pE) const;
     void desenhar(sf::RectangleShape* corpo) const;
+    void desenharSprite(sf::Sprite* pS) const;
 };
 }

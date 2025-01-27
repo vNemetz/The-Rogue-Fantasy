@@ -2,8 +2,7 @@
 
 enum tipoEstado{
     fase = 0,
-    menuPrincipal,
-    menuPausa,
+    menu,
     placar,
     salvar
 };
