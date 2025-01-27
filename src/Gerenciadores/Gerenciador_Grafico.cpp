@@ -60,6 +60,12 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     carregarTextura("/assets/images/Goblin/goblin-idle.png", "Goblin-Idle");
     carregarTextura("/assets/images/Goblin/goblin-walk.png", "Goblin-Walk");
     carregarTextura("/assets/images/Goblin/goblin-hurt.png", "Goblin-Hurt");
+
+    /* Spider Textures */
+    carregarTextura("/assets/images/Spider/spider-idle.png", "Spider-Idle");
+    carregarTextura("/assets/images/Spider/spider-hurt.png", "Spider-Hurt");
+    carregarTextura("/assets/images/Spider/spider-attack.png", "Spider-Attack");
+    carregarTextura("/assets/images/Spider/spider-walk.png", "Spider-Walk");
 }
 
 Gerenciador_Grafico::~Gerenciador_Grafico() {

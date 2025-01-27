@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/System/Vector2.hpp>
 #include "Gerenciadores/Gerenciador_Colisoes.h"
 #include "Gerenciadores/Gerenciador_Estados.h"
 #include "Listas/Lista_Entidades.h"
@@ -31,7 +32,11 @@ public:
     void gerenciarColisoes();
 
     /*Criação de entidades: */
-    void criarPersonagens(sf::Vector2f posicao, ID id);
+    void criarPersonagens(sf::Vector2f posicao, ID id, char tipo = '-');
+    
+    void criarGoblin(sf::Vector2f posicao);
+    void criarAranha(sf::Vector2f posicao);
+
     void criarPlataformas(sf::Vector2f pos, int tipo);
     void criarObstaculos();
     virtual void criarFundo() = 0;

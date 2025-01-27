@@ -30,7 +30,7 @@ protected:
     float tempoDano;
     const float duracaoInvulneravel = 1.8f;
     float tempoAtaque;
-    const float duracaoAtaque = 0.35f; // Duração Total do Ataque
+    float duracaoAtaque = 0.35f; // Duração Total do Ataque
 
     /* Gravidade - Constantes */
     const float GRAVIDADE_REAL = 9.8f; // metros por segundo ao quadrado (m/s^2)

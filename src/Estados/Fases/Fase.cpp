@@ -4,6 +4,7 @@
 #include "Gerenciadores/Gerenciador_Grafico.h"
 #include "Gerenciadores/Gerenciador_Input.h"
 #include "Entidades/Personagens/Goblin.h"
+#include "Entidades/Personagens/Aranha.h"
 #include "Entidades/Obstáculos/Plataforma.h"
 
 fases::Fase::Fase() : Fase(nullptr, 0)
@@ -50,22 +51,22 @@ fases::Fase::~Fase() {
     listaPersonagens.limpar();
 }
 
-void fases::Fase::criarPersonagens(sf::Vector2f posicao, ID id) {
+void fases::Fase::criarPersonagens(sf::Vector2f posicao, ID id, char tipo) {
     if (id == inimigo) {
-        /* Criação do Goblin */
-        ent::pers::Goblin* goblin = new ent::pers::Goblin(sf::Vector2f(posicao),sf::Vector2f(1.7f, 1.7f));
-        goblin->setTextura("Goblin-Idle");
-        goblin->setVelocidadeMaxima(sf::Vector2f (250.f, 250.f));
-        goblin->setTamanhoFase(tamanhoFase);
-        goblin->incluirJogador(getJogador1());
-        
-        if (doisJogadores)
-            goblin->incluirJogador(getJogador2());
+        switch (tipo) {
+            case ('g'):
+                criarGoblin(posicao);
+                break;
             
-        listaPersonagens.incluir(static_cast<ent::Entidade*>(goblin));
-        pColisoes->incluirInimigo(goblin);
-    }
+            case ('a'):
+                criarAranha(posicao);
+                break;
 
+            default:
+                break;
+        }
+    }
+    
     else if (id == jogador) {
         pJog1->setPosition(posicao);
         pJog1->setTamanhoFase(tamanhoFase);
@@ -75,6 +76,34 @@ void fases::Fase::criarPersonagens(sf::Vector2f posicao, ID id) {
             pJog2->setTamanhoFase(tamanhoFase);
         }
     }
+}
+
+void fases::Fase::criarGoblin(sf::Vector2f posicao) {
+    ent::pers::Goblin* goblin = new ent::pers::Goblin(sf::Vector2f(posicao),sf::Vector2f(1.7f, 1.7f));
+    goblin->setTextura("Goblin-Idle");
+    goblin->setVelocidadeMaxima(sf::Vector2f (250.f, 250.f));
+    goblin->setTamanhoFase(tamanhoFase);
+    goblin->incluirJogador(getJogador1());
+    
+    if (doisJogadores)
+        goblin->incluirJogador(getJogador2());
+        
+    listaPersonagens.incluir(static_cast<ent::Entidade*>(goblin));
+    pColisoes->incluirInimigo(goblin);
+}
+
+void fases::Fase::criarAranha(sf::Vector2f posicao) {
+    ent::pers::Aranha* aranha = new ent::pers::Aranha(sf::Vector2f(posicao),sf::Vector2f(1.7f, 1.7f));
+    aranha->setTextura("Spider-Idle");
+    aranha->setVelocidadeMaxima(sf::Vector2f (250.f, 250.f));
+    aranha->setTamanhoFase(tamanhoFase);
+    aranha->incluirJogador(getJogador1());
+
+    if (doisJogadores)
+        aranha->incluirJogador(getJogador2());
+        
+    listaPersonagens.incluir(static_cast<ent::Entidade*>(aranha));
+    pColisoes->incluirInimigo(aranha);
 }
 
 void fases::Fase::criarPlataformas(sf::Vector2f pos, int tipo) {
@@ -126,7 +155,11 @@ void fases::Fase::desenharFundo() {
 void fases::Fase::criarEntidade(char simbolo, const sf::Vector2i pos) {
     switch(simbolo) {
         case ('g'):
-            criarPersonagens(sf::Vector2f(pos.x * 54.0f, pos.y * 54.0f), inimigo);
+            criarPersonagens(sf::Vector2f(pos.x * 54.0f, pos.y * 54.0f), inimigo, 'g');
+            break;
+
+        case ('a'):
+            criarPersonagens(sf::Vector2f(pos.x * 54.0f, pos.y * 54.0f), inimigo, 'a');
             break;
 
         case ('j'):
