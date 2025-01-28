@@ -2,6 +2,7 @@
 #include <vector>
 #include "ElementosGraficos/Botao.h"
 #include "Estados/Estado.h"
+#include <iostream>
 
 namespace menus{
 class Menu : public Estado{
@@ -14,17 +15,17 @@ protected:
     bool ativo;
     sf::Texture* pTexturaFundo;
     sf::Sprite* pSpriteFundo;
+
+    float bufferTime;
 public:
-    Menu();
-    Menu(ger::Gerenciador_Estados* pGE);
+    Menu(int min, int max);
+    Menu(ger::Gerenciador_Estados* pGE, int min, int max);
     ~Menu();
-    void alterarAtivo();
-    bool getAtivo() const;
+    void alterarBotaoSelecionado(int unidade);
     void setTexturaFundo(std::string nomeImg);
     void setSpriteFundo();
-    void setBotaoSelecionado(int botao);
     void limparVetorBotoes();
-    void adicionarBotao(std::string nomeImg);    
+    void adicionarBotao(std::string nomeImg, sf::Vector2f escala, std::string text, sf::Vector2f pos);    
     void desenharBotoes();
 
     void checarBotoes();

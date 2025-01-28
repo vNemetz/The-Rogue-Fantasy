@@ -5,9 +5,10 @@ namespace ElementosGraficos{
 
 class Botao{
 private:
-    sf::Texture* pTextura;
+    sf::Texture* pTextura;  /*Elementos Gráficos do Botão*/
     sf::Sprite* pSprite;
-    std::string textoBotao;
+
+   // sf::Text* textoBotao;
     ger::Gerenciador_Grafico* pGrafico;
 
     sf::Vector2u tamanho;
@@ -17,14 +18,19 @@ public:
     Botao();
     Botao(std::string nomeImg);
     ~Botao();
+
+
     void alterarApertado();
-    void setTamanho(sf::Vector2u tam);
+    void setEscala(sf::Vector2f escala);
     sf::Vector2u getTamanho() const;
     void setTextura(std::string nomeImagem);
     void setSprite();
     sf::Sprite* getSprite() const;
     void setPosicao(sf::Vector2f pos);
-    void checarApertado() const;
+    //void setTexto(std::string text);
+    //sf::Text* getTexto() const;
+
+    bool checarApertado() const;
 
 };
 }

@@ -4,25 +4,34 @@
 
 namespace menus{
 
-Menu::Menu():
+Menu::Menu(int min, int max):
 Estado(menu)
 ,pTexturaFundo(nullptr)
 ,pSpriteFundo(nullptr)
 ,vetorBotoes()
+,minimo(min)
+,maximo(max)
+,botaoSelecionado(0)
+,bufferTime(0.0f)
 {
-    it = vetorBotoes.begin();
     limparVetorBotoes();
+    it = vetorBotoes.begin();
     pTexturaFundo = new sf::Texture();
     pSpriteFundo = new sf::Sprite();
 }
 
-Menu::Menu(ger::Gerenciador_Estados* pGE):
+Menu::Menu(ger::Gerenciador_Estados* pGE, int min, int max):
 Estado(menu,pGE)
 ,pTexturaFundo(nullptr)
 ,pSpriteFundo(nullptr)
 ,vetorBotoes()
+,botaoSelecionado(0)
+,minimo(min)
+,maximo(max)
+,bufferTime(0.0f)
 {
     limparVetorBotoes();
+    it = vetorBotoes.begin();
     pTexturaFundo = new sf::Texture();
     pSpriteFundo = new sf::Sprite();
 }
@@ -34,15 +43,24 @@ Menu::~Menu()
     limparVetorBotoes();
 }
 
-void Menu::alterarAtivo()
-{
-    ativo = !ativo;
+void Menu::alterarBotaoSelecionado(int unidade)
+{   //bufferTime +=ger::Gerenciador_Grafico::getInstancia()->getDeltaTime();
+    if(unidade > 0 && botaoSelecionado != maximo /*&& bufferTime < 1.0f*/){
+        vetorBotoes[botaoSelecionado]->setTextura("Brown-Button");
+        (botaoSelecionado++);
+        vetorBotoes[botaoSelecionado]->setTextura("Yellow-Button");
+        //bufferTime = 0.0f;
+    }
+    else if(unidade < 0 && botaoSelecionado != minimo /*&& bufferTime < 1.0f*/){
+        vetorBotoes[botaoSelecionado]->setTextura("Brown-Button");
+        (botaoSelecionado --);
+        vetorBotoes[botaoSelecionado]->setTextura("Yellow-Button");
+        //bufferTime = 0.0f;
+    }
+    else{std::cerr <<"Valor de botão inválido\n";}
 }
 
-bool Menu::getAtivo() const
-{
-    return ativo;
-}
+
 
 void Menu::setTexturaFundo(std::string nomeImg)
 {
@@ -59,13 +77,10 @@ void Menu::setSpriteFundo()
         static_cast<float>(tamanhoJanela.x) / tamanhoFundo.x,
         static_cast<float>(tamanhoJanela.y) / tamanhoFundo.y
     );
-    pSpriteFundo->setPosition(-565,-270);
+    //pSpriteFundo->setPosition(-565,-270);
 }
 
-void Menu::setBotaoSelecionado(int botao)
-{
-    botaoSelecionado = botao;
-}
+
 void Menu::limparVetorBotoes()
 {
     for(it = vetorBotoes.begin(); it != vetorBotoes.end(); it++){
@@ -76,9 +91,12 @@ void Menu::limparVetorBotoes()
     vetorBotoes.clear();
 }
 
-void Menu::adicionarBotao(std::string nomeImg)
+void Menu::adicionarBotao(std::string nomeImg, sf::Vector2f escala, std::string text, sf::Vector2f pos)
 {
     ElementosGraficos::Botao* novoBotao = new ElementosGraficos::Botao(nomeImg);
+    novoBotao->setEscala(escala);
+    //novoBotao->setTexto(text);
+    novoBotao->setPosicao(pos);
     vetorBotoes.push_back(novoBotao);
 }
 
@@ -88,6 +106,7 @@ void Menu::desenharBotoes()
     for(it = vetorBotoes.begin(); it != vetorBotoes.end(); it++){
         if(*it){
             ger::Gerenciador_Grafico::getInstancia()->desenharSprite((*it)->getSprite());
+            //ger::Gerenciador_Grafico::getInstancia()->desenharTexto((*it)->getTexto());
         }
     }
 }
@@ -102,8 +121,10 @@ void Menu::checarBotoes(){
 
 void Menu::desenhar()
 {
+    ger::Gerenciador_Grafico::getInstancia()->getJanela()->setView(ger::Gerenciador_Grafico::getInstancia()->getJanela()->getDefaultView());
     ger::Gerenciador_Grafico::getInstancia()->desenharSprite(pSpriteFundo);
     desenharBotoes();
+    ger::Gerenciador_Grafico::getInstancia()->getJanela()->setView(ger::Gerenciador_Grafico::getInstancia()->getVista());
 
 }
 }

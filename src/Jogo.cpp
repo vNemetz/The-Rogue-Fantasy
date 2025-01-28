@@ -3,8 +3,8 @@
 #include "Gerenciadores/Gerenciador_Colisoes.h"
 #include <SFML/System/Vector2.hpp>
 
-Jogo::Jogo()
-    : gerGrafico(ger::Gerenciador_Grafico::getInstancia())
+Jogo::Jogo():
+     gerGrafico(ger::Gerenciador_Grafico::getInstancia())
     , gerEventos(ger::Gerenciador_Eventos::getInstancia())
     , gerEstados(ger::Gerenciador_Estados::getInstancia())
     , faseFloresta(nullptr)
@@ -12,8 +12,10 @@ Jogo::Jogo()
 {
     srand(time(NULL));
     Ente::setPGG(gerGrafico);
-    criarFase();
-    criarMenuPrincipal();
+    gerEstados->inicializarEstados(); /*NUNCA colocar esse método na construtora de GerEstados (seg fault)*/
+    //criarFase();
+    //criarMenuPrincipal();
+
 
     executar();
 }
@@ -22,8 +24,8 @@ Jogo::~Jogo() {
     gerGrafico = nullptr;
     gerEventos = nullptr;
     gerEstados = nullptr;
-    delete faseFloresta;
-    delete menuPrincipal;
+    //delete faseFloresta;
+    //delete menuPrincipal;
 }
 
 void Jogo::criarFase() {
@@ -46,7 +48,8 @@ void Jogo::executar() {
         gerEventos->gerenciar(); // Gerencia os eventos
 
         gerGrafico->limpaJanela(); // Limpa a janela
-        menuPrincipal->desenhar();
+        gerEstados->requererEstado();
+        //menuPrincipal->desenhar();
         //faseFloresta->executar(); // Executa a fase
 
         //gerGrafico->centralizarVista(faseFloresta->getJogador1()); // Centraliza o campo de visão no jogador

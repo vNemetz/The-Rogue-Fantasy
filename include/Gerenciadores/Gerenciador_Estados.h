@@ -27,8 +27,9 @@ public:
 
     void inicializarEstados();
     void requererEstado(); /*Executa o estado atual*/
-    void setEstadoAtual(tipoEstado tEstado);
+    void setEstadoAtual(tipoEstado tipo);
     Estado* getEstadoAtual();
+    Estado* getEstado(tipoEstado tipo);
     
 
 };

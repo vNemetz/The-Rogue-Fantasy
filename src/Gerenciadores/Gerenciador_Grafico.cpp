@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string.h>
 
+
 namespace ger{
 /* Singleton - Padrão de Projeto */
 Gerenciador_Grafico* Gerenciador_Grafico::instancia(nullptr);
@@ -16,13 +17,15 @@ Gerenciador_Grafico* Gerenciador_Grafico::getInstancia() {
 }
 
 Gerenciador_Grafico::Gerenciador_Grafico()
-    : pJanela(NULL)
+    : pJanela(nullptr)
     , clock()
     , mapaTexturas()
     , vista()
+    , fonteSmacky(nullptr)
 {
     setVideoMode();
     setJanela();
+    setFonte();
 
     carregarTextura("/assets/images/Backgrounds/Forest.png", "Forest");
     carregarTextura("/assets/images/Tiles/Ground_grass_0001_tile.png", "Grass0001");
@@ -65,6 +68,7 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     carregarTextura("/assets/images/User-interface/leaderboard-button.png", "Leaderboard-Button");
     carregarTextura("/assets/images/User-interface/main-menu-bg.png", "Main-Menu-Bg");
     carregarTextura("/assets/images/User-interface/yellow-button.png", "Yellow-Button");
+    carregarTextura("/assets/images/User-interface/brown-button.png", "Brown-Button");
 
 }
 
@@ -74,7 +78,9 @@ Gerenciador_Grafico::~Gerenciador_Grafico() {
         delete it->second;
     }
     delete pJanela;
-    pJanela = NULL;
+    pJanela = nullptr;
+    delete fonteSmacky;
+    fonteSmacky = nullptr;
 }
 
 // Inicializando DeltaTime
@@ -213,6 +219,20 @@ sf::Texture* Gerenciador_Grafico::getTextura(std::string nomeImagem) {
     exit(1);
 }
 
+void Gerenciador_Grafico::setFonte()
+{
+    fonteSmacky = new sf::Font();
+    fonteSmacky->loadFromFile("/assets/fonts/Arial.ttf");
+}
+sf::Font* Gerenciador_Grafico::getFonte() const
+{
+    if(fonteSmacky){
+        return (fonteSmacky);
+    }else{std::cerr << "Fonte nao alocada corretamente\n";
+        return nullptr;
+     }
+}
+
 /* Renderização */
 void Gerenciador_Grafico::desenharEntidade(ent::Entidade *pE) const {
     if(pE) {
@@ -230,4 +250,9 @@ void ger::Gerenciador_Grafico::desenharSprite(sf::Sprite *pS) const
     if(pS){
         pJanela->draw(*pS);
     }
+}
+
+void ger::Gerenciador_Grafico::desenharTexto(sf::Text* text) const
+{
+    //pJanela->draw(*text);
 }

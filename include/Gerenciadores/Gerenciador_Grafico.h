@@ -14,6 +14,7 @@ private:
     std::map<std::string, sf::Texture*> mapaTexturas;   // Mapa de texturas
     sf::Clock clock;
     static float deltaTime;
+    sf::Font* fonteSmacky; 
 
     /* Singleton - Padrão de Projeto */
     static Gerenciador_Grafico* instancia;
@@ -52,10 +53,13 @@ public:
     /* Texturas */
     sf::Texture* carregarTextura(std::string caminhoImagem, std::string nomeImagem);
     sf::Texture* getTextura(std::string nomeImagem);
+    void setFonte();
+    sf::Font* getFonte() const;
 
     /* Renderização */
     void desenharEntidade(ent::Entidade* pE) const;
     void desenhar(sf::RectangleShape* corpo) const;
     void desenharSprite(sf::Sprite* pS) const;
+    void desenharTexto(sf::Text* text) const;
 };
 }
