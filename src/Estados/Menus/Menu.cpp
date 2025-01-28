@@ -44,20 +44,19 @@ Menu::~Menu()
 }
 
 void Menu::alterarBotaoSelecionado(int unidade)
-{   //bufferTime +=ger::Gerenciador_Grafico::getInstancia()->getDeltaTime();
-    if(unidade > 0 && botaoSelecionado != maximo /*&& bufferTime < 1.0f*/){
+{
+    if(unidade > 0 && botaoSelecionado != maximo && bufferTime > 0.12f){ 
         vetorBotoes[botaoSelecionado]->setTextura("Brown-Button");
-        (botaoSelecionado++);
-        vetorBotoes[botaoSelecionado]->setTextura("Yellow-Button");
-        //bufferTime = 0.0f;
+        vetorBotoes[++botaoSelecionado]->setTextura("Yellow-Button");
+        bufferTime = 0;
+        std::cout<<botaoSelecionado <<"\n";
     }
-    else if(unidade < 0 && botaoSelecionado != minimo /*&& bufferTime < 1.0f*/){
+    else if(unidade < 0 && botaoSelecionado != minimo && bufferTime > 0.12f){
         vetorBotoes[botaoSelecionado]->setTextura("Brown-Button");
-        (botaoSelecionado --);
-        vetorBotoes[botaoSelecionado]->setTextura("Yellow-Button");
-        //bufferTime = 0.0f;
+        vetorBotoes[--botaoSelecionado]->setTextura("Yellow-Button");
+        bufferTime = 0;
+        std::cout<<botaoSelecionado <<"\n";
     }
-    else{std::cerr <<"Valor de botão inválido\n";}
 }
 
 
@@ -132,4 +131,5 @@ void Menu::desenhar()
  void menus::Menu::executar()
 {
     desenhar();
+ bufferTime +=ger::Gerenciador_Grafico::getInstancia()->getDeltaTime();
 }
