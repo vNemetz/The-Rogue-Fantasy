@@ -6,6 +6,8 @@ fases::Floresta::Floresta(ger::Gerenciador_Colisoes* pGC):
 Fase(pGC, 0)
 ,faseFinalizada(false)
 {
+    criarMapa();
+    criarFundo();
 }
 
 fases::Floresta::~Floresta()

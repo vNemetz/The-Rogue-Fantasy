@@ -12,6 +12,6 @@ public:
     ~Menu_Principal();
 
     void setFase(fases::Fase* pF);
-    void executarEstado(tipoEstado tipo);
+    void executarEstado();
 };
 }

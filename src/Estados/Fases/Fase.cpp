@@ -154,6 +154,7 @@ void fases::Fase::executar() {
     atualizaObstaculos();
     atualizaPersonagens();
     pColisoes->executar();
+    ger::Gerenciador_Grafico::getInstancia()->centralizarVista(pJog1);
 }
 
 ent::pers::Jogador* fases::Fase::getJogador1(){

@@ -1,5 +1,6 @@
 #include "Gerenciadores/Gerenciador_Estados.h"
 #include "Estados/Fases/Floresta.h"
+#include "Gerenciadores/Gerenciador_Input.h"
 
 
 
@@ -13,7 +14,7 @@ pEstadoAtual(nullptr)
     mapaEstados.clear();
     menus::Menu_Principal* menuPrincipal = new menus::Menu_Principal(this);
     mapaEstados.insert(std::pair<tipoEstado, Estado*>(menu, static_cast<Estado*>(menuPrincipal)));
-    setEstadoAtual(menu);
+    pEstadoAtual = mapaEstados[menu];
 }
 
 Gerenciador_Estados::~Gerenciador_Estados(){
@@ -48,9 +49,11 @@ void Gerenciador_Estados::setEstadoAtual(tipoEstado tipo){
     switch (tipo){
         case menu:
             pEstadoAtual = static_cast<Estado*>(mapaEstados[menu]);
+            ger::Gerenciador_Input::getInstancia()->criarInputMapEstado(menu);
             break;
         case fase:
             pEstadoAtual = static_cast<Estado*>(mapaEstados[fase]);
+            ger::Gerenciador_Input::getInstancia()->criarInputMapEstado(fase);
             break;
         default:
             break;

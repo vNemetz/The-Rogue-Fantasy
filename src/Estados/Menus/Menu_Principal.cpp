@@ -34,7 +34,21 @@ void menus::Menu_Principal::setFase(fases::Fase *pF)
     }
 }
 
-void menus::Menu_Principal::executarEstado(tipoEstado tipo)
+void menus::Menu_Principal::executarEstado()
 {
-    pGEstados->setEstadoAtual(tipo);
+    switch (botaoSelecionado){
+        case 0:
+            pGEstados->setEstadoAtual(fase);
+            break;
+        case 1:
+            pGEstados->setEstadoAtual(placar);
+            break;
+        case 2:
+            pGEstados->setEstadoAtual(config);
+            break;
+        default:
+            break;
+    }
+
 }
+

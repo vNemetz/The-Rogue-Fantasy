@@ -133,8 +133,9 @@ void Gerenciador_Input::criarInputMapMenuPrincipal()
         if (pMenuPrincipal)
             pMenuPrincipal->alterarBotaoSelecionado(-1);
     });
-        incluir_tecla(sf::Keyboard::Key::Enter, [this](bool pressionado) {
-            //TO DO
+    incluir_tecla(sf::Keyboard::Key::Enter, [this](bool pressionado) {
+        if(pMenuPrincipal)
+            pMenuPrincipal->executarEstado();
     });
 }
 

@@ -4,7 +4,8 @@ enum tipoEstado{
     fase = 0,
     menu,
     placar,
-    salvar
+    salvar,
+    config
 };
 namespace ger{
 class Gerenciador_Estados;
