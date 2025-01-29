@@ -32,11 +32,6 @@ protected:
     float tempoAtaque;
     float duracaoAtaque = 0.35f; // Duração Total do Ataque
 
-    /* Gravidade - Constantes */
-    const float GRAVIDADE_REAL = 9.8f; // metros por segundo ao quadrado (m/s^2)
-    const float ESCALA_GRAVIDADE_PIXEL = 100.f; // pixels por metro (px/m)
-    const float GRAVIDADE = GRAVIDADE_REAL * ESCALA_GRAVIDADE_PIXEL; // pixels por segundo ao quadrado (px/s^2)
-
     /* Movimentação - Atributos */
     bool movendoEsquerda;
     bool movendoDireita;
@@ -44,6 +39,8 @@ protected:
     bool correndo;
     bool levandoDano;
     bool atacando;
+
+    bool podeAtacar;
 
     /* Knockback - Constantes */
     const float knockbackHorizontal = 500.f;
@@ -61,7 +58,7 @@ public:
 
     /* Movimentação */
     virtual void mover();
-    void sofrerDano(Personagem* atacante);
+    void sofrerDano(Entidade* atacante);
     bool getOlhandoDireita() const;
     virtual void emColisaoInimigo(Inimigo* pI, sf::Vector2f ds) = 0;
     
