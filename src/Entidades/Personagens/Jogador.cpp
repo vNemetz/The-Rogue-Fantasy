@@ -19,6 +19,8 @@ Jogador::Jogador(sf::Vector2f pos, sf::Vector2f tam, bool jog)
     , pulando(false)
     , jogador1(jog)
 {
+    setTextura("Rogue-Stand");
+    setVelocidadeMaxima(sf::Vector2f(600.f, 600.f));
     carregarControles();
 }
 
@@ -93,13 +95,13 @@ void Jogador::emColisaoInimigo(Inimigo* pI, sf::Vector2f ds) {
         // Se está atacando e acertando,
         // além da colisão ser horizontal, dá dano
         if (atacando && ((olhandoDireita && inimigoADireita) || (!olhandoDireita && !inimigoADireita)) && (ds.x > ds.y)) {
-            pI->sofrerDano(static_cast<Personagem*>(this));
+            pI->sofrerDano(static_cast<Entidade*>(pI));
         }
 
         // Se não está atacando ou errando o ataque,
         // e o inimigo não está sofrendo, leva dano
         else if (pI->getEstado() != sofrendo) {
-            sofrerDano(static_cast<Personagem*>(pI));
+            sofrerDano(static_cast<Entidade*>(pI));
         }
     }
 }

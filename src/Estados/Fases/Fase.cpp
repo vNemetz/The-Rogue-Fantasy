@@ -17,25 +17,23 @@ fases::Fase::Fase(ger::Gerenciador_Colisoes* pGC, int nFase)
     , pColisoes(ger::Gerenciador_Colisoes::getInstancia())
     , listaPersonagens()
     , listaObstaculos()
+    , listaProjeteis()
     , numeroFase(nFase)
     , pJog1(nullptr)
     , pJog2(nullptr)
     , tamanhoFase(0.f)
 {
     ent::pers::Jogador* jogador1 = new ent::pers::Jogador(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.7f, 1.7f), true);
-    jogador1->setTextura("Rogue-Stand");
-    jogador1->setVelocidadeMaxima(sf::Vector2f(600.f, 600.f));
     listaPersonagens.incluir(static_cast<ent::Entidade*>(jogador1));
     pColisoes->incluirJogador(jogador1);
     ger::Gerenciador_Eventos::getInstancia()->setJogador(jogador1);
     ger::Gerenciador_Input::getInstancia()->setJogador(jogador1);
     pJog1 = jogador1;
     
+    pColisoes->setListaProjeteis(&listaProjeteis);
 
     if (doisJogadores) {
         ent::pers::Jogador* jogador2 = new ent::pers::Jogador(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.7f, 1.7f), false);
-        jogador2->setTextura("Rogue-Stand");
-        jogador2->setVelocidadeMaxima(sf::Vector2f(600.f, 600.f));
         listaPersonagens.incluir(static_cast<ent::Entidade*>(jogador2));
         pColisoes->incluirJogador(jogador2);
         ger::Gerenciador_Input::getInstancia()->setJogador2(jogador2);
@@ -49,6 +47,7 @@ fases::Fase::~Fase() {
     pColisoes = nullptr;
     listaObstaculos.limpar();
     listaPersonagens.limpar();
+    listaProjeteis.limpar();
 }
 
 void fases::Fase::criarPersonagens(sf::Vector2f posicao, ID id, char tipo) {
@@ -80,8 +79,6 @@ void fases::Fase::criarPersonagens(sf::Vector2f posicao, ID id, char tipo) {
 
 void fases::Fase::criarGoblin(sf::Vector2f posicao) {
     ent::pers::Goblin* goblin = new ent::pers::Goblin(sf::Vector2f(posicao),sf::Vector2f(1.7f, 1.7f));
-    goblin->setTextura("Goblin-Idle");
-    goblin->setVelocidadeMaxima(sf::Vector2f (250.f, 250.f));
     goblin->setTamanhoFase(tamanhoFase);
     goblin->incluirJogador(getJogador1());
     
@@ -94,10 +91,9 @@ void fases::Fase::criarGoblin(sf::Vector2f posicao) {
 
 void fases::Fase::criarAranha(sf::Vector2f posicao) {
     ent::pers::Aranha* aranha = new ent::pers::Aranha(sf::Vector2f(posicao),sf::Vector2f(1.7f, 1.7f));
-    aranha->setTextura("Spider-Idle");
-    aranha->setVelocidadeMaxima(sf::Vector2f (250.f, 250.f));
     aranha->setTamanhoFase(tamanhoFase);
     aranha->incluirJogador(getJogador1());
+    aranha->setListaProjeteis(&listaProjeteis);
 
     if (doisJogadores)
         aranha->incluirJogador(getJogador2());
@@ -190,6 +186,10 @@ void fases::Fase::criarEntidade(char simbolo, const sf::Vector2i pos) {
             criarPlataformas(sf::Vector2f(pos.x * 54.2f, pos.y * 54.2f), 5);
             break;
 
+        case ('p'):
+            criarPersonagens(sf::Vector2f(pos.x * 54.0f, pos.y * 54.0f), projetil);
+            break;
+
         default: 
             break;
     }
@@ -197,6 +197,7 @@ void fases::Fase::criarEntidade(char simbolo, const sf::Vector2i pos) {
 
 void fases::Fase::executar() {
     desenharFundo();
+    atualizarProjeteis();
     atualizaObstaculos();
     atualizaPersonagens();
     pColisoes->executar();
@@ -216,6 +217,10 @@ void fases::Fase::atualizaPersonagens(){
 
 void fases::Fase::atualizaObstaculos(){
     listaObstaculos.percorrer();
+}
+
+void fases::Fase::atualizarProjeteis() {
+    listaProjeteis.percorrer();
 }
 
 float fases::Fase::getTamanhoFase() {

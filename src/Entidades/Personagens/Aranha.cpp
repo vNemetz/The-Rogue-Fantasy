@@ -1,4 +1,6 @@
 #include "Entidades/Personagens/Aranha.h"
+#include "Entidades/Projeteis/Teia.h"
+#include "Listas/Lista_Entidades.h"
 #include <SFML/System/Vector2.hpp>
 #include <cmath>
 
@@ -14,10 +16,11 @@ Aranha::Aranha(sf::Vector2f pos, sf::Vector2f tam)
     : Inimigo(pos, tam)
     , raioAtaque(800.f)
 {
+    setTextura("Spider-Idle");
+    setVelocidadeMaxima(sf::Vector2f (250.f, 250.f));
     raioDetect = 1000.f;
-    duracaoAtaque = 1.5f;
+    duracaoAtaque = 1.2f;
 }
-
 
 Aranha::~Aranha()
 {
@@ -30,19 +33,18 @@ void Aranha::executar() {
         Jogador* jogadorMenosDistante = jogadorMaisProximo();
         float distancia = distanciaJogador(jogadorMenosDistante);
         
-        if (distancia <= raioAtaque) {
+        if (distancia <= raioAtaque)
             atacar(jogadorMenosDistante);
-        }
 
-        else if (distancia <= raioDetect) {
+        else if (distancia <= raioDetect)
             persegueJogador(jogadorMenosDistante);
-        }
 
-        else {
-            movendoEsquerda = false;
-            movendoDireita = false;
-        }
+        else
+            parar();
     }
+
+    else
+        parar();
 
     mover();
 
@@ -61,9 +63,32 @@ void Aranha::atacar(Jogador* jogador) {
     else
         olhandoDireita = false;
 
+    // Lança Teia
+    if (podeAtacar) {
+        prj::Teia* teia = new prj::Teia(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.7f, 1.7f), olhandoDireita);
+        
+        if (olhandoDireita)
+            teia->setPosition(sf::Vector2f(posicao.x + tamanho.x, posicao.y));
+
+        else
+            teia->setPosition(sf::Vector2f(posicao.x, posicao.y));
+
+        listaProjeteis->incluir(teia);
+    }
+
     atacando = true;
-    // Lança o projétil
 }
+
+void Aranha::parar() {
+    movendoEsquerda = false;
+    movendoDireita = false;
+}
+
+void Aranha::setListaProjeteis(lis::Lista_Entidades* listaProjeteis) {
+    this->listaProjeteis = listaProjeteis;
+}
+
+/* Animação */
 
 void Aranha::atualizarElementosAnimacao() {
     switch (est) {
@@ -84,7 +109,7 @@ void Aranha::atualizarElementosAnimacao() {
 
         case estado::atacando:
             setTextura("Spider-Attack");
-            animacao.atualizarSpritesheet(pTextura, sf::Vector2u(3, 1), duracaoAtaque / 7.f, ElementosGraficos::atacando);
+            animacao.atualizarSpritesheet(pTextura, sf::Vector2u(3, 1), duracaoAtaque / 3.f, ElementosGraficos::atacando);
             break;
         
         default:

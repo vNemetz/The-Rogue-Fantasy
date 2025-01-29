@@ -1,4 +1,5 @@
 #include "Gerenciadores/Gerenciador_Colisoes.h"
+#include "Listas/Lista_Entidades.h"
 #include <cmath>
 
 namespace ger {
@@ -70,6 +71,30 @@ void Gerenciador_Colisoes::executar() {
             }
         }
     }
+
+    /* Verificar colisões dos projéteis entre obstáculos e jogador */
+    for (int i = 0; i < listaProjeteis->getTamanho(); i++) {
+        ent::prj::Projetil* projetil = static_cast<ent::prj::Projetil*>(listaProjeteis->operator[](i));
+        
+        if (projetil) {
+            for (auto jogador: listaJogadores) {
+                if (verificarColisao(projetil, jogador)) {
+                    projetil->emColisaoPersonagem(jogador);
+                }
+            }
+
+            for (auto obstaculo: listaObstaculos) {
+                if (verificarColisao(projetil, obstaculo)) {
+                    projetil->emColisaoObstaculo();
+                }
+            }
+        }
+    }
+
+    /* Verificar colisões entre jogadores */
+    if (listaJogadores.size() > 1) {
+        // TODO: COLISÃO ENTRE JOGADORES
+    }
 }
 
 const bool Gerenciador_Colisoes::verificarColisao(ent::Entidade* pe1, ent::Entidade* pe2) const {
@@ -110,6 +135,10 @@ void Gerenciador_Colisoes::incluirObstaculo(ent::obs::Obstaculo* po) {
 
 void Gerenciador_Colisoes::incluirJogador(ent::pers::Jogador* jog) {
     listaJogadores.push_back(jog);
+}
+
+void Gerenciador_Colisoes::setListaProjeteis(lis::Lista_Entidades* listaProjeteis) {
+    this->listaProjeteis = listaProjeteis;
 }
 
 }

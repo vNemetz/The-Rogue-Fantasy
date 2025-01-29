@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Entidades/Personagens/Inimigo.h"
+#include "Listas/Lista_Entidades.h"
 
 namespace ent {
 namespace pers {
@@ -8,6 +9,7 @@ namespace pers {
 class Aranha : public Inimigo {
 private:
     float raioAtaque;
+    lis::Lista_Entidades* listaProjeteis;
 
 public:
     Aranha();
@@ -16,6 +18,8 @@ public:
 
     void executar();
     void atacar(Jogador* jogador);
+    void parar();
+    void setListaProjeteis(lis::Lista_Entidades* listaProjeteis);
 
     /* Animação */
     void atualizarElementosAnimacao();

@@ -19,6 +19,13 @@ protected:
     float dt;
     bool noChao;
     float tamanhoFase;
+
+    bool paraDeletar;
+
+    /* Gravidade - Constantes */
+    const float GRAVIDADE_REAL = 9.8f; // metros por segundo ao quadrado (m/s^2)
+    const float ESCALA_GRAVIDADE_PIXEL = 100.f; // pixels por metro (px/m)
+    const float GRAVIDADE = GRAVIDADE_REAL * ESCALA_GRAVIDADE_PIXEL; // pixels por segundo ao quadrado (px/s^2)
     
 public:
     Entidade();
@@ -52,5 +59,6 @@ public:
     sf::Vector2f getTamanho() const;
 
     void setTamanhoFase(float tamanhoFase);
+    bool getParaDeletar() const;
 };
 }

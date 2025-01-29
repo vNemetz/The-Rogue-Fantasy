@@ -16,8 +16,9 @@ public:
     void remover(ent::Entidade* pE); // Remove
     void limpar(); // Limpa
 
-    void percorrer(); // Chama atualizar() para cada elemento
+    void percorrer(); // Atualiza todos os elementos
     
+    ent::Entidade* operator[](unsigned int index) const;
     int getTamanho() const; // Retorna o tamanho
     
     // Iteradores para o começo e final da lista

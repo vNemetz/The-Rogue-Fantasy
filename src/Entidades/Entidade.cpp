@@ -17,6 +17,7 @@ Entidade::Entidade(sf::Vector2f pos, sf::Vector2f esc, ID id)
     , escala(esc)
     , tamanho()
     , tamanhoFase(INT_MAX)
+    , paraDeletar(false)
 {
     pTextura = new sf::Texture();  // Aloca memória para pTextura
     pSprite = new sf::Sprite();    // Aloca memória para pSprite
@@ -115,6 +116,10 @@ sf::Vector2f Entidade::getTamanho() const {
 
 void Entidade::setTamanhoFase(float tamanhoFase) {
     this->tamanhoFase = tamanhoFase;
+}
+
+bool Entidade::getParaDeletar() const {
+    return paraDeletar;
 }
 
 }

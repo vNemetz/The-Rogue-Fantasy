@@ -60,8 +60,10 @@ public:
 
     void incluir(TL* p); // Adiciona 'p' no final da lista
     void remover(TL* p); // Remove 'p' da lista
+    void remover(unsigned int index);
     void limpar(); // Limpa a lista
     unsigned int getTamanho() const {return tamanho;}
+    TL* operator[](unsigned int index) const;
 
     Iterator begin() const; // Retorna o iterador inicial (primeiro elemento)
     Iterator end() const; // Retorna um iterador para nullptr, o fim da lista
@@ -173,6 +175,43 @@ void Lista<TL>::remover(TL* p) {
 }
 
 template <typename TL>
+void Lista<TL>::remover(unsigned int index) {
+    // Verifica se o índice é válido
+    if (index >= tamanho) {
+        return; // Índice fora dos limites, não faz nada
+    }
+
+    Iterator it = begin();
+    Iterator anterior = end(); // Representa o iterador anterior como inválido inicialmente
+    unsigned int contador = 0;
+
+    // Percorre a lista até encontrar o índice desejado
+    while (it != end() && contador < index) {
+        anterior = it;
+        ++it;
+        contador++;
+    }
+
+    // Se o índice foi encontrado, remove o elemento
+    if (it != end()) {
+        Elemento<TL>* atual = it.getElemento();
+
+        // Atualiza os ponteiros da lista
+        if (atual == pPrimeiro) {
+            pPrimeiro = atual->getProximo();
+        } else if (atual == pUltimo) {
+            pUltimo = anterior.getElemento();
+        } else {
+            (anterior.getElemento())->setProx(atual->getProximo());
+        }
+
+        // Remove o elemento
+        delete atual;
+        tamanho--;
+    }
+}
+
+template <typename TL>
 void Lista<TL>::limpar() {
     Iterator it = begin();
 
@@ -185,6 +224,20 @@ void Lista<TL>::limpar() {
     pPrimeiro = nullptr;
     pUltimo = nullptr;
     tamanho = 0;
+}
+
+template <typename TL>
+TL* Lista<TL>::operator[](unsigned int index) const {
+    if (index >= tamanho) {
+        return nullptr; // Índice fora dos limites
+    }
+    
+    Elemento<TL>* atual = pPrimeiro;
+    for (unsigned int i = 0; i < index; ++i) {
+        atual = atual->getProximo();
+    }
+    
+    return atual->getInfo();
 }
 
 template <typename TL>
