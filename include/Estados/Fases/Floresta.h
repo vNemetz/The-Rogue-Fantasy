@@ -3,7 +3,7 @@
 
 namespace fases{
 
-class Floresta : public Fase{
+class Floresta :public Fase{
 private:
     bool faseFinalizada;
 public:
@@ -13,4 +13,4 @@ public:
     virtual void criarMapa();
 
 };
-}
+}   

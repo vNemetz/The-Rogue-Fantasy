@@ -48,7 +48,7 @@ void Lista_Entidades::percorrer() {
             aux->executar();
             aux->desenhar();
             aux->setNoChao(false);
-            aux->desenharHitbox();
+            //aux->desenharHitbox();
             ++it; // Avança normalmente se não houve remoção
         }
     }

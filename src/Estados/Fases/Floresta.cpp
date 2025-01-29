@@ -2,11 +2,13 @@
 #include <iostream>
 #include <fstream>
 
-fases::Floresta::Floresta(ger::Gerenciador_Colisoes* pGC)
-    : Fase(pGC, 1)
-    , faseFinalizada(false)
+fases::Floresta::Floresta(ger::Gerenciador_Colisoes* pGC):
+Fase(pGC, 0)
+,faseFinalizada(false)
 {
     tamanhoFase = 5311.f;
+    criarMapa();
+    criarFundo();
 }
 
 fases::Floresta::~Floresta()

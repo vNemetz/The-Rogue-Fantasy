@@ -2,12 +2,76 @@
 #include "Entidades/Personagens/Jogador.h"
 #include <SFML/Window/Keyboard.hpp>
 
+
 namespace ger {
 /* Singleton - Padrão de Projeto */
 Gerenciador_Input::Gerenciador_Input()
     : mapaTeclas()
     , jogador1(nullptr)
     , jogador2(nullptr)
+    , pMenuPrincipal(nullptr)
+    , pGerEstados(ger::Gerenciador_Estados::getInstancia())
+{
+    setMenuPrincipal(static_cast<menus::Menu_Principal*>(pGerEstados->getEstado(menu)));
+    criarInputMapEstado(menu);
+}
+
+Gerenciador_Input::~Gerenciador_Input() {
+    mapaTeclas.clear();
+    jogador1 = nullptr;
+    jogador2 = nullptr;
+    
+    pMenuPrincipal = nullptr;
+}
+
+Gerenciador_Input* Gerenciador_Input::instancia(nullptr);
+
+Gerenciador_Input* Gerenciador_Input::getInstancia() {
+   if(instancia == nullptr)
+        instancia = new Gerenciador_Input();
+    
+    return instancia;
+}
+
+/* Gerenciador de Input */
+void Gerenciador_Input::setJogador(ent::pers::Jogador* jogador1) {
+    this->jogador1 = jogador1;
+}
+
+void Gerenciador_Input::setJogador2(ent::pers::Jogador* jogador2) {
+    this->jogador2 = jogador2;
+}
+
+void Gerenciador_Input::setMenuPrincipal(menus::Menu_Principal *pMenuP)
+{
+    if(pMenuP){pMenuPrincipal = pMenuP;}
+}
+
+void Gerenciador_Input::incluir_tecla(sf::Keyboard::Key tecla, std::function<void(bool)> funcaoTecla) {
+    mapaTeclas[tecla] = funcaoTecla;
+}
+
+void Gerenciador_Input::checarEstado() const
+{
+    pGerEstados->getEstadoAtual();
+}
+void Gerenciador_Input::criarInputMapEstado(tipoEstado tipoEstado)
+{
+    switch(tipoEstado){
+        case fase:
+            mapaTeclas.clear();
+            criarInputMapFase();
+            break;
+        case menu:
+            mapaTeclas.clear();
+            criarInputMapMenuPrincipal();
+            break;
+        default:
+            break;
+    }
+}
+
+void Gerenciador_Input::criarInputMapFase()
 {
     /* Inicializa os comandos do jogo */
     /* Jogador 1 - Comandos*/
@@ -56,42 +120,27 @@ Gerenciador_Input::Gerenciador_Input()
         if (jogador2)
             jogador2->atualizarMovimentacao(pressionado, "L");
     });
-
-    /*Teclas de Mudança de Estado*/
-    /*incluir_tecla(sf::Keyboard::Key::Escape, [this](bool pressionado){
-        estado->alterarEstado();
-    });*/
 }
 
-Gerenciador_Input::~Gerenciador_Input() {
-    mapaTeclas.clear();
-    jogador1 = nullptr;
-    jogador2 = nullptr;
+void Gerenciador_Input::criarInputMapMenuPrincipal()
+{
+    incluir_tecla(sf::Keyboard::Key::Down, [this](bool pressionado) {
+        if (pMenuPrincipal){
+            pMenuPrincipal->alterarBotaoSelecionado(1);
+        }
+    });
+    incluir_tecla(sf::Keyboard::Key::Up, [this](bool pressionado) {
+        if (pMenuPrincipal)
+            pMenuPrincipal->alterarBotaoSelecionado(-1);
+    });
+    incluir_tecla(sf::Keyboard::Key::Enter, [this](bool pressionado) {
+        if(pMenuPrincipal)
+            pMenuPrincipal->executarEstado();
+    });
 }
 
-Gerenciador_Input* Gerenciador_Input::instancia(nullptr);
-
-Gerenciador_Input* Gerenciador_Input::getInstancia() {
-   if(instancia == nullptr)
-        instancia = new Gerenciador_Input();
-    
-    return instancia;
-}
-
-/* Gerenciador de Input */
-void Gerenciador_Input::setJogador(ent::pers::Jogador* jogador1) {
-    this->jogador1 = jogador1;
-}
-
-void Gerenciador_Input::setJogador2(ent::pers::Jogador* jogador2) {
-    this->jogador2 = jogador2;
-}
-
-void Gerenciador_Input::incluir_tecla(sf::Keyboard::Key tecla, std::function<void(bool)> funcaoTecla) {
-    mapaTeclas[tecla] = funcaoTecla;
-}
-
-void Gerenciador_Input::teclaApertada(sf::Keyboard::Key tecla) {
+void Gerenciador_Input::teclaApertada(sf::Keyboard::Key tecla)
+{
     auto it = mapaTeclas.find(tecla);
     
     // Procura a tecla no mapa, se achar executa a função como verdadeira

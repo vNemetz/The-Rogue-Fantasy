@@ -2,9 +2,9 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System/Vector2.hpp>
 #include "Gerenciadores/Gerenciador_Colisoes.h"
-#include "Gerenciadores/Gerenciador_Estados.h"
 #include "Listas/Lista_Entidades.h"
 #include "Entidades/Personagens/Jogador.h"
+#include "Estados/Estado.h"
 #include "Ente.h"
 
 namespace fases{

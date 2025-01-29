@@ -12,7 +12,7 @@ fases::Fase::Fase() : Fase(nullptr, 0)
 }
 
 fases::Fase::Fase(ger::Gerenciador_Colisoes* pGC, int nFase)
-    : Ente(fase)
+    : Ente()
     , Estado()
     , pColisoes(ger::Gerenciador_Colisoes::getInstancia())
     , listaPersonagens()
@@ -146,6 +146,7 @@ void fases::Fase::desenharFundo() {
     ger::Gerenciador_Grafico::getInstancia()->getJanela()->setView(ger::Gerenciador_Grafico::getInstancia()->getJanela()->getDefaultView());
     ger::Gerenciador_Grafico::getInstancia()->getJanela()->draw(spriteFundo);
     ger::Gerenciador_Grafico::getInstancia()->getJanela()->setView(ger::Gerenciador_Grafico::getInstancia()->getVista());
+    ger::Gerenciador_Grafico::getInstancia()->centralizarVista(pJog1, tamanhoFase);
 }
 
 void fases::Fase::criarEntidade(char simbolo, const sf::Vector2i pos) {

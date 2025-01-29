@@ -1,6 +1,6 @@
 #pragma once
 #include "Entidades/Entidade.h"
-#include "Animacao.h"
+#include "ElementosGraficos/Animacao.h"
 
 namespace ent {
 namespace pers{
