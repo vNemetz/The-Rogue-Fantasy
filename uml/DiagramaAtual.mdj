@@ -10720,7 +10720,7 @@
 											"parentStyle": true,
 											"left": 2197,
 											"top": 877,
-											"width": 298.9453125,
+											"width": 303.1898193359375,
 											"height": 11,
 											"text": "«Entidade - Abstrata»"
 										},
@@ -10736,7 +10736,7 @@
 											"parentStyle": true,
 											"left": 2197,
 											"top": 890,
-											"width": 298.9453125,
+											"width": 303.1898193359375,
 											"height": 11,
 											"text": "Personagem"
 										},
@@ -10779,7 +10779,7 @@
 									"parentStyle": true,
 									"left": 2192,
 									"top": 872,
-									"width": 308.9453125,
+									"width": 313.1898193359375,
 									"height": 34,
 									"stereotypeLabel": {
 										"$ref": "1uymcqx1k0et1/n+OD7JwgAA"
@@ -10819,7 +10819,7 @@
 											"parentStyle": true,
 											"left": 2197,
 											"top": 911,
-											"width": 298.9453125,
+											"width": 303.1898193359375,
 											"height": 11,
 											"text": "#est: estado",
 											"horizontalAlignment": 0
@@ -10839,7 +10839,7 @@
 											"parentStyle": true,
 											"left": 2197,
 											"top": 924,
-											"width": 298.9453125,
+											"width": 303.1898193359375,
 											"height": 11,
 											"text": "#numVidas: int",
 											"horizontalAlignment": 0
@@ -10859,7 +10859,7 @@
 											"parentStyle": true,
 											"left": 2197,
 											"top": 937,
-											"width": 298.9453125,
+											"width": 303.1898193359375,
 											"height": 11,
 											"text": "#tempoParado: float",
 											"horizontalAlignment": 0
@@ -10879,7 +10879,7 @@
 											"parentStyle": true,
 											"left": 2197,
 											"top": 950,
-											"width": 298.9453125,
+											"width": 303.1898193359375,
 											"height": 11,
 											"text": "#tempoDano: float",
 											"horizontalAlignment": 0
@@ -10899,7 +10899,7 @@
 											"parentStyle": true,
 											"left": 2197,
 											"top": 963,
-											"width": 298.9453125,
+											"width": 303.1898193359375,
 											"height": 11,
 											"text": "#movendoEsquerda: bool",
 											"horizontalAlignment": 0
@@ -10919,7 +10919,7 @@
 											"parentStyle": true,
 											"left": 2197,
 											"top": 976,
-											"width": 298.9453125,
+											"width": 303.1898193359375,
 											"height": 11,
 											"text": "#movendoDireita: bool",
 											"horizontalAlignment": 0
@@ -10939,7 +10939,7 @@
 											"parentStyle": true,
 											"left": 2197,
 											"top": 989,
-											"width": 298.9453125,
+											"width": 303.1898193359375,
 											"height": 11,
 											"text": "#olhandoDireita: bool",
 											"horizontalAlignment": 0
@@ -10959,7 +10959,7 @@
 											"parentStyle": true,
 											"left": 2197,
 											"top": 1002,
-											"width": 298.9453125,
+											"width": 303.1898193359375,
 											"height": 11,
 											"text": "#levandoDano: bool",
 											"horizontalAlignment": 0
@@ -10971,7 +10971,7 @@
 									"parentStyle": true,
 									"left": 2192,
 									"top": 906,
-									"width": 308.9453125,
+									"width": 313.1898193359375,
 									"height": 112
 								},
 								{
@@ -10999,7 +10999,7 @@
 											"parentStyle": true,
 											"left": 2197,
 											"top": 1023,
-											"width": 298.9453125,
+											"width": 303.1898193359375,
 											"height": 11,
 											"text": "«create»+Personagem()",
 											"horizontalAlignment": 0
@@ -11019,7 +11019,7 @@
 											"parentStyle": true,
 											"left": 2197,
 											"top": 1036,
-											"width": 298.9453125,
+											"width": 303.1898193359375,
 											"height": 11,
 											"text": "«create»+Personagem(pos: Vector2f, tam: Vector2f, id: ID)",
 											"horizontalAlignment": 0
@@ -11039,7 +11039,7 @@
 											"parentStyle": true,
 											"left": 2197,
 											"top": 1049,
-											"width": 298.9453125,
+											"width": 303.1898193359375,
 											"height": 11,
 											"text": "«destroy»+Personagem()",
 											"horizontalAlignment": 0
@@ -11059,7 +11059,7 @@
 											"parentStyle": true,
 											"left": 2197,
 											"top": 1062,
-											"width": 298.9453125,
+											"width": 303.1898193359375,
 											"height": 11,
 											"text": "+executar(): virtual void = 0",
 											"horizontalAlignment": 0
@@ -11100,7 +11100,7 @@
 											"parentStyle": true,
 											"left": 2197,
 											"top": 1075,
-											"width": 298.9453125,
+											"width": 303.1898193359375,
 											"height": 11,
 											"text": "+mover(): virtual void",
 											"horizontalAlignment": 0
@@ -11162,7 +11162,7 @@
 											"parentStyle": true,
 											"left": 2197,
 											"top": 1088,
-											"width": 298.9453125,
+											"width": 303.1898193359375,
 											"height": 11,
 											"text": "+const getOlhandoDireita(): bool",
 											"horizontalAlignment": 0
@@ -11182,7 +11182,7 @@
 											"parentStyle": true,
 											"left": 2197,
 											"top": 1101,
-											"width": 298.9453125,
+											"width": 303.1898193359375,
 											"height": 11,
 											"text": "+atualizarEstado(): void",
 											"horizontalAlignment": 0
@@ -11202,7 +11202,7 @@
 											"parentStyle": true,
 											"left": 2197,
 											"top": 1114,
-											"width": 298.9453125,
+											"width": 303.1898193359375,
 											"height": 11,
 											"text": "+const getEstado(): estado",
 											"horizontalAlignment": 0
@@ -11222,7 +11222,7 @@
 											"parentStyle": true,
 											"left": 2197,
 											"top": 1127,
-											"width": 298.9453125,
+											"width": 303.1898193359375,
 											"height": 11,
 											"text": "+setNumVidas(numVidas: int): void",
 											"horizontalAlignment": 0
@@ -11242,7 +11242,7 @@
 											"parentStyle": true,
 											"left": 2197,
 											"top": 1140,
-											"width": 298.9453125,
+											"width": 303.1898193359375,
 											"height": 11,
 											"text": "+const getNumVidas(): int",
 											"horizontalAlignment": 0
@@ -11262,7 +11262,7 @@
 											"parentStyle": true,
 											"left": 2197,
 											"top": 1153,
-											"width": 298.9453125,
+											"width": 303.1898193359375,
 											"height": 11,
 											"text": "+setEstado(est: estado): void",
 											"horizontalAlignment": 0
@@ -11282,7 +11282,7 @@
 											"parentStyle": true,
 											"left": 2197,
 											"top": 1166,
-											"width": 298.9453125,
+											"width": 303.1898193359375,
 											"height": 11,
 											"text": "+emColisaoInimigo(pI: *Inimigo, ds: Vector2f): virtual void = 0",
 											"horizontalAlignment": 0
@@ -11294,7 +11294,7 @@
 									"parentStyle": true,
 									"left": 2192,
 									"top": 1018,
-									"width": 308.9453125,
+									"width": 313.1898193359375,
 									"height": 164
 								},
 								{
@@ -11323,7 +11323,7 @@
 							"parentStyle": false,
 							"left": 2192,
 							"top": 872,
-							"width": 307.9453125,
+							"width": 312.1898193359375,
 							"height": 310,
 							"showProperty": false,
 							"nameCompartment": {
@@ -20021,7 +20021,7 @@
 											"top": 1589,
 											"width": 199,
 											"height": 11,
-											"text": "«Inimigo 2»"
+											"text": "«Inimigo Médio»"
 										},
 										{
 											"_type": "LabelView",
@@ -20037,7 +20037,7 @@
 											"top": 1602,
 											"width": 199,
 											"height": 11,
-											"text": "Inim_Medio"
+											"text": "Aranha"
 										},
 										{
 											"_type": "LabelView",
@@ -31214,8 +31214,8 @@
 					"_parent": {
 						"$ref": "IoH8RzmxEE6xOc9zvj2jawAA"
 					},
-					"name": "Inim_Medio",
-					"stereotype": "Inimigo 2",
+					"name": "Aranha",
+					"stereotype": "Inimigo Médio",
 					"attributes": [
 						{
 							"_type": "UMLAttribute",

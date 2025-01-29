@@ -3,9 +3,12 @@
 #include <fstream>
 
 fases::Floresta::Floresta(ger::Gerenciador_Colisoes* pGC):
-Fase(pGC)
+Fase(pGC, 0)
 ,faseFinalizada(false)
 {
+    tamanhoFase = 5311.f;
+    criarMapa();
+    criarFundo();
 }
 
 fases::Floresta::~Floresta()

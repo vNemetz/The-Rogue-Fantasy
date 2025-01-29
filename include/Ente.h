@@ -12,8 +12,7 @@ enum ID {
     plataforma,
     inimigo,
     projetil,
-    menu,
-    fase
+
 };
 
 class Ente {

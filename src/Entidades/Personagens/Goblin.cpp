@@ -6,16 +6,18 @@ namespace ent {
 namespace pers {
 
 Goblin::Goblin()
-    : Goblin(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f), nullptr)
+    : Goblin(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f))
 {
 }
 
-Goblin::Goblin(sf::Vector2f pos, sf::Vector2f tam, Jogador* jog)
-    : Inimigo(pos, tam, jog)
-    , raioDetect(600)
+Goblin::Goblin(sf::Vector2f pos, sf::Vector2f tam)
+    : Inimigo(pos, tam)
     , tempoSemDetectar(0.f)
     , estadoIdle(PARADO)
 {
+    setTextura("Goblin-Idle");
+    raioDetect = 600.f;
+    setVelocidadeMaxima(sf::Vector2f (250.f, 250.f));
 }
 
 Goblin::~Goblin()
@@ -23,15 +25,22 @@ Goblin::~Goblin()
 }
 
 void Goblin::executar() {
-    if (jogador) {
-        sf::Vector2f dist = jogador->getPosition() - posicao;
-        float moduloDist = sqrt(pow((dist.x),2) + pow(dist.y, 2));
+    if (jogadores.size() > 0) {
+        // Se há jogadores, selecionar o que está mais próximo
+        // e então se mover a ele
 
-        if (moduloDist <= raioDetect) {
-            persegueJogador();
+        Jogador* jogadorMenosDistante = jogadorMaisProximo();
+        float distancia = distanciaJogador(jogadorMenosDistante);
+
+        if (distancia <= raioDetect) {
+            persegueJogador(jogadorMenosDistante);
 
             tempoSemDetectar = 0.f;
             estadoIdle = PARADO;
+        }
+
+        else {
+            movimentoAleatorio();
         }
     }
 
@@ -47,21 +56,6 @@ void Goblin::executar() {
 }
 
 /* Movimentação */
-
-void Goblin::persegueJogador() {
-    sf::Vector2f posJogador = jogador->getPosition();
-    sf::Vector2f posInimigo = getPosition();
-
-    if (posJogador.x > posInimigo.x) {
-        movendoDireita = true;
-        movendoEsquerda = false;
-    }
-
-    else {
-        movendoDireita = false;
-        movendoEsquerda = true;
-    }
-}
 
 void Goblin::movimentoAleatorio() {
     /* Movimento aleatório se não detectar nada */
@@ -103,39 +97,6 @@ void Goblin::movimentoAleatorio() {
             movendoEsquerda = true;
             break;
     }
-}
-
-void Goblin::emColisaoInimigo(Inimigo* pI, sf::Vector2f ds) {
-    sf::Vector2f posicaoInimigo = pI->getPosition();
-    sf::Vector2f tamanhoPers = pI->getTamanho();
-    sf::Vector2f velocidadeInimigo = pI->getVelocidade();
-
-    if (ds.x != 0.f && ds.y != 0.f) {
-        // Se a colisão é no eixo x
-        if (ds.x > ds.y) {
-            if (posicaoInimigo.x < posicao.x)
-                posicaoInimigo.x += ds.x;
-
-            else
-                posicaoInimigo.x -= ds.x;
-        }
-        
-        // Se a colisão é no eixo y
-        else {
-            if (posicaoInimigo.y < posicao.y) {
-                posicaoInimigo.y += ds.y;
-            }
-
-            else {
-                posicaoInimigo.y -= ds.y;
-            }
-
-            velocidadeInimigo.y = 0;
-        }
-    }
-
-    pI->setPosition(posicaoInimigo);
-    pI->setVelocidade(velocidadeInimigo);
 }
 
 /* Animação */

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string.h>
 
+
 namespace ger{
 /* Singleton - Padrão de Projeto */
 Gerenciador_Grafico* Gerenciador_Grafico::instancia(nullptr);
@@ -16,13 +17,15 @@ Gerenciador_Grafico* Gerenciador_Grafico::getInstancia() {
 }
 
 Gerenciador_Grafico::Gerenciador_Grafico()
-    : pJanela(NULL)
+    : pJanela(nullptr)
     , clock()
     , mapaTexturas()
     , vista()
+    , fonteSmacky(nullptr)
 {
     setVideoMode();
     setJanela();
+    setFonte();
 
     carregarTextura("/assets/images/Backgrounds/Forest.png", "Forest");
     carregarTextura("/assets/images/Tiles/Ground_grass_0001_tile.png", "Grass0001");
@@ -60,6 +63,21 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     carregarTextura("/assets/images/Goblin/goblin-idle.png", "Goblin-Idle");
     carregarTextura("/assets/images/Goblin/goblin-walk.png", "Goblin-Walk");
     carregarTextura("/assets/images/Goblin/goblin-hurt.png", "Goblin-Hurt");
+
+    /* Spider Textures */
+    carregarTextura("/assets/images/Spider/spider-idle.png", "Spider-Idle");
+    carregarTextura("/assets/images/Spider/spider-hurt.png", "Spider-Hurt");
+    carregarTextura("/assets/images/Spider/spider-attack.png", "Spider-Attack");
+    carregarTextura("/assets/images/Spider/spider-walk.png", "Spider-Walk");
+
+    carregarTextura("/assets/images/General/web.png", "Web");
+
+    /*GUI Textures*/
+    carregarTextura("/assets/images/User-interface/leaderboard-button.png", "Leaderboard-Button");
+    carregarTextura("/assets/images/User-interface/main-menu-bg.png", "Main-Menu-Bg");
+    carregarTextura("/assets/images/User-interface/yellow-button.png", "Yellow-Button");
+    carregarTextura("/assets/images/User-interface/brown-button.png", "Brown-Button");
+
 }
 
 Gerenciador_Grafico::~Gerenciador_Grafico() {
@@ -68,7 +86,9 @@ Gerenciador_Grafico::~Gerenciador_Grafico() {
         delete it->second;
     }
     delete pJanela;
-    pJanela = NULL;
+    pJanela = nullptr;
+    delete fonteSmacky;
+    fonteSmacky = nullptr;
 }
 
 // Inicializando DeltaTime
@@ -137,12 +157,12 @@ void Gerenciador_Grafico::setCentroVista(sf::Vector2f pos) {
     pJanela->setView(vista);
 }
 
-void Gerenciador_Grafico::centralizarVista(ent::Entidade *e) {
+void Gerenciador_Grafico::centralizarVista(ent::Entidade *e, float tamanhoFase) {
     vista.setSize((sf::Vector2f(static_cast<float>(WIDTH), static_cast<float>(HEIGHT))));
     sf::Vector2i tamanho = e->getCorpo().getSize();
 
     sf::Vector2f posicao;
-    posicao.y = getVista().getCenter().y;
+    posicao.y = HEIGHT/2.f - 300.f;
 
     posicao.x = e->getPosition().x;
 
@@ -152,8 +172,8 @@ void Gerenciador_Grafico::centralizarVista(ent::Entidade *e) {
     else
         posicao.x -= tamanho.x / 2.f;
 
-    float limiteEsquerdo = getVista().getSize().x / 2.f + 11.f;
-    float limiteDireito = - getVista().getSize().x / 2.f + 11.f + 5582.6f;
+    float limiteEsquerdo = 12.f + getVista().getSize().x / 2.f;
+    float limiteDireito = tamanhoFase - getVista().getSize().x / 2.f;
 
     if (posicao.x < limiteEsquerdo)
         posicao.x = limiteEsquerdo;
@@ -207,6 +227,20 @@ sf::Texture* Gerenciador_Grafico::getTextura(std::string nomeImagem) {
     exit(1);
 }
 
+void Gerenciador_Grafico::setFonte()
+{
+    fonteSmacky = new sf::Font();
+    fonteSmacky->loadFromFile("/assets/fonts/Arial.ttf");
+}
+sf::Font* Gerenciador_Grafico::getFonte() const
+{
+    if(fonteSmacky){
+        return (fonteSmacky);
+    }else{std::cerr << "Fonte nao alocada corretamente\n";
+        return nullptr;
+     }
+}
+
 /* Renderização */
 void Gerenciador_Grafico::desenharEntidade(ent::Entidade *pE) const {
     if(pE) {
@@ -217,4 +251,16 @@ void Gerenciador_Grafico::desenharEntidade(ent::Entidade *pE) const {
 void Gerenciador_Grafico::desenhar(sf::RectangleShape *corpo) const {
     pJanela->draw(*corpo);
 }
+}
+
+void ger::Gerenciador_Grafico::desenharSprite(sf::Sprite *pS) const
+{
+    if(pS){
+        pJanela->draw(*pS);
+    }
+}
+
+void ger::Gerenciador_Grafico::desenharTexto(sf::Text* text) const
+{
+    //pJanela->draw(*text);
 }

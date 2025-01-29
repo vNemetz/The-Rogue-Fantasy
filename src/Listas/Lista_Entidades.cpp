@@ -28,13 +28,34 @@ void Lista_Entidades::percorrer() {
 
     while (it != end()) {
         ent::Entidade* aux = *it;
+
+        if (!aux) { // Verifica se o ponteiro é válido (evita crash se houver nullptr na lista)
+            ++it;
+            continue;
+        }
+
+        if (aux->getParaDeletar()) {
+            // Captura o próximo elemento ANTES de remover o atual
+            Lista<ent::Entidade>::Iterator next = it;
+            ++next;
+
+            remover(aux); // Remove o elemento atual
+
+            it = next; // Atualiza o iterator para o próximo elemento válido
+        }
         
-        aux->executar();
-        aux->desenhar();
-        aux->setNoChao(false); // Setta noChao como false (se estiver colidindo com chão, fica true depois)
-        //aux->desenharHitbox(); // Para Debug
-        ++it;
+        else {
+            aux->executar();
+            aux->desenhar();
+            aux->setNoChao(false);
+            //aux->desenharHitbox();
+            ++it; // Avança normalmente se não houve remoção
+        }
     }
+}
+
+ent::Entidade* Lista_Entidades::operator[](unsigned int index) const {
+    return LEs.operator[](index);
 }
 
 int Lista_Entidades::getTamanho() const {

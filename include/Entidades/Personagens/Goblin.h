@@ -13,23 +13,19 @@ enum EstadoIdle {
 
 class Goblin : public Inimigo {
 private:
-    float raioDetect;
     float tempoSemDetectar;
 
     EstadoIdle estadoIdle; // Salva o estado da patrulha
 
 public:
     Goblin();
-    Goblin(sf::Vector2f pos, sf::Vector2f tam, Jogador* jog);
+    Goblin(sf::Vector2f pos, sf::Vector2f tam);
     ~Goblin();
 
     void executar();
 
     /* Movimentação */
-    void persegueJogador();
     void movimentoAleatorio();
-
-    void emColisaoInimigo(Inimigo* pI, sf::Vector2f ds);
     
     /* Animação */
     void atualizarElementosAnimacao();

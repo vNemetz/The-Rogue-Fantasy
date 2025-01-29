@@ -22,6 +22,7 @@ Personagem::Personagem(sf::Vector2f pos, sf::Vector2f tam, ID id)
     , correndo(false)
     , levandoDano(false)
     , atacando(false)
+    , podeAtacar(true)
     , animacao()
 {
 }
@@ -89,16 +90,17 @@ void Personagem::mover() {
     setPosition((ds + posicao));
 }
 
-void Personagem::sofrerDano(Personagem* atacante) {
+void Personagem::sofrerDano(Entidade* atacante) {
     levandoDano = true;
     tempoDano = 0.f;
     numVidas--;
 
     /* Knockback */
     setPosition(posicao + sf::Vector2f(0.f, -15.f));
+    noChao = false;
     velocidade = sf::Vector2f(knockbackHorizontal, -knockbackVertical);
 
-    if (!atacante->getOlhandoDireita()) {
+    if (atacante->getPosition().x > posicao.x) {
         velocidade.x *= -1; // Direção do Knockback vai depender da visão do atacante
     }
 }
@@ -126,11 +128,13 @@ void Personagem::atualizarEstado() {
 
     else if (atacando) {
         est = estado::atacando;
+        podeAtacar = false;
 
         tempoAtaque += pGG->getDeltaTime();
         if (tempoAtaque >= duracaoAtaque) {
             tempoAtaque = 0.f;
             atacando = false;
+            podeAtacar = true;
         }
     }
 
