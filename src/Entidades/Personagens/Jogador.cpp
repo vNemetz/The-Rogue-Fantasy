@@ -95,7 +95,7 @@ void Jogador::emColisaoInimigo(Inimigo* pI, sf::Vector2f ds) {
         // Se está atacando e acertando,
         // além da colisão ser horizontal, dá dano
         if (atacando && ((olhandoDireita && inimigoADireita) || (!olhandoDireita && !inimigoADireita)) && (ds.x > ds.y)) {
-            pI->sofrerDano(static_cast<Entidade*>(pI));
+            pI->sofrerDano(static_cast<Entidade*>(this));
         }
 
         // Se não está atacando ou errando o ataque,

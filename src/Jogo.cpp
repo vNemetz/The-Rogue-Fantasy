@@ -1,7 +1,5 @@
 #include "Jogo.h"
 #include "Ente.h"
-#include "Gerenciadores/Gerenciador_Colisoes.h"
-#include <SFML/System/Vector2.hpp>
 
 Jogo::Jogo():
      gerGrafico(ger::Gerenciador_Grafico::getInstancia())
@@ -15,8 +13,7 @@ Jogo::Jogo():
     gerEstados->inicializarEstados(); /*NUNCA colocar esse método na construtora de GerEstados (seg fault)*/
     //criarFase();
     //criarMenuPrincipal();
-
-
+    
     executar();
 }
 
@@ -30,15 +27,12 @@ Jogo::~Jogo() {
 
 void Jogo::criarFase() {
     if(faseFloresta == nullptr){
-        faseFloresta = new fases::Floresta(ger::Gerenciador_Colisoes::getInstancia());
-        faseFloresta->criarMapa();
-        faseFloresta->criarFundo(); 
+        faseFloresta = new fases::Floresta();
     }
 }
 
-void Jogo::criarMenuPrincipal()
-{
-    if(menuPrincipal == nullptr){
+void Jogo::criarMenuPrincipal() {
+    if(menuPrincipal == nullptr) {
         menuPrincipal = new menus::Menu_Principal(gerEstados);
     }
 }
@@ -49,10 +43,7 @@ void Jogo::executar() {
 
         gerGrafico->limpaJanela(); // Limpa a janela
         gerEstados->requererEstado();
-        //menuPrincipal->desenhar();
-        //faseFloresta->executar(); // Executa a fase
 
-        //gerGrafico->centralizarVista(faseFloresta->getJogador1(), faseFloresta->getTamanhoFase()); // Centraliza o campo de visão no jogador
         gerGrafico->updateDeltaTime(); // Atualiza o tempo
         gerGrafico->display(); // Exibe a janela
     }

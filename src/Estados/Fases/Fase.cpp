@@ -1,145 +1,132 @@
 #include "Estados/Fases/Fase.h"
-#include "Entidades/Obstáculos/Plataforma.h"
 #include "Gerenciadores/Gerenciador_Eventos.h"
 #include "Gerenciadores/Gerenciador_Grafico.h"
 #include "Gerenciadores/Gerenciador_Input.h"
-#include "Entidades/Personagens/Goblin.h"
-#include "Entidades/Personagens/Aranha.h"
-#include "Entidades/Obstáculos/Plataforma.h"
+#include "Fabricas/Fabrica_Goblin.h"
+#include "Fabricas/Fabrica_Plataforma.h"
+#include "Fabricas/Fabrica_Aranha.h"
+#include "Fabricas/Fabrica_Jogador.h"
 
-fases::Fase::Fase() : Fase(nullptr, 0)
+fases::Fase::Fase() : Fase(0)
 {
 }
 
-fases::Fase::Fase(ger::Gerenciador_Colisoes* pGC, int nFase)
+fases::Fase::Fase(int nFase)
     : Ente()
     , Estado()
-    , pColisoes(ger::Gerenciador_Colisoes::getInstancia())
-    , listaPersonagens()
-    , listaObstaculos()
-    , listaProjeteis()
     , numeroFase(nFase)
+    , tamanhoFase(0.f)
+    , pColisoes(ger::Gerenciador_Colisoes::getInstancia())
     , pJog1(nullptr)
     , pJog2(nullptr)
-    , tamanhoFase(0.f)
 {
-    ent::pers::Jogador* jogador1 = new ent::pers::Jogador(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.7f, 1.7f), true);
-    listaPersonagens.incluir(static_cast<ent::Entidade*>(jogador1));
-    pColisoes->incluirJogador(jogador1);
-    ger::Gerenciador_Eventos::getInstancia()->setJogador(jogador1);
-    ger::Gerenciador_Input::getInstancia()->setJogador(jogador1);
-    pJog1 = jogador1;
-    
     pColisoes->setListaProjeteis(&listaProjeteis);
 
-    if (doisJogadores) {
-        ent::pers::Jogador* jogador2 = new ent::pers::Jogador(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.7f, 1.7f), false);
-        listaPersonagens.incluir(static_cast<ent::Entidade*>(jogador2));
-        pColisoes->incluirJogador(jogador2);
-        ger::Gerenciador_Input::getInstancia()->setJogador2(jogador2);
-        pJog2 = jogador2;
-    }
+    if (numeroFase == 0)
+        tamanhoFase = 5290.f;
+
+    /* Criação Inicial dos Jogadores e suas Fábricas */
+    registrarFabrica('j', new fact::Fabrica_Jogador(true, tamanhoFase));
+    if (doisJogadores) registrarFabrica('k', new fact::Fabrica_Jogador(false, tamanhoFase));
+
+    criarEntidade('j', sf::Vector2i(0, 0));
+
+    /* Criação do restante das Fábricas (Factory Method Design Pattern) */
+    registrarFabrica('g', new fact::Fabrica_Goblin(pJog1, pJog2, doisJogadores, tamanhoFase));
+    registrarFabrica('a', new fact::Fabrica_Aranha(pJog1, pJog2, doisJogadores, tamanhoFase, &listaProjeteis));
+    registrarFabrica('/', new fact::Fabrica_Plataforma(0, tamanhoFase));
+    registrarFabrica('#', new fact::Fabrica_Plataforma(1, tamanhoFase));
+    registrarFabrica(';', new fact::Fabrica_Plataforma(2, tamanhoFase));
+    registrarFabrica('|', new fact::Fabrica_Plataforma(3, tamanhoFase));
+    registrarFabrica('@', new fact::Fabrica_Plataforma(4, tamanhoFase));
+    registrarFabrica('.', new fact::Fabrica_Plataforma(5, tamanhoFase));
+    
 }
 
-bool fases::Fase::doisJogadores(true);
-
 fases::Fase::~Fase() {
+    // Deleta as fábricas
+    for (auto& par : fabricas) {
+        delete par.second;
+    }
+    fabricas.clear();
+
     pColisoes = nullptr;
     listaObstaculos.limpar();
     listaPersonagens.limpar();
     listaProjeteis.limpar();
 }
 
-void fases::Fase::criarPersonagens(sf::Vector2f posicao, ID id, char tipo) {
-    if (id == inimigo) {
-        switch (tipo) {
-            case ('g'):
-                criarGoblin(posicao);
-                break;
-            
-            case ('a'):
-                criarAranha(posicao);
-                break;
+/* Atributos Estáticos */
+bool fases::Fase::doisJogadores(true);
 
-            default:
-                break;
+/* Criação de Entidades */
+void fases::Fase::registrarFabrica(char simbolo, fact::Fabrica_Entidades* fabrica) {
+    fabricas[simbolo] = fabrica;
+}
+
+void fases::Fase::criarEntidade(char simbolo, const sf::Vector2i pos) {
+    auto it = fabricas.find(simbolo);
+
+    if (it != fabricas.end()) {
+        sf::Vector2f posicao(pos.x * 54.0f, pos.y * 54.0f);
+        ent::Entidade* entidade = it->second->criarEntidade(posicao);
+        
+        // Adicionar às listas e colisões conforme o tipo
+        if (dynamic_cast<ent::pers::Inimigo*>(entidade)) {
+            listaPersonagens.incluir(entidade);
+            pColisoes->incluirInimigo(static_cast<ent::pers::Inimigo*>(entidade));
+        }
+        
+        else if (dynamic_cast<ent::obs::Obstaculo*>(entidade)) {
+            listaObstaculos.incluir(entidade);
+            pColisoes->incluirObstaculo(static_cast<ent::obs::Obstaculo*>(entidade));
+        }
+
+        else if (dynamic_cast<ent::pers::Jogador*>(entidade)) {
+            // Se o(s) jogador(es) ainda não foi definido, cria.
+            // Se já foi, apenas atualize sua posição.
+            if (!pJog1) {
+                listaPersonagens.incluir(entidade);
+                ent::pers::Jogador* jogador = static_cast<ent::pers::Jogador*>(entidade);
+
+                pColisoes->incluirJogador(jogador);
+                ger::Gerenciador_Eventos::getInstancia()->setJogador(jogador);
+                ger::Gerenciador_Input::getInstancia()->setJogador(jogador);
+                pJog1 = jogador;
+
+                if (doisJogadores) {
+                    auto it2 = fabricas.find('k');
+                    sf::Vector2f posicao2(posicao.x + 200.f, posicao.y);
+                    
+                    ent::Entidade* entidade2 = it2->second->criarEntidade(posicao2);
+                    listaPersonagens.incluir(entidade2);
+                    ent::pers::Jogador* jogador2 = static_cast<ent::pers::Jogador*>(entidade2);
+
+                    pColisoes->incluirJogador(jogador2);
+                    ger::Gerenciador_Input::getInstancia()->setJogador2(jogador2);
+                    pJog2 = jogador2;
+                }
+            }
+
+            else {
+                pJog1->setPosition(posicao);
+
+                if (doisJogadores)
+                    pJog2->setPosition(sf::Vector2f(posicao.x + 200.f, posicao.y));
+            }
         }
     }
-    
-    else if (id == jogador) {
-        pJog1->setPosition(posicao);
-        pJog1->setTamanhoFase(tamanhoFase);
-
-        if (doisJogadores) {
-            pJog2->setPosition(posicao + sf::Vector2f(200.f, 0.f));
-            pJog2->setTamanhoFase(tamanhoFase);
-        }
-    }
 }
 
-void fases::Fase::criarGoblin(sf::Vector2f posicao) {
-    ent::pers::Goblin* goblin = new ent::pers::Goblin(sf::Vector2f(posicao),sf::Vector2f(1.7f, 1.7f));
-    goblin->setTamanhoFase(tamanhoFase);
-    goblin->incluirJogador(getJogador1());
-    
-    if (doisJogadores)
-        goblin->incluirJogador(getJogador2());
-        
-    listaPersonagens.incluir(static_cast<ent::Entidade*>(goblin));
-    pColisoes->incluirInimigo(goblin);
-}
+/* Execução da Fase */
+void fases::Fase::executar() {
+    desenharFundo();
 
-void fases::Fase::criarAranha(sf::Vector2f posicao) {
-    ent::pers::Aranha* aranha = new ent::pers::Aranha(sf::Vector2f(posicao),sf::Vector2f(1.7f, 1.7f));
-    aranha->setTamanhoFase(tamanhoFase);
-    aranha->incluirJogador(getJogador1());
-    aranha->setListaProjeteis(&listaProjeteis);
+    atualizarProjeteis();
+    atualizarObstaculos();
+    atualizarPersonagens();
 
-    if (doisJogadores)
-        aranha->incluirJogador(getJogador2());
-        
-    listaPersonagens.incluir(static_cast<ent::Entidade*>(aranha));
-    pColisoes->incluirInimigo(aranha);
-}
-
-void fases::Fase::criarPlataformas(sf::Vector2f pos, int tipo) {
-    ent::obs::Plataforma* plataforma = new ent::obs::Plataforma(sf::Vector2f(pos), sf::Vector2f(1.7f, 1.7f), false, 50);
-    plataforma->setTamanhoFase(tamanhoFase);
-
-    switch (tipo) {
-        case (0):
-            plataforma->setTextura("Grass0000");
-            break;
-        
-        case (1):
-            plataforma->setTextura("Grass0001");
-            break;
-        
-        case (2):
-            plataforma->setTextura("Grass0002");
-            break;
-        
-        case (3):
-            plataforma->setTextura("Grass0003");
-            break;
-
-        case (4):
-            plataforma->setTextura("Grass0004");
-            break;
-
-        case (5):
-            plataforma->setTextura("Grass0005");
-            break;
-
-        default:
-            break;
-    }
-
-    pColisoes->incluirObstaculo(static_cast<ent::obs::Obstaculo*>(plataforma));
-    listaObstaculos.incluir(static_cast<ent::Entidade*>(plataforma));
-}
-
-void fases::Fase::criarObstaculos() {
+    pColisoes->executar();
 }
 
 void fases::Fase::desenharFundo() {
@@ -149,74 +136,12 @@ void fases::Fase::desenharFundo() {
     ger::Gerenciador_Grafico::getInstancia()->centralizarVista(pJog1, tamanhoFase);
 }
 
-void fases::Fase::criarEntidade(char simbolo, const sf::Vector2i pos) {
-    switch(simbolo) {
-        case ('g'):
-            criarPersonagens(sf::Vector2f(pos.x * 54.0f, pos.y * 54.0f), inimigo, 'g');
-            break;
 
-        case ('a'):
-            criarPersonagens(sf::Vector2f(pos.x * 54.0f, pos.y * 54.0f), inimigo, 'a');
-            break;
-
-        case ('j'):
-            criarPersonagens(sf::Vector2f(pos.x * 50.0f, pos.y * 50.0f), jogador);
-            break;
-
-        case ('#'):
-            criarPlataformas(sf::Vector2f(pos.x * 54.2f, pos.y * 54.2f), 1);
-            break;
-
-        case ('/'):
-            criarPlataformas(sf::Vector2f(pos.x * 54.2f, pos.y * 54.2f), 0);
-            break;
-
-        case (';'):
-            criarPlataformas(sf::Vector2f(pos.x * 54.2f, pos.y * 54.2f), 2);
-            break;
-
-        case ('@'):
-            criarPlataformas(sf::Vector2f(pos.x * 54.2f, pos.y * 54.2f), 4);
-            break;
-        
-        case ('|'):
-            criarPlataformas(sf::Vector2f(pos.x * 54.2f, pos.y * 54.2f), 3);
-            break;
-
-        case ('.'):
-            criarPlataformas(sf::Vector2f(pos.x * 54.2f, pos.y * 54.2f), 5);
-            break;
-
-        case ('p'):
-            criarPersonagens(sf::Vector2f(pos.x * 54.0f, pos.y * 54.0f), projetil);
-            break;
-
-        default: 
-            break;
-    }
-}
-
-void fases::Fase::executar() {
-    desenharFundo();
-    atualizarProjeteis();
-    atualizaObstaculos();
-    atualizaPersonagens();
-    pColisoes->executar();
-}
-
-ent::pers::Jogador* fases::Fase::getJogador1(){
-    return pJog1;
-}
-
-ent::pers::Jogador* fases::Fase::getJogador2(){
-    return pJog2;
-}
-
-void fases::Fase::atualizaPersonagens(){
+void fases::Fase::atualizarPersonagens(){
     listaPersonagens.percorrer();
 }
 
-void fases::Fase::atualizaObstaculos(){
+void fases::Fase::atualizarObstaculos(){
     listaObstaculos.percorrer();
 }
 
@@ -224,8 +149,21 @@ void fases::Fase::atualizarProjeteis() {
     listaProjeteis.percorrer();
 }
 
-float fases::Fase::getTamanhoFase() {
+ent::pers::Jogador* fases::Fase::getJogador1() const {
+    return pJog1;
+}
+
+ent::pers::Jogador* fases::Fase::getJogador2() const {
+    return pJog2;
+}
+
+
+float fases::Fase::getTamanhoFase() const {
     return tamanhoFase;
+}
+
+float fases::Fase::getNumeroFase() const {
+    return numeroFase;
 }
 
 /*void fases::Fase::alterarParaMenu(){

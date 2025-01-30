@@ -36,7 +36,7 @@ Gerenciador_Estados* Gerenciador_Estados::getInstancia(){
 void Gerenciador_Estados::inicializarEstados()
 {
 
-    fases::Floresta* faseFloresta = new fases::Floresta(ger::Gerenciador_Colisoes::getInstancia());
+    fases::Floresta* faseFloresta = new fases::Floresta();
     mapaEstados.insert(std::pair<tipoEstado, Estado*>(fase, static_cast<Estado*>(faseFloresta) ) );
 }
 

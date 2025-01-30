@@ -7,7 +7,7 @@ class Castelo : public Fase{
 private:
 
 public:
-    Castelo(ger::Gerenciador_Colisoes* pGC);
+    Castelo();
     ~Castelo();
 
     virtual void executar();
