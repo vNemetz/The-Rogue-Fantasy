@@ -230,7 +230,9 @@ sf::Texture* Gerenciador_Grafico::getTextura(std::string nomeImagem) {
 void Gerenciador_Grafico::setFonte()
 {
     fonteSmacky = new sf::Font();
-    fonteSmacky->loadFromFile("/assets/fonts/Arial.ttf");
+    if (!fonteSmacky->loadFromFile("../assets/fonts/Retro Gaming.ttf")) {
+    std::cerr << "Erro ao carregar a fonte!\n";
+}
 }
 sf::Font* Gerenciador_Grafico::getFonte() const
 {
@@ -262,5 +264,5 @@ void ger::Gerenciador_Grafico::desenharSprite(sf::Sprite *pS) const
 
 void ger::Gerenciador_Grafico::desenharTexto(sf::Text* text) const
 {
-    //pJanela->draw(*text);
+    pJanela->draw(*text);
 }

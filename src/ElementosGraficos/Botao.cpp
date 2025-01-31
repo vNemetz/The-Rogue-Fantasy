@@ -9,19 +9,19 @@ pTextura(nullptr)
 {
     pTextura = new sf::Texture();
     pSprite = new sf::Sprite();
-    //textoBotao = new sf::Text();
-    //textoBotao->setFont(*ger::Gerenciador_Grafico::getInstancia()->getFonte());
+    textoBotao = new sf::Text();
+    textoBotao->setFont(*ger::Gerenciador_Grafico::getInstancia()->getFonte());
 }
 ElementosGraficos::Botao::Botao(std::string nomeImg):
 pTextura(nullptr)
 ,pSprite(nullptr)
 ,pGrafico(ger::Gerenciador_Grafico::getInstancia())
-//,textoBotao(nullptr)
+,textoBotao(nullptr)
 {
     pTextura = new sf::Texture();
     pSprite = new sf::Sprite();
-    //textoBotao = new sf::Text();
-    //textoBotao->setFont(*ger::Gerenciador_Grafico::getInstancia()->getFonte());
+    textoBotao = new sf::Text();
+    textoBotao->setFont(*ger::Gerenciador_Grafico::getInstancia()->getFonte());
     setTextura(nomeImg);
 }
 ElementosGraficos::Botao::~Botao()
@@ -31,7 +31,7 @@ ElementosGraficos::Botao::~Botao()
     pSprite = nullptr;
     pTextura = nullptr;
     pGrafico = nullptr;
-    //delete textoBotao;
+    delete textoBotao;
 }
 
 void ElementosGraficos::Botao::alterarApertado()
@@ -74,9 +74,13 @@ void ElementosGraficos::Botao::setPosicao(sf::Vector2f pos)
     pSprite->setPosition(pos);
 }
 
-/*void ElementosGraficos::Botao::setTexto(std::string text)
+void ElementosGraficos::Botao::setTexto(std::string text, sf::Vector2f escala)
 {
     textoBotao->setString(text);
+    textoBotao->setScale(escala);
+    sf::Vector2f tamanhoFonte = textoBotao->getGlobalBounds().getSize();
+    textoBotao->setPosition(sf::Vector2f(pSprite->getPosition().x+pSprite->getGlobalBounds().getSize().x/2.0f - tamanhoFonte.x /2.0f,
+        pSprite->getPosition().y+pSprite->getGlobalBounds().getSize().y/2.4f - tamanhoFonte.y / 2.0f));
 }
 
 sf::Text* ElementosGraficos::Botao::getTexto() const
@@ -85,7 +89,7 @@ sf::Text* ElementosGraficos::Botao::getTexto() const
     return textoBotao;
     }return nullptr;
     
-}*/
+}
 
 bool ElementosGraficos::Botao::checarApertado() const
 {
