@@ -8,7 +8,7 @@ private:
     sf::Texture* pTextura;  /*Elementos Gráficos do Botão*/
     sf::Sprite* pSprite;
 
-   // sf::Text* textoBotao;
+   sf::Text* textoBotao;
     ger::Gerenciador_Grafico* pGrafico;
 
     sf::Vector2u tamanho;
@@ -27,8 +27,8 @@ public:
     void setSprite();
     sf::Sprite* getSprite() const;
     void setPosicao(sf::Vector2f pos);
-    //void setTexto(std::string text);
-    //sf::Text* getTexto() const;
+    void setTexto(std::string text, sf::Vector2f escala);
+    sf::Text* getTexto() const;
 
     bool checarApertado() const;
 

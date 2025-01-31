@@ -49,13 +49,11 @@ void Menu::alterarBotaoSelecionado(int unidade)
         vetorBotoes[botaoSelecionado]->setTextura("Brown-Button");
         vetorBotoes[++botaoSelecionado]->setTextura("Yellow-Button");
         bufferTime = 0;
-        std::cout<<botaoSelecionado <<"\n";
     }
     else if(unidade < 0 && botaoSelecionado != minimo && bufferTime > 0.12f){
         vetorBotoes[botaoSelecionado]->setTextura("Brown-Button");
         vetorBotoes[--botaoSelecionado]->setTextura("Yellow-Button");
         bufferTime = 0;
-        std::cout<<botaoSelecionado <<"\n";
     }
 }
 
@@ -94,8 +92,8 @@ void Menu::adicionarBotao(std::string nomeImg, sf::Vector2f escala, std::string 
 {
     ElementosGraficos::Botao* novoBotao = new ElementosGraficos::Botao(nomeImg);
     novoBotao->setEscala(escala);
-    //novoBotao->setTexto(text);
     novoBotao->setPosicao(pos);
+    novoBotao->setTexto(text, sf::Vector2f(1.5f, 1.5f));
     vetorBotoes.push_back(novoBotao);
 }
 
@@ -105,7 +103,7 @@ void Menu::desenharBotoes()
     for(it = vetorBotoes.begin(); it != vetorBotoes.end(); it++){
         if(*it){
             ger::Gerenciador_Grafico::getInstancia()->desenharSprite((*it)->getSprite());
-            //ger::Gerenciador_Grafico::getInstancia()->desenharTexto((*it)->getTexto());
+            ger::Gerenciador_Grafico::getInstancia()->desenharTexto((*it)->getTexto());
         }
     }
 }
