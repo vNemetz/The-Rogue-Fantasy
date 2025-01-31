@@ -44,16 +44,22 @@ void Personagem::mover() {
     }
 
     else if (movendoDireita && !movendoEsquerda) {
-        if (correndo)
+        if (correndo && noChao)
             velocidade.x = velocidadeMaxima.x * 1.4f;
+
+        else if (correndo && !noChao && velocidade.x != 0.f)
+            velocidade.x = velocidade.x;
         
         else
             velocidade.x = velocidadeMaxima.x;
     }
 
     else if (movendoEsquerda && !movendoDireita) {
-        if (correndo)
+        if (correndo && noChao)
             velocidade.x = -velocidadeMaxima.x * 1.4f;
+
+        else if (correndo && !noChao && velocidade.x != 0.f)
+            velocidade.x = velocidade.x;
         
         else
             velocidade.x = -velocidadeMaxima.x;
@@ -145,7 +151,7 @@ void Personagem::atualizarEstado() {
     else if ((movendoDireita && !movendoEsquerda) || (movendoEsquerda && !movendoDireita)) {
         est = andando;
 
-        if (correndo) {
+        if (correndo && noChao) {
             est = estado::correndo;
 
             // RUN_ATTACK
