@@ -4,15 +4,14 @@
 
 namespace menus{
 
-Menu::Menu(int min, int max):
-Estado(menu)
+Menu::Menu(int min, int max, tipoEstado tipo):
+Estado(tipo)
 ,pTexturaFundo(nullptr)
 ,pSpriteFundo(nullptr)
 ,vetorBotoes()
 ,minimo(min)
 ,maximo(max)
 ,botaoSelecionado(0)
-,bufferTime(0.0f)
 {
     limparVetorBotoes();
     it = vetorBotoes.begin();
@@ -20,15 +19,14 @@ Estado(menu)
     pSpriteFundo = new sf::Sprite();
 }
 
-Menu::Menu(ger::Gerenciador_Estados* pGE, int min, int max):
-Estado(menu,pGE)
+Menu::Menu(ger::Gerenciador_Estados* pGE, int min, int max, tipoEstado tipo):
+Estado(tipo,pGE)
 ,pTexturaFundo(nullptr)
 ,pSpriteFundo(nullptr)
 ,vetorBotoes()
 ,botaoSelecionado(0)
 ,minimo(min)
 ,maximo(max)
-,bufferTime(0.0f)
 {
     limparVetorBotoes();
     it = vetorBotoes.begin();
@@ -45,12 +43,12 @@ Menu::~Menu()
 
 void Menu::alterarBotaoSelecionado(int unidade)
 {
-    if(unidade > 0 && botaoSelecionado != maximo && bufferTime > 0.12f){ 
+    if(unidade > 0 && botaoSelecionado != maximo && bufferTime > 0.13f){ 
         vetorBotoes[botaoSelecionado]->setTextura("Brown-Button");
         vetorBotoes[++botaoSelecionado]->setTextura("Yellow-Button");
         bufferTime = 0;
     }
-    else if(unidade < 0 && botaoSelecionado != minimo && bufferTime > 0.12f){
+    else if(unidade < 0 && botaoSelecionado != minimo && bufferTime > 0.13f){
         vetorBotoes[botaoSelecionado]->setTextura("Brown-Button");
         vetorBotoes[--botaoSelecionado]->setTextura("Yellow-Button");
         bufferTime = 0;

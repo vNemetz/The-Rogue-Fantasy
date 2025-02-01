@@ -1,7 +1,10 @@
 #pragma once
-#include "Gerenciadores/Gerenciador_Estados.h"
 #include "Menu.h"
 #include "Estados/Fases/Fase.h"
+
+namespace ger{
+    class Gerenciador_Estados;
+}
 namespace menus{
 class Menu_Principal : public Menu{
 private:
