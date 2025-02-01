@@ -10,6 +10,7 @@ class Menu_Pausa : public Menu{
 private:
     fases::Fase* pFase;
     Menu_Principal* pMenuPrincipal;
+
 public:
     Menu_Pausa();
     Menu_Pausa(ger::Gerenciador_Estados* pGE);

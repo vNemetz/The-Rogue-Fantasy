@@ -22,13 +22,14 @@ menus::Menu_Pausa::Menu_Pausa(ger::Gerenciador_Estados* pGE):
     ,pFase(nullptr)
     ,pMenuPrincipal(nullptr)
 {
+
     setTexturaFundo("Menu-bg");
     sf::Vector2f posicaoBotao = sf::Vector2f(pSpriteFundo->getPosition().x+pSpriteFundo->getGlobalBounds().getSize().x/2.0f - 300.0f,
         HEIGHT/3.0f);
     adicionarBotao("Yellow-Button", sf::Vector2f(4.0f, 3.0f), "VOLTAR AO JOGO",posicaoBotao);
     adicionarBotao("Brown-Button", sf::Vector2f(4.0f, 3.0f), "SALVAR", sf::Vector2f(posicaoBotao.x, posicaoBotao.y + 150.0f));
     adicionarBotao("Brown-Button", sf::Vector2f(4.0f, 3.0f), "MENU PRINCIPAL", sf::Vector2f(posicaoBotao.x, posicaoBotao.y + 300.0f));
-
+    adicionarBotao("Pause", sf::Vector2f(2.0f, 2.0f), "", posicaoBotao - sf::Vector2f(-150.f, 170.0f)); /*Considerando um botão não interagível*/
 }
 
 menus::Menu_Pausa::~Menu_Pausa()
@@ -36,7 +37,7 @@ menus::Menu_Pausa::~Menu_Pausa()
 
 }
 
-void menus::Menu_Pausa::executarEstado() 
+void menus::Menu_Pausa::executarEstado()
 {
     switch (botaoSelecionado){
         case 0:
