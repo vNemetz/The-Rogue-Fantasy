@@ -35,13 +35,16 @@ Gerenciador_Estados* Gerenciador_Estados::getInstancia(){
 
 void Gerenciador_Estados::inicializarEstados()
 {
-
     fases::Floresta* faseFloresta = new fases::Floresta(ger::Gerenciador_Colisoes::getInstancia());
     mapaEstados.insert(std::pair<tipoEstado, Estado*>(fase, static_cast<Estado*>(faseFloresta) ) );
+
+    menus::Menu_Pausa* menuPausa = new menus::Menu_Pausa(ger::Gerenciador_Estados::getInstancia());
+        mapaEstados.insert(std::pair<tipoEstado, Estado*>(pausa, static_cast<Estado*>(menuPausa) ) );
 }
 
 void Gerenciador_Estados::requererEstado() 
 {
+    std::cout<<pEstadoAtual->getID() <<"\n";
     pEstadoAtual->executar();
 }
 
@@ -54,6 +57,10 @@ void Gerenciador_Estados::setEstadoAtual(tipoEstado tipo){
         case fase:
             pEstadoAtual = static_cast<Estado*>(mapaEstados[fase]);
             ger::Gerenciador_Input::getInstancia()->criarInputMapEstado(fase);
+            break;
+        case pausa:
+            pEstadoAtual = static_cast<Estado*>(mapaEstados[pausa]);
+            ger::Gerenciador_Input::getInstancia()->criarInputMapEstado(pausa);
             break;
         default:
             break;

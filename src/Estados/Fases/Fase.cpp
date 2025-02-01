@@ -3,18 +3,22 @@
 #include "Gerenciadores/Gerenciador_Eventos.h"
 #include "Gerenciadores/Gerenciador_Grafico.h"
 #include "Gerenciadores/Gerenciador_Input.h"
+#include "Gerenciadores/Gerenciador_Estados.h"
 #include "Entidades/Personagens/Goblin.h"
 #include "Entidades/Personagens/Aranha.h"
 #include "Entidades/Obstáculos/Plataforma.h"
 
-fases::Fase::Fase() : Fase(nullptr, 0)
+fases::Fase::Fase() : 
+    Ente()
+    , Estado(fase)
 {
 }
 
 fases::Fase::Fase(ger::Gerenciador_Colisoes* pGC, int nFase)
     : Ente()
-    , Estado()
+    , Estado(fase)
     , pColisoes(ger::Gerenciador_Colisoes::getInstancia())
+    , pEstados(ger::Gerenciador_Estados::getInstancia())
     , listaPersonagens()
     , listaObstaculos()
     , listaProjeteis()
@@ -228,6 +232,10 @@ float fases::Fase::getTamanhoFase() {
     return tamanhoFase;
 }
 
-/*void fases::Fase::alterarParaMenu(){
-    ger::Gerenciador_Estados::getInstancia()->setEstadoAtual(menuPausa);
-}*/
+void fases::Fase::executarEstado(tipoEstado tipo){
+    switch (tipo){
+        case pausa:
+            pEstados->setEstadoAtual(pausa);
+            break;
+    }
+}

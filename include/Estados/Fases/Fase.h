@@ -7,11 +7,15 @@
 #include "Estados/Estado.h"
 #include "Ente.h"
 
+namespace ger{
+    class Gerenciador_Estados;
+}
 namespace fases{
 
 class Fase : public Ente, public Estado{
 protected:
     ger::Gerenciador_Colisoes* pColisoes;
+    ger::Gerenciador_Estados* pEstados;
     lis::Lista_Entidades listaPersonagens;
     lis::Lista_Entidades listaObstaculos;
     lis::Lista_Entidades listaProjeteis;
@@ -53,6 +57,7 @@ public:
     float getTamanhoFase();
     
     void executar();
-    //virtual void alterarEstado();
+    void executarEstado(tipoEstado tipo);
+
 };
 }

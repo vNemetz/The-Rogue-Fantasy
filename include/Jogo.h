@@ -21,15 +21,10 @@ private:
     ger::Gerenciador_Eventos* gerEventos;
     ger::Gerenciador_Estados* gerEstados;
 
-    /*Estados*/
-    fases::Floresta* faseFloresta;
-    menus::Menu_Principal* menuPrincipal;
 
 public:
     Jogo();
     ~Jogo();
 
     void executar();
-    void criarFase();
-    void criarMenuPrincipal();
 };

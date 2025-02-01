@@ -77,6 +77,9 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     carregarTextura("/assets/images/User-interface/main-menu-bg.png", "Main-Menu-Bg");
     carregarTextura("/assets/images/User-interface/yellow-button.png", "Yellow-Button");
     carregarTextura("/assets/images/User-interface/brown-button.png", "Brown-Button");
+    carregarTextura("/assets/images/User-interface/menu_bg.png", "Menu-bg");
+    carregarTextura("/assets/images/User-interface/pause.png", "Pause");
+
 
 }
 

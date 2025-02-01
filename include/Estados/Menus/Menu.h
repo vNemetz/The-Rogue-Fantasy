@@ -16,10 +16,9 @@ protected:
     sf::Texture* pTexturaFundo;
     sf::Sprite* pSpriteFundo;
 
-    float bufferTime; // Para 1 click das setinhas não valerem por 2 alterações de botão (tempo entre "apertos" do botão)
 public:
-    Menu(int min, int max);
-    Menu(ger::Gerenciador_Estados* pGE, int min, int max);
+    Menu(int min, int max, tipoEstado tipo);
+    Menu(ger::Gerenciador_Estados* pGE, int min, int max, tipoEstado tipo);
     ~Menu();
     void alterarBotaoSelecionado(int unidade);
     void setTexturaFundo(std::string nomeImg);
