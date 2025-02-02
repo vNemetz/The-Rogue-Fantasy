@@ -38,6 +38,8 @@ public:
     void removerProjetil(ent::prj::Projetil* pj);
     void setListaProjeteis(lis::Lista_Entidades* listaProjeteis);
 
+    void limparListas();
+
     void tratarColisoesJogsObstacs();
     void tratarColisoesJogsInimgs();
     void tratarColisoesJogsProjeteis();

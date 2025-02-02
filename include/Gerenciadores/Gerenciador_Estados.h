@@ -31,6 +31,7 @@ public:
     void setEstadoAtual(tipoEstado tipo);
     Estado* getEstadoAtual();
     Estado* getEstado(tipoEstado tipo);
+    void reiniciarJogo();
     
 
 };

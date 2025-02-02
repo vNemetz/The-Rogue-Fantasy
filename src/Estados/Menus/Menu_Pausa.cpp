@@ -47,6 +47,7 @@ void menus::Menu_Pausa::executarEstado()
             pGEstados->setEstadoAtual(salvar);
             break;
         case 2:
+            pGEstados->reiniciarJogo();
             pGEstados->setEstadoAtual(menu);
         default:
             break;

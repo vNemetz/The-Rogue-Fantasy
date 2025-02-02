@@ -29,13 +29,14 @@ fases::Fase::Fase(ger::Gerenciador_Colisoes* pGC, int nFase)
 {
     ent::pers::Jogador* jogador1 = new ent::pers::Jogador(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.7f, 1.7f), true);
     listaPersonagens.incluir(static_cast<ent::Entidade*>(jogador1));
+
     pColisoes->incluirJogador(jogador1);
+
     ger::Gerenciador_Eventos::getInstancia()->setJogador(jogador1);
     ger::Gerenciador_Input::getInstancia()->setJogador(jogador1);
     pJog1 = jogador1;
-    
-    pColisoes->setListaProjeteis(&listaProjeteis);
 
+    pColisoes->setListaProjeteis(&listaProjeteis);
     if (doisJogadores) {
         ent::pers::Jogador* jogador2 = new ent::pers::Jogador(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.7f, 1.7f), false);
         listaPersonagens.incluir(static_cast<ent::Entidade*>(jogador2));

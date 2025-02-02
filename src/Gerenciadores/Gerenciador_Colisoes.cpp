@@ -5,15 +5,11 @@
 namespace ger {
 
 Gerenciador_Colisoes::Gerenciador_Colisoes() {
-    listaInimigos.clear();
-    listaObstaculos.clear();
-    listaJogadores.clear();
+    limparListas();
 }
 
 Gerenciador_Colisoes::~Gerenciador_Colisoes() {
-    listaInimigos.clear();
-    listaObstaculos.clear();
-    listaJogadores.clear();
+    limparListas();
 }
 
 Gerenciador_Colisoes* Gerenciador_Colisoes::instancia(nullptr);
@@ -139,6 +135,12 @@ void Gerenciador_Colisoes::incluirJogador(ent::pers::Jogador* jog) {
 
 void Gerenciador_Colisoes::setListaProjeteis(lis::Lista_Entidades* listaProjeteis) {
     this->listaProjeteis = listaProjeteis;
+}
+
+void Gerenciador_Colisoes::limparListas(){
+    listaInimigos.clear();
+    listaObstaculos.clear();
+    listaJogadores.clear();
 }
 
 }
