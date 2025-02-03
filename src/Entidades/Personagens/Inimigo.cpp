@@ -73,7 +73,13 @@ void Inimigo::persegueJogador(Jogador* jogador) {
 }
 
 float Inimigo::distanciaJogador(Jogador* jogador) const {
-    sf::Vector2f dist = jogador->getPosition() - posicao;
+    sf::Vector2f posicaoJogador = jogador->getPosition();
+    sf::Vector2f posicaoInimigo = posicao;
+
+    posicaoJogador.x += jogador->getTamanho().x / 2.f;
+    posicaoInimigo.x += tamanho.x / 2.f;
+
+    sf::Vector2f dist = posicaoJogador - posicaoInimigo;
     float moduloDist = sqrt(pow((dist.x),2) + pow(dist.y, 2));
     return moduloDist;
 }
