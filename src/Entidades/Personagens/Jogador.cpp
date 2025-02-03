@@ -22,11 +22,7 @@ Jogador::Jogador(sf::Vector2f pos, sf::Vector2f tam, bool jog)
     , vetorCoracoes()
     , texturaCoracao(nullptr)
 {
-    //texturaCoracao = new sf::Texture();
-    //texturaCoracao = pGG->getTextura("Heart");
-    //vetorCoracoes.clear();
     setNumVidas(5);
-    //inicializarCoracoes();
     setTextura("Rogue-Stand");
     setVelocidadeMaxima(sf::Vector2f(600.f, 600.f));
     carregarControles();
@@ -34,18 +30,7 @@ Jogador::Jogador(sf::Vector2f pos, sf::Vector2f tam, bool jog)
 
 Jogador::~Jogador()
 {
-    /*std::vector<sf::Sprite*>::iterator it = vetorCoracoes.begin();
-    while(it != vetorCoracoes.end()){
-        if(*it){
-            delete (*it);
-            (*it) = nullptr;
-        }
-        it++;
-    }
-    vetorCoracoes.clear();
-   delete texturaCoracao;
-   texturaCoracao = nullptr;
-    */
+
 }
 
 void Jogador::executar() {
@@ -55,7 +40,6 @@ void Jogador::executar() {
     
     atualizarAnimacao();
 
-    //desenharCoracoes();
 }
 
 void Jogador::desenhar() {
