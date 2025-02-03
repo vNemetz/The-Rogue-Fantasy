@@ -11,6 +11,7 @@ Gerenciador_Estados* Gerenciador_Estados::instancia(nullptr);
 Gerenciador_Estados::Gerenciador_Estados():
 pEstadoAtual(nullptr)
 , mapaEstados()
+, multijogador(false)
 {
     mapaEstados.clear();
     menus::Menu_Principal* menuPrincipal = new menus::Menu_Principal(this);
@@ -45,7 +46,10 @@ void Gerenciador_Estados::inicializarEstados()
 
 void Gerenciador_Estados::requererEstado() 
 {
+    if(pEstadoAtual){
     pEstadoAtual->executar();
+    }
+
 }
 
 void Gerenciador_Estados::setEstadoAtual(tipoEstado tipo){
@@ -67,6 +71,11 @@ void Gerenciador_Estados::setEstadoAtual(tipoEstado tipo){
     }
     
 }
+ void Gerenciador_Estados::setMultijogador(bool multi)
+{
+    multijogador = multi;
+}
+
 Estado *Gerenciador_Estados::getEstadoAtual(){
     if(pEstadoAtual){
         return pEstadoAtual;
@@ -82,7 +91,10 @@ Estado *ger::Gerenciador_Estados::getEstado(tipoEstado tipo)
 void ger::Gerenciador_Estados::reiniciarJogo()
 {
     ger::Gerenciador_Colisoes::getInstancia()->limparListas();
-    delete mapaEstados[fase];
+    if(mapaEstados[fase]){
+        delete mapaEstados[fase];
+        mapaEstados.erase(fase);
+    }
     fases::Floresta* faseFloresta = new fases::Floresta();
     mapaEstados.insert(std::pair<tipoEstado, Estado*>(fase, static_cast<Estado*>(faseFloresta) ) );
     faseFloresta->setPGG(ger::Gerenciador_Grafico::getInstancia());

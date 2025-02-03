@@ -8,6 +8,8 @@ namespace pers {
 Goblin::Goblin()
     : Goblin(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f))
 {
+    setNumVidas(2);
+
 }
 
 Goblin::Goblin(sf::Vector2f pos, sf::Vector2f tam)
@@ -15,6 +17,7 @@ Goblin::Goblin(sf::Vector2f pos, sf::Vector2f tam)
     , tempoSemDetectar(0.f)
     , estadoIdle(PARADO)
 {
+    setNumVidas(2);
     setTextura("Goblin-Idle");
     raioDetect = 600.f;
     setVelocidadeMaxima(sf::Vector2f (250.f, 250.f));

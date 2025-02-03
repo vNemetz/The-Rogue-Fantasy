@@ -9,6 +9,7 @@
 #include "Fabricas/Fabrica_Jogador.h"
 #include "Entidades/Personagens/Inimigo.h"
 
+
 fases::Fase::Fase() : 
     Ente()
     , Estado(fase)
@@ -124,9 +125,11 @@ void fases::Fase::criarEntidade(char simbolo, const sf::Vector2i pos) {
 
 /* Execução da Fase */
 void fases::Fase::executar() {
+    std::cout << "d\n";
     desenharFundo();
-
+std::cout << "e\n";
     atualizarProjeteis();
+    std::cout << "f\n";
     atualizarObstaculos();
     atualizarPersonagens();
 
@@ -185,4 +188,9 @@ void fases::Fase::executarEstado(tipoEstado tipo){
         default:
             break;
     }
+}
+
+void fases::Fase::setMultijogador(bool multi)
+{
+    doisJogadores = multi;
 }

@@ -60,6 +60,7 @@ public:
     float getNumeroFase() const;
     
     void executarEstado(tipoEstado tipo);
+    static void setMultijogador(bool multi);
 
 };
 }

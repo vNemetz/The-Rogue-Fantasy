@@ -79,8 +79,10 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     carregarTextura("/assets/images/User-interface/brown-button.png", "Brown-Button");
     carregarTextura("/assets/images/User-interface/menu_bg.png", "Menu-bg");
     carregarTextura("/assets/images/User-interface/pause.png", "Pause");
+    carregarTextura("/assets/images/User-interface/heart.png", "Heart");
 
-
+    /*Obstacle Textures*/
+    carregarTextura("/assets/images/Obstacles/box.png", "Box");
 }
 
 Gerenciador_Grafico::~Gerenciador_Grafico() {

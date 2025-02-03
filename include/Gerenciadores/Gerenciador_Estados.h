@@ -17,6 +17,7 @@ private:
     Estado* pEstadoAtual;
     std::map<tipoEstado, Estado*> mapaEstados;
 
+    bool multijogador;
     /* Singleton - Padrão de Projeto */
     static ger::Gerenciador_Estados* instancia;
 
@@ -29,6 +30,7 @@ public:
     void inicializarEstados();
     void requererEstado(); /*Executa o estado atual*/
     void setEstadoAtual(tipoEstado tipo);
+    void setMultijogador(bool multi);
     Estado* getEstadoAtual();
     Estado* getEstado(tipoEstado tipo);
     void reiniciarJogo();

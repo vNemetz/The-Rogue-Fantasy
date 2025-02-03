@@ -1,6 +1,7 @@
 #pragma once
 #include "Entidades/Personagens/Personagem.h"
 #include <SFML/Window/Keyboard.hpp>
+#include <vector>
 
 namespace ent {
 namespace pers {
@@ -18,7 +19,9 @@ private:
     std::string botaoPular;
     std::string botaoCorrer;
     std::string botaoAtacar;
-
+    
+    sf::Texture* texturaCoracao;
+    std::vector<sf::Sprite*> vetorCoracoes;
 public:
     Jogador();
     Jogador(sf::Vector2f pos, sf::Vector2f tam, bool jog);
@@ -37,6 +40,11 @@ public:
     /* Animação */
     void atualizarElementosAnimacao();
     void setCorpo();
+
+    /*Vida e Corações*/
+    void inicializarCoracoes();
+    void desenharCoracoes();
+
 };
 }
 }

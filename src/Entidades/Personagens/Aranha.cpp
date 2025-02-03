@@ -10,12 +10,15 @@ namespace pers {
 Aranha::Aranha()
     : Aranha(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f))
 {
+    setNumVidas(3);
+
 }
 
 Aranha::Aranha(sf::Vector2f pos, sf::Vector2f tam)
     : Inimigo(pos, tam)
     , raioAtaque(800.f)
 {
+    setNumVidas(3);
     setTextura("Spider-Idle");
     setVelocidadeMaxima(sf::Vector2f (250.f, 250.f));
     raioDetect = 1000.f;
