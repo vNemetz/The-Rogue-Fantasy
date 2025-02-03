@@ -19,6 +19,8 @@ protected:
 
     std::unordered_map<char, fact::Fabrica_Entidades*> fabricas;
     lis::Lista_Entidades listaPersonagens;
+    lis::Lista_Entidades listaInimigos;
+    lis::Lista_Entidades listaJogadores;
     lis::Lista_Entidades listaObstaculos;
     lis::Lista_Entidades listaProjeteis;
     

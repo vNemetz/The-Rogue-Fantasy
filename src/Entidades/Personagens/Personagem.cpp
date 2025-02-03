@@ -16,6 +16,7 @@ Personagem::Personagem(sf::Vector2f pos, sf::Vector2f tam, ID id)
     , tempoParado(0.f)
     , tempoDano(0.f)
     , tempoAtaque(0.f)
+    , tempoMorrendo(0.f)
     , movendoEsquerda(false)
     , movendoDireita(false)
     , olhandoDireita(true)
@@ -38,7 +39,13 @@ void Personagem::mover() {
     dt = pGG->getDeltaTime(); // Guarda os segundos passados em dt
 
     /* Atualiza o movimento horizontal */
-    if (levandoDano) {
+    if (numVidas <= 0) {
+        if (noChao) {
+            paraDeletar = true;
+        }
+    }
+
+    else if (levandoDano) {
         if (noChao)
             levandoDano = false;
     }
@@ -89,7 +96,7 @@ void Personagem::mover() {
         olhandoDireita = false;
     }
 
-    if (est == sofrendo)
+    if (est == sofrendo || est == morrendo)
         olhandoDireita = !olhandoDireita; // Se está levando dano, é ao contrário
 
     /* Atualiza a posição do sprite */
@@ -97,17 +104,19 @@ void Personagem::mover() {
 }
 
 void Personagem::sofrerDano(Entidade* atacante) {
-    levandoDano = true;
-    tempoDano = 0.f;
-    numVidas--;
+    if (!levandoDano) {
+        levandoDano = true;
+        tempoDano = 0.f;
+        numVidas--;
 
-    /* Knockback */
-    setPosition(posicao + sf::Vector2f(0.f, -15.f));
-    noChao = false;
-    velocidade = sf::Vector2f(knockbackHorizontal, -knockbackVertical);
+        /* Knockback */
+        setPosition(posicao + sf::Vector2f(0.f, -15.f));
+        noChao = false;
+        velocidade = sf::Vector2f(knockbackHorizontal, -knockbackVertical);
 
-    if (atacante->getPosition().x > posicao.x) {
-        velocidade.x *= -1; // Direção do Knockback vai depender da visão do atacante
+        if (atacante->getPosition().x > posicao.x) {
+            velocidade.x *= -1; // Direção do Knockback vai depender da visão do atacante
+        }
     }
 }
 
@@ -119,8 +128,18 @@ bool Personagem::getOlhandoDireita() const {
 
 void Personagem::atualizarEstado() {
     estado estadoAntigo = est;
+
+    if (numVidas <= 0) {
+        est = estado::morrendo;
+
+        tempoMorrendo += pGG->getDeltaTime();
+
+        if (tempoMorrendo >= duracaoMorrendo) {
+            paraDeletar = true;
+        }
+    }
     
-    if (levandoDano) {
+    else if (levandoDano) {
         est = sofrendo;
 
         tempoDano += pGG->getDeltaTime();
@@ -153,12 +172,6 @@ void Personagem::atualizarEstado() {
 
         if (correndo && noChao) {
             est = estado::correndo;
-
-            // RUN_ATTACK
-        }
-
-        else if (atacando) {
-            // WALK_ATTACK
         }
     }
 
@@ -182,6 +195,10 @@ void Personagem::atualizarEstado() {
 
     if (est != estado::parado && est != estado::ausente) {
         tempoParado = 0.f;
+    }
+    
+    if (est != estado::morrendo) {
+        tempoMorrendo = 0.f;
     }
 }
 

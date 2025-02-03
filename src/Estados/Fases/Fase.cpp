@@ -21,6 +21,8 @@ fases::Fase::Fase(int nFase)
     , pJog2(nullptr)
 {
     pColisoes->setListaProjeteis(&listaProjeteis);
+    pColisoes->setListaInimigos(&listaInimigos);
+    pColisoes->setListaJogadores(&listaJogadores);
 
     if (numeroFase == 0)
         tamanhoFase = 5290.f;
@@ -73,8 +75,7 @@ void fases::Fase::criarEntidade(char simbolo, const sf::Vector2i pos) {
         
         // Adicionar às listas e colisões conforme o tipo
         if (dynamic_cast<ent::pers::Inimigo*>(entidade)) {
-            listaPersonagens.incluir(entidade);
-            pColisoes->incluirInimigo(static_cast<ent::pers::Inimigo*>(entidade));
+            listaInimigos.incluir(entidade);
         }
         
         else if (dynamic_cast<ent::obs::Obstaculo*>(entidade)) {
@@ -86,10 +87,9 @@ void fases::Fase::criarEntidade(char simbolo, const sf::Vector2i pos) {
             // Se o(s) jogador(es) ainda não foi definido, cria.
             // Se já foi, apenas atualize sua posição.
             if (!pJog1) {
-                listaPersonagens.incluir(entidade);
+                listaJogadores.incluir(entidade);
                 ent::pers::Jogador* jogador = static_cast<ent::pers::Jogador*>(entidade);
 
-                pColisoes->incluirJogador(jogador);
                 ger::Gerenciador_Eventos::getInstancia()->setJogador(jogador);
                 ger::Gerenciador_Input::getInstancia()->setJogador(jogador);
                 pJog1 = jogador;
@@ -99,10 +99,9 @@ void fases::Fase::criarEntidade(char simbolo, const sf::Vector2i pos) {
                     sf::Vector2f posicao2(posicao.x + 200.f, posicao.y);
                     
                     ent::Entidade* entidade2 = it2->second->criarEntidade(posicao2);
-                    listaPersonagens.incluir(entidade2);
+                    listaJogadores.incluir(entidade2);
                     ent::pers::Jogador* jogador2 = static_cast<ent::pers::Jogador*>(entidade2);
 
-                    pColisoes->incluirJogador(jogador2);
                     ger::Gerenciador_Input::getInstancia()->setJogador2(jogador2);
                     pJog2 = jogador2;
                 }
@@ -111,7 +110,7 @@ void fases::Fase::criarEntidade(char simbolo, const sf::Vector2i pos) {
             else {
                 pJog1->setPosition(posicao);
 
-                if (doisJogadores)
+                if (doisJogadores && pJog2)
                     pJog2->setPosition(sf::Vector2f(posicao.x + 200.f, posicao.y));
             }
         }
@@ -133,12 +132,18 @@ void fases::Fase::desenharFundo() {
     ger::Gerenciador_Grafico::getInstancia()->getJanela()->setView(ger::Gerenciador_Grafico::getInstancia()->getJanela()->getDefaultView());
     ger::Gerenciador_Grafico::getInstancia()->getJanela()->draw(spriteFundo);
     ger::Gerenciador_Grafico::getInstancia()->getJanela()->setView(ger::Gerenciador_Grafico::getInstancia()->getVista());
-    ger::Gerenciador_Grafico::getInstancia()->centralizarVista(pJog1, tamanhoFase);
+    
+    if (!pJog1->getParaDeletar())
+        ger::Gerenciador_Grafico::getInstancia()->centralizarVista(pJog1, tamanhoFase);
+    
+    else if (pJog2 && !pJog2->getParaDeletar())
+        ger::Gerenciador_Grafico::getInstancia()->centralizarVista(pJog2, tamanhoFase);
 }
 
 
 void fases::Fase::atualizarPersonagens(){
-    listaPersonagens.percorrer();
+    listaInimigos.percorrer();
+    listaJogadores.percorrer();
 }
 
 void fases::Fase::atualizarObstaculos(){
