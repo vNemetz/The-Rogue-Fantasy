@@ -7,7 +7,7 @@ class Floresta :public Fase{
 private:
     bool faseFinalizada;
 public:
-    Floresta(ger::Gerenciador_Colisoes* pGC);
+    Floresta();
     ~Floresta();
     virtual void criarFundo();
     virtual void criarMapa();

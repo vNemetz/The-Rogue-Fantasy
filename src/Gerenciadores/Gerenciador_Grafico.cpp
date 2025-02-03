@@ -237,9 +237,11 @@ sf::Texture* Gerenciador_Grafico::getTextura(std::string nomeImagem) {
 void Gerenciador_Grafico::setFonte()
 {
     fonteSmacky = new sf::Font();
-    if (!fonteSmacky->loadFromFile("../assets/fonts/Retro Gaming.ttf")) {
-    std::cerr << "Erro ao carregar a fonte!\n";
-}
+    std::string caminho = PROJECT_ROOT;
+    caminho += "/assets/fonts/Retro Gaming.ttf";
+    if (!fonteSmacky->loadFromFile(caminho)) {
+        std::cerr << "Erro ao carregar a fonte!\n";
+    }
 }
 sf::Font* Gerenciador_Grafico::getFonte() const
 {

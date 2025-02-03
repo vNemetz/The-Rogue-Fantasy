@@ -117,7 +117,7 @@ void Jogador::emColisaoInimigo(Inimigo* pI, sf::Vector2f ds) {
         // Se está atacando e acertando,
         // além da colisão ser horizontal, dá dano
         if (atacando && ((olhandoDireita && inimigoADireita) || (!olhandoDireita && !inimigoADireita)) && (ds.x > ds.y)) {
-            pI->sofrerDano(static_cast<Entidade*>(pI));
+            pI->sofrerDano(static_cast<Entidade*>(this));
         }
 
         // Se não está atacando ou errando o ataque,
@@ -189,7 +189,7 @@ void Jogador::atualizarElementosAnimacao() {
 
         case estado::morrendo:
             setTextura("Rogue-Death" + sufixo);
-            animacao.atualizarSpritesheet(pTextura, sf::Vector2u(10, 1), 0.15f, ElementosGraficos::morrendo);
+            animacao.atualizarSpritesheet(pTextura, sf::Vector2u(10, 1), duracaoMorrendo / 10.f, ElementosGraficos::morrendo);
             break;
         
         default:
@@ -215,6 +215,21 @@ void Jogador::setCorpo() {
         else {
             frame.left -= 56;
             frame.width = -56;
+        }
+
+        if (est == estado::morrendo) {
+            frame.top = 90;
+            frame.height = 66;
+
+            if (frame.width > 0) {
+                frame.left += 60;
+                frame.width = 113;
+            }
+
+            else {
+                frame.left -= 83;
+                frame.width = -113;
+            }
         }
 
         if (est == estado::atacando) {

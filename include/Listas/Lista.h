@@ -150,7 +150,7 @@ void Lista<TL>::incluir(TL* p) {
 template <typename TL>
 void Lista<TL>::remover(TL* p) {
     Iterator it = begin();
-    Iterator anterior = end(); // Representa o iterador anterior como inválido inicialmente
+    Iterator anterior = end();
 
     while (it != end() && *it != p) {
         anterior = it;
@@ -160,14 +160,24 @@ void Lista<TL>::remover(TL* p) {
     if (it != end()) {
         Elemento<TL>* atual = it.getElemento();
 
-        if (atual == pPrimeiro)
+        if (atual == pPrimeiro) {
             pPrimeiro = atual->getProximo();
-
-        else if (atual == pUltimo)
+            // Se a lista ficou vazia, atualiza pUltimo também
+            if (pPrimeiro == nullptr) {
+                pUltimo = nullptr;
+            }
+        } 
+        else if (atual == pUltimo) {
             pUltimo = anterior.getElemento();
-
-        else
-            (anterior.getElemento())->setProx(atual->getProximo());
+            // Define o próximo do novo último elemento como nullptr
+            if (anterior != end()) {
+                anterior.getElemento()->setProx(nullptr);
+            }
+        } 
+        else {
+            // Atualiza o próximo do elemento anterior
+            anterior.getElemento()->setProx(atual->getProximo());
+        }
 
         delete atual;
         tamanho--;
