@@ -77,6 +77,9 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     carregarTextura("/assets/images/User-interface/main-menu-bg.png", "Main-Menu-Bg");
     carregarTextura("/assets/images/User-interface/yellow-button.png", "Yellow-Button");
     carregarTextura("/assets/images/User-interface/brown-button.png", "Brown-Button");
+    carregarTextura("/assets/images/User-interface/menu_bg.png", "Menu-bg");
+    carregarTextura("/assets/images/User-interface/pause.png", "Pause");
+
 
 }
 
@@ -221,16 +224,22 @@ sf::Texture* Gerenciador_Grafico::carregarTextura(std::string caminhoImagem, std
 sf::Texture* Gerenciador_Grafico::getTextura(std::string nomeImagem) {
     if (mapaTexturas.find(nomeImagem) != mapaTexturas.end()) {
         return mapaTexturas[nomeImagem];
+        std::cout<<"potato\n";
     }
-    
+
     std::cerr << "ERRO ao achar imagem: " << nomeImagem << '\n';
+    return nullptr;
     exit(1);
 }
 
 void Gerenciador_Grafico::setFonte()
 {
     fonteSmacky = new sf::Font();
-    fonteSmacky->loadFromFile("/assets/fonts/Arial.ttf");
+    std::string caminho = PROJECT_ROOT;
+    caminho += "/assets/fonts/Retro Gaming.ttf";
+    if (!fonteSmacky->loadFromFile(caminho)) {
+        std::cerr << "Erro ao carregar a fonte!\n";
+    }
 }
 sf::Font* Gerenciador_Grafico::getFonte() const
 {
@@ -262,5 +271,5 @@ void ger::Gerenciador_Grafico::desenharSprite(sf::Sprite *pS) const
 
 void ger::Gerenciador_Grafico::desenharTexto(sf::Text* text) const
 {
-    //pJanela->draw(*text);
+    pJanela->draw(*text);
 }

@@ -6,6 +6,9 @@
 #include "Estados/Estado.h"
 #include <unordered_map>
 
+namespace ger{
+    class Gerenciador_Estados;
+}
 namespace fases{
 
 class Fase : public Ente, public Estado{
@@ -13,6 +16,8 @@ protected:
     int numeroFase;
     float tamanhoFase;
 
+    ger::Gerenciador_Estados* pEstados;
+    
     static bool doisJogadores;
     ent::pers::Jogador* pJog1;
     ent::pers::Jogador* pJog2;
@@ -54,6 +59,7 @@ public:
     float getTamanhoFase() const;
     float getNumeroFase() const;
     
-    //virtual void alterarEstado();
+    void executarEstado(tipoEstado tipo);
+
 };
 }

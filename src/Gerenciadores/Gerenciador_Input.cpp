@@ -3,6 +3,7 @@
 #include <SFML/Window/Keyboard.hpp>
 
 
+
 namespace ger {
 /* Singleton - Padrão de Projeto */
 Gerenciador_Input::Gerenciador_Input()
@@ -10,6 +11,8 @@ Gerenciador_Input::Gerenciador_Input()
     , jogador1(nullptr)
     , jogador2(nullptr)
     , pMenuPrincipal(nullptr)
+    , pFaseAtual(nullptr)
+    , pMenuPausa(nullptr)
     , pGerEstados(ger::Gerenciador_Estados::getInstancia())
 {
     setMenuPrincipal(static_cast<menus::Menu_Principal*>(pGerEstados->getEstado(menu)));
@@ -22,6 +25,8 @@ Gerenciador_Input::~Gerenciador_Input() {
     jogador2 = nullptr;
     
     pMenuPrincipal = nullptr;
+    pFaseAtual = nullptr;
+    pMenuPausa = nullptr;
 }
 
 Gerenciador_Input* Gerenciador_Input::instancia(nullptr);
@@ -47,7 +52,18 @@ void Gerenciador_Input::setMenuPrincipal(menus::Menu_Principal *pMenuP)
     if(pMenuP){pMenuPrincipal = pMenuP;}
 }
 
-void Gerenciador_Input::incluir_tecla(sf::Keyboard::Key tecla, std::function<void(bool)> funcaoTecla) {
+void Gerenciador_Input::setFaseAtual(fases::Fase *pAtual)
+{
+    if(pAtual){pFaseAtual = pAtual;}
+}
+
+void Gerenciador_Input::setMenuPausa(menus::Menu_Pausa *pMenuPause)
+{
+    if(pMenuPause){pMenuPausa = pMenuPause;}
+}
+
+void Gerenciador_Input::incluir_tecla(sf::Keyboard::Key tecla, std::function<void(bool)> funcaoTecla)
+{
     mapaTeclas[tecla] = funcaoTecla;
 }
 
@@ -59,6 +75,7 @@ void Gerenciador_Input::criarInputMapEstado(tipoEstado tipoEstado)
 {
     switch(tipoEstado){
         case fase:
+            setFaseAtual(static_cast<fases::Fase*>(pGerEstados->getEstadoAtual()));
             mapaTeclas.clear();
             criarInputMapFase();
             break;
@@ -66,6 +83,10 @@ void Gerenciador_Input::criarInputMapEstado(tipoEstado tipoEstado)
             mapaTeclas.clear();
             criarInputMapMenuPrincipal();
             break;
+        case pausa:
+            setMenuPausa(static_cast<menus::Menu_Pausa*>(pGerEstados->getEstadoAtual()));
+            mapaTeclas.clear();
+            criarInputMapPausa();
         default:
             break;
     }
@@ -120,6 +141,13 @@ void Gerenciador_Input::criarInputMapFase()
         if (jogador2)
             jogador2->atualizarMovimentacao(pressionado, "L");
     });
+
+    /*Esc para abrir o menu de pausa*/
+    incluir_tecla(sf::Keyboard::Key::Escape, [this](bool pressionado) {
+        if(pFaseAtual)
+            pFaseAtual->setBufferTime(0);
+            pFaseAtual->executarEstado(pausa);
+    });
 }
 
 void Gerenciador_Input::criarInputMapMenuPrincipal()
@@ -134,9 +162,33 @@ void Gerenciador_Input::criarInputMapMenuPrincipal()
             pMenuPrincipal->alterarBotaoSelecionado(-1);
     });
     incluir_tecla(sf::Keyboard::Key::Enter, [this](bool pressionado) {
-        if(pMenuPrincipal)
+        if(pMenuPrincipal && pMenuPrincipal->getBufferTime() > 0.12f){
+            pMenuPrincipal->setBufferTime(0);
             pMenuPrincipal->executarEstado();
+        }
     });
+    
+}
+
+void Gerenciador_Input::criarInputMapPausa()
+{
+    incluir_tecla(sf::Keyboard::Key::Down, [this](bool pressionado) {
+        if (pMenuPausa){
+            pMenuPausa->alterarBotaoSelecionado(1);
+        }
+    });
+    incluir_tecla(sf::Keyboard::Key::Up, [this](bool pressionado) {
+        if (pMenuPausa)
+            pMenuPausa->alterarBotaoSelecionado(-1);
+    });
+    incluir_tecla(sf::Keyboard::Key::Enter, [this](bool pressionado) {
+        if(pMenuPausa && pMenuPausa->getBufferTime() > 0.12f){
+            pMenuPausa->setBufferTime(0);
+            pMenuPausa->executarEstado();
+        }
+    });
+
+    
 }
 
 void Gerenciador_Input::teclaApertada(sf::Keyboard::Key tecla)

@@ -4,6 +4,7 @@
 
 
 
+
 namespace ger{
 Gerenciador_Estados* Gerenciador_Estados::instancia(nullptr);
 
@@ -35,9 +36,11 @@ Gerenciador_Estados* Gerenciador_Estados::getInstancia(){
 
 void Gerenciador_Estados::inicializarEstados()
 {
-
     fases::Floresta* faseFloresta = new fases::Floresta();
     mapaEstados.insert(std::pair<tipoEstado, Estado*>(fase, static_cast<Estado*>(faseFloresta) ) );
+
+    menus::Menu_Pausa* menuPausa = new menus::Menu_Pausa(ger::Gerenciador_Estados::getInstancia());
+        mapaEstados.insert(std::pair<tipoEstado, Estado*>(pausa, static_cast<Estado*>(menuPausa) ) );
 }
 
 void Gerenciador_Estados::requererEstado() 
@@ -55,6 +58,10 @@ void Gerenciador_Estados::setEstadoAtual(tipoEstado tipo){
             pEstadoAtual = static_cast<Estado*>(mapaEstados[fase]);
             ger::Gerenciador_Input::getInstancia()->criarInputMapEstado(fase);
             break;
+        case pausa:
+            pEstadoAtual = static_cast<Estado*>(mapaEstados[pausa]);
+            ger::Gerenciador_Input::getInstancia()->criarInputMapEstado(pausa);
+            break;
         default:
             break;
     }
@@ -70,4 +77,13 @@ Estado *Gerenciador_Estados::getEstadoAtual(){
 Estado *ger::Gerenciador_Estados::getEstado(tipoEstado tipo)
 {
         return mapaEstados[tipo];
+}
+
+void ger::Gerenciador_Estados::reiniciarJogo()
+{
+    ger::Gerenciador_Colisoes::getInstancia()->limparListas();
+    delete mapaEstados[fase];
+    fases::Floresta* faseFloresta = new fases::Floresta();
+    mapaEstados.insert(std::pair<tipoEstado, Estado*>(fase, static_cast<Estado*>(faseFloresta) ) );
+    faseFloresta->setPGG(ger::Gerenciador_Grafico::getInstancia());
 }

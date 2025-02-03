@@ -2,21 +2,26 @@
 #include "Gerenciadores/Gerenciador_Eventos.h"
 #include "Gerenciadores/Gerenciador_Grafico.h"
 #include "Gerenciadores/Gerenciador_Input.h"
+#include "Gerenciadores/Gerenciador_Estados.h"
 #include "Fabricas/Fabrica_Goblin.h"
 #include "Fabricas/Fabrica_Plataforma.h"
 #include "Fabricas/Fabrica_Aranha.h"
 #include "Fabricas/Fabrica_Jogador.h"
+#include "Entidades/Personagens/Inimigo.h"
 
-fases::Fase::Fase() : Fase(0)
+fases::Fase::Fase() : 
+    Ente()
+    , Estado(fase)
 {
 }
 
 fases::Fase::Fase(int nFase)
     : Ente()
-    , Estado()
+    , Estado(fase)
     , numeroFase(nFase)
     , tamanhoFase(0.f)
     , pColisoes(ger::Gerenciador_Colisoes::getInstancia())
+    , pEstados(ger::Gerenciador_Estados::getInstancia())
     , pJog1(nullptr)
     , pJog2(nullptr)
 {
@@ -171,6 +176,13 @@ float fases::Fase::getNumeroFase() const {
     return numeroFase;
 }
 
-/*void fases::Fase::alterarParaMenu(){
-    ger::Gerenciador_Estados::getInstancia()->setEstadoAtual(menuPausa);
-}*/
+void fases::Fase::executarEstado(tipoEstado tipo){
+    switch (tipo){
+        case pausa:
+            pEstados->setEstadoAtual(pausa);
+            break;
+
+        default:
+            break;
+    }
+}

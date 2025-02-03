@@ -4,15 +4,14 @@
 
 namespace menus{
 
-Menu::Menu(int min, int max):
-Estado(menu)
+Menu::Menu(int min, int max, tipoEstado tipo):
+Estado(tipo)
 ,pTexturaFundo(nullptr)
 ,pSpriteFundo(nullptr)
 ,vetorBotoes()
 ,minimo(min)
 ,maximo(max)
 ,botaoSelecionado(0)
-,bufferTime(0.0f)
 {
     limparVetorBotoes();
     it = vetorBotoes.begin();
@@ -20,15 +19,14 @@ Estado(menu)
     pSpriteFundo = new sf::Sprite();
 }
 
-Menu::Menu(ger::Gerenciador_Estados* pGE, int min, int max):
-Estado(menu,pGE)
+Menu::Menu(ger::Gerenciador_Estados* pGE, int min, int max, tipoEstado tipo):
+Estado(tipo,pGE)
 ,pTexturaFundo(nullptr)
 ,pSpriteFundo(nullptr)
 ,vetorBotoes()
 ,botaoSelecionado(0)
 ,minimo(min)
 ,maximo(max)
-,bufferTime(0.0f)
 {
     limparVetorBotoes();
     it = vetorBotoes.begin();
@@ -45,17 +43,15 @@ Menu::~Menu()
 
 void Menu::alterarBotaoSelecionado(int unidade)
 {
-    if(unidade > 0 && botaoSelecionado != maximo && bufferTime > 0.12f){ 
+    if(unidade > 0 && botaoSelecionado != maximo && bufferTime > 0.13f){ 
         vetorBotoes[botaoSelecionado]->setTextura("Brown-Button");
         vetorBotoes[++botaoSelecionado]->setTextura("Yellow-Button");
         bufferTime = 0;
-        std::cout<<botaoSelecionado <<"\n";
     }
-    else if(unidade < 0 && botaoSelecionado != minimo && bufferTime > 0.12f){
+    else if(unidade < 0 && botaoSelecionado != minimo && bufferTime > 0.13f){
         vetorBotoes[botaoSelecionado]->setTextura("Brown-Button");
         vetorBotoes[--botaoSelecionado]->setTextura("Yellow-Button");
         bufferTime = 0;
-        std::cout<<botaoSelecionado <<"\n";
     }
 }
 
@@ -94,8 +90,8 @@ void Menu::adicionarBotao(std::string nomeImg, sf::Vector2f escala, std::string 
 {
     ElementosGraficos::Botao* novoBotao = new ElementosGraficos::Botao(nomeImg);
     novoBotao->setEscala(escala);
-    //novoBotao->setTexto(text);
     novoBotao->setPosicao(pos);
+    novoBotao->setTexto(text, sf::Vector2f(1.5f, 1.5f));
     vetorBotoes.push_back(novoBotao);
 }
 
@@ -105,7 +101,7 @@ void Menu::desenharBotoes()
     for(it = vetorBotoes.begin(); it != vetorBotoes.end(); it++){
         if(*it){
             ger::Gerenciador_Grafico::getInstancia()->desenharSprite((*it)->getSprite());
-            //ger::Gerenciador_Grafico::getInstancia()->desenharTexto((*it)->getTexto());
+            ger::Gerenciador_Grafico::getInstancia()->desenharTexto((*it)->getTexto());
         }
     }
 }

@@ -1,5 +1,8 @@
 #include "Gerenciadores/Gerenciador_Colisoes.h"
 #include "Listas/Lista_Entidades.h"
+#include "Entidades/Personagens/Inimigo.h"
+#include "Entidades/Personagens/Jogador.h"
+#include "Entidades/Projeteis/Projetil.h"
 #include <cmath>
 
 namespace ger {
@@ -144,6 +147,14 @@ void Gerenciador_Colisoes::setListaInimigos(lis::Lista_Entidades* listaInimigos)
 
 void Gerenciador_Colisoes::setListaJogadores(lis::Lista_Entidades* listaJogadores) {
     this->listaJogadores = listaJogadores;
+}
+
+void Gerenciador_Colisoes::limparListas() {
+    listaObstaculos.clear();
+    
+    if (listaInimigos) listaInimigos->limpar();
+    if (listaJogadores) listaJogadores->limpar();
+    if (listaProjeteis) listaProjeteis->limpar();
 }
 
 }

@@ -1,8 +1,5 @@
 #pragma once
-#include "Entidades/Personagens/Inimigo.h"
-#include "Entidades/Personagens/Jogador.h"
 #include "Entidades/Obstáculos/Obstaculo.h"
-#include "Entidades/Projeteis/Projetil.h"
 #include "Listas/Lista_Entidades.h"
 #include <list>
 
@@ -34,6 +31,7 @@ public:
     void setListaProjeteis(lis::Lista_Entidades* listaProjeteis);
     void setListaInimigos(lis::Lista_Entidades* listaInimigos);
     void setListaJogadores(lis::Lista_Entidades* listaJogadores);
+    void limparListas();
 };
 
 }
