@@ -22,11 +22,11 @@ Jogador::Jogador(sf::Vector2f pos, sf::Vector2f tam, bool jog)
     , vetorCoracoes()
     , texturaCoracao(nullptr)
 {
-    texturaCoracao = new sf::Texture();
-    texturaCoracao = pGG->getTextura("Heart");
-    vetorCoracoes.clear();
+    //texturaCoracao = new sf::Texture();
+    //texturaCoracao = pGG->getTextura("Heart");
+    //vetorCoracoes.clear();
     setNumVidas(5);
-    inicializarCoracoes();
+    //inicializarCoracoes();
     setTextura("Rogue-Stand");
     setVelocidadeMaxima(sf::Vector2f(600.f, 600.f));
     carregarControles();
@@ -34,7 +34,7 @@ Jogador::Jogador(sf::Vector2f pos, sf::Vector2f tam, bool jog)
 
 Jogador::~Jogador()
 {
-    std::vector<sf::Sprite*>::iterator it = vetorCoracoes.begin();
+    /*std::vector<sf::Sprite*>::iterator it = vetorCoracoes.begin();
     while(it != vetorCoracoes.end()){
         if(*it){
             delete (*it);
@@ -45,6 +45,7 @@ Jogador::~Jogador()
     vetorCoracoes.clear();
    delete texturaCoracao;
    texturaCoracao = nullptr;
+    */
 }
 
 void Jogador::executar() {
@@ -54,7 +55,7 @@ void Jogador::executar() {
     
     atualizarAnimacao();
 
-    desenharCoracoes();
+    //desenharCoracoes();
 }
 
 void Jogador::desenhar() {
@@ -123,6 +124,7 @@ void Jogador::emColisaoInimigo(Inimigo* pI, sf::Vector2f ds) {
         // e o inimigo não está sofrendo, leva dano
         else if (pI->getEstado() != sofrendo) {
             sofrerDano(static_cast<Entidade*>(pI));
+    }
     }
 }
 
