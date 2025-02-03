@@ -1,7 +1,5 @@
 #include "Jogo.h"
 #include "Ente.h"
-#include "Gerenciadores/Gerenciador_Colisoes.h"
-#include <SFML/System/Vector2.hpp>
 
 Jogo::Jogo():
      gerGrafico(ger::Gerenciador_Grafico::getInstancia())
@@ -13,8 +11,6 @@ Jogo::Jogo():
     Ente::setPGG(gerGrafico);
     gerEstados->inicializarEstados(); /*NUNCA colocar esse método na construtora de GerEstados (seg fault)*/
 
-
-
     executar();
 }
 
@@ -23,9 +19,6 @@ Jogo::~Jogo() {
     gerEventos = nullptr;
     gerEstados = nullptr;
 }
-
-
-
 
 void Jogo::executar() {
     while (gerGrafico->getJanelaAberta()) {

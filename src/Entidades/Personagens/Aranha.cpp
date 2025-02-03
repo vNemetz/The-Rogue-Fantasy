@@ -84,8 +84,8 @@ void Aranha::parar() {
     movendoDireita = false;
 }
 
-void Aranha::setListaProjeteis(lis::Lista_Entidades* listaProjeteis) {
-    this->listaProjeteis = listaProjeteis;
+void Aranha::setListaProjeteis(lis::Lista_Entidades* listaProj) {
+    listaProjeteis = listaProj;
 }
 
 /* Animação */

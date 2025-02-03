@@ -31,6 +31,8 @@ protected:
     const float duracaoInvulneravel = 1.8f;
     float tempoAtaque;
     float duracaoAtaque = 0.35f; // Duração Total do Ataque
+    float tempoMorrendo;
+    const float duracaoMorrendo = 2.f;
 
     /* Movimentação - Atributos */
     bool movendoEsquerda;
@@ -39,6 +41,7 @@ protected:
     bool correndo;
     bool levandoDano;
     bool atacando;
+    bool morto;
 
     bool podeAtacar;
 
