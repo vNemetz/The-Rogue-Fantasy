@@ -8,6 +8,8 @@
 #include "Fabricas/Fabrica_Aranha.h"
 #include "Fabricas/Fabrica_Cavaleiro.h"
 #include "Fabricas/Fabrica_Jogador.h"
+#include "Fabricas/Fabrica_Porta.h"
+#include "Entidades/Obstáculos/Porta.h"
 #include "Entidades/Personagens/Inimigo.h"
 
 fases::Fase::Fase() : 
@@ -43,6 +45,7 @@ fases::Fase::Fase(int nFase)
     registrarFabrica('g', new fact::Fabrica_Goblin(pJog1, pJog2, doisJogadores, tamanhoFase));
     registrarFabrica('a', new fact::Fabrica_Aranha(pJog1, pJog2, doisJogadores, tamanhoFase, &listaProjeteis));
     registrarFabrica('c', new fact::Fabrica_Cavaleiro(pJog1, pJog2, doisJogadores, tamanhoFase));
+    registrarFabrica('d', new fact::Fabrica_Porta(tamanhoFase));
     registrarFabrica('/', new fact::Fabrica_Plataforma(0, tamanhoFase));
     registrarFabrica('#', new fact::Fabrica_Plataforma(1, tamanhoFase));
     registrarFabrica(';', new fact::Fabrica_Plataforma(2, tamanhoFase));
@@ -51,6 +54,8 @@ fases::Fase::Fase(int nFase)
     registrarFabrica('.', new fact::Fabrica_Plataforma(5, tamanhoFase));
     
 }
+
+bool ent::obs::Porta::aberta(false);
 
 fases::Fase::~Fase() {
     // Deleta as fábricas
@@ -150,6 +155,11 @@ void fases::Fase::desenharFundo() {
 
 void fases::Fase::atualizarPersonagens(){
     listaInimigos.percorrer();
+
+    if (listaInimigos.getTamanho() <= 0) {
+        ent::obs::Porta::setAberta(true);
+    }
+
     listaJogadores.percorrer();
 }
 

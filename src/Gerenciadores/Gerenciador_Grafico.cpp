@@ -87,7 +87,10 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     carregarTextura("/assets/images/User-interface/menu_bg.png", "Menu-bg");
     carregarTextura("/assets/images/User-interface/pause.png", "Pause");
 
-
+    /* Door Textures */
+    carregarTextura("/assets/images/Door/door-closed.png", "Door-Closed");
+    carregarTextura("/assets/images/Door/door-opening.png", "Door-Opening");
+    carregarTextura("/assets/images/Door/door-opened.png", "Door-Opened");
 }
 
 Gerenciador_Grafico::~Gerenciador_Grafico() {
