@@ -34,19 +34,6 @@ void Inimigo::emColisaoInimigo(Inimigo* pI, sf::Vector2f ds) {
             else
                 posicaoInimigo.x -= ds.x;
         }
-        
-        // Se a colisão é no eixo y
-        else {
-            if (posicaoInimigo.y < posicao.y) {
-                posicaoInimigo.y += ds.y;
-            }
-
-            else {
-                posicaoInimigo.y -= ds.y;
-            }
-
-            velocidadeInimigo.y = 0;
-        }
     }
 
     pI->setPosition(posicaoInimigo);
