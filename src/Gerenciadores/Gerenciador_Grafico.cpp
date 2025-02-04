@@ -72,6 +72,13 @@ Gerenciador_Grafico::Gerenciador_Grafico()
 
     carregarTextura("/assets/images/General/web.png", "Web");
 
+    /* Knight Textures */
+    carregarTextura("/assets/images/Knight/knight-walk.png", "Knight-Walk");
+    carregarTextura("/assets/images/Knight/knight-attack.png", "Knight-Attack");
+    carregarTextura("/assets/images/Knight/knight-death.png", "Knight-Death");
+    carregarTextura("/assets/images/Knight/knight-hurt.png", "Knight-Hurt");
+    carregarTextura("/assets/images/Knight/knight-idle.png", "Knight-Idle");
+
     /*GUI Textures*/
     carregarTextura("/assets/images/User-interface/leaderboard-button.png", "Leaderboard-Button");
     carregarTextura("/assets/images/User-interface/main-menu-bg.png", "Main-Menu-Bg");

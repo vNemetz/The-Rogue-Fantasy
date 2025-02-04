@@ -6,6 +6,7 @@
 #include "Fabricas/Fabrica_Goblin.h"
 #include "Fabricas/Fabrica_Plataforma.h"
 #include "Fabricas/Fabrica_Aranha.h"
+#include "Fabricas/Fabrica_Cavaleiro.h"
 #include "Fabricas/Fabrica_Jogador.h"
 #include "Entidades/Personagens/Inimigo.h"
 
@@ -42,6 +43,7 @@ fases::Fase::Fase(int nFase)
     /* Criação do restante das Fábricas (Factory Method Design Pattern) */
     registrarFabrica('g', new fact::Fabrica_Goblin(pJog1, pJog2, doisJogadores, tamanhoFase));
     registrarFabrica('a', new fact::Fabrica_Aranha(pJog1, pJog2, doisJogadores, tamanhoFase, &listaProjeteis));
+    registrarFabrica('c', new fact::Fabrica_Cavaleiro(pJog1, pJog2, doisJogadores, tamanhoFase));
     registrarFabrica('/', new fact::Fabrica_Plataforma(0, tamanhoFase));
     registrarFabrica('#', new fact::Fabrica_Plataforma(1, tamanhoFase));
     registrarFabrica(';', new fact::Fabrica_Plataforma(2, tamanhoFase));
