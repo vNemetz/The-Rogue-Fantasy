@@ -7,7 +7,9 @@
 #include "Fabricas/Fabrica_Plataforma.h"
 #include "Fabricas/Fabrica_Aranha.h"
 #include "Fabricas/Fabrica_Jogador.h"
+#include "Fabricas/Fabrica_Porta.h"
 #include "Entidades/Personagens/Inimigo.h"
+#include "Entidades/Obstáculos/Porta.h"
 
 
 fases::Fase::Fase() : 
@@ -48,6 +50,7 @@ fases::Fase::Fase(int nFase)
     registrarFabrica('|', new fact::Fabrica_Plataforma(3, tamanhoFase));
     registrarFabrica('@', new fact::Fabrica_Plataforma(4, tamanhoFase));
     registrarFabrica('.', new fact::Fabrica_Plataforma(5, tamanhoFase));
+    registrarFabrica('d', new fact::Fabrica_Porta(tamanhoFase));
     
 }
 
@@ -73,6 +76,7 @@ void fases::Fase::registrarFabrica(char simbolo, fact::Fabrica_Entidades* fabric
 }
 
 void fases::Fase::criarEntidade(char simbolo, const sf::Vector2i pos) {
+
     auto it = fabricas.find(simbolo);
 
     if (it != fabricas.end()) {
@@ -125,11 +129,8 @@ void fases::Fase::criarEntidade(char simbolo, const sf::Vector2i pos) {
 
 /* Execução da Fase */
 void fases::Fase::executar() {
-    std::cout << "d\n";
     desenharFundo();
-std::cout << "e\n";
     atualizarProjeteis();
-    std::cout << "f\n";
     atualizarObstaculos();
     atualizarPersonagens();
 
@@ -175,9 +176,6 @@ float fases::Fase::getTamanhoFase() const {
     return tamanhoFase;
 }
 
-float fases::Fase::getNumeroFase() const {
-    return numeroFase;
-}
 
 void fases::Fase::executarEstado(tipoEstado tipo){
     switch (tipo){

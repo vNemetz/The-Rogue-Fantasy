@@ -1,5 +1,6 @@
 #include "Gerenciadores/Gerenciador_Estados.h"
 #include "Estados/Fases/Floresta.h"
+#include "Estados/Fases/Castelo.h"
 #include "Gerenciadores/Gerenciador_Input.h"
 
 
@@ -86,6 +87,20 @@ Estado *Gerenciador_Estados::getEstadoAtual(){
 Estado *ger::Gerenciador_Estados::getEstado(tipoEstado tipo)
 {
         return mapaEstados[tipo];
+}
+
+void ger::Gerenciador_Estados::proximaFase(int numFase)
+{
+    if(numFase == 1){
+        fases::Castelo* faseCastelo = new fases::Castelo();
+        pEstadoAtual = faseCastelo;
+        if(mapaEstados[fase]){
+            delete mapaEstados[fase];
+            mapaEstados.erase(fase);
+        }
+        mapaEstados.insert(std::pair<tipoEstado, Estado*>(fase, static_cast<Estado*>(faseCastelo) ) );
+        faseCastelo->setPGG(ger::Gerenciador_Grafico::getInstancia());
+    }
 }
 
 void ger::Gerenciador_Estados::reiniciarJogo()

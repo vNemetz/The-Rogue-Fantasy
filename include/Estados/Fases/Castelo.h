@@ -9,7 +9,9 @@ private:
 public:
     Castelo();
     ~Castelo();
+    virtual void criarFundo();
+    virtual void criarMapa();
 
-    virtual void executar();
+    void executar();
 };
 }

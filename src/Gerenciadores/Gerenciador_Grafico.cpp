@@ -27,6 +27,8 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     setJanela();
     setFonte();
 
+
+    /*Forest Textures*/
     carregarTextura("/assets/images/Backgrounds/Forest.png", "Forest");
     carregarTextura("/assets/images/Tiles/Ground_grass_0001_tile.png", "Grass0001");
     carregarTextura("/assets/images/Tiles/Ground_grass_0002_tile.png", "Grass0002");
@@ -34,6 +36,12 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     carregarTextura("/assets/images/Tiles/Ground_grass_0003_tile.png", "Grass0003");
     carregarTextura("/assets/images/Tiles/Ground_grass_0004_tile.png", "Grass0004");
     carregarTextura("/assets/images/Tiles/Ground_grass_0005_tile.png", "Grass0005");
+
+    /*Castles Textures*/
+    carregarTextura("/assets/images/Backgrounds/Castle.png", "Castle");
+    carregarTextura("/assets/images/Tiles-castle/tile13.png", "Brick1");
+    carregarTextura("/assets/images/Tiles-castle/tile8.png", "Brick-Left-Border");
+    carregarTextura("/assets/images/Tiles-castle/tile9.png", "Brick-Right-Border");
 
     /* Rogue Textures */
     carregarTextura("/assets/images/Rogue/rogue-stand.png", "Rogue-Stand");
@@ -81,8 +89,13 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     carregarTextura("/assets/images/User-interface/pause.png", "Pause");
     carregarTextura("/assets/images/User-interface/heart.png", "Heart");
 
-    /*Obstacle Textures*/
+    /*Obstacle's Textures*/
     carregarTextura("/assets/images/Obstacles/box.png", "Box");
+
+    /*Element's Textures*/
+    carregarTextura("/assets/images/Elements/Star.png", "Star");
+    carregarTextura("/assets/images/Elements/Door.png", "Door");
+    carregarTextura("/assets/images/Elements/door1.png", "Static-door");
 }
 
 Gerenciador_Grafico::~Gerenciador_Grafico() {

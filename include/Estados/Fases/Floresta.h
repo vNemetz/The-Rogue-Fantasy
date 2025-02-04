@@ -12,5 +12,6 @@ public:
     virtual void criarFundo();
     virtual void criarMapa();
 
+    void proximaFase();
 };
 }   

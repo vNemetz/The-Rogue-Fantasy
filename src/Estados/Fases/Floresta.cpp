@@ -1,4 +1,5 @@
 #include "Estados/Fases/Floresta.h"
+#include "Gerenciadores/Gerenciador_Estados.h"
 #include <iostream>
 #include <fstream>
 
@@ -48,3 +49,13 @@ void fases::Floresta::criarMapa(){
     
     arquivoMapa.close();
 }
+void fases::Floresta::proximaFase()
+{
+    if(pGEstados){
+        pGEstados->proximaFase(1);
+    }
+}
+
+/*void fases::Floresta::checaObjetivo(){
+
+}*/
