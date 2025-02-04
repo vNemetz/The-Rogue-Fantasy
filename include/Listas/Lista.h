@@ -242,12 +242,11 @@ TL* Lista<TL>::operator[](unsigned int index) const {
         return nullptr; // Índice fora dos limites
     }
     
-    Elemento<TL>* atual = pPrimeiro;
-    for (unsigned int i = 0; i < index; ++i) {
-        atual = atual->getProximo();
-    }
+    Lista<TL>::Iterator atual = begin();
+    for (int i = 0; i < index; i++)
+        ++atual;
     
-    return atual->getInfo();
+    return *atual;
 }
 
 template <typename TL>
