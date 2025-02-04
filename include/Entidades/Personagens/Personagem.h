@@ -30,7 +30,7 @@ protected:
     float tempoDano;
     const float duracaoInvulneravel = 1.8f;
     float tempoAtaque;
-    float duracaoAtaque = 0.35f; // Duração Total do Ataque
+    float duracaoAtaque = 0.5f; // Duração Total do Ataque
     float tempoMorrendo;
     const float duracaoMorrendo = 2.f;
 

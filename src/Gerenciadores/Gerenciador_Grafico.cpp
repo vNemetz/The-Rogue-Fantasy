@@ -95,8 +95,10 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     carregarTextura("/assets/images/User-interface/pause.png", "Pause");
     carregarTextura("/assets/images/User-interface/heart.png", "Heart");
 
-    /*Obstacle Textures*/
-    carregarTextura("/assets/images/Obstacles/box.png", "Box");
+    /* Door Textures */
+    carregarTextura("/assets/images/Door/door-closed.png", "Door-Closed");
+    carregarTextura("/assets/images/Door/door-opening.png", "Door-Opening");
+    carregarTextura("/assets/images/Door/door-opened.png", "Door-Opened");
 }
 
 Gerenciador_Grafico::~Gerenciador_Grafico() {
