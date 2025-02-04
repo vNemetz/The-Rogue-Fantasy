@@ -22,6 +22,7 @@ Jogador::Jogador(sf::Vector2f pos, sf::Vector2f tam, bool jog)
     setTextura("Rogue-Stand");
     setVelocidadeMaxima(sf::Vector2f(600.f, 600.f));
     carregarControles();
+    numVidas = 10;
 }
 
 Jogador::~Jogador()
