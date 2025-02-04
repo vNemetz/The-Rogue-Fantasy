@@ -27,6 +27,7 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     setJanela();
     setFonte();
 
+    /*Forest Textures*/
     carregarTextura("/assets/images/Backgrounds/Forest.png", "Forest");
     carregarTextura("/assets/images/Tiles/Ground_grass_0001_tile.png", "Grass0001");
     carregarTextura("/assets/images/Tiles/Ground_grass_0002_tile.png", "Grass0002");
@@ -34,6 +35,12 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     carregarTextura("/assets/images/Tiles/Ground_grass_0003_tile.png", "Grass0003");
     carregarTextura("/assets/images/Tiles/Ground_grass_0004_tile.png", "Grass0004");
     carregarTextura("/assets/images/Tiles/Ground_grass_0005_tile.png", "Grass0005");
+
+    /*Castle Textures*/
+    carregarTextura("/assets/images/Backgrounds/Castle.png", "Castle");
+    carregarTextura("/assets/images/Tiles-castle/tile13.png", "Brick");
+    carregarTextura("/assets/images/Tiles-castle/tile8.png", "Left-Brick");
+    carregarTextura("/assets/images/Tiles-castle/tile9.png", "Right-Brick");
 
     /* Rogue Textures */
     carregarTextura("/assets/images/Rogue/rogue-stand.png", "Rogue-Stand");
