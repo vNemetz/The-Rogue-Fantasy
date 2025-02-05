@@ -42,9 +42,10 @@ void fases::Castelo::criarMapa(){
     while(std::getline(arquivoMapa, linha)){
         for(int i = 0; i < linha.size(); i++){
             if(linha[i] != ' ') {
-                if (linha[i] == 'g')
+                if (linha[i] == 'g'){
+                    std::cout<<"cavaleiro\n";
                     cavaleiros.push_back(sf::Vector2i(i, j));
-
+                }   
                 else if (linha[i] == 'a')
                     aranhas.push_back(sf::Vector2i(i, j));
 
@@ -60,22 +61,39 @@ void fases::Castelo::criarMapa(){
 
 void fases::Castelo::criarInimigos(){
     // Randomiza a quantidade de inimigos, com um mínimo de 3 de cada
-    unsigned int quantidadeCavaleiros = (rand() % (cavaleiros.size() - 2)) + 3;
-    unsigned int quantidadeAranhas = (rand() % (aranhas.size() - 2)) + 3;
+    if (cavaleiros.size() >= 3) {
+        unsigned int quantidadeCavaleiros = (rand() % (cavaleiros.size() - 2)) + 3;
 
-    for (int i = 0; i < quantidadeCavaleiros; i++) {
-        unsigned int cavaleiroRandom = (rand() % (cavaleiros.size()));
-        
-        criarEntidade('g', cavaleiros[cavaleiroRandom]);
-        
-        cavaleiros.erase(cavaleiros.begin() + cavaleiroRandom);
+        for (int i = 0; i < quantidadeCavaleiros; i++) {
+            unsigned int cavaleiroRandom = (rand() % (cavaleiros.size()));
+            
+            criarEntidade('c', cavaleiros[cavaleiroRandom]);
+            
+            cavaleiros.erase(cavaleiros.begin() + cavaleiroRandom);
+        }
     }
 
-    for (int i = 0; i < quantidadeAranhas; i++) {
-        unsigned int aranhaRandom = (rand() % (aranhas.size()));
-        
-        criarEntidade('a', aranhas[aranhaRandom]);
+    else {
+        for (auto cavaleiro : cavaleiros) {
+            criarEntidade('c', cavaleiro);
+        }
+    }
+    
+    if (aranhas.size() >= 3) {
+        unsigned int quantidadeAranhas = (rand() % (aranhas.size() - 2)) + 3;
 
-        aranhas.erase(aranhas.begin() + aranhaRandom);
+        for (int i = 0; i < quantidadeAranhas; i++) {
+            unsigned int aranhaRandom = (rand() % (aranhas.size()));
+            
+            criarEntidade('a', aranhas[aranhaRandom]);
+
+            aranhas.erase(aranhas.begin() + aranhaRandom);
+        }
+    }
+
+    else {
+        for (auto aranha : aranhas) {
+            criarEntidade('a', aranha);
+        }
     }
 }

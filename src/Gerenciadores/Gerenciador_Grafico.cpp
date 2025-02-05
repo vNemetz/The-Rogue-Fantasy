@@ -38,9 +38,10 @@ Gerenciador_Grafico::Gerenciador_Grafico()
 
     /*Castle Textures*/
     carregarTextura("/assets/images/Backgrounds/Castle.png", "Castle");
-    carregarTextura("/assets/images/Tiles-castle/tile13.png", "Brick");
-    carregarTextura("/assets/images/Tiles-castle/tile8.png", "Left-Brick");
-    carregarTextura("/assets/images/Tiles-castle/tile9.png", "Right-Brick");
+    carregarTextura("/assets/images/Tiles-castle/tile13.png", "Brick0001");
+    carregarTextura("/assets/images/Tiles-castle/tile8.png", "Brick0002");
+    carregarTextura("/assets/images/Tiles-castle/tile9.png", "Brick0003");
+    carregarTextura("/assets/images/Tiles-castle/tile12.png", "Brick0004");
 
     /* Rogue Textures */
     carregarTextura("/assets/images/Rogue/rogue-stand.png", "Rogue-Stand");
@@ -118,7 +119,8 @@ float Gerenciador_Grafico::deltaTime(0);
 /* Video Mode (Resolução) */
 
 void Gerenciador_Grafico::setVideoMode() {
-    videoMode.getDesktopMode();
+    videoMode.height = HEIGHT;
+    videoMode.width = WIDTH;
 }
 
 /* Janela */

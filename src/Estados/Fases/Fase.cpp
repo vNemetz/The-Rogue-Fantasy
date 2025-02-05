@@ -35,6 +35,8 @@ fases::Fase::Fase(int nFase)
 
     if (numeroFase == 0)
         tamanhoFase = 5290.f;
+    else if(numeroFase == 1)
+        tamanhoFase = 5290.0f;
 
     /* Criação Inicial dos Jogadores e suas Fábricas */
     registrarFabrica('j', new fact::Fabrica_Jogador(true, tamanhoFase));
@@ -47,12 +49,12 @@ fases::Fase::Fase(int nFase)
     registrarFabrica('a', new fact::Fabrica_Aranha(pJog1, pJog2, doisJogadores, tamanhoFase, &listaProjeteis));
     registrarFabrica('c', new fact::Fabrica_Cavaleiro(pJog1, pJog2, doisJogadores, tamanhoFase));
     registrarFabrica('d', new fact::Fabrica_Porta(tamanhoFase));
-    registrarFabrica('/', new fact::Fabrica_Plataforma(0, tamanhoFase));
-    registrarFabrica('#', new fact::Fabrica_Plataforma(1, tamanhoFase));
-    registrarFabrica(';', new fact::Fabrica_Plataforma(2, tamanhoFase));
-    registrarFabrica('|', new fact::Fabrica_Plataforma(3, tamanhoFase));
-    registrarFabrica('@', new fact::Fabrica_Plataforma(4, tamanhoFase));
-    registrarFabrica('.', new fact::Fabrica_Plataforma(5, tamanhoFase));
+    registrarFabrica('/', new fact::Fabrica_Plataforma(numeroFase, 0, tamanhoFase));
+    registrarFabrica('#', new fact::Fabrica_Plataforma(numeroFase, 1, tamanhoFase));
+    registrarFabrica(';', new fact::Fabrica_Plataforma(numeroFase, 2, tamanhoFase));
+    registrarFabrica('|', new fact::Fabrica_Plataforma(numeroFase, 3, tamanhoFase));
+    registrarFabrica('@', new fact::Fabrica_Plataforma(numeroFase, 4, tamanhoFase));
+    registrarFabrica('.', new fact::Fabrica_Plataforma(numeroFase, 5, tamanhoFase));
     
 }
 
@@ -132,11 +134,8 @@ void fases::Fase::criarEntidade(char simbolo, const sf::Vector2i pos) {
 
 /* Execução da Fase */
 void fases::Fase::executar() {
-    std::cout << "d\n";
     desenharFundo();
-std::cout << "e\n";
     atualizarProjeteis();
-    std::cout << "f\n";
     atualizarObstaculos();
     atualizarPersonagens();
 
