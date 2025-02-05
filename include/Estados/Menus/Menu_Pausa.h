@@ -13,7 +13,7 @@ private:
 
 public:
     Menu_Pausa();
-    Menu_Pausa(ger::Gerenciador_Estados* pGE);
+    Menu_Pausa(ger::Gerenciador_Estados* pGE = nullptr);
     ~Menu_Pausa();
 
     void executarEstado();
