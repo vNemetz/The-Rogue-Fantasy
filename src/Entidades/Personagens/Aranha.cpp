@@ -114,7 +114,12 @@ void Aranha::atualizarElementosAnimacao() {
             setTextura("Spider-Attack");
             animacao.atualizarSpritesheet(pTextura, sf::Vector2u(3, 1), duracaoAtaque / 3.f, ElementosGraficos::atacando);
             break;
-        
+
+        case estado::morrendo:
+            setTextura("Spider-Death");
+            animacao.atualizarSpritesheet(pTextura, sf::Vector2u(4, 1), 0.2f, ElementosGraficos::morrendo);
+            break;
+
         default:
             break;
     }

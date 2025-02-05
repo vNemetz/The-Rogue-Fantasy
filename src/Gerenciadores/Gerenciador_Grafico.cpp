@@ -78,6 +78,7 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     carregarTextura("/assets/images/Spider/spider-hurt.png", "Spider-Hurt");
     carregarTextura("/assets/images/Spider/spider-attack.png", "Spider-Attack");
     carregarTextura("/assets/images/Spider/spider-walk.png", "Spider-Walk");
+    carregarTextura("/assets/images/Spider/spider-death.png", "Spider-Death");
 
     carregarTextura("/assets/images/General/web.png", "Web");
 
