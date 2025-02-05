@@ -21,6 +21,7 @@ Jogador::Jogador(sf::Vector2f pos, sf::Vector2f tam, bool jog)
     : Personagem(pos, tam, jogador)
     , pulando(false)
     , jogador1(jog)
+    , pontos(0)
 {
     setNumVidas(5);
     setTextura("Rogue-Stand");
@@ -33,15 +34,12 @@ Jogador::~Jogador()
 {
 }
 
-int Jogador::pontos(0);
-
 void Jogador::executar() {
     atualizarPosicao();
 
     atualizarEstado();
     
     atualizarAnimacao();
-    std::cout << pontos << '\n';
 }
 
 void Jogador::desenhar() {
@@ -104,24 +102,26 @@ void Jogador::emColisaoInimigo(Inimigo* pI, sf::Vector2f ds) {
         // além da colisão ser horizontal, 
         // e também se o inimigo não estiver sofrendo dano nem morrendo,
         // dá dano
-        if (atacando && ((olhandoDireita && inimigoADireita) || (!olhandoDireita && !inimigoADireita)) && (ds.x > ds.y) && (pI->getEstado() != sofrendo) && (pI->getEstado() != morrendo)) {
-            pI->sofrerDano(static_cast<Entidade*>(this));
-            
-            if (pI->getNumVidas() <= 0) {
-                if (dynamic_cast<Goblin*>(pI))
-                    pontos += 100;
+        if (atacando && ((olhandoDireita && inimigoADireita) || (!olhandoDireita && !inimigoADireita)) && (ds.x > ds.y)) {
+            if ((pI->getEstado() != sofrendo) && (pI->getEstado() != morrendo)) {
+                pI->sofrerDano(static_cast<Entidade*>(this));
+                
+                if (pI->getNumVidas() <= 0) {
+                    if (dynamic_cast<Goblin*>(pI))
+                        pontos += 100;
 
-                else if (dynamic_cast<Aranha*>(pI))
-                    pontos += 200;
+                    else if (dynamic_cast<Aranha*>(pI))
+                        pontos += 200;
 
-                else if (dynamic_cast<Cavaleiro*>(pI))
-                    pontos += 300;
+                    else if (dynamic_cast<Cavaleiro*>(pI))
+                        pontos += 300;
+                }
             }
         }
 
         // Se não está atacando ou errando o ataque,
         // e o inimigo não está sofrendo, leva dano
-        else if (pI->getEstado() != sofrendo) {
+        else if (pI->getEstado() != sofrendo && pI->getEstado() != morrendo) {
             sofrerDano(static_cast<Entidade*>(pI));
         }
     }

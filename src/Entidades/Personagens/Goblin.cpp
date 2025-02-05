@@ -120,6 +120,11 @@ void Goblin::atualizarElementosAnimacao() {
             setTextura("Goblin-Hurt");
             animacao.atualizarSpritesheet(pTextura, sf::Vector2u(3, 1), 0.13f, ElementosGraficos::sofrendo);
             break;
+
+        case morrendo:
+            setTextura("Goblin-Death");
+            animacao.atualizarSpritesheet(pTextura, sf::Vector2u(4, 1), 0.2f, ElementosGraficos::morrendo);
+            break;
         
         default:
             break;
@@ -132,17 +137,34 @@ void Goblin::setCorpo() {
     if (pSprite) {
         sf::IntRect frame = animacao.getCorpo();
 
-        frame.top += 32;
-        frame.height = 89 - 32;
+        if (est == morrendo) {
+            frame.top = 34;
+            frame.height = 94 - 34;
 
-        if (frame.width > 0) {
-            frame.left += 30;
-            frame.width = 70;
+            if (frame.width > 0) {
+                frame.left += 18;
+                frame.width = 91 - 18;
+            }
+
+            else {
+                frame.left -= 128 - 91;
+                frame.width = 18 - 91;
+            }
         }
 
         else {
-            frame.left -= 28;
-            frame.width = -70;
+            frame.top += 32;
+            frame.height = 89 - 32;
+
+            if (frame.width > 0) {
+                frame.left += 30;
+                frame.width = 70;
+            }
+
+            else {
+                frame.left -= 28;
+                frame.width = -70;
+            }
         }
 
         pSprite->setTextureRect(frame);

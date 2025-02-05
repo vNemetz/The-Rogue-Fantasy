@@ -39,6 +39,8 @@ fases::Fase::Fase(int nFase)
     else if(numeroFase == 1)
         tamanhoFase = 5290.0f;
 
+    ent::obs::Porta::setAberta(false);
+
     /* Criação Inicial dos Jogadores e suas Fábricas */
     registrarFabrica('j', new fact::Fabrica_Jogador(true, tamanhoFase));
     if (doisJogadores) registrarFabrica('k', new fact::Fabrica_Jogador(false, tamanhoFase));

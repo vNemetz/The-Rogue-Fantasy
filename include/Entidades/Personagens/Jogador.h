@@ -9,7 +9,7 @@ class Inimigo;
 
 class Jogador : public Personagem {
 private:
-    static int pontos;
+    int pontos;
     bool pulando;
     bool jogador1;
 

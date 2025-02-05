@@ -71,6 +71,7 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     carregarTextura("/assets/images/Goblin/goblin-idle.png", "Goblin-Idle");
     carregarTextura("/assets/images/Goblin/goblin-walk.png", "Goblin-Walk");
     carregarTextura("/assets/images/Goblin/goblin-hurt.png", "Goblin-Hurt");
+    carregarTextura("/assets/images/Goblin/goblin-death.png", "Goblin-Death");
 
     /* Spider Textures */
     carregarTextura("/assets/images/Spider/spider-idle.png", "Spider-Idle");
