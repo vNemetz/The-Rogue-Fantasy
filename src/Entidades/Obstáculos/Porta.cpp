@@ -1,5 +1,6 @@
 #include "Entidades/Obstáculos/Porta.h"
 #include "Entidades/Obstáculos/Obstaculo.h"
+#include "Entidades/Personagens/Jogador.h"
 
 namespace ent {
 namespace obs {
@@ -16,11 +17,14 @@ Porta::Porta(sf::Vector2f pos, sf::Vector2f tam)
     , tempoAbrindo(0.f)
 {
     setTextura("Door-Closed");
+    setAberta(false);
 }
 
 Porta::~Porta()
 {
 }
+
+bool Porta::aberta(false);
 
 void Porta::executar() {
     atualizarEstado();
@@ -43,13 +47,16 @@ void Porta::atualizarEstado() {
 }
 
 void Porta::emColisao(Entidade* pE, sf::Vector2f ds) {
+
 }
 
 void Porta::setAberta(bool aber) {
     aberta = aber;
 }
 
-bool Porta::getAberta() const {
+
+bool Porta::getAberta() const
+{
     return aberta;
 }
 

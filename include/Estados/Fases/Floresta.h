@@ -16,5 +16,8 @@ public:
     virtual void criarFundo();
     virtual void criarMapa();
     void criarInimigos();
+
+    virtual void checaObjetivo();
+    void proximaFase();
 };
 }   

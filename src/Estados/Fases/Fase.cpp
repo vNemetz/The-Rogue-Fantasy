@@ -35,7 +35,7 @@ fases::Fase::Fase(int nFase)
     pColisoes->setListaJogadores(&listaJogadores);
 
     if (numeroFase == 0)
-        tamanhoFase = 5290.f;
+        tamanhoFase = 8000.f;
     else if(numeroFase == 1)
         tamanhoFase = 5290.0f;
 
@@ -59,7 +59,7 @@ fases::Fase::Fase(int nFase)
     
 }
 
-bool ent::obs::Porta::aberta(false);
+
 
 fases::Fase::~Fase() {
     // Deleta as fábricas
@@ -142,6 +142,7 @@ void fases::Fase::executar() {
     atualizarPersonagens();
 
     pColisoes->executar();
+    checaObjetivo();
 }
 
 void fases::Fase::desenharFundo() {
