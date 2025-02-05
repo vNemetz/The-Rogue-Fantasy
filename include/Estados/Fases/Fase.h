@@ -4,6 +4,7 @@
 #include "Listas/Lista_Entidades.h"
 #include "Entidades/Personagens/Jogador.h"
 #include "Estados/Estado.h"
+
 #include <unordered_map>
 
 namespace ger{
@@ -57,7 +58,7 @@ public:
     ent::pers::Jogador* getJogador1() const;
     ent::pers::Jogador* getJogador2() const;
     float getTamanhoFase() const;
-    float getNumeroFase() const;
+    int getNumeroFase() const;
     
     void executarEstado(tipoEstado tipo);
     static void setMultijogador(bool multi);

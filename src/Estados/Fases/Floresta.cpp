@@ -1,4 +1,5 @@
 #include "Estados/Fases/Floresta.h"
+#include "Gerenciadores/Gerenciador_Estados.h"
 #include <iostream>
 #include <fstream>
 
@@ -60,22 +61,39 @@ void fases::Floresta::criarMapa(){
 
 void fases::Floresta::criarInimigos() {
     // Randomiza a quantidade de inimigos, com um mínimo de 3 de cada
-    unsigned int quantidadeGoblins = (rand() % (goblins.size() - 2)) + 3;
-    unsigned int quantidadeAranhas = (rand() % (aranhas.size() - 2)) + 3;
+    if (goblins.size() >= 3) {
+        unsigned int quantidadeGoblins = (rand() % (goblins.size() - 2)) + 3;
 
-    for (int i = 0; i < quantidadeGoblins; i++) {
-        unsigned int goblinRandom = (rand() % (goblins.size()));
-        
-        criarEntidade('g', goblins[goblinRandom]);
-        
-        goblins.erase(goblins.begin() + goblinRandom);
+        for (int i = 0; i < quantidadeGoblins; i++) {
+            unsigned int goblinRandom = (rand() % (goblins.size()));
+            
+            criarEntidade('g', goblins[goblinRandom]);
+            
+            goblins.erase(goblins.begin() + goblinRandom);
+        }
     }
 
-    for (int i = 0; i < quantidadeAranhas; i++) {
-        unsigned int aranhaRandom = (rand() % (aranhas.size()));
-        
-        criarEntidade('a', aranhas[aranhaRandom]);
+    else {
+        for (auto goblin : goblins) {
+            criarEntidade('g', goblin);
+        }
+    }
+    
+    if (aranhas.size() >= 3) {
+        unsigned int quantidadeAranhas = (rand() % (aranhas.size() - 2)) + 3;
 
-        aranhas.erase(aranhas.begin() + aranhaRandom);
+        for (int i = 0; i < quantidadeAranhas; i++) {
+            unsigned int aranhaRandom = (rand() % (aranhas.size()));
+            
+            criarEntidade('a', aranhas[aranhaRandom]);
+
+            aranhas.erase(aranhas.begin() + aranhaRandom);
+        }
+    }
+
+    else {
+        for (auto aranha : aranhas) {
+            criarEntidade('a', aranha);
+        }
     }
 }

@@ -20,8 +20,6 @@ private:
     std::string botaoCorrer;
     std::string botaoAtacar;
     
-    sf::Texture* texturaCoracao;
-    std::vector<sf::Sprite*> vetorCoracoes;
 public:
     Jogador();
     Jogador(sf::Vector2f pos, sf::Vector2f tam, bool jog);
@@ -41,9 +39,7 @@ public:
     void atualizarElementosAnimacao();
     void setCorpo();
 
-    /*Vida e Corações*/
-    void inicializarCoracoes();
-    void desenharCoracoes();
+
 
 };
 }

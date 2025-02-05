@@ -27,6 +27,7 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     setJanela();
     setFonte();
 
+    /*Forest Textures*/
     carregarTextura("/assets/images/Backgrounds/Forest.png", "Forest");
     carregarTextura("/assets/images/Tiles/Ground_grass_0001_tile.png", "Grass0001");
     carregarTextura("/assets/images/Tiles/Ground_grass_0002_tile.png", "Grass0002");
@@ -34,6 +35,13 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     carregarTextura("/assets/images/Tiles/Ground_grass_0003_tile.png", "Grass0003");
     carregarTextura("/assets/images/Tiles/Ground_grass_0004_tile.png", "Grass0004");
     carregarTextura("/assets/images/Tiles/Ground_grass_0005_tile.png", "Grass0005");
+
+    /*Castle Textures*/
+    carregarTextura("/assets/images/Backgrounds/Castle.png", "Castle");
+    carregarTextura("/assets/images/Tiles-castle/tile13.png", "Brick0001");
+    carregarTextura("/assets/images/Tiles-castle/tile8.png", "Brick0002");
+    carregarTextura("/assets/images/Tiles-castle/tile9.png", "Brick0003");
+    carregarTextura("/assets/images/Tiles-castle/tile12.png", "Brick0004");
 
     /* Rogue Textures */
     carregarTextura("/assets/images/Rogue/rogue-stand.png", "Rogue-Stand");
@@ -88,8 +96,10 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     carregarTextura("/assets/images/User-interface/pause.png", "Pause");
     carregarTextura("/assets/images/User-interface/heart.png", "Heart");
 
-    /*Obstacle Textures*/
-    carregarTextura("/assets/images/Obstacles/box.png", "Box");
+    /* Door Textures */
+    carregarTextura("/assets/images/Door/door-closed.png", "Door-Closed");
+    carregarTextura("/assets/images/Door/door-opening.png", "Door-Opening");
+    carregarTextura("/assets/images/Door/door-opened.png", "Door-Opened");
 }
 
 Gerenciador_Grafico::~Gerenciador_Grafico() {
@@ -109,7 +119,8 @@ float Gerenciador_Grafico::deltaTime(0);
 /* Video Mode (Resolução) */
 
 void Gerenciador_Grafico::setVideoMode() {
-    videoMode.getDesktopMode();
+    videoMode.height = HEIGHT;
+    videoMode.width = WIDTH;
 }
 
 /* Janela */

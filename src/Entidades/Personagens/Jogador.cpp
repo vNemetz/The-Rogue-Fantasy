@@ -19,8 +19,6 @@ Jogador::Jogador(sf::Vector2f pos, sf::Vector2f tam, bool jog)
     , pontos(0)
     , pulando(false)
     , jogador1(jog)
-    , vetorCoracoes()
-    , texturaCoracao(nullptr)
 {
     setNumVidas(5);
     setTextura("Rogue-Stand");
@@ -237,30 +235,5 @@ void Jogador::setCorpo() {
     }
 }
 }
-void pers::Jogador::inicializarCoracoes()
-{
-    sf::Vector2f pos = sf::Vector2f(20.0f, -280.0f);
-    for(int i = 0; i < numVidas; i++){
-        sf::Sprite* spriteCoracao = new sf::Sprite();
-        spriteCoracao->setTexture(*texturaCoracao);
-        spriteCoracao->setPosition(pos);
-        spriteCoracao->setScale(2.5f, 2.5f);
-        vetorCoracoes.push_back(spriteCoracao);
-        pos += sf::Vector2f(80.0f, 0.0f);
-    }
-}
-void pers::Jogador::desenharCoracoes()
-{
-    sf::Vector2f pos = pGG->getVista().getCenter() - sf::Vector2f((pGG->getTamanhoJanela().x/2.f) - 10.f
-        ,(pGG->getTamanhoJanela().y/2.f) - 10.f);
-    std::vector<sf::Sprite*>::iterator it = vetorCoracoes.begin();
-    while(it != vetorCoracoes.end()){
-        if(*it){
-            (*it)->setPosition(pos);
-            pGG->desenharSprite(*it);
-            pos += sf::Vector2f(80.0f, 0.0f);
-        }  
-        it++;
-    }
-}
+
 }

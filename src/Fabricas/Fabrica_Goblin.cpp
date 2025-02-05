@@ -1,5 +1,6 @@
 #include "Fabricas/Fabrica_Goblin.h"
 #include "Entidades/Personagens/Goblin.h"
+#include <iostream>
 
 namespace fact {
 
