@@ -227,8 +227,8 @@ void Lista<TL>::limpar() {
 
     while (it != end()) {
         Elemento<TL>* aux = it.getElemento();
-        ++it;
-        delete aux;
+            ++it;    
+            delete aux;
     }
 
     pPrimeiro = nullptr;
