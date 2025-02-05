@@ -1,5 +1,4 @@
 #include "Estados/Fases/Floresta.h"
-#include "Gerenciadores/Gerenciador_Estados.h"
 #include <iostream>
 #include <fstream>
 

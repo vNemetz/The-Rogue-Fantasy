@@ -1,7 +1,6 @@
 #pragma once
 #include "Entidades/Personagens/Personagem.h"
 #include <SFML/Window/Keyboard.hpp>
-#include <vector>
 
 namespace ent {
 namespace pers {
@@ -10,7 +9,7 @@ class Inimigo;
 
 class Jogador : public Personagem {
 private:
-    int pontos;
+    static int pontos;
     bool pulando;
     bool jogador1;
 
