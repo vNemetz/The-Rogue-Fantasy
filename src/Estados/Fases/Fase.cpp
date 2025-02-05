@@ -137,8 +137,8 @@ void fases::Fase::criarEntidade(char simbolo, const sf::Vector2i pos) {
 /* Execução da Fase */
 void fases::Fase::executar() {
     desenharFundo();
-    atualizarProjeteis();
     atualizarObstaculos();
+    atualizarProjeteis();
     atualizarPersonagens();
 
     pColisoes->executar();

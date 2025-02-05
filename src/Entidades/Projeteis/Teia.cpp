@@ -1,5 +1,7 @@
 #include "Entidades/Projeteis/Teia.h"
+#include "Entidades/Entidade.h"
 #include "Gerenciadores/Gerenciador_Grafico.h"
+#include "Entidades/Obstáculos/Plataforma.h"
 
 namespace ent {
 namespace prj {
@@ -46,8 +48,9 @@ void Teia::emColisaoPersonagem(pers::Personagem* sofredor) {
     paraDeletar = true;
 }
 
-void Teia::emColisaoObstaculo() {
-    paraDeletar = true;
+void Teia::emColisaoObstaculo(ent::Entidade* entidade) {
+    if (dynamic_cast<obs::Plataforma*>(entidade))
+        paraDeletar = true;
 }
 
 }

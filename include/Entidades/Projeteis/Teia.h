@@ -18,7 +18,7 @@ public:
     void mover();
 
     void emColisaoPersonagem(pers::Personagem* sofredor);
-    void emColisaoObstaculo();
+    void emColisaoObstaculo(ent::Entidade* entidade);
 };
 
 }

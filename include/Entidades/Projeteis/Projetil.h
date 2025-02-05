@@ -20,7 +20,7 @@ public:
     virtual void executar() = 0;
 
     virtual void emColisaoPersonagem(pers::Personagem* sofredor) = 0;
-    virtual void emColisaoObstaculo() = 0;
+    virtual void emColisaoObstaculo(ent::Entidade* entidade) = 0;
 
     void setParaDireita(bool paraDireita);
     bool getParaDireita() const;
