@@ -9,6 +9,7 @@ Fase(0)
 {
     criarMapa();
     criarFundo();
+    criarInimigos();
 }
 
 fases::Floresta::~Floresta()
@@ -37,25 +38,62 @@ void fases::Floresta::criarMapa(){
     if(!arquivoMapa.is_open()){
         std::cerr << "Erro ao abrir o arquivo de Mapa da Floresta\n";
     }
+
     int j = 0;
     while(std::getline(arquivoMapa, linha)){
         for(int i = 0; i < linha.size(); i++){
-            if(linha[i] != ' '){
-                criarEntidade(linha[i], sf::Vector2i(i, j));
+            if(linha[i] != ' ') {
+                if (linha[i] == 'g')
+                    goblins.push_back(sf::Vector2i(i, j));
+
+                else if (linha[i] == 'a')
+                    aranhas.push_back(sf::Vector2i(i, j));
+
+                else
+                    criarEntidade(linha[i], sf::Vector2i(i, j));
             }
         }
         j++;
     }
-    
+
     arquivoMapa.close();
 }
-void fases::Floresta::proximaFase()
-{
-    if(pGEstados){
-        pGEstados->proximaFase(1);
+
+void fases::Floresta::criarInimigos() {
+    // Randomiza a quantidade de inimigos, com um mínimo de 3 de cada
+    if (goblins.size() >= 3) {
+        unsigned int quantidadeGoblins = (rand() % (goblins.size() - 2)) + 3;
+
+        for (int i = 0; i < quantidadeGoblins; i++) {
+            unsigned int goblinRandom = (rand() % (goblins.size()));
+            
+            criarEntidade('g', goblins[goblinRandom]);
+            
+            goblins.erase(goblins.begin() + goblinRandom);
+        }
+    }
+
+    else {
+        for (auto goblin : goblins) {
+            criarEntidade('g', goblin);
+        }
+    }
+    
+    if (aranhas.size() >= 3) {
+        unsigned int quantidadeAranhas = (rand() % (aranhas.size() - 2)) + 3;
+
+        for (int i = 0; i < quantidadeAranhas; i++) {
+            unsigned int aranhaRandom = (rand() % (aranhas.size()));
+            
+            criarEntidade('a', aranhas[aranhaRandom]);
+
+            aranhas.erase(aranhas.begin() + aranhaRandom);
+        }
+    }
+
+    else {
+        for (auto aranha : aranhas) {
+            criarEntidade('a', aranha);
+        }
     }
 }
-
-/*void fases::Floresta::checaObjetivo(){
-
-}*/

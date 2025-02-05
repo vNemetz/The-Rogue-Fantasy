@@ -2,7 +2,7 @@
 #include "Estados/Fases/Floresta.h"
 #include "Estados/Fases/Castelo.h"
 #include "Gerenciadores/Gerenciador_Input.h"
-
+#include "Estados/Fases/Castelo.h"
 
 
 
@@ -38,11 +38,14 @@ Gerenciador_Estados* Gerenciador_Estados::getInstancia(){
 
 void Gerenciador_Estados::inicializarEstados()
 {
-    fases::Floresta* faseFloresta = new fases::Floresta();
-    mapaEstados.insert(std::pair<tipoEstado, Estado*>(fase, static_cast<Estado*>(faseFloresta) ) );
+    /*fases::Floresta* faseFloresta = new fases::Floresta();
+    mapaEstados.insert(std::pair<tipoEstado, Estado*>(fase, static_cast<Estado*>(faseFloresta) ) );*/
+    fases::Castelo* faseCastelo = new fases::Castelo();
+    mapaEstados.insert(std::pair<tipoEstado, Estado*>(fase, static_cast<Estado*>(faseCastelo) ) );
 
     menus::Menu_Pausa* menuPausa = new menus::Menu_Pausa(ger::Gerenciador_Estados::getInstancia());
         mapaEstados.insert(std::pair<tipoEstado, Estado*>(pausa, static_cast<Estado*>(menuPausa) ) );
+
 }
 
 void Gerenciador_Estados::requererEstado() 
@@ -110,7 +113,12 @@ void ger::Gerenciador_Estados::reiniciarJogo()
         delete mapaEstados[fase];
         mapaEstados.erase(fase);
     }
-    fases::Floresta* faseFloresta = new fases::Floresta();
+    /*fases::Floresta* faseFloresta = new fases::Floresta();
     mapaEstados.insert(std::pair<tipoEstado, Estado*>(fase, static_cast<Estado*>(faseFloresta) ) );
     faseFloresta->setPGG(ger::Gerenciador_Grafico::getInstancia());
+    */
+
+    fases::Castelo* faseCastelo = new fases::Castelo();
+    mapaEstados.insert(std::pair<tipoEstado, Estado*>(fase, static_cast<Estado*>(faseCastelo) ) );
+    faseCastelo->setPGG(ger::Gerenciador_Grafico::getInstancia());
 }

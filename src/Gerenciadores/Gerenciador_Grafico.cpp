@@ -27,7 +27,6 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     setJanela();
     setFonte();
 
-
     /*Forest Textures*/
     carregarTextura("/assets/images/Backgrounds/Forest.png", "Forest");
     carregarTextura("/assets/images/Tiles/Ground_grass_0001_tile.png", "Grass0001");
@@ -37,11 +36,12 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     carregarTextura("/assets/images/Tiles/Ground_grass_0004_tile.png", "Grass0004");
     carregarTextura("/assets/images/Tiles/Ground_grass_0005_tile.png", "Grass0005");
 
-    /*Castles Textures*/
+    /*Castle Textures*/
     carregarTextura("/assets/images/Backgrounds/Castle.png", "Castle");
-    carregarTextura("/assets/images/Tiles-castle/tile13.png", "Brick1");
-    carregarTextura("/assets/images/Tiles-castle/tile8.png", "Brick-Left-Border");
-    carregarTextura("/assets/images/Tiles-castle/tile9.png", "Brick-Right-Border");
+    carregarTextura("/assets/images/Tiles-castle/tile13.png", "Brick0001");
+    carregarTextura("/assets/images/Tiles-castle/tile8.png", "Brick0002");
+    carregarTextura("/assets/images/Tiles-castle/tile9.png", "Brick0003");
+    carregarTextura("/assets/images/Tiles-castle/tile12.png", "Brick0004");
 
     /* Rogue Textures */
     carregarTextura("/assets/images/Rogue/rogue-stand.png", "Rogue-Stand");
@@ -80,6 +80,13 @@ Gerenciador_Grafico::Gerenciador_Grafico()
 
     carregarTextura("/assets/images/General/web.png", "Web");
 
+    /* Knight Textures */
+    carregarTextura("/assets/images/Knight/knight-walk.png", "Knight-Walk");
+    carregarTextura("/assets/images/Knight/knight-attack.png", "Knight-Attack");
+    carregarTextura("/assets/images/Knight/knight-death.png", "Knight-Death");
+    carregarTextura("/assets/images/Knight/knight-hurt.png", "Knight-Hurt");
+    carregarTextura("/assets/images/Knight/knight-idle.png", "Knight-Idle");
+
     /*GUI Textures*/
     carregarTextura("/assets/images/User-interface/leaderboard-button.png", "Leaderboard-Button");
     carregarTextura("/assets/images/User-interface/main-menu-bg.png", "Main-Menu-Bg");
@@ -89,13 +96,10 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     carregarTextura("/assets/images/User-interface/pause.png", "Pause");
     carregarTextura("/assets/images/User-interface/heart.png", "Heart");
 
-    /*Obstacle's Textures*/
-    carregarTextura("/assets/images/Obstacles/box.png", "Box");
-
-    /*Element's Textures*/
-    carregarTextura("/assets/images/Elements/Star.png", "Star");
-    carregarTextura("/assets/images/Elements/Door.png", "Door");
-    carregarTextura("/assets/images/Elements/door1.png", "Static-door");
+    /* Door Textures */
+    carregarTextura("/assets/images/Door/door-closed.png", "Door-Closed");
+    carregarTextura("/assets/images/Door/door-opening.png", "Door-Opening");
+    carregarTextura("/assets/images/Door/door-opened.png", "Door-Opened");
 }
 
 Gerenciador_Grafico::~Gerenciador_Grafico() {
@@ -115,7 +119,8 @@ float Gerenciador_Grafico::deltaTime(0);
 /* Video Mode (Resolução) */
 
 void Gerenciador_Grafico::setVideoMode() {
-    videoMode.getDesktopMode();
+    videoMode.height = HEIGHT;
+    videoMode.width = WIDTH;
 }
 
 /* Janela */

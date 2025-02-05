@@ -24,6 +24,7 @@ Jogador::Jogador(sf::Vector2f pos, sf::Vector2f tam, bool jog)
     setTextura("Rogue-Stand");
     setVelocidadeMaxima(sf::Vector2f(600.f, 600.f));
     carregarControles();
+    numVidas = 10;
 }
 
 Jogador::~Jogador()
@@ -186,19 +187,6 @@ void Jogador::setCorpo() {
         /* Do corpo inteiro, frame pega apenas a parte em que há textura de fato */
         sf::IntRect frame = animacao.getCorpo();
 
-        frame.top += 52;
-        frame.height -= 52;
-        
-        if (frame.width > 0) {
-            frame.left += 15;
-            frame.width = 56;
-        }
-
-        else {
-            frame.left -= 56;
-            frame.width = -56;
-        }
-
         if (est == estado::morrendo) {
             frame.top = 90;
             frame.height = 66;
@@ -214,12 +202,27 @@ void Jogador::setCorpo() {
             }
         }
 
-        if (est == estado::atacando) {
+        else {
+            frame.top += 52;
+            frame.height -= 52;
+            
             if (frame.width > 0) {
-                frame.width += 10;
+                frame.left += 15;
+                frame.width = 56;
             }
+
             else {
-                frame.left += 10;
+                frame.left -= 56;
+                frame.width = -56;
+            }
+
+            if (est == estado::atacando) {
+                if (frame.width > 0) {
+                    frame.width += 10;
+                }
+                else {
+                    frame.left += 10;
+                }
             }
         }
 

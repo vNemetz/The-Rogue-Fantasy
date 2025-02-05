@@ -6,8 +6,10 @@
 #include "Fabricas/Fabrica_Goblin.h"
 #include "Fabricas/Fabrica_Plataforma.h"
 #include "Fabricas/Fabrica_Aranha.h"
+#include "Fabricas/Fabrica_Cavaleiro.h"
 #include "Fabricas/Fabrica_Jogador.h"
 #include "Fabricas/Fabrica_Porta.h"
+#include "Entidades/Obstáculos/Porta.h"
 #include "Entidades/Personagens/Inimigo.h"
 #include "Entidades/Obstáculos/Porta.h"
 
@@ -34,6 +36,8 @@ fases::Fase::Fase(int nFase)
 
     if (numeroFase == 0)
         tamanhoFase = 5290.f;
+    else if(numeroFase == 1)
+        tamanhoFase = 5290.0f;
 
     /* Criação Inicial dos Jogadores e suas Fábricas */
     registrarFabrica('j', new fact::Fabrica_Jogador(true, tamanhoFase));
@@ -44,15 +48,18 @@ fases::Fase::Fase(int nFase)
     /* Criação do restante das Fábricas (Factory Method Design Pattern) */
     registrarFabrica('g', new fact::Fabrica_Goblin(pJog1, pJog2, doisJogadores, tamanhoFase));
     registrarFabrica('a', new fact::Fabrica_Aranha(pJog1, pJog2, doisJogadores, tamanhoFase, &listaProjeteis));
-    registrarFabrica('/', new fact::Fabrica_Plataforma(0, tamanhoFase));
-    registrarFabrica('#', new fact::Fabrica_Plataforma(1, tamanhoFase));
-    registrarFabrica(';', new fact::Fabrica_Plataforma(2, tamanhoFase));
-    registrarFabrica('|', new fact::Fabrica_Plataforma(3, tamanhoFase));
-    registrarFabrica('@', new fact::Fabrica_Plataforma(4, tamanhoFase));
-    registrarFabrica('.', new fact::Fabrica_Plataforma(5, tamanhoFase));
+    registrarFabrica('c', new fact::Fabrica_Cavaleiro(pJog1, pJog2, doisJogadores, tamanhoFase));
     registrarFabrica('d', new fact::Fabrica_Porta(tamanhoFase));
+    registrarFabrica('/', new fact::Fabrica_Plataforma(numeroFase, 0, tamanhoFase));
+    registrarFabrica('#', new fact::Fabrica_Plataforma(numeroFase, 1, tamanhoFase));
+    registrarFabrica(';', new fact::Fabrica_Plataforma(numeroFase, 2, tamanhoFase));
+    registrarFabrica('|', new fact::Fabrica_Plataforma(numeroFase, 3, tamanhoFase));
+    registrarFabrica('@', new fact::Fabrica_Plataforma(numeroFase, 4, tamanhoFase));
+    registrarFabrica('.', new fact::Fabrica_Plataforma(numeroFase, 5, tamanhoFase));
     
 }
+
+bool ent::obs::Porta::aberta(false);
 
 fases::Fase::~Fase() {
     // Deleta as fábricas
@@ -152,6 +159,11 @@ void fases::Fase::desenharFundo() {
 
 void fases::Fase::atualizarPersonagens(){
     listaInimigos.percorrer();
+
+    if (listaInimigos.getTamanho() <= 0) {
+        ent::obs::Porta::setAberta(true);
+    }
+
     listaJogadores.percorrer();
 }
 
