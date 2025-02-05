@@ -124,7 +124,9 @@ void Placar::desenhar()
 
         while(stringTexto.length() + stringPontos.length() < 85){
             stringTexto += " .";
+
         }
+        stringTexto += " ";
         txt = new ElementosGraficos::Texto(ger::Gerenciador_Grafico::getInstancia()->getFonte(), sf::Color::White,
             stringTexto + stringPontos, sf::Vector2f(1.5f, 1.5f));
         sf::Vector2f posicao(130.0f, 60.f + espacamento);

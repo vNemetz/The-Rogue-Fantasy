@@ -29,7 +29,9 @@ Texto::~Texto(){
 
 sf::Text *ElementosGraficos::Texto::getTexto() const
 {
-    if(pElementoTexto){return pElementoTexto;}
+    if(pElementoTexto){
+        return pElementoTexto;
+    }return nullptr;
 }
 
 void ElementosGraficos::Texto::setPosicao(sf::Vector2f pos)
@@ -41,7 +43,7 @@ void ElementosGraficos::Texto::setTexto()
 {
     if(pFonte)
     pElementoTexto->setFont(*pFonte);
-    pElementoTexto->setColor(cor);
+    pElementoTexto->setFillColor(cor);
     pElementoTexto->setString(string);
     pElementoTexto->setScale(escala);
 
