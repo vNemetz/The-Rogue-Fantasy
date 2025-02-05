@@ -96,7 +96,7 @@ void Gerenciador_Colisoes::executar() {
 
             for (auto obstaculo: listaObstaculos) {
                 if (verificarColisao(projetil, obstaculo)) {
-                    projetil->emColisaoObstaculo();
+                    projetil->emColisaoObstaculo(obstaculo);
                 }
             }
         }

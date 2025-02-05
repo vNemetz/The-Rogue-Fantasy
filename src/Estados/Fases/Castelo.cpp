@@ -45,10 +45,9 @@ void fases::Castelo::criarMapa(){
     while(std::getline(arquivoMapa, linha)){
         for(int i = 0; i < linha.size(); i++){
             if(linha[i] != ' ') {
-                if (linha[i] == 'g'){
-                    std::cout<<"cavaleiro\n";
+                if (linha[i] == 'c')
                     cavaleiros.push_back(sf::Vector2i(i, j));
-                }   
+                
                 else if (linha[i] == 'a')
                     aranhas.push_back(sf::Vector2i(i, j));
 
