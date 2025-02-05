@@ -24,7 +24,7 @@ menus::Menu_Pausa::Menu_Pausa(ger::Gerenciador_Estados* pGE):
 {
 
     setTexturaFundo("Menu-bg");
-    sf::Vector2f posicaoBotao = sf::Vector2f(pSpriteFundo->getPosition().x+pSpriteFundo->getGlobalBounds().getSize().x/2.0f - 300.0f,
+    sf::Vector2f posicaoBotao = sf::Vector2f(pSpriteFundo->getPosition().x+pSpriteFundo->getGlobalBounds().getSize().x/2.0f - 380.0f,
         HEIGHT/3.0f);
     adicionarBotao("Yellow-Button", sf::Vector2f(4.0f, 3.0f), "VOLTAR AO JOGO",posicaoBotao);
     adicionarBotao("Brown-Button", sf::Vector2f(4.0f, 3.0f), "SALVAR", sf::Vector2f(posicaoBotao.x, posicaoBotao.y + 150.0f));

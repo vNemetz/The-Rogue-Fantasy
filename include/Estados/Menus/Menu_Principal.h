@@ -8,13 +8,11 @@ namespace ger{
 namespace menus{
 class Menu_Principal : public Menu{
 private:
-    fases::Fase* pFase;
 public:
     Menu_Principal();
-    Menu_Principal(ger::Gerenciador_Estados* pGE);
+    Menu_Principal(ger::Gerenciador_Estados* pGE = nullptr);
     ~Menu_Principal();
 
-    void setFase(fases::Fase* pF);
     void executarEstado();
 };
 }

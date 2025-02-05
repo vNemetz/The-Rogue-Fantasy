@@ -1,8 +1,9 @@
 #include "Gerenciadores/Gerenciador_Estados.h"
+#include "Gerenciadores/Gerenciador_Input.h"
+
 #include "Estados/Fases/Floresta.h"
 #include "Estados/Fases/Castelo.h"
-#include "Gerenciadores/Gerenciador_Input.h"
-#include "Estados/Fases/Castelo.h"
+#include "Estados/Menus/Placar.h"
 
 
 
@@ -41,11 +42,11 @@ void Gerenciador_Estados::inicializarEstados()
     fases::Floresta* faseFloresta = new fases::Floresta();
     mapaEstados.insert(std::pair<tipoEstado, Estado*>(fase, static_cast<Estado*>(faseFloresta) ) );
 
-    //fases::Castelo* faseCastelo = new fases::Castelo();
-    //mapaEstados.insert(std::pair<tipoEstado, Estado*>(fase, static_cast<Estado*>(faseCastelo) ) );
-
     menus::Menu_Pausa* menuPausa = new menus::Menu_Pausa(ger::Gerenciador_Estados::getInstancia());
     mapaEstados.insert(std::pair<tipoEstado, Estado*>(pausa, static_cast<Estado*>(menuPausa) ) );
+
+    menus::Placar* pPlacar = new menus::Placar(ger::Gerenciador_Estados::getInstancia());
+    mapaEstados.insert(std::pair<tipoEstado, Estado*>( placar, static_cast<Estado*>(pPlacar) ) );
 
 }
 
@@ -71,6 +72,9 @@ void Gerenciador_Estados::setEstadoAtual(tipoEstado tipo){
             pEstadoAtual = static_cast<Estado*>(mapaEstados[pausa]);
             ger::Gerenciador_Input::getInstancia()->criarInputMapEstado(pausa);
             break;
+        case placar:
+            pEstadoAtual = static_cast<Estado*>(mapaEstados[placar]);
+            ger::Gerenciador_Input::getInstancia()->criarInputMapEstado(pausa);
         default:
             break;
     }
