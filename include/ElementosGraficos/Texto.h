@@ -13,7 +13,7 @@ private:
 
 public:
     Texto();
-    Texto(sf::Font* font = nullptr, sf::Color cor = sf::Color::White, std::string stg = "", sf::Vector2f esc = sf::Vector2f(0.0f, 0.0f));
+    Texto(sf::Font* font = nullptr, sf::Color cor = sf::Color::White, std::string stg = "", sf::Vector2f esc = sf::Vector2f(1.0f, 1.0f));
     ~Texto();
 
     sf::Text* getTexto() const;
