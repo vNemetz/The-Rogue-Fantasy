@@ -55,25 +55,66 @@ Gerenciador_Input* Gerenciador_Input::getInstancia() {
 /* Gerenciador de Input */
 void Gerenciador_Input::setJogador(ent::pers::Jogador* jogador1) {
     this->jogador1 = jogador1;
+    for(it = listaObservadores.begin(); it != listaObservadores.end(); it++){
+        if((*it)->getTipoControle() == controle::formaControle::controleJogador){
+            if (*it){
+                static_cast<controle::Controle_Jogador*>(*it)->setJogador1(this->jogador1);
+            }
+        }
+    }
 }
 
 void Gerenciador_Input::setJogador2(ent::pers::Jogador* jogador2) {
     this->jogador2 = jogador2;
+    for(it = listaObservadores.begin(); it != listaObservadores.end(); it++){
+        if((*it)->getTipoControle() == controle::formaControle::controleJogador){
+            if (*it){
+            static_cast<controle::Controle_Jogador*>(*it)->setJogador2(this->jogador2);
+            }
+        }
+    }
 }
 
 void Gerenciador_Input::setMenuPrincipal(menus::Menu_Principal *pMenuP)
 {
-    if(pMenuP){pMenuPrincipal = pMenuP;}
+    if(pMenuP){
+        pMenuPrincipal = pMenuP;
+        bool controleMenuPrincipal = false;   
+        for(it = listaObservadores.begin(); it != listaObservadores.end() && controleMenuPrincipal == false; it++){
+            if((*it)->getTipoControle() == controle::formaControle::controleJogador){
+                static_cast<controle::Controle_Menu*>(*it)->setMenuAtual(pMenuPrincipal);
+                controleMenuPrincipal = true;
+            }
+        }
+    }
 }
 
 void Gerenciador_Input::setFaseAtual(fases::Fase *pAtual)
 {
-    if(pAtual){pFaseAtual = pAtual;}
+    if(pAtual){
+        pFaseAtual = pAtual;
+        bool controleJogador = false;   
+        for(it = listaObservadores.begin(); it != listaObservadores.end() && controleJogador == false; it++){
+            if((*it)->getTipoControle() == controle::formaControle::controleJogador){
+                static_cast<controle::Controle_Jogador*>(*it)->setFaseAtual(pFaseAtual);
+                controleJogador = true;
+            }
+        }
+    }
 }
 
 void Gerenciador_Input::setMenuPausa(menus::Menu_Pausa *pMenuPause)
 {
-    if(pMenuPause){pMenuPausa = pMenuPause;}
+    if(pMenuPause){
+        pMenuPausa = pMenuPause;
+        bool controleMenuPausa = false;   
+        for(it = listaObservadores.begin(); it != listaObservadores.end() && controleMenuPausa == false; it++){
+            if((*it)->getTipoControle() == controle::formaControle::controleMenuPausa){
+                static_cast<controle::Controle_Menu*>(*it)->setMenuAtual(pMenuPausa);
+                controleMenuPausa = true;
+            }
+        }
+    }
 }
 
 void Gerenciador_Input::incluir_tecla(sf::Keyboard::Key tecla, std::function<void(bool)> funcaoTecla)
@@ -91,16 +132,40 @@ void Gerenciador_Input::criarInputMapEstado(tipoEstado tipoEstado)
         case fase:
             setFaseAtual(static_cast<fases::Fase*>(pGerEstados->getEstadoAtual()));
             mapaTeclas.clear();
-            criarInputMapFase();
+            //criarInputMapFase();
+            for(it = listaObservadores.begin(); it != listaObservadores.end(); it++){
+                if (*it){
+                    if((*it)->getTipoControle() == controle::formaControle::controleJogador){
+                        (*it)->setAtivo(true);
+                    }else{
+                        (*it)->setAtivo(false);
+                    }
+                }
+            }
             break;
         case menu:
             mapaTeclas.clear();
-            criarInputMapMenuPrincipal();
+            //criarInputMapMenuPrincipal();
+            for(it = listaObservadores.begin(); it != listaObservadores.end(); it++){
+                if((*it)->getTipoControle() == controle::formaControle::controleMenuPrincipal){
+                    (*it)->setAtivo(true);
+                }else{
+                    (*it)->setAtivo(false);
+                }
+            }
             break;
         case pausa:
             setMenuPausa(static_cast<menus::Menu_Pausa*>(pGerEstados->getEstadoAtual()));
             mapaTeclas.clear();
-            criarInputMapPausa();
+            //criarInputMapPausa();
+            for(it = listaObservadores.begin(); it != listaObservadores.end(); it++){
+                if((*it)->getTipoControle() == controle::formaControle::controleMenuPausa){
+                    (*it)->setAtivo(true);
+                }else{
+                    (*it)->setAtivo(false);
+                }
+            }
+            break;
         default:
             break;
     }
@@ -207,13 +272,16 @@ void Gerenciador_Input::criarInputMapPausa()
 
 void Gerenciador_Input::iniciarListaObservadores()
 {
-    controle::Controle_Menu* controleMenuPrincipal = new controle::Controle_Menu(this, pMenuPrincipal);
+    controle::Controle_Menu* controleMenuPrincipal = new controle::Controle_Menu(controle::formaControle::controleMenuPrincipal,
+         this, pMenuPrincipal);
+    controleMenuPrincipal->setAtivo(true);
     listaObservadores.push_back(static_cast<controle::Observador*> (controleMenuPrincipal));
     
-    controle::Controle_Menu* controleMenuPausa = new controle::Controle_Menu(this, pMenuPausa);
+    controle::Controle_Menu* controleMenuPausa = new controle::Controle_Menu(controle::formaControle::controleMenuPausa,
+         this, pMenuPausa);
     listaObservadores.push_back(static_cast<controle::Observador*> (controleMenuPausa));
 
-    controle::Controle_Jogador* controleJogador = new controle::Controle_Jogador(this, jogador1, jogador2, pFaseAtual);
+    controle::Controle_Jogador* controleJogador = new controle::Controle_Jogador(controle::formaControle::controleJogador,this, jogador1, jogador2, pFaseAtual);
     listaObservadores.push_back(static_cast<controle::Observador*>(controleJogador));
 
 }

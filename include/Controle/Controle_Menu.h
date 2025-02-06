@@ -15,7 +15,7 @@ private:
 
 public:
     Controle_Menu();
-    Controle_Menu(ger::Gerenciador_Input* pGI = nullptr, 
+    Controle_Menu(formaControle tipoControle, ger::Gerenciador_Input* pGI = nullptr, 
         menus::Menu* pMenuAtual = nullptr);
     ~Controle_Menu();
 

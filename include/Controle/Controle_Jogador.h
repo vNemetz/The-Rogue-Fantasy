@@ -23,7 +23,7 @@ private:
 
 public:
     Controle_Jogador();
-    Controle_Jogador(ger::Gerenciador_Input* pGI = nullptr, 
+    Controle_Jogador(formaControle  tipoControle, ger::Gerenciador_Input* pGI = nullptr, 
         ent::pers::Jogador* j1 = nullptr, ent::pers::Jogador* j2 = nullptr, fases::Fase* pAtual = nullptr);
     ~Controle_Jogador();
 

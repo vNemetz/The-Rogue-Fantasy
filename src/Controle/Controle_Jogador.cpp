@@ -5,12 +5,12 @@
 namespace controle{
 
 Controle_Jogador::Controle_Jogador():
-Controle_Jogador(nullptr, nullptr, nullptr, nullptr)
+Controle_Jogador(controleJogador, nullptr, nullptr, nullptr, nullptr)
 {
 }
 
-Controle_Jogador::Controle_Jogador(ger::Gerenciador_Input *pGI, ent::pers::Jogador *j1, ent::pers::Jogador *j2, fases::Fase *pAtual)
-: Observador(pGI)
+Controle_Jogador::Controle_Jogador(formaControle tipoControle, ger::Gerenciador_Input *pGI, ent::pers::Jogador *j1, ent::pers::Jogador *j2, fases::Fase *pAtual)
+: Observador(tipoControle, pGI)
 {
     setFaseAtual(pAtual);
     setJogador1(j1);
@@ -42,22 +42,25 @@ void Controle_Jogador::setFaseAtual(fases::Fase *pFaseAtual)
 }
 
 void Controle_Jogador::notificarApertada(sf::Keyboard::Key tecla)
-
 {
-    auto it = mapaTeclas.find(tecla);
-    
-    // Procura a tecla no mapa, se achar executa a função como verdadeira
-    if (it != mapaTeclas.end())
-        it->second(true);
+    if(ativo){
+        auto it = mapaTeclas.find(tecla);
+        
+        // Procura a tecla no mapa, se achar executa a função como verdadeira
+        if (it != mapaTeclas.end())
+            it->second(true);
+    }
 }
 
 void Controle_Jogador::notificarSoltada(sf::Keyboard::Key tecla)
 {
-    auto it = mapaTeclas.find(tecla);
-    
-    // Procura a tecla no mapa, se achar executa a função como falsa
-    if (it != mapaTeclas.end())
-        it->second(false);
+    if(ativo){
+        auto it = mapaTeclas.find(tecla);
+        
+        // Procura a tecla no mapa, se achar executa a função como falsa
+        if (it != mapaTeclas.end())
+            it->second(false);
+    }
 }
 
 void Controle_Jogador::criarMapa()

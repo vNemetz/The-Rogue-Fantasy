@@ -4,13 +4,13 @@
 namespace controle{
 
 Controle_Menu::Controle_Menu():
-    Controle_Menu(nullptr)
+    Controle_Menu(controleMenuPausa, nullptr)
 {
 
 }
 
-Controle_Menu::Controle_Menu(ger::Gerenciador_Input* pGI, menus::Menu* pMenuAtual):
-    Observador(pGI)
+Controle_Menu::Controle_Menu(formaControle tipoControle, ger::Gerenciador_Input* pGI, menus::Menu* pMenuAtual):
+    Observador(tipoControle, pGI)
 {
     setMenuAtual(pMenuAtual);
     criarMapa();
@@ -26,21 +26,25 @@ void Controle_Menu::setMenuAtual(menus::Menu *pMenuAtual)
 }
 
 void Controle_Menu::notificarApertada(sf::Keyboard::Key tecla)
-{
-    auto it = mapaTeclas.find(tecla);
-    
-    // Procura a tecla no mapa, se achar executa a função como verdadeira
-    if (it != mapaTeclas.end())
-        it->second(true);
+{   
+    if(ativo){
+        auto it = mapaTeclas.find(tecla);
+        
+        // Procura a tecla no mapa, se achar executa a função como verdadeira
+        if (it != mapaTeclas.end())
+            it->second(true);
+    }
 }
 
 void Controle_Menu::notificarSoltada(sf::Keyboard::Key tecla)
 {
-    auto it = mapaTeclas.find(tecla);
-    
-    // Procura a tecla no mapa, se achar executa a função como falsa
-    if (it != mapaTeclas.end())
-        it->second(false);
+    if(ativo){
+        auto it = mapaTeclas.find(tecla);
+        
+        // Procura a tecla no mapa, se achar executa a função como falsa
+        if (it != mapaTeclas.end())
+            it->second(false);
+    }
 }
 
 void Controle_Menu::criarMapa()
