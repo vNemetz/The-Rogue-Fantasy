@@ -1,5 +1,6 @@
 #include "Controle/Assunto.h"
 
+
 namespace controle{
 Assunto::Assunto():
     listaObservadores()
@@ -18,6 +19,27 @@ Assunto::~Assunto(){
     listaObservadores.clear();
 }
 
+void Assunto::incluirObservador(controle::Observador *obs)
+{
+    if(obs){
+        listaObservadores.push_back(obs);
+    }
+}
+
+void Assunto::excluirObservador(controle::Observador *obs)
+{
+    if(obs){
+        for(it = listaObservadores.begin(); it != listaObservadores.end(); it++){
+            if((*it)->getTipoControle() == obs->getTipoControle()){
+                Observador* aux = obs;
+                listaObservadores.remove(obs);
+                delete aux;
+                aux = nullptr;
+                return;
+            }
+        }
+    }
+}
 
 void Assunto::teclaApertada(sf::Keyboard::Key tecla)
 {

@@ -8,15 +8,12 @@
 #include <SFML/Graphics.hpp>
 #include <map>
 #include <functional>
+#include "Controle/Assunto.h"
 
 /* Gerenciadores - Namespace */
 namespace ger {
-class Gerenciador_Input {
+class Gerenciador_Input : public controle::Assunto{
 private:
-    std::list<controle::Observador*> listaObservadores;
-    std::list<controle::Observador*>::iterator it; 
-
-    std::map<sf::Keyboard::Key, std::function<void(bool)>> mapaTeclas;
     /* Ponteiros para fase: */
     ent::pers::Jogador* jogador1;
     ent::pers::Jogador* jogador2;   
@@ -45,16 +42,9 @@ public:
     void setFaseAtual(fases::Fase* pAtual);
     void setMenuPausa(menus::Menu_Pausa* pMenuPause);
 
-    void incluir_tecla(sf::Keyboard::Key tecla, std::function<void(bool)> funcaoTecla);
     void checarEstado() const;
      void criarInputMapEstado(tipoEstado tipoEstado); /*Cria o input map com base no estado atual*/
-     void criarInputMapFase(); /*Cria o input map para uma fase*/
-    void criarInputMapMenuPrincipal();
-    void criarInputMapPausa();
-
     void iniciarListaObservadores();
 
-    void teclaApertada(sf::Keyboard::Key tecla);
-    void teclaSoltada(sf::Keyboard::Key tecla);
 };
 }
