@@ -127,5 +127,5 @@ void Menu::desenhar()
  void menus::Menu::executar()
 {
     desenhar();
- bufferTime +=ger::Gerenciador_Grafico::getInstancia()->getDeltaTime();
+    bufferTime +=ger::Gerenciador_Grafico::getInstancia()->getDeltaTime();
 }

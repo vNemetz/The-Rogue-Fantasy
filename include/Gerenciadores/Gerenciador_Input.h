@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Controle/Observador.h"
 #include "Entidades/Personagens/Jogador.h"
 #include "Estados/Fases/Fase.h"
 #include "Estados/Estado.h"
@@ -13,6 +13,9 @@
 namespace ger {
 class Gerenciador_Input {
 private:
+    std::list<controle::Observador*> listaObservadores;
+    std::list<controle::Observador*>::iterator it; 
+
     std::map<sf::Keyboard::Key, std::function<void(bool)>> mapaTeclas;
     /* Ponteiros para fase: */
     ent::pers::Jogador* jogador1;
@@ -48,6 +51,8 @@ public:
      void criarInputMapFase(); /*Cria o input map para uma fase*/
     void criarInputMapMenuPrincipal();
     void criarInputMapPausa();
+
+    void iniciarListaObservadores();
 
     void teclaApertada(sf::Keyboard::Key tecla);
     void teclaSoltada(sf::Keyboard::Key tecla);

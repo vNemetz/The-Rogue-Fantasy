@@ -1,6 +1,8 @@
 #include "Gerenciadores/Gerenciador_Input.h"
 #include "Entidades/Personagens/Jogador.h"
 #include <SFML/Window/Keyboard.hpp>
+#include "Controle/Controle_Jogador.h"
+#include "Controle/Controle_Menu.h"
 
 
 
@@ -14,9 +16,13 @@ Gerenciador_Input::Gerenciador_Input()
     , pFaseAtual(nullptr)
     , pMenuPausa(nullptr)
     , pGerEstados(ger::Gerenciador_Estados::getInstancia())
+    , listaObservadores()
 {
+    listaObservadores.clear();
+    it = listaObservadores.begin();
     setMenuPrincipal(static_cast<menus::Menu_Principal*>(pGerEstados->getEstado(menu)));
     criarInputMapEstado(menu);
+    iniciarListaObservadores();
 }
 
 Gerenciador_Input::~Gerenciador_Input() {
@@ -27,6 +33,14 @@ Gerenciador_Input::~Gerenciador_Input() {
     pMenuPrincipal = nullptr;
     pFaseAtual = nullptr;
     pMenuPausa = nullptr;
+
+    for(it = listaObservadores.begin(); it != listaObservadores.end(); it++){
+        if(*it){
+            delete (*it);
+            (*it) = nullptr;
+        }
+    }
+    listaObservadores.clear();
 }
 
 Gerenciador_Input* Gerenciador_Input::instancia(nullptr);
@@ -191,20 +205,43 @@ void Gerenciador_Input::criarInputMapPausa()
     
 }
 
+void Gerenciador_Input::iniciarListaObservadores()
+{
+    controle::Controle_Menu* controleMenuPrincipal = new controle::Controle_Menu(this, pMenuPrincipal);
+    listaObservadores.push_back(static_cast<controle::Observador*> (controleMenuPrincipal));
+    
+    controle::Controle_Menu* controleMenuPausa = new controle::Controle_Menu(this, pMenuPausa);
+    listaObservadores.push_back(static_cast<controle::Observador*> (controleMenuPausa));
+
+    controle::Controle_Jogador* controleJogador = new controle::Controle_Jogador(this, jogador1, jogador2, pFaseAtual);
+    listaObservadores.push_back(static_cast<controle::Observador*>(controleJogador));
+
+}
+
 void Gerenciador_Input::teclaApertada(sf::Keyboard::Key tecla)
 {
-    auto it = mapaTeclas.find(tecla);
+    /*auto it = mapaTeclas.find(tecla);
     
     // Procura a tecla no mapa, se achar executa a função como verdadeira
     if (it != mapaTeclas.end())
         it->second(true);
+    */
+   //mapaTeclas[tecla] = true;
+   for(it = listaObservadores.begin(); it != listaObservadores.end(); it++){
+        (*it)->notificarApertada(tecla);
+   }
 }
 
 void Gerenciador_Input::teclaSoltada(sf::Keyboard::Key tecla) {
-    auto it = mapaTeclas.find(tecla);
+
+    /*auto it = mapaTeclas.find(tecla);
 
     // Procura a tecla no mapa, se achar executa a função como falsa
     if (it != mapaTeclas.end())
-        it->second(false);
+        it->second(false);*/
+    //mapaTeclas[tecla] = false;
+   for(it = listaObservadores.begin(); it != listaObservadores.end(); it++){
+        (*it)->notificarSoltada(tecla);
+   }
 }
-}
+} 

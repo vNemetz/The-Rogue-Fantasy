@@ -6,7 +6,7 @@ enum tipoEstado{
     pausa,
     placar,
     salvar,
-    config
+    fim
 };
 namespace ger{
 class Gerenciador_Estados;
