@@ -3,6 +3,8 @@
 #include <SFML/System/Vector2.hpp>
 #include <climits>
 
+namespace ger { class Mediador; }
+
 namespace ent {
 
 class Entidade : public Ente {
@@ -21,6 +23,8 @@ protected:
     float tamanhoFase;
 
     bool paraDeletar;
+
+    ger::Mediador* mediador;
 
     /* Gravidade - Constantes */
     const float GRAVIDADE_REAL = 9.8f; // metros por segundo ao quadrado (m/s^2)
@@ -60,5 +64,6 @@ public:
 
     void setTamanhoFase(float tamanhoFase);
     bool getParaDeletar() const;
+    void setParaDeletar(bool paraDeletar);
 };
 }

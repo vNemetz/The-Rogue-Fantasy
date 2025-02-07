@@ -1,4 +1,5 @@
 #include "Entidades/Entidade.h"
+#include "Gerenciadores/Gerenciador_Colisoes.h"
 
 namespace ent {
 
@@ -18,6 +19,7 @@ Entidade::Entidade(sf::Vector2f pos, sf::Vector2f esc, ID id)
     , tamanho()
     , tamanhoFase(INT_MAX)
     , paraDeletar(false)
+    , mediador(ger::Gerenciador_Colisoes::getInstancia())
 {
     pTextura = new sf::Texture();  // Aloca memória para pTextura
     pSprite = new sf::Sprite();    // Aloca memória para pSprite
@@ -119,6 +121,10 @@ void Entidade::setTamanhoFase(float tamanhoFase) {
 
 bool Entidade::getParaDeletar() const {
     return paraDeletar;
+}
+
+void Entidade::setParaDeletar(bool paraDeletar) {
+    this->paraDeletar = paraDeletar;
 }
 
 }

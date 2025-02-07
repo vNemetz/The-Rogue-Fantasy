@@ -30,10 +30,6 @@ fases::Fase::Fase(int nFase)
     , pJog1(nullptr)
     , pJog2(nullptr)
 {
-    pColisoes->setListaProjeteis(&listaProjeteis);
-    pColisoes->setListaInimigos(&listaInimigos);
-    pColisoes->setListaJogadores(&listaJogadores);
-
     if (numeroFase == 0)
         tamanhoFase = 5290.f;
     else if(numeroFase == 1)

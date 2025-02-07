@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Entidades/Entidade.h"
-#include "Entidades/Personagens/Personagem.h"
 #include <SFML/System/Vector2.hpp>
 
 namespace ent {
@@ -18,9 +17,6 @@ public:
     ~Projetil();
 
     virtual void executar() = 0;
-
-    virtual void emColisaoPersonagem(pers::Personagem* sofredor) = 0;
-    virtual void emColisaoObstaculo(ent::Entidade* entidade) = 0;
 
     void setParaDireita(bool paraDireita);
     bool getParaDireita() const;

@@ -22,6 +22,7 @@ class Personagem : public Entidade {
 protected:
     bool vivo;
     int numVidas;
+    int pontos;
 
     /* Estado */
     estado est;
@@ -61,9 +62,8 @@ public:
 
     /* Movimentação */
     virtual void mover();
-    void sofrerDano(Entidade* atacante);
+    void sofrerDano(sf::Vector2f posicaoAtacante);
     bool getOlhandoDireita() const;
-    virtual void emColisaoInimigo(Inimigo* pI, sf::Vector2f ds) = 0;
     
     /* Estado */
     void atualizarEstado();
@@ -74,6 +74,9 @@ public:
     bool getVivo() const;
     void setNumVidas(int numVidas);
     int getNumVidas() const;
+    bool getAtacando() const;
+    bool getLevandoDano() const;
+    int getPontos() const;
 
     /* Animação */
     void atualizarAnimacao();

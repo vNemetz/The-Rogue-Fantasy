@@ -18,6 +18,7 @@ Cavaleiro::Cavaleiro(sf::Vector2f pos, sf::Vector2f tam)
     raioDetect = 700.f;
     duracaoAtaque = 0.35f;
     numVidas = 5;
+    pontos = 300;
 }
 
 Cavaleiro::~Cavaleiro()

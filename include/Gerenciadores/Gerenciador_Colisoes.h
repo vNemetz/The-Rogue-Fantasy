@@ -1,16 +1,28 @@
 #pragma once
-#include "Entidades/Obstáculos/Obstaculo.h"
+#include "Entidades/Obstáculos/Plataforma.h"
+#include "Entidades/Obstáculos/Porta.h"
 #include "Listas/Lista_Entidades.h"
-#include <list>
+#include "Entidades/Personagens/Inimigo.h"
+#include "Entidades/Personagens/Jogador.h"
+#include "Entidades/Projeteis/Projetil.h"
 
 namespace ger {
 
-class Gerenciador_Colisoes {
+/* Padrão de Projeto / Design Pattern - Mediator */
+class Mediador {
+public:
+    virtual ~Mediador();
+
+    // Método para registro de entidades
+    virtual void incluirEntidade(ent::Entidade* entidade) = 0;
+};
+
+class Gerenciador_Colisoes : public Mediador {
 private:
-    std::list<ent::obs::Obstaculo*> listaObstaculos;
-    lis::Lista_Entidades* listaInimigos;
-    lis::Lista_Entidades* listaJogadores;
-    lis::Lista_Entidades* listaProjeteis;
+    std::vector<ent::obs::Obstaculo*> listaObstaculos;
+    std::vector<ent::pers::Inimigo*> listaInimigos;
+    std::vector<ent::pers::Jogador*> listaJogadores;
+    std::vector<ent::prj::Projetil*> listaProjeteis;
 
     /* Singleton - Padrão de Projeto */
     static ger::Gerenciador_Colisoes* instancia;
@@ -27,10 +39,19 @@ public:
     const bool verificarColisao(ent::Entidade* pe1, ent::Entidade* pe2) const;
     sf::Vector2f calcularColisao(ent::Entidade* pe1, ent::Entidade* pe2) const;
 
-    void incluirObstaculo(ent::obs::Obstaculo* po);
-    void setListaProjeteis(lis::Lista_Entidades* listaProjeteis);
-    void setListaInimigos(lis::Lista_Entidades* listaInimigos);
-    void setListaJogadores(lis::Lista_Entidades* listaJogadores);
+    /* Tratamento de colisões */
+    void tratarJogadorInimigo(ent::pers::Jogador* jogador, ent::pers::Inimigo* inimigo);
+    void tratarInimigoInimigo(ent::pers::Inimigo* inimigo1, ent::pers::Inimigo* inimigo2);
+    void tratarPersonagemPlataforma(ent::pers::Personagem* personagem, ent::obs::Plataforma* plataforma);
+    void tratarProjetilPersonagem(ent::prj::Projetil* projetil, ent::pers::Personagem* personagem);
+    void tratarProjetilPlataforma(ent::prj::Projetil* projetil, ent::obs::Plataforma* plataforma);
+    void tratarJogadorPorta(ent::pers::Jogador* jogador, ent::obs::Porta* porta);
+
+    void incluirEntidade(ent::Entidade* entidade);
+    void incluirObstaculo(ent::obs::Obstaculo* obstaculo);
+    void incluirJogador(ent::pers::Jogador* jogador);
+    void incluirInimigo(ent::pers::Inimigo* inimigo);
+    void incluirProjetil(ent::prj::Projetil* projetil);
     void limparListas();
 };
 
