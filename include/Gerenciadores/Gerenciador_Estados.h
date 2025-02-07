@@ -16,6 +16,7 @@ class Gerenciador_Estados{
 private:
     Estado* pEstadoAtual;
     std::map<tipoEstado, Estado*> mapaEstados;
+    int faseSelecionada;
 
     bool multijogador;
     /* Singleton - Padrão de Projeto */
@@ -34,7 +35,8 @@ public:
     Estado* getEstadoAtual();
     Estado* getEstado(tipoEstado tipo);
     void proximaFase(int numFase, int pontos);
-    void reiniciarJogo();
+    void reiniciarJogo(int nFase);
+    void setFaseSelecionada(int n);
     
 
 };

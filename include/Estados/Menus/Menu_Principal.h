@@ -8,6 +8,7 @@ namespace ger{
 namespace menus{
 class Menu_Principal : public Menu{
 private:
+    int faseSelecionada;
 public:
     Menu_Principal();
     Menu_Principal(ger::Gerenciador_Estados* pGE = nullptr);
