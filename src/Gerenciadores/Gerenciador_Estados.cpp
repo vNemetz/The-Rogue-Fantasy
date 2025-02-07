@@ -4,7 +4,7 @@
 #include "Estados/Fases/Floresta.h"
 #include "Estados/Fases/Castelo.h"
 #include "Estados/Menus/Placar.h"
-
+#include "Estados/Menus/Menu_Fim.h"
 
 
 namespace ger{
@@ -16,6 +16,7 @@ pEstadoAtual(nullptr)
 , multijogador(false)
 {
     mapaEstados.clear();
+
     menus::Menu_Principal* menuPrincipal = new menus::Menu_Principal(this);
     mapaEstados.insert(std::pair<tipoEstado, Estado*>(menu, static_cast<Estado*>(menuPrincipal)));
     pEstadoAtual = mapaEstados[menu];
@@ -42,11 +43,17 @@ void Gerenciador_Estados::inicializarEstados()
     fases::Floresta* faseFloresta = new fases::Floresta();
     mapaEstados.insert(std::pair<tipoEstado, Estado*>(fase, static_cast<Estado*>(faseFloresta) ) );
 
-    menus::Menu_Pausa* menuPausa = new menus::Menu_Pausa(ger::Gerenciador_Estados::getInstancia());
+    menus::Menu_Pausa* menuPausa = new menus::Menu_Pausa(this);
     mapaEstados.insert(std::pair<tipoEstado, Estado*>(pausa, static_cast<Estado*>(menuPausa) ) );
 
-    menus::Placar* pPlacar = new menus::Placar(ger::Gerenciador_Estados::getInstancia());
+    menus::Placar* pPlacar = new menus::Placar(this);
     mapaEstados.insert(std::pair<tipoEstado, Estado*>( placar, static_cast<Estado*>(pPlacar) ) );
+
+    menus::Menu_Fim* pMenu_Fim = new menus::Menu_Fim(this);
+    mapaEstados.insert(std::pair<tipoEstado, Estado*>( fim, static_cast<Estado*>(pMenu_Fim) ) );
+
+    ger::Gerenciador_Input::getInstancia()->iniciarListaObservadores();
+
 
 }
 
@@ -75,6 +82,9 @@ void Gerenciador_Estados::setEstadoAtual(tipoEstado tipo){
         case placar:
             pEstadoAtual = static_cast<Estado*>(mapaEstados[placar]);
             ger::Gerenciador_Input::getInstancia()->criarInputMapEstado(pausa);
+        case fim:
+        pEstadoAtual = static_cast<Estado*>(mapaEstados[fim]);
+        ger::Gerenciador_Input::getInstancia()->criarInputMapEstado(fim);
         default:
             break;
     }

@@ -48,3 +48,8 @@ void ElementosGraficos::Texto::setTexto()
     pElementoTexto->setScale(escala);
 
 }
+
+void ElementosGraficos::Texto::atualizaTexto(std::string txt)
+{
+    pElementoTexto->setString(txt);
+}

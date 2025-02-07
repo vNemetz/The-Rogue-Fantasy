@@ -9,6 +9,7 @@
 #include <map>
 #include <functional>
 #include "Controle/Assunto.h"
+#include "Estados/Menus/Menu_Fim.h"
 
 /* Gerenciadores - Namespace */
 namespace ger {
@@ -21,6 +22,8 @@ private:
     menus::Menu_Principal* pMenuPrincipal;
     fases::Fase* pFaseAtual;
     menus::Menu_Pausa* pMenuPausa;
+    menus::Menu_Fim* pMenuFim;
+
 
     ger::Gerenciador_Estados* pGerEstados;
 
@@ -41,6 +44,7 @@ public:
     void setMenuPrincipal(menus::Menu_Principal* pMenuP);
     void setFaseAtual(fases::Fase* pAtual);
     void setMenuPausa(menus::Menu_Pausa* pMenuPause);
+    void setMenuFim(menus::Menu_Fim* pMenuFim);
 
     void checarEstado() const;
      void criarInputMapEstado(tipoEstado tipoEstado); /*Cria o input map com base no estado atual*/
