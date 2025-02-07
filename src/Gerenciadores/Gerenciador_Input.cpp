@@ -15,9 +15,7 @@ Gerenciador_Input::Gerenciador_Input()
     , pFaseAtual(nullptr)
     , pMenuPausa(nullptr)
     , pGerEstados(ger::Gerenciador_Estados::getInstancia())
-    , listaObservadores()
 {
-    listaObservadores.clear();
     it = listaObservadores.begin();
     setMenuPrincipal(static_cast<menus::Menu_Principal*>(pGerEstados->getEstado(menu)));
     criarInputMapEstado(menu);
