@@ -33,7 +33,7 @@ public:
     void setMultijogador(bool multi);
     Estado* getEstadoAtual();
     Estado* getEstado(tipoEstado tipo);
-    void proximaFase(int numFase);
+    void proximaFase(int numFase, int pontos);
     void reiniciarJogo();
     
 

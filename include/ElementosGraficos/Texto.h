@@ -20,6 +20,7 @@ public:
     void setPosicao(sf::Vector2f pos);
     void setTexto();
     void atualizaTexto(std::string txt);
+    void incrementaTexto(std::string txt);
 
 };
 

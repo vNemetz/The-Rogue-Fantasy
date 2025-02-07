@@ -9,6 +9,7 @@ private:
     std::vector<sf::Vector2i> cavaleiros;
 public:
     Castelo();
+    Castelo(int pts);
     ~Castelo();
 
     virtual void criarFundo();

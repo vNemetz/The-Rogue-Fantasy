@@ -15,6 +15,8 @@
 
 
 
+
+
 fases::Fase::Fase() : 
     Ente()
     , Estado(fase)
@@ -30,6 +32,7 @@ fases::Fase::Fase(int nFase)
     , pEstados(ger::Gerenciador_Estados::getInstancia())
     , pJog1(nullptr)
     , pJog2(nullptr)
+    , pontos(0)
 {
     pColisoes->setListaProjeteis(&listaProjeteis);
     pColisoes->setListaInimigos(&listaInimigos);
@@ -151,6 +154,21 @@ void fases::Fase::executar() {
     pColisoes->executar();
     if(checaFimJogo() == false)
     checaObjetivo();
+    if(doisJogadores){
+        if(pJog1->getPontos() + pJog2->getPontos() > pontos){
+            pontos = pJog1->getPontos() + pJog2->getPontos();
+            std::cout<<"Pontos: " << pontos <<"\n";
+        }
+    }
+    else{
+        if(pJog1->getPontos() > pontos){
+            pontos = pJog1->getPontos();
+            std::cout<<"Pontos: " << pontos <<"\n";
+
+        }
+            //std::cout<<"pts j:" << pJog1->getPontos()<<"\n";
+    }
+    pontos =99999;
     executarEstado(fim);
 }
 
@@ -196,6 +214,16 @@ ent::pers::Jogador* fases::Fase::getJogador2() const {
 
 float fases::Fase::getTamanhoFase() const {
     return tamanhoFase;
+}
+
+int fases::Fase::getPontuacao()
+{
+    return pontos;
+}
+
+void fases::Fase::setPontuacao(int pontos)
+{
+    this->pontos = pontos;
 }
 
 bool fases::Fase::checaFimJogo()

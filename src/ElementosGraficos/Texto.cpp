@@ -1,6 +1,7 @@
 #include "ElementosGraficos/Texto.h"
 
 
+
 namespace ElementosGraficos{
 
 Texto::Texto():
@@ -52,4 +53,11 @@ void ElementosGraficos::Texto::setTexto()
 void ElementosGraficos::Texto::atualizaTexto(std::string txt)
 {
     pElementoTexto->setString(txt);
+}
+
+void ElementosGraficos::Texto::incrementaTexto(std::string txt)
+{
+    std::string textoIncial = pElementoTexto->getString();
+    textoIncial += txt;
+    pElementoTexto->setString(textoIncial);
 }

@@ -37,6 +37,8 @@ public:
     /* Animação */
     void atualizarElementosAnimacao();
     void setCorpo();
+    int getPontos();
+    void setPontos(int pts);
 
 
 

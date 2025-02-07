@@ -34,6 +34,7 @@ public:
     void ativarBufferTexto(bool alt);
     void executarEstado();
 
+    void setPontosParaIncrementar(int pts);
     controle::Texto_Input* getInput();
 };
 

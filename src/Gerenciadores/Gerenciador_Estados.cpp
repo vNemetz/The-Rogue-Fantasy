@@ -66,6 +66,7 @@ void Gerenciador_Estados::requererEstado()
 }
 
 void Gerenciador_Estados::setEstadoAtual(tipoEstado tipo){
+    int pontos = 0;
     switch (tipo){
         case menu:
             pEstadoAtual = static_cast<Estado*>(mapaEstados[menu]);
@@ -81,12 +82,15 @@ void Gerenciador_Estados::setEstadoAtual(tipoEstado tipo){
             break;
         case placar:
             pEstadoAtual = static_cast<Estado*>(mapaEstados[placar]);
+            dynamic_cast<menus::Placar*>(pEstadoAtual)->construirPlacar();
             ger::Gerenciador_Input::getInstancia()->criarInputMapEstado(pausa);
             break;
         case fim:
+            pontos = dynamic_cast<fases::Fase*>(pEstadoAtual)->getPontuacao();
             pEstadoAtual = static_cast<Estado*>(mapaEstados[fim]);
+            dynamic_cast<menus::Menu_Fim*>(pEstadoAtual)->setPontosParaIncrementar(pontos);
             ger::Gerenciador_Input::getInstancia()->criarInputMapEstado(fim);
-            break;
+            break;  
         default:
             break;
     }
@@ -109,7 +113,7 @@ Estado *ger::Gerenciador_Estados::getEstado(tipoEstado tipo)
         return mapaEstados[tipo];
 }
 
-void ger::Gerenciador_Estados::proximaFase(int numFase)
+void ger::Gerenciador_Estados::proximaFase(int numFase, int pontos)
 {
     if(numFase == 1){
             if(mapaEstados[fase]){
@@ -117,11 +121,12 @@ void ger::Gerenciador_Estados::proximaFase(int numFase)
             mapaEstados.erase(fase);
         }
         ger::Gerenciador_Colisoes::getInstancia()->limparListas();
-        fases::Castelo* faseCastelo = new fases::Castelo();
+        fases::Castelo* faseCastelo = new fases::Castelo(pontos);
         pEstadoAtual = faseCastelo;
 
         mapaEstados.insert(std::pair<tipoEstado, Estado*>(fase, static_cast<Estado*>(faseCastelo) ) );
         faseCastelo->setPGG(ger::Gerenciador_Grafico::getInstancia());
+
     }
 }
 
