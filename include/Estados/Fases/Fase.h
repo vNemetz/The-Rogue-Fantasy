@@ -62,6 +62,7 @@ public:
     float getTamanhoFase() const;
     int getNumeroFase() const;
     
+    bool checaFimJogo();
     void executarEstado(tipoEstado tipo);
     static void setMultijogador(bool multi);
 

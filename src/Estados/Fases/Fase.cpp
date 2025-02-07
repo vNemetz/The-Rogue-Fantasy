@@ -14,6 +14,7 @@
 #include "Entidades/Obstáculos/Porta.h"
 
 
+
 fases::Fase::Fase() : 
     Ente()
     , Estado(fase)
@@ -138,13 +139,19 @@ void fases::Fase::criarEntidade(char simbolo, const sf::Vector2i pos) {
 
 /* Execução da Fase */
 void fases::Fase::executar() {
+    if(checaFimJogo() == false)
     desenharFundo();
+    if(checaFimJogo() == false)
     atualizarObstaculos();
+    if(checaFimJogo() == false)
     atualizarProjeteis();
+    if(checaFimJogo() == false)
     atualizarPersonagens();
-
+    if(checaFimJogo() == false)
     pColisoes->executar();
+    if(checaFimJogo() == false)
     checaObjetivo();
+    executarEstado(fim);
 }
 
 void fases::Fase::desenharFundo() {
@@ -191,13 +198,24 @@ float fases::Fase::getTamanhoFase() const {
     return tamanhoFase;
 }
 
+bool fases::Fase::checaFimJogo()
+{
+    if(listaJogadores.getTamanho() == 0){
+        return true;
+    }
+    return false;
+}
+
 
 void fases::Fase::executarEstado(tipoEstado tipo){
+
     switch (tipo){
         case pausa:
             pEstados->setEstadoAtual(pausa);
             break;
-
+        case fim:
+            pEstados->setEstadoAtual(fim);
+            break;
         default:
             break;
     }

@@ -8,6 +8,8 @@ class Texto_Input : public controle::Observador{
 private:
 
     std::string texto;
+    float bufferTime;
+    sf::Clock clock;
 
 public:
     Texto_Input();

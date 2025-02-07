@@ -10,24 +10,36 @@ menus::Menu_Fim::Menu_Fim():
 }
 
 menus::Menu_Fim::Menu_Fim(ger::Gerenciador_Estados *pGE):
-    Menu(pGE, 0, 1, fim)
-    , titulo(ger::Gerenciador_Grafico::getInstancia()->getFonte(), sf::Color::White, "VOCÊ MORREU!", sf::Vector2f(2.0,2.0))
-    , nome(ger::Gerenciador_Grafico::getInstancia()->getFonte(), sf::Color::White, "Nome:  ")
-    , nomeJogador(ger::Gerenciador_Grafico::getInstancia()->getFonte(), sf::Color::White, "")
+    Menu(pGE, 0, 0, fim)
+    , titulo(ger::Gerenciador_Grafico::getInstancia()->getFonte(), sf::Color::White, "FIM DE JOGO", sf::Vector2f(4.0,4.0))
+    , nome(ger::Gerenciador_Grafico::getInstancia()->getFonte(), sf::Color::White, "Nome:  ", sf::Vector2f(1.8f, 1.8f))
+    , nomeJogador(ger::Gerenciador_Grafico::getInstancia()->getFonte(), sf::Color::White, "", sf::Vector2f(1.8f, 1.8f))
     , pontos(ger::Gerenciador_Grafico::getInstancia()->getFonte())
     , pontosParaIncrementar(0)
-    , input()
+    , input(nullptr)
 {
+    input = new controle::Texto_Input();
+    input->setAtivo(false);
+    ger::Gerenciador_Input::getInstancia()->incluirObservador(static_cast<controle::Observador*>(input));
     limparVetorBotoes();
+    setTexturaFundo("Menu-bg");
+    sf::Vector2f pos = pSpriteFundo->getPosition();
+    sf::Vector2f tam = pSpriteFundo->getGlobalBounds().getSize();
+    titulo.setPosicao(sf::Vector2f(pos.x + tam.x/2.0f -500.f , pos.y + tam.y/2.0f - 400.f));
+    pontos.setPosicao(sf::Vector2f(pos.x + tam.x/4.0f, pos.y + tam.y/2.0f));
+    nome.setPosicao(sf::Vector2f(pos.x + tam.x/4.0f, pos.y + tam.y/2.0f));
+    nomeJogador.setPosicao(sf::Vector2f(pos.x + tam.x/2.85f, pos.y + tam.y/2.0f));
     sf::Vector2f posicaoBotao = sf::Vector2f(pSpriteFundo->getPosition().x+pSpriteFundo->getGlobalBounds().getSize().x/2.0f - 380.0f,
     HEIGHT/1.4f);
     adicionarBotao("Yellow-Button", sf::Vector2f(4.0f, 3.0f), "MENU PRINCIPAL", posicaoBotao);
-    ger::Gerenciador_Input::getInstancia()->setMenuFim(this);
+
 }
 
 menus::Menu_Fim::~Menu_Fim()
 {
     limparVetorBotoes();
+    delete input;
+    input = nullptr;
 }
 
 void menus::Menu_Fim::escreverNoArquivo()
@@ -35,43 +47,39 @@ void menus::Menu_Fim::escreverNoArquivo()
 }
 void menus::Menu_Fim::desenhar()
 {
+    ger::Gerenciador_Grafico::getInstancia()->getJanela()->setView(ger::Gerenciador_Grafico::getInstancia()->getJanela()->getDefaultView());
+    ger::Gerenciador_Grafico::getInstancia()->desenharSprite(pSpriteFundo);
     ger::Gerenciador_Grafico::getInstancia()->desenharTexto(nome.getTexto());
     ger::Gerenciador_Grafico::getInstancia()->desenharTexto(titulo.getTexto());
     ger::Gerenciador_Grafico::getInstancia()->desenharTexto(pontos.getTexto());
-    nomeJogador.atualizaTexto(input.getTexto());
+    nomeJogador.atualizaTexto(input->getTexto());
     ger::Gerenciador_Grafico::getInstancia()->desenharTexto(nomeJogador.getTexto());
-    ger::Gerenciador_Grafico::getInstancia()->getJanela()->setView(ger::Gerenciador_Grafico::getInstancia()->getJanela()->getDefaultView());
-    ger::Gerenciador_Grafico::getInstancia()->desenharSprite(pSpriteFundo);
     desenharBotoes();
-    ger::Gerenciador_Grafico::getInstancia()->getJanela()->setView(ger::Gerenciador_Grafico::getInstancia()->getVista());
-
-
+ 
 }
 
 
 void menus::Menu_Fim::executarEstado(){
     switch (botaoSelecionado){
         case 0:
-            fases::Fase::setMultijogador(false);
+            input->limpar();
             pGEstados->reiniciarJogo();
-            pGEstados->setEstadoAtual(fase);
+            pGEstados->setEstadoAtual(menu);
             break;
-        case 1:
-            fases::Fase::setMultijogador(true);
-            pGEstados->reiniciarJogo();
-            pGEstados->setEstadoAtual(fase);
-            break;
-        case 2:
-            pGEstados->setEstadoAtual(placar);
-            break;
-        case 3:
-            ger::Gerenciador_Grafico::getInstancia()->fechaJanela();
         default:
             break;
     }
 }
 
+controle::Texto_Input *menus::Menu_Fim::getInput()
+{
+    if(input){
+        return input;
+    }return nullptr;
+}
 void menus::Menu_Fim::ativarBufferTexto(bool alt)
 {
-    input.setAtivo(alt);
+    if(alt == true){
+    }
+    input->setAtivo(alt);
 }

@@ -82,9 +82,11 @@ void Gerenciador_Estados::setEstadoAtual(tipoEstado tipo){
         case placar:
             pEstadoAtual = static_cast<Estado*>(mapaEstados[placar]);
             ger::Gerenciador_Input::getInstancia()->criarInputMapEstado(pausa);
+            break;
         case fim:
-        pEstadoAtual = static_cast<Estado*>(mapaEstados[fim]);
-        ger::Gerenciador_Input::getInstancia()->criarInputMapEstado(fim);
+            pEstadoAtual = static_cast<Estado*>(mapaEstados[fim]);
+            ger::Gerenciador_Input::getInstancia()->criarInputMapEstado(fim);
+            break;
         default:
             break;
     }

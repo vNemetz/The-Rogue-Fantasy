@@ -45,30 +45,35 @@ void Inimigo::incluirJogador(Jogador* jogador) {
 }
 
 void Inimigo::persegueJogador(Jogador* jogador) {
-    sf::Vector2f posJogador = jogador->getPosition();
-    sf::Vector2f posInimigo = getPosition();
+    if(jogador){
+        sf::Vector2f posJogador = jogador->getPosition();
+        sf::Vector2f posInimigo = getPosition();
 
-    if (posJogador.x > posInimigo.x) {
-        movendoDireita = true;
-        movendoEsquerda = false;
-    }
+        if (posJogador.x > posInimigo.x) {
+            movendoDireita = true;
+            movendoEsquerda = false;
+        }
 
-    else {
-        movendoDireita = false;
-        movendoEsquerda = true;
+        else {
+            movendoDireita = false;
+            movendoEsquerda = true;
+        }
     }
 }
 
 float Inimigo::distanciaJogador(Jogador* jogador) const {
-    sf::Vector2f posicaoJogador = jogador->getPosition();
-    sf::Vector2f posicaoInimigo = posicao;
+    if(jogador){
+        sf::Vector2f posicaoJogador = jogador->getPosition();
+        sf::Vector2f posicaoInimigo = posicao;
 
-    posicaoJogador.x += jogador->getTamanho().x / 2.f;
-    posicaoInimigo.x += tamanho.x / 2.f;
+        posicaoJogador.x += jogador->getTamanho().x / 2.f;
+        posicaoInimigo.x += tamanho.x / 2.f;
 
-    sf::Vector2f dist = posicaoJogador - posicaoInimigo;
-    float moduloDist = sqrt(pow((dist.x),2) + pow(dist.y, 2));
-    return moduloDist;
+        sf::Vector2f dist = posicaoJogador - posicaoInimigo;
+        float moduloDist = sqrt(pow((dist.x),2) + pow(dist.y, 2));
+        return moduloDist;
+    }
+    return 0;
 }
 
 Jogador* Inimigo::jogadorMaisProximo() const {

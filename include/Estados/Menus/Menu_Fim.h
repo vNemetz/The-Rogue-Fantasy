@@ -18,7 +18,7 @@ private:
     unsigned int pontosParaIncrementar;
     //fases::Fase* pFase;
 
-    controle::Texto_Input input;
+    controle::Texto_Input* input;
 
 
 
@@ -33,6 +33,8 @@ public:
     void desenhar() override;
     void ativarBufferTexto(bool alt);
     void executarEstado();
+
+    controle::Texto_Input* getInput();
 };
 
 }

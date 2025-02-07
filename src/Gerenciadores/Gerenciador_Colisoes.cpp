@@ -47,11 +47,13 @@ void Gerenciador_Colisoes::executar() {
             }
             
             for (int j = 0; j < listaJogadores->getTamanho(); j++) {
-                ent::pers::Jogador* jogador = static_cast<ent::pers::Jogador*>(listaJogadores->operator[](j));
+                    if(listaJogadores->operator[](j)){
+                    ent::pers::Jogador* jogador = static_cast<ent::pers::Jogador*>(listaJogadores->operator[](j));
 
-                if (jogador)
-                    if (verificarColisao(inimigo, jogador))
-                            jogador->emColisaoInimigo(inimigo, calcularColisao(inimigo,jogador));
+                    if (jogador)
+                        if (verificarColisao(inimigo, jogador))
+                                jogador->emColisaoInimigo(inimigo, calcularColisao(inimigo,jogador));
+                }
             }
         }
     }
@@ -112,25 +114,27 @@ const bool Gerenciador_Colisoes::verificarColisao(ent::Entidade* pe1, ent::Entid
 }
 
 sf::Vector2f Gerenciador_Colisoes::calcularColisao(ent::Entidade* pe1, ent::Entidade* pe2) const {
-    sf::Vector2f pos1 = pe1->getPosition();
-    sf::Vector2f pos2 = pe2->getPosition();
+    if(pe1 && pe2){
+        sf::Vector2f pos1 = pe1->getPosition();
+        sf::Vector2f pos2 = pe2->getPosition();
 
-    sf::Vector2f tam1 = pe1->getTamanho();
-    sf::Vector2f tam2 = pe2->getTamanho();
+        sf::Vector2f tam1 = pe1->getTamanho();
+        sf::Vector2f tam2 = pe2->getTamanho();
 
-    sf::Vector2f distanciaEntreCentros(
-        fabs((pos1.x + tam1.x/2.f) - (pos2.x + tam2.x/2.f)),
-        fabs((pos1.y + tam1.y/2.f) - (pos2.y + tam2.y/2.f))
-    );
+        sf::Vector2f distanciaEntreCentros(
+            fabs((pos1.x + tam1.x/2.f) - (pos2.x + tam2.x/2.f)),
+            fabs((pos1.y + tam1.y/2.f) - (pos2.y + tam2.y/2.f))
+        );
 
-    sf::Vector2f somaMetadeRetangulo(tam1.x/2.f + tam2.x/2.f, tam1.y/2.f + tam2.y/2.f);
-    
-    sf::Vector2f ds(
-        (distanciaEntreCentros.x - somaMetadeRetangulo.x),
-        (distanciaEntreCentros.y - somaMetadeRetangulo.y)
-    );
-
+        sf::Vector2f somaMetadeRetangulo(tam1.x/2.f + tam2.x/2.f, tam1.y/2.f + tam2.y/2.f);
+        
+        sf::Vector2f ds(
+            (distanciaEntreCentros.x - somaMetadeRetangulo.x),
+            (distanciaEntreCentros.y - somaMetadeRetangulo.y)
+        );
     return ds;
+    }
+    return sf::Vector2f(0.f, 0.f);
 }
 
 void Gerenciador_Colisoes::incluirObstaculo(ent::obs::Obstaculo* po) {
