@@ -142,34 +142,27 @@ void fases::Fase::criarEntidade(char simbolo, const sf::Vector2i pos) {
 
 /* Execução da Fase */
 void fases::Fase::executar() {
-    if(checaFimJogo() == false)
-    desenharFundo();
-    if(checaFimJogo() == false)
-    atualizarObstaculos();
-    if(checaFimJogo() == false)
-    atualizarProjeteis();
-    if(checaFimJogo() == false)
-    atualizarPersonagens();
-    if(checaFimJogo() == false)
-    pColisoes->executar();
-    if(checaFimJogo() == false)
-    checaObjetivo();
-    if(doisJogadores){
-        if(pJog1->getPontos() + pJog2->getPontos() > pontos){
-            pontos = pJog1->getPontos() + pJog2->getPontos();
-            std::cout<<"Pontos: " << pontos <<"\n";
+    if(checaFimJogo() == false){
+        desenharFundo();
+        atualizarObstaculos();
+        atualizarProjeteis();
+        atualizarPersonagens();
+        pColisoes->executar();
+        checaObjetivo();
+        if(doisJogadores){
+            if(pJog1->getPontos() + pJog2->getPontos() > pontos){
+                pontos = pJog1->getPontos() + pJog2->getPontos();
+            }
         }
-    }
-    else{
-        if(pJog1->getPontos() > pontos){
-            pontos = pJog1->getPontos();
-            std::cout<<"Pontos: " << pontos <<"\n";
+        else{
+            if(pJog1->getPontos() > pontos){
+                pontos = pJog1->getPontos();
 
+            }
         }
-            //std::cout<<"pts j:" << pJog1->getPontos()<<"\n";
     }
-    pontos =99999;
-    executarEstado(fim);
+    //pontos = 100000;    
+    else{executarEstado(fim);}
 }
 
 void fases::Fase::desenharFundo() {

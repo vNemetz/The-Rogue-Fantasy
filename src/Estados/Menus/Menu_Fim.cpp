@@ -109,6 +109,7 @@ void menus::Menu_Fim::executarEstado(){
     switch (botaoSelecionado){
         case 0:
             escreverNoArquivo();
+            pontos.atualizaTexto("Pontos: ");
             input->limpar();
             pGEstados->reiniciarJogo();
             pGEstados->setEstadoAtual(menu);

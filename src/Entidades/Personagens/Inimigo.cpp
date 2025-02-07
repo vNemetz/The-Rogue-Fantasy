@@ -78,17 +78,19 @@ float Inimigo::distanciaJogador(Jogador* jogador) const {
 
 Jogador* Inimigo::jogadorMaisProximo() const {
     float menorDist = INT_MAX;
-    Jogador* jogadorMenosDistante;
+    Jogador* jogadorMenosDistante = nullptr;
 
     for (int i = 0; i < jogadores.size(); i++) {
-        Jogador* jogador = jogadores[i];
+            if(jogadores[i]){
+            Jogador* jogador = jogadores[i];
 
-        if (!jogador->getParaDeletar()) {
-            float distancia = distanciaJogador(jogador);
+            if (!jogador->getParaDeletar()) {
+                float distancia = distanciaJogador(jogador);
 
-            if (distancia < menorDist) {
-                jogadorMenosDistante = jogador;
-                menorDist = distancia;
+                if (distancia < menorDist) {
+                    jogadorMenosDistante = jogador;
+                    menorDist = distancia;
+                }
             }
         }
     }
