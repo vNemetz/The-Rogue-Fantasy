@@ -25,6 +25,11 @@ menus::Menu_Principal::~Menu_Principal()
 {
 }
 
+void menus::Menu_Principal::executar(){
+    pGEstados->reiniciarJogo(faseSelecionada);
+    desenhar();
+    bufferTime +=ger::Gerenciador_Grafico::getInstancia()->getDeltaTime();
+}
 
 
 void menus::Menu_Principal::executarEstado()

@@ -149,19 +149,21 @@ void fases::Fase::executar() {
         pColisoes->executar();
         checaObjetivo();
         if(doisJogadores){
-            /*if(pJog1->getPontos() + pJog2->getPontos() > pontos){
+            if(pJog1->getPontos() + pJog2->getPontos() > pontos){
                 pontos = pJog1->getPontos() + pJog2->getPontos();
-            }*/
+            }
         }
         else{
-            /*if(pJog1->getPontos() > pontos){
+            if(pJog1->getPontos() > pontos){
                 pontos = pJog1->getPontos();
 
-            }*/
+            }
         }
-    }
-    //pontos = 100000;    
+    }    
     else{executarEstado(fim);}
+    if(numeroFase = 1 && listaInimigos.getTamanho() <= 0){
+        executarEstado(fim);
+    }
 }
 
 void fases::Fase::desenharFundo() {
