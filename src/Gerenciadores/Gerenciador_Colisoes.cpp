@@ -138,9 +138,11 @@ void Gerenciador_Colisoes::executar() {
 }
 
 const bool Gerenciador_Colisoes::verificarColisao(ent::Entidade* pe1, ent::Entidade* pe2) const {
+    if(pe1 && pe2){
     sf::Vector2f ds = calcularColisao(pe1, pe2);
-
     return (ds.x < 0.f && ds.y < 0.f);
+    }
+    return false;
 }
 
 sf::Vector2f Gerenciador_Colisoes::calcularColisao(ent::Entidade* pe1, ent::Entidade* pe2) const {
@@ -163,105 +165,115 @@ sf::Vector2f Gerenciador_Colisoes::calcularColisao(ent::Entidade* pe1, ent::Enti
             (distanciaEntreCentros.y - somaMetadeRetangulo.y)
         );
     return ds;
+    }
+    return sf::Vector2f(0.0f, 0.0f);
 }
 
 /* Tratamento de colisões */
 
 void Gerenciador_Colisoes::tratarJogadorInimigo(ent::pers::Jogador* jogador, ent::pers::Inimigo* inimigo) {
-    if (!jogador->getLevandoDano()) {
-        bool inimigoADireita = inimigo->getPosition().x > jogador->getPosition().x;
-        sf::Vector2f ds = calcularColisao(jogador, inimigo);
+    if(jogador && inimigo){
+        if (!jogador->getLevandoDano()) {
+            bool inimigoADireita = inimigo->getPosition().x > jogador->getPosition().x;
+            sf::Vector2f ds = calcularColisao(jogador, inimigo);
 
-        // Se o jogador está atacando e acertando,
-        // além da colisão ser horizontal, 
-        // e também se o inimigo não estiver sofrendo dano nem morrendo,
-        // dá dano
-        if (jogador->getAtacando() && ((jogador->getOlhandoDireita() && inimigoADireita) || (!jogador->getOlhandoDireita() && !inimigoADireita)) && (ds.x > ds.y)) {
-            if ((inimigo->getEstado() != ent::pers::estado::sofrendo) && (inimigo->getEstado() != ent::pers::estado::morrendo)) {
-                inimigo->sofrerDano(jogador->getPosition());
-                
-                if (inimigo->getNumVidas() <= 0) {
-                    jogador->incrementarPontos(inimigo->getPontos());
+            // Se o jogador está atacando e acertando,
+            // além da colisão ser horizontal, 
+            // e também se o inimigo não estiver sofrendo dano nem morrendo,
+            // dá dano
+            if (jogador->getAtacando() && ((jogador->getOlhandoDireita() && inimigoADireita) || (!jogador->getOlhandoDireita() && !inimigoADireita)) && (ds.x > ds.y)) {
+                if ((inimigo->getEstado() != ent::pers::estado::sofrendo) && (inimigo->getEstado() != ent::pers::estado::morrendo)) {
+                    inimigo->sofrerDano(jogador->getPosition());
+                    
+                    if (inimigo->getNumVidas() <= 0) {
+                        jogador->incrementarPontos(inimigo->getPontos());
+                    }
                 }
             }
-        }
 
-        // Se não está atacando ou errando o ataque,
-        // e o inimigo não está sofrendo, leva dano
-        else if (inimigo->getEstado() != ent::pers::estado::sofrendo && inimigo->getEstado() != ent::pers::estado::morrendo) {
-            jogador->sofrerDano(inimigo->getPosition());
+            // Se não está atacando ou errando o ataque,
+            // e o inimigo não está sofrendo, leva dano
+            else if (inimigo->getEstado() != ent::pers::estado::sofrendo && inimigo->getEstado() != ent::pers::estado::morrendo) {
+                jogador->sofrerDano(inimigo->getPosition());
+            }
         }
     }
 }
 
 void Gerenciador_Colisoes::tratarInimigoInimigo(ent::pers::Inimigo* inimigo1, ent::pers::Inimigo* inimigo2) {
-    sf::Vector2f posicaoInimigo = inimigo2->getPosition();
-    sf::Vector2f tamanhoPers = inimigo2->getTamanho();
-    sf::Vector2f velocidadeInimigo = inimigo2->getVelocidade();
+    if(inimigo1 && inimigo2){
+        sf::Vector2f posicaoInimigo = inimigo2->getPosition();
+        sf::Vector2f tamanhoPers = inimigo2->getTamanho();
+        sf::Vector2f velocidadeInimigo = inimigo2->getVelocidade();
 
-    sf::Vector2f ds = calcularColisao(inimigo1, inimigo2);
+        sf::Vector2f ds = calcularColisao(inimigo1, inimigo2);
 
-    if (ds.x != 0.f && ds.y != 0.f) {
-        // Se a colisão é no eixo x
-        if (ds.x > ds.y) {
-            if (posicaoInimigo.x < inimigo1->getPosition().x)
-                posicaoInimigo.x += ds.x;
+        if (ds.x != 0.f && ds.y != 0.f) {
+            // Se a colisão é no eixo x
+            if (ds.x > ds.y) {
+                if (posicaoInimigo.x < inimigo1->getPosition().x)
+                    posicaoInimigo.x += ds.x;
 
-            else
-                posicaoInimigo.x -= ds.x;
+                else
+                    posicaoInimigo.x -= ds.x;
+            }
         }
-    }
 
-    inimigo2->setPosition(posicaoInimigo);
-    inimigo2->setVelocidade(velocidadeInimigo);
+        inimigo2->setPosition(posicaoInimigo);
+        inimigo2->setVelocidade(velocidadeInimigo);
+    }
 }
 
 void Gerenciador_Colisoes::tratarPersonagemPlataforma(ent::pers::Personagem* personagem, ent::obs::Plataforma* plataforma) {
-    sf::Vector2f posicaoPers = personagem->getPosition();
-    sf::Vector2f tamanhoPers = personagem->getTamanho();
-    sf::Vector2f velocidadePers = personagem->getVelocidade();
+    if(personagem && plataforma){
+        sf::Vector2f posicaoPers = personagem->getPosition();
+        sf::Vector2f tamanhoPers = personagem->getTamanho();
+        sf::Vector2f velocidadePers = personagem->getVelocidade();
 
-    sf::Vector2f ds = calcularColisao(personagem, plataforma);
+        sf::Vector2f ds = calcularColisao(personagem, plataforma);
 
-    if (ds.x < 0.f && ds.y < 0.f) {
-        // Se a colisão é no eixo x
-        if (ds.x > ds.y) {
-            ds.x = ceil(ds.x);
-            if (posicaoPers.x < plataforma->getPosition().x)
-                posicaoPers.x += ds.x;
+        if (ds.x < 0.f && ds.y < 0.f) {
+            // Se a colisão é no eixo x
+            if (ds.x > ds.y) {
+                ds.x = ceil(ds.x);
+                if (posicaoPers.x < plataforma->getPosition().x)
+                    posicaoPers.x += ds.x;
 
-            else
-                posicaoPers.x -= ds.x;
-        }
-        
-        // Se a colisão é no eixo y
-        else {
-            ds.y = ceil(ds.y);
-            if (posicaoPers.y < plataforma->getPosition().y) {
-                posicaoPers.y += ds.y;
-
-                velocidadePers.y = 0;
-                personagem->setNoChao(true);
+                else
+                    posicaoPers.x -= ds.x;
             }
-
+            
+            // Se a colisão é no eixo y
             else {
-                posicaoPers.y -= ds.y;
+                ds.y = ceil(ds.y);
+                if (posicaoPers.y < plataforma->getPosition().y) {
+                    posicaoPers.y += ds.y;
+
+                    velocidadePers.y = 0;
+                    personagem->setNoChao(true);
+                }
+
+                else {
+                    posicaoPers.y -= ds.y;
+                }
             }
         }
-    }
 
-    personagem->setPosition(posicaoPers);
-    personagem->setVelocidade(velocidadePers);
+        personagem->setPosition(posicaoPers);
+        personagem->setVelocidade(velocidadePers);
+    }
 }
 
 void Gerenciador_Colisoes::tratarProjetilPersonagem(ent::prj::Projetil* projetil, ent::pers::Personagem* personagem) {
-    bool projetilADireita = projetil->getPosition().x > personagem->getPosition().x;
-    sf::Vector2f ds = calcularColisao(personagem, projetil);
+        if(projetil && personagem){
+        bool projetilADireita = projetil->getPosition().x > personagem->getPosition().x;
+        sf::Vector2f ds = calcularColisao(personagem, projetil);
 
-    if (!(personagem->getAtacando() && ((personagem->getOlhandoDireita() && projetilADireita) || (!personagem->getOlhandoDireita() && !projetilADireita)) && (ds.x > ds.y)))
-        personagem->sofrerDano(projetil->getPosition());
-    
-    projetil->setParaDeletar(true);
+        if (!(personagem->getAtacando() && ((personagem->getOlhandoDireita() && projetilADireita) || (!personagem->getOlhandoDireita() && !projetilADireita)) && (ds.x > ds.y)))
+            personagem->sofrerDano(projetil->getPosition());
+        
+        projetil->setParaDeletar(true);
+        }
 }
 
 void Gerenciador_Colisoes::tratarProjetilPlataforma(ent::prj::Projetil* projetil, ent::obs::Plataforma* plataforma) {

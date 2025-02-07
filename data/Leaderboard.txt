@@ -1,6 +1,4 @@
 100
-aaaaaa
-100
 elzi nemetz
 100
 aeeee
@@ -18,3 +16,5 @@ vinic
 chales balduin
 100
 JOGADOR 1
+100
+tester

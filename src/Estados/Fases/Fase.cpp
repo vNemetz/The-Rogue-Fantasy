@@ -149,15 +149,15 @@ void fases::Fase::executar() {
         pColisoes->executar();
         checaObjetivo();
         if(doisJogadores){
-            if(pJog1->getPontos() + pJog2->getPontos() > pontos){
+            /*if(pJog1->getPontos() + pJog2->getPontos() > pontos){
                 pontos = pJog1->getPontos() + pJog2->getPontos();
-            }
+            }*/
         }
         else{
-            if(pJog1->getPontos() > pontos){
+            /*if(pJog1->getPontos() > pontos){
                 pontos = pJog1->getPontos();
 
-            }
+            }*/
         }
     }
     //pontos = 100000;    
@@ -196,11 +196,15 @@ void fases::Fase::atualizarProjeteis() {
 }
 
 ent::pers::Jogador* fases::Fase::getJogador1() const {
-    return pJog1;
+    if(pJog1)
+        return pJog1;
+    return nullptr;
 }
 
 ent::pers::Jogador* fases::Fase::getJogador2() const {
-    return pJog2;
+    if(pJog2)
+        return pJog2;
+    return nullptr;
 }
 
 
