@@ -14,6 +14,9 @@
 #include "Entidades/Obstáculos/Porta.h"
 
 
+
+
+
 fases::Fase::Fase() : 
     Ente()
     , Estado(fase)
@@ -29,6 +32,7 @@ fases::Fase::Fase(int nFase)
     , pEstados(ger::Gerenciador_Estados::getInstancia())
     , pJog1(nullptr)
     , pJog2(nullptr)
+    , pontos(0)
 {
     if (numeroFase == 0)
         tamanhoFase = 8000.f;
@@ -137,13 +141,27 @@ void fases::Fase::criarEntidade(char simbolo, const sf::Vector2i pos) {
 
 /* Execução da Fase */
 void fases::Fase::executar() {
-    desenharFundo();
-    atualizarObstaculos();
-    atualizarProjeteis();
-    atualizarPersonagens();
+    if(checaFimJogo() == false){
+        desenharFundo();
+        atualizarObstaculos();
+        atualizarProjeteis();
+        atualizarPersonagens();
+        pColisoes->executar();
+        checaObjetivo();
+        if(doisJogadores){
+            /*if(pJog1->getPontos() + pJog2->getPontos() > pontos){
+                pontos = pJog1->getPontos() + pJog2->getPontos();
+            }*/
+        }
+        else{
+            /*if(pJog1->getPontos() > pontos){
+                pontos = pJog1->getPontos();
 
-    pColisoes->executar();
-    checaObjetivo();
+            }*/
+        }
+    }
+    //pontos = 100000;    
+    else{executarEstado(fim);}
 }
 
 void fases::Fase::desenharFundo() {
@@ -178,11 +196,15 @@ void fases::Fase::atualizarProjeteis() {
 }
 
 ent::pers::Jogador* fases::Fase::getJogador1() const {
-    return pJog1;
+    if(pJog1)
+        return pJog1;
+    return nullptr;
 }
 
 ent::pers::Jogador* fases::Fase::getJogador2() const {
-    return pJog2;
+    if(pJog2)
+        return pJog2;
+    return nullptr;
 }
 
 
@@ -190,13 +212,34 @@ float fases::Fase::getTamanhoFase() const {
     return tamanhoFase;
 }
 
+int fases::Fase::getPontuacao()
+{
+    return pontos;
+}
+
+void fases::Fase::setPontuacao(int pontos)
+{
+    this->pontos = pontos;
+}
+
+bool fases::Fase::checaFimJogo()
+{
+    if(listaJogadores.getTamanho() == 0){
+        return true;
+    }
+    return false;
+}
+
 
 void fases::Fase::executarEstado(tipoEstado tipo){
+
     switch (tipo){
         case pausa:
             pEstados->setEstadoAtual(pausa);
             break;
-
+        case fim:
+            pEstados->setEstadoAtual(fim);
+            break;
         default:
             break;
     }

@@ -59,13 +59,13 @@ void Aranha::executar() {
 void Aranha::atacar(Jogador* jogador) {
     movendoEsquerda = false;
     movendoDireita = false;
+    if(jogador){
+        if (jogador->getPosition().x > posicao.x)
+            olhandoDireita = true;
 
-    if (jogador->getPosition().x > posicao.x)
-        olhandoDireita = true;
-
-    else
-        olhandoDireita = false;
-
+        else
+            olhandoDireita = false;
+    }
     // Lança Teia
     if (podeAtacar) {
         prj::Teia* teia = new prj::Teia(sf::Vector2f(0.f, 0.f), sf::Vector2f(1.7f, 1.7f), olhandoDireita);

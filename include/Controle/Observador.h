@@ -11,6 +11,7 @@ enum formaControle{
     controleJogador = 0,
     controleMenuPrincipal,
     controleMenuPausa,
+    controleMenuFim,
     textoInput
 };
 

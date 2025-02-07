@@ -109,6 +109,6 @@ void fases::Floresta::proximaFase()
 {
     pGEstados = ger::Gerenciador_Estados::getInstancia();
     if(pGEstados){
-        pGEstados->proximaFase(1);
+        pGEstados->proximaFase(1, pontos);
     }
 }

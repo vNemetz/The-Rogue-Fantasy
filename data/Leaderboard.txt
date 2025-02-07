@@ -1,10 +1,20 @@
-12000
+100
+elzi nemetz
+100
+aeeee
+100
+casca de bala
+100
+nmtz
+100
+freddy
+100
+vinicius
+100
+vinic
+100
+chales balduin
+100
 JOGADOR 1
-8000
-NEMETZ
-1000
-UNNAMED
-0
-SIMAO
-200
-FELIPEREIS_96
+100
+tester

@@ -6,6 +6,7 @@
 
 
 
+
 namespace ger {
 /* Singleton - Padrão de Projeto */
 Gerenciador_Input::Gerenciador_Input()
@@ -14,11 +15,12 @@ Gerenciador_Input::Gerenciador_Input()
     , pMenuPrincipal(nullptr)
     , pFaseAtual(nullptr)
     , pMenuPausa(nullptr)
+    , pMenuFim(nullptr)
     , pGerEstados(ger::Gerenciador_Estados::getInstancia())
 {
+    it = listaObservadores.begin();
     setMenuPrincipal(static_cast<menus::Menu_Principal*>(pGerEstados->getEstado(menu)));
     criarInputMapEstado(menu);
-    iniciarListaObservadores();
 }
 
 Gerenciador_Input::~Gerenciador_Input() {
@@ -49,22 +51,26 @@ Gerenciador_Input* Gerenciador_Input::getInstancia() {
 
 /* Gerenciador de Input */
 void Gerenciador_Input::setJogador(ent::pers::Jogador* jogador1) {
-    this->jogador1 = jogador1;
-    for(it = listaObservadores.begin(); it != listaObservadores.end(); it++){
-        if((*it)->getTipoControle() == controle::formaControle::controleJogador){
-            if (*it){
-                static_cast<controle::Controle_Jogador*>(*it)->setJogador1(this->jogador1);
+    if(jogador1){
+        this->jogador1 = jogador1;
+        for(it = listaObservadores.begin(); it != listaObservadores.end(); it++){
+            if((*it)->getTipoControle() == controle::formaControle::controleJogador){
+                if (*it){
+                    static_cast<controle::Controle_Jogador*>(*it)->setJogador1(this->jogador1);
+                }
             }
         }
     }
 }
 
 void Gerenciador_Input::setJogador2(ent::pers::Jogador* jogador2) {
+    if(jogador2){
     this->jogador2 = jogador2;
-    for(it = listaObservadores.begin(); it != listaObservadores.end(); it++){
-        if((*it)->getTipoControle() == controle::formaControle::controleJogador){
-            if (*it){
-            static_cast<controle::Controle_Jogador*>(*it)->setJogador2(this->jogador2);
+        for(it = listaObservadores.begin(); it != listaObservadores.end(); it++){
+            if((*it)->getTipoControle() == controle::formaControle::controleJogador){
+                if (*it){
+                static_cast<controle::Controle_Jogador*>(*it)->setJogador2(this->jogador2);
+                }
             }
         }
     }
@@ -112,11 +118,26 @@ void Gerenciador_Input::setMenuPausa(menus::Menu_Pausa *pMenuPause)
     }
 }
 
+void Gerenciador_Input::setMenuFim(menus::Menu_Fim *pMenuFim)
+{
+    if(pMenuFim){
+        this->pMenuFim = pMenuFim;
+        bool controleMenuFim = false;   
+        for(it = listaObservadores.begin(); it != listaObservadores.end() && controleMenuFim == false; it++){
+            if((*it)->getTipoControle() == controle::formaControle::controleMenuFim){
+                static_cast<controle::Controle_Menu*>(*it)->setMenuAtual(pMenuFim);
+                controleMenuFim = true;
+            }
+        }
+    }
+
+}
 
 void Gerenciador_Input::checarEstado() const
 {
     pGerEstados->getEstadoAtual();
 }
+
 void Gerenciador_Input::criarInputMapEstado(tipoEstado tipoEstado)
 {
     switch(tipoEstado){
@@ -131,15 +152,21 @@ void Gerenciador_Input::criarInputMapEstado(tipoEstado tipoEstado)
                     }
                 }
             }
+            if(pMenuFim)
+                pMenuFim->ativarBufferTexto(false);
             break;
         case menu:
             for(it = listaObservadores.begin(); it != listaObservadores.end(); it++){
-                if((*it)->getTipoControle() == controle::formaControle::controleMenuPrincipal){
-                    (*it)->setAtivo(true);
-                }else{
-                    (*it)->setAtivo(false);
+                if(*it){
+                    if((*it)->getTipoControle() == controle::formaControle::controleMenuPrincipal){
+                        (*it)->setAtivo(true);
+                    }else{
+                        (*it)->setAtivo(false);
+                    }
                 }
             }
+            if(pMenuFim)
+            pMenuFim->ativarBufferTexto(false); 
             break;
         case pausa:
             setMenuPausa(static_cast<menus::Menu_Pausa*>(pGerEstados->getEstadoAtual()));
@@ -147,6 +174,20 @@ void Gerenciador_Input::criarInputMapEstado(tipoEstado tipoEstado)
                 if((*it)->getTipoControle() == controle::formaControle::controleMenuPausa){
                     (*it)->setAtivo(true);
                 }else{
+                    (*it)->setAtivo(false);
+                }
+            }
+            break;
+        case fim:
+            setMenuFim(static_cast<menus::Menu_Fim*>(pGerEstados->getEstadoAtual()));
+            for(it = listaObservadores.begin(); it != listaObservadores.end(); it++){
+                if((*it)->getTipoControle() == controle::formaControle::controleMenuFim){ 
+                    (*it)->setAtivo(true);
+                }
+                else if((*it)->getTipoControle() == controle::formaControle::textoInput){
+                    (*it)->setAtivo(true);
+                }
+                else{
                     (*it)->setAtivo(false);
                 }
             }
@@ -166,9 +207,16 @@ void Gerenciador_Input::iniciarListaObservadores()
     controle::Controle_Menu* controleMenuPausa = new controle::Controle_Menu(controle::formaControle::controleMenuPausa,
          this, pMenuPausa);
     incluirObservador(static_cast<controle::Observador*> (controleMenuPausa));
+    controleMenuPausa->setAtivo(false);
 
     controle::Controle_Jogador* controleJogador = new controle::Controle_Jogador(controle::formaControle::controleJogador,this, jogador1, jogador2, pFaseAtual);
     incluirObservador(static_cast<controle::Observador*>(controleJogador));
+    controleJogador->setAtivo(false);
+    
+    controle::Controle_Menu* controleMenuFim = new controle::Controle_Menu(controle::formaControle::controleMenuFim,
+        this, pMenuFim);
+    incluirObservador(static_cast<controle::Observador*>(controleMenuFim));
+    controleMenuFim->setAtivo(false);
 
 }
 

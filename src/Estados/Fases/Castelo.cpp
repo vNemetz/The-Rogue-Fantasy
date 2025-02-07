@@ -5,12 +5,24 @@
 
 
 fases::Castelo::Castelo():
-Fase(1)
+Castelo(0)
+
 {
     criarMapa();
     criarFundo();
     criarInimigos();
+    std::cout<<pontos;
+    pJog1->setPontos(pontos);
+}
 
+fases::Castelo::Castelo(int pts):
+Fase(1)
+{
+    setPontuacao(pts);
+    criarMapa();
+    criarFundo();
+    criarInimigos();
+    pJog1->setPontos(pontos);
 }
 
 fases::Castelo::~Castelo()

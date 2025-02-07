@@ -1,5 +1,5 @@
 #pragma once
-#include "Jogo.h"
+#include <SFML/Graphics.hpp>
 namespace ElementosGraficos{
 
 class Texto{
@@ -19,6 +19,8 @@ public:
     sf::Text* getTexto() const;
     void setPosicao(sf::Vector2f pos);
     void setTexto();
+    void atualizaTexto(std::string txt);
+    void incrementaTexto(std::string txt);
 
 };
 

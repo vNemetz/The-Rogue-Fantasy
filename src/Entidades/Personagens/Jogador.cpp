@@ -218,4 +218,13 @@ void Jogador::setCorpo() {
 }
 }
 
+int pers::Jogador::getPontos()
+{
+    return pontos;
+}
+}
+
+void ent::pers::Jogador::setPontos(int pts)
+{
+    pontos = pts;
 }
