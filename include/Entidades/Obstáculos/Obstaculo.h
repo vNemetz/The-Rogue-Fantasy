@@ -16,7 +16,6 @@ public:
     ~Obstaculo();
 
     virtual void executar() = 0;
-    virtual void emColisao(Entidade* pE, sf::Vector2f ds) = 0;
 };
 
 }

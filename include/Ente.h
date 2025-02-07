@@ -12,7 +12,8 @@ enum ID {
     plataforma,
     inimigo,
     projetil,
-    obstaculo
+    obstaculo,
+    porta
 };
 
 class Ente {

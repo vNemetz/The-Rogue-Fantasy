@@ -12,7 +12,7 @@ Porta::Porta()
 }
 
 Porta::Porta(sf::Vector2f pos, sf::Vector2f tam)
-    : Obstaculo(pos, tam, false, plataforma)
+    : Obstaculo(pos, tam, false, porta)
     , est(fechado)
     , tempoAbrindo(0.f)
 {
@@ -44,10 +44,6 @@ void Porta::atualizarEstado() {
 
     else
         est = estado::fechado;
-}
-
-void Porta::emColisao(Entidade* pE, sf::Vector2f ds) {
-
 }
 
 void Porta::setAberta(bool aber) {

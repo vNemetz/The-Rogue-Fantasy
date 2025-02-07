@@ -1,5 +1,6 @@
 #include "Entidades/Personagens/Aranha.h"
 #include "Entidades/Projeteis/Teia.h"
+#include "Gerenciadores/Gerenciador_Colisoes.h"
 #include "Listas/Lista_Entidades.h"
 #include <SFML/System/Vector2.hpp>
 #include <cmath>
@@ -10,14 +11,13 @@ namespace pers {
 Aranha::Aranha()
     : Aranha(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f))
 {
-    setNumVidas(3);
-
 }
 
 Aranha::Aranha(sf::Vector2f pos, sf::Vector2f tam)
     : Inimigo(pos, tam)
     , raioAtaque(800.f)
 {
+    pontos = 200;
     setNumVidas(3);
     setTextura("Spider-Idle");
     setVelocidadeMaxima(sf::Vector2f (250.f, 250.f));
@@ -77,6 +77,7 @@ void Aranha::atacar(Jogador* jogador) {
             teia->setPosition(sf::Vector2f(posicao.x, posicao.y));
 
         listaProjeteis->incluir(teia);
+        mediador->incluirEntidade(teia);
     }
 
     atacando = true;

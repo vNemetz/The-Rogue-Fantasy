@@ -9,7 +9,6 @@ class Inimigo;
 
 class Jogador : public Personagem {
 private:
-    int pontos;
     bool pulando;
     bool jogador1;
 
@@ -31,15 +30,12 @@ public:
     void atualizarMovimentacao(bool estado, std::string key);
     void atualizarPosicao();
     void pular();
-    void emColisaoInimigo(Inimigo* pI, sf::Vector2f ds);
     void carregarControles();
+    void incrementarPontos(int pontos);
     
     /* Animação */
     void atualizarElementosAnimacao();
     void setCorpo();
-
-
-
 };
 }
 }

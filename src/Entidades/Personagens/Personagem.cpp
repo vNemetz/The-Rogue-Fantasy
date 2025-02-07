@@ -12,6 +12,7 @@ Personagem::Personagem(sf::Vector2f pos, sf::Vector2f tam, ID id)
     : Entidade(pos, tam, id)
     , vivo(true)
     , numVidas(3)
+    , pontos(0)
     , est(parado)
     , tempoParado(0.f)
     , tempoDano(0.f)
@@ -103,7 +104,7 @@ void Personagem::mover() {
     setPosition((ds + posicao));
 }
 
-void Personagem::sofrerDano(Entidade* atacante) {
+void Personagem::sofrerDano(sf::Vector2f posicaoAtacante) {
     if (!levandoDano) {
         levandoDano = true;
         tempoDano = 0.f;
@@ -114,7 +115,7 @@ void Personagem::sofrerDano(Entidade* atacante) {
         noChao = false;
         velocidade = sf::Vector2f(knockbackHorizontal, -knockbackVertical);
 
-        if (atacante->getPosition().x > posicao.x) {
+        if (posicaoAtacante.x > posicao.x) {
             velocidade.x *= -1; // Direção do Knockback vai depender da visão do atacante
         }
     }
@@ -224,6 +225,18 @@ void Personagem::setNumVidas(int numVidas) {
 
 int Personagem::getNumVidas() const {
     return numVidas;
+}
+
+bool Personagem::getAtacando() const {
+    return atacando;
+}
+
+bool Personagem::getLevandoDano() const {
+    return levandoDano;
+}
+
+int Personagem::getPontos() const {
+    return pontos;
 }
 
 /* Animação */
