@@ -11,8 +11,6 @@ namespace ger {
 /* Padrão de Projeto / Design Pattern - Mediator */
 class Mediador {
 public:
-    virtual ~Mediador();
-
     // Método para registro de entidades
     virtual void incluirEntidade(ent::Entidade* entidade) = 0;
 };
@@ -38,6 +36,7 @@ public:
     void executar();
     const bool verificarColisao(ent::Entidade* pe1, ent::Entidade* pe2) const;
     sf::Vector2f calcularColisao(ent::Entidade* pe1, ent::Entidade* pe2) const;
+    void limparListas();
 
     /* Tratamento de colisões */
     void tratarJogadorInimigo(ent::pers::Jogador* jogador, ent::pers::Inimigo* inimigo);
@@ -48,11 +47,12 @@ public:
     void tratarJogadorPorta(ent::pers::Jogador* jogador, ent::obs::Porta* porta);
 
     void incluirEntidade(ent::Entidade* entidade);
+
+private:
     void incluirObstaculo(ent::obs::Obstaculo* obstaculo);
     void incluirJogador(ent::pers::Jogador* jogador);
     void incluirInimigo(ent::pers::Inimigo* inimigo);
     void incluirProjetil(ent::prj::Projetil* projetil);
-    void limparListas();
 };
 
 }

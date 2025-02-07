@@ -36,56 +36,74 @@ void Gerenciador_Colisoes::executar() {
     /* Verificar colisões dos inimigos entre si e entre o jogador */
     for (int i = 0; i < listaInimigos.size(); i++) {
         ent::pers::Inimigo* inimigo = listaInimigos[i];
+
+        if (!inimigo || inimigo->getParaDeletar()) {
+            listaInimigos.erase(listaInimigos.begin() + i);
+            i--;
+            continue;
+        }
         
-        if (inimigo) {
-            for (int j = i + 1; j < listaInimigos.size(); j++) {
-                ent::pers::Inimigo* inimigo2 = listaInimigos[j];
-                
-                if (inimigo2) {
-                    if (verificarColisao(inimigo,inimigo2))
-                        tratarInimigoInimigo(inimigo, inimigo2);
-
-                    else if (inimigo->getPosition() == inimigo2->getPosition())
-                        inimigo->setPosition(inimigo->getPosition() - sf::Vector2f(0.f, 0.5f));
-                }
-            }
+        for (int j = i + 1; j < listaInimigos.size(); j++) {
+            ent::pers::Inimigo* inimigo2 = listaInimigos[j];
             
-            for (int j = 0; j < listaJogadores.size(); j++) {
-                ent::pers::Jogador* jogador = listaJogadores[j];
-
-                if (jogador)
-                    if (verificarColisao(inimigo, jogador))
-                            tratarJogadorInimigo(jogador, inimigo);
+            if (!inimigo2 || inimigo2->getParaDeletar()) {
+                listaInimigos.erase(listaInimigos.begin() + j);
+                j--;
+                continue;
             }
+
+            if (verificarColisao(inimigo,inimigo2))
+                tratarInimigoInimigo(inimigo, inimigo2);
+
+            else if (inimigo->getPosition() == inimigo2->getPosition())
+                inimigo->setPosition(inimigo->getPosition() - sf::Vector2f(0.f, 0.5f));
+        }
+        
+        for (int j = 0; j < listaJogadores.size(); j++) {
+            ent::pers::Jogador* jogador = listaJogadores[j];
+
+            if (!jogador || jogador->getParaDeletar()) {
+                listaJogadores.erase(listaJogadores.begin() + j);
+                j--;
+                continue;
+            }
+
+            if (verificarColisao(inimigo, jogador))
+                    tratarJogadorInimigo(jogador, inimigo);
         }
     }
     
     /* Verificar colisões dos obstáculos entre inimigos e entre o jogador */
     for (auto obstaculo : listaObstaculos) {
-        if (obstaculo) {
-            for (int j = 0; j < listaInimigos.size(); j++) {
-                ent::pers::Inimigo* inimigo = listaInimigos[j];
-                
-                if (inimigo) {
-                    if (verificarColisao(obstaculo, inimigo)) {
-                        if (obstaculo->getID() == plataforma)
-                            tratarPersonagemPlataforma(inimigo, static_cast<ent::obs::Plataforma*>(obstaculo));
-                    }
-                }
+        if (!obstaculo || obstaculo->getParaDeletar()) {
+            listaObstaculos.erase(find(listaObstaculos.begin(), listaObstaculos.end(), obstaculo));
+            continue;
+        }
+
+        for (int j = 0; j < listaInimigos.size(); j++) {
+            ent::pers::Inimigo* inimigo = listaInimigos[j];
+            
+            if (!inimigo || inimigo->getParaDeletar()) {
+                listaInimigos.erase(listaInimigos.begin() + j);
+                j--;
+                continue;
             }
 
-            for (int j = 0; j < listaJogadores.size(); j++) {
-                ent::pers::Jogador* jogador = listaJogadores[j];
+            if (verificarColisao(obstaculo, inimigo)) {
+                if (obstaculo->getID() == plataforma)
+                    tratarPersonagemPlataforma(inimigo, static_cast<ent::obs::Plataforma*>(obstaculo));
+            }
+        }
+
+        for (int j = 0; j < listaJogadores.size(); j++) {
+            ent::pers::Jogador* jogador = listaJogadores[j];
+
+            if (verificarColisao(obstaculo, jogador)) {
+                if (obstaculo->getID() == plataforma)
+                    tratarPersonagemPlataforma(jogador, static_cast<ent::obs::Plataforma*>(obstaculo));
                 
-                if (jogador) {
-                    if (verificarColisao(obstaculo, jogador)) {
-                        if (obstaculo->getID() == plataforma)
-                            tratarPersonagemPlataforma(jogador, static_cast<ent::obs::Plataforma*>(obstaculo));
-                        
-                        else if (obstaculo->getID() == porta)
-                            tratarJogadorPorta(jogador, static_cast<ent::obs::Porta*>(obstaculo));
-                    }
-                }
+                else if (obstaculo->getID() == porta)
+                    tratarJogadorPorta(jogador, static_cast<ent::obs::Porta*>(obstaculo));
             }
         }
     }
@@ -94,22 +112,26 @@ void Gerenciador_Colisoes::executar() {
     for (int i = 0; i < listaProjeteis.size(); i++) {
         ent::prj::Projetil* projetil = listaProjeteis[i];
         
-        if (projetil) {
-            for (int j = 0; j < listaJogadores.size(); j++) {
-                ent::pers::Jogador* jogador = listaJogadores[j];
-                
-                if (jogador) {
-                    if (verificarColisao(projetil, jogador)) {
-                        tratarProjetilPersonagem(projetil, jogador);
-                    }
+        if (!projetil || projetil->getParaDeletar()) {
+            listaProjeteis.erase(listaProjeteis.begin() + i);
+            i--;
+            continue;
+        }
+
+        for (int j = 0; j < listaJogadores.size(); j++) {
+            ent::pers::Jogador* jogador = listaJogadores[j];
+            
+            if (jogador) {
+                if (verificarColisao(projetil, jogador)) {
+                    tratarProjetilPersonagem(projetil, jogador);
                 }
             }
+        }
 
-            for (auto obstaculo: listaObstaculos) {
-                if (verificarColisao(projetil, obstaculo)) {
-                    if (obstaculo->getID() == plataforma)
-                        tratarProjetilPlataforma(projetil, static_cast<ent::obs::Plataforma*>(obstaculo));
-                }
+        for (auto obstaculo: listaObstaculos) {
+            if (verificarColisao(projetil, obstaculo)) {
+                if (obstaculo->getID() == plataforma)
+                    tratarProjetilPlataforma(projetil, static_cast<ent::obs::Plataforma*>(obstaculo));
             }
         }
     }

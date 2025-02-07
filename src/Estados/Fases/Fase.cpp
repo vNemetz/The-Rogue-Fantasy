@@ -91,11 +91,12 @@ void fases::Fase::criarEntidade(char simbolo, const sf::Vector2i pos) {
         // Adicionar às listas e colisões conforme o tipo
         if (dynamic_cast<ent::pers::Inimigo*>(entidade)) {
             listaInimigos.incluir(entidade);
+            pColisoes->incluirEntidade(entidade);
         }
         
         else if (dynamic_cast<ent::obs::Obstaculo*>(entidade)) {
             listaObstaculos.incluir(entidade);
-            pColisoes->incluirObstaculo(static_cast<ent::obs::Obstaculo*>(entidade));
+            pColisoes->incluirEntidade(entidade);
         }
 
         else if (dynamic_cast<ent::pers::Jogador*>(entidade)) {
@@ -104,7 +105,8 @@ void fases::Fase::criarEntidade(char simbolo, const sf::Vector2i pos) {
             if (!pJog1) {
                 listaJogadores.incluir(entidade);
                 ent::pers::Jogador* jogador = static_cast<ent::pers::Jogador*>(entidade);
-
+                
+                pColisoes->incluirEntidade(entidade);
                 ger::Gerenciador_Eventos::getInstancia()->setJogador(jogador);
                 ger::Gerenciador_Input::getInstancia()->setJogador(jogador);
                 pJog1 = jogador;
@@ -115,6 +117,7 @@ void fases::Fase::criarEntidade(char simbolo, const sf::Vector2i pos) {
                     
                     ent::Entidade* entidade2 = it2->second->criarEntidade(posicao2);
                     listaJogadores.incluir(entidade2);
+                    pColisoes->incluirEntidade(entidade2);
                     ent::pers::Jogador* jogador2 = static_cast<ent::pers::Jogador*>(entidade2);
 
                     ger::Gerenciador_Input::getInstancia()->setJogador2(jogador2);

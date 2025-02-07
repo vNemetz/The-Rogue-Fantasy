@@ -1,5 +1,6 @@
 #include "Entidades/Personagens/Aranha.h"
 #include "Entidades/Projeteis/Teia.h"
+#include "Gerenciadores/Gerenciador_Colisoes.h"
 #include "Listas/Lista_Entidades.h"
 #include <SFML/System/Vector2.hpp>
 #include <cmath>
@@ -76,6 +77,7 @@ void Aranha::atacar(Jogador* jogador) {
             teia->setPosition(sf::Vector2f(posicao.x, posicao.y));
 
         listaProjeteis->incluir(teia);
+        mediador->incluirEntidade(teia);
     }
 
     atacando = true;
