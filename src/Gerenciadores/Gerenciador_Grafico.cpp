@@ -21,7 +21,7 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     , clock()
     , mapaTexturas()
     , vista()
-    , fonteSmacky(nullptr)
+    , fonteRetroGaming(nullptr)
 {
     setVideoMode();
     setJanela();
@@ -97,6 +97,8 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     carregarTextura("/assets/images/User-interface/menu_bg.png", "Menu-bg");
     carregarTextura("/assets/images/User-interface/pause.png", "Pause");
     carregarTextura("/assets/images/User-interface/heart.png", "Heart");
+    carregarTextura("/assets/images/User-interface/Leaderboard-bg.png", "Leaderboard-Bg");
+
 
     /* Door Textures */
     carregarTextura("/assets/images/Door/door-closed.png", "Door-Closed");
@@ -111,8 +113,8 @@ Gerenciador_Grafico::~Gerenciador_Grafico() {
     }
     delete pJanela;
     pJanela = nullptr;
-    delete fonteSmacky;
-    fonteSmacky = nullptr;
+    delete fonteRetroGaming;
+    fonteRetroGaming = nullptr;
 }
 
 // Inicializando DeltaTime
@@ -256,17 +258,17 @@ sf::Texture* Gerenciador_Grafico::getTextura(std::string nomeImagem) {
 
 void Gerenciador_Grafico::setFonte()
 {
-    fonteSmacky = new sf::Font();
+    fonteRetroGaming = new sf::Font();
     std::string caminho = PROJECT_ROOT;
     caminho += "/assets/fonts/Retro Gaming.ttf";
-    if (!fonteSmacky->loadFromFile(caminho)) {
+    if (!fonteRetroGaming->loadFromFile(caminho)) {
         std::cerr << "Erro ao carregar a fonte!\n";
     }
 }
 sf::Font* Gerenciador_Grafico::getFonte() const
 {
-    if(fonteSmacky){
-        return (fonteSmacky);
+    if(fonteRetroGaming){
+        return (fonteRetroGaming);
     }else{std::cerr << "Fonte nao alocada corretamente\n";
         return nullptr;
      }

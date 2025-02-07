@@ -1,6 +1,8 @@
 #include "Estados/Fases/Castelo.h"
 #include <fstream>
 #include <iostream>
+#include "Entidades/Obstáculos/Porta.h"
+
 
 fases::Castelo::Castelo():
 Fase(1)
@@ -8,6 +10,7 @@ Fase(1)
     criarMapa();
     criarFundo();
     criarInimigos();
+
 }
 
 fases::Castelo::~Castelo()
@@ -58,8 +61,13 @@ void fases::Castelo::criarMapa(){
     arquivoMapa.close();
 }
 
+    void fases::Castelo::checaObjetivo()
+{
+}
+
 void fases::Castelo::criarInimigos(){
     // Randomiza a quantidade de inimigos, com um mínimo de 3 de cada
+
     if (cavaleiros.size() >= 3) {
         unsigned int quantidadeCavaleiros = (rand() % (cavaleiros.size() - 2)) + 3;
 

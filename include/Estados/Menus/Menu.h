@@ -28,8 +28,9 @@ public:
     void desenharBotoes();
 
     void checarBotoes();
-    void desenhar();
+    virtual void desenhar();
 
+    virtual void executarEstado() = 0;
     virtual void executar();
 };
 }

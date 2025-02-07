@@ -13,6 +13,8 @@ public:
 
     virtual void criarFundo();
     virtual void criarMapa();
+
+    void checaObjetivo();
     void criarInimigos();
 };
 }

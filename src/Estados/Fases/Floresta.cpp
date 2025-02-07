@@ -1,4 +1,6 @@
 #include "Estados/Fases/Floresta.h"
+#include "Gerenciadores/Gerenciador_Estados.h"
+#include "Entidades/Obstáculos/Porta.h"
 #include <iostream>
 #include <fstream>
 
@@ -94,5 +96,19 @@ void fases::Floresta::criarInimigos() {
         for (auto aranha : aranhas) {
             criarEntidade('a', aranha);
         }
+    }
+}
+
+void fases::Floresta::checaObjetivo(){
+    if(listaInimigos.getTamanho() == 0){
+        proximaFase();
+    }
+}
+
+void fases::Floresta::proximaFase()
+{
+    pGEstados = ger::Gerenciador_Estados::getInstancia();
+    if(pGEstados){
+        pGEstados->proximaFase(1);
     }
 }

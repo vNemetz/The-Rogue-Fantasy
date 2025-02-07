@@ -14,7 +14,7 @@ private:
     std::map<std::string, sf::Texture*> mapaTexturas;   // Mapa de texturas
     sf::Clock clock;
     static float deltaTime;
-    sf::Font* fonteSmacky; 
+    sf::Font* fonteRetroGaming; 
 
     /* Singleton - Padrão de Projeto */
     static Gerenciador_Grafico* instancia;

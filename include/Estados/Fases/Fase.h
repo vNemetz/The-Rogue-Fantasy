@@ -53,6 +53,8 @@ public:
     void atualizarPersonagens();
     void atualizarObstaculos();
     void atualizarProjeteis();
+
+    virtual void checaObjetivo() = 0;
     
     /* Métodos Auxiliares */
     ent::pers::Jogador* getJogador1() const;
