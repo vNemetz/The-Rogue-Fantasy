@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Entidades/Personagens/Personagem.h"
 #include "Entidades/Obstáculos/Obstaculo.h"
 
 namespace ent {
@@ -16,8 +15,6 @@ public:
     ~Plataforma();
 
     void executar();
-    void emColisao(Entidade* pE, sf::Vector2f ds);
-    void emColisaoPersonagem(pers::Personagem* pPers, sf::Vector2f ds);
 };
 
 }

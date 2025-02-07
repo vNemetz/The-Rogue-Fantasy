@@ -20,26 +20,6 @@ Inimigo::~Inimigo()
 {
 }
 
-void Inimigo::emColisaoInimigo(Inimigo* pI, sf::Vector2f ds) {
-    sf::Vector2f posicaoInimigo = pI->getPosition();
-    sf::Vector2f tamanhoPers = pI->getTamanho();
-    sf::Vector2f velocidadeInimigo = pI->getVelocidade();
-
-    if (ds.x != 0.f && ds.y != 0.f) {
-        // Se a colisão é no eixo x
-        if (ds.x > ds.y) {
-            if (posicaoInimigo.x < posicao.x)
-                posicaoInimigo.x += ds.x;
-
-            else
-                posicaoInimigo.x -= ds.x;
-        }
-    }
-
-    pI->setPosition(posicaoInimigo);
-    pI->setVelocidade(velocidadeInimigo);
-}
-
 void Inimigo::incluirJogador(Jogador* jogador) {
     jogadores.push_back(jogador);
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Entidades/Projeteis/Projetil.h"
+#include "ElementosGraficos/Animacao.h"
 
 namespace ent {
 namespace prj {
@@ -16,9 +17,6 @@ public:
 
     void executar();
     void mover();
-
-    void emColisaoPersonagem(pers::Personagem* sofredor);
-    void emColisaoObstaculo(ent::Entidade* entidade);
 };
 
 }

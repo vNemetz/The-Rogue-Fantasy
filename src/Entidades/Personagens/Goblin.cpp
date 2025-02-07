@@ -18,6 +18,7 @@ Goblin::Goblin(sf::Vector2f pos, sf::Vector2f tam)
     , estadoIdle(PARADO)
 {
     setNumVidas(2);
+    pontos = 100;
     setTextura("Goblin-Idle");
     raioDetect = 600.f;
     setVelocidadeMaxima(sf::Vector2f (250.f, 250.f));

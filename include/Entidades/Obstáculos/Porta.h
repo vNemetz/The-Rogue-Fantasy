@@ -28,7 +28,6 @@ public:
     ~Porta();
 
     void executar();
-    void emColisao(Entidade* pE, sf::Vector2f ds);
 
     void atualizarEstado();
 

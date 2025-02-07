@@ -20,7 +20,6 @@ public:
 
     virtual void executar() = 0;
     virtual void atualizarElementosAnimacao() = 0;
-    void emColisaoInimigo(Inimigo* pI, sf::Vector2f ds);
     void incluirJogador(Jogador* jogador);
     void persegueJogador(Jogador* jogador);
 

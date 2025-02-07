@@ -1,7 +1,4 @@
 #include "Entidades/Projeteis/Teia.h"
-#include "Entidades/Entidade.h"
-#include "Gerenciadores/Gerenciador_Grafico.h"
-#include "Entidades/Obstáculos/Plataforma.h"
 
 namespace ent {
 namespace prj {
@@ -41,16 +38,6 @@ void Teia::mover() {
     ds += velocidade * dt;
 
     setPosition(ds + posicao);
-}
-
-void Teia::emColisaoPersonagem(pers::Personagem* sofredor) {
-    sofredor->sofrerDano(static_cast<Entidade*>(this));
-    paraDeletar = true;
-}
-
-void Teia::emColisaoObstaculo(ent::Entidade* entidade) {
-    if (dynamic_cast<obs::Plataforma*>(entidade))
-        paraDeletar = true;
 }
 
 }

@@ -1,14 +1,9 @@
 #include "Entidades/Personagens/Jogador.h"
-#include "Entidades/Personagens/Inimigo.h"
 #include "Entidades/Personagens/Personagem.h"
 #include <SFML/Window/Keyboard.hpp>
 #include <iostream>
 #include <cmath>
 #include <stdexcept>
-#include "Entidades/Personagens/Goblin.h"
-#include "Entidades/Personagens/Aranha.h"
-#include "Entidades/Personagens/Cavaleiro.h"
-
 
 namespace ent {
 namespace pers {
@@ -21,8 +16,8 @@ Jogador::Jogador(sf::Vector2f pos, sf::Vector2f tam, bool jog)
     : Personagem(pos, tam, jogador)
     , pulando(false)
     , jogador1(jog)
-    , pontos(0)
 {
+    pontos = 0;
     setNumVidas(5);
     setTextura("Rogue-Stand");
     setVelocidadeMaxima(sf::Vector2f(600.f, 600.f));
@@ -94,39 +89,6 @@ void Jogador::pular() {
     noChao = false;
 }
 
-void Jogador::emColisaoInimigo(Inimigo* pI, sf::Vector2f ds) {
-    if (!levandoDano) {
-        bool inimigoADireita = pI->getPosition().x > posicao.x;
-
-        // Se o jogador está atacando e acertando,
-        // além da colisão ser horizontal, 
-        // e também se o inimigo não estiver sofrendo dano nem morrendo,
-        // dá dano
-        if (atacando && ((olhandoDireita && inimigoADireita) || (!olhandoDireita && !inimigoADireita)) && (ds.x > ds.y)) {
-            if ((pI->getEstado() != sofrendo) && (pI->getEstado() != morrendo)) {
-                pI->sofrerDano(static_cast<Entidade*>(this));
-                
-                if (pI->getNumVidas() <= 0) {
-                    if (dynamic_cast<Goblin*>(pI))
-                        pontos += 100;
-
-                    else if (dynamic_cast<Aranha*>(pI))
-                        pontos += 200;
-
-                    else if (dynamic_cast<Cavaleiro*>(pI))
-                        pontos += 300;
-                }
-            }
-        }
-
-        // Se não está atacando ou errando o ataque,
-        // e o inimigo não está sofrendo, leva dano
-        else if (pI->getEstado() != sofrendo && pI->getEstado() != morrendo) {
-            sofrerDano(static_cast<Entidade*>(pI));
-        }
-    }
-}
-
 void Jogador::carregarControles() {
     if (jogador1) {
         botaoEsquerda = "A";
@@ -143,6 +105,10 @@ void Jogador::carregarControles() {
         botaoCorrer = "K";
         botaoAtacar = "L";
     }
+}
+
+void Jogador::incrementarPontos(int pontos) {
+    this->pontos += pontos;
 }
 
 /* Animação */
