@@ -11,7 +11,6 @@ Castelo(0)
     criarMapa();
     criarFundo();
     criarInimigos();
-    std::cout<<pontos;
     pJog1->setPontos(pontos);
 }
 

@@ -14,6 +14,8 @@ public:
     Menu_Principal(ger::Gerenciador_Estados* pGE = nullptr);
     ~Menu_Principal();
 
+    void executar() override;
+
     void executarEstado();
 };
 }
