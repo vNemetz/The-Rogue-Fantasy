@@ -29,12 +29,15 @@ Gerenciador_Grafico::Gerenciador_Grafico()
 
     /*Forest Textures*/
     carregarTextura("/assets/images/Backgrounds/Forest.png", "Forest");
-    carregarTextura("/assets/images/Tiles/Ground_grass_0001_tile.png", "Grass0001");
-    carregarTextura("/assets/images/Tiles/Ground_grass_0002_tile.png", "Grass0002");
-    carregarTextura("/assets/images/Tiles/Ground_grass_0000_tile.png", "Grass0000");
-    carregarTextura("/assets/images/Tiles/Ground_grass_0003_tile.png", "Grass0003");
-    carregarTextura("/assets/images/Tiles/Ground_grass_0004_tile.png", "Grass0004");
-    carregarTextura("/assets/images/Tiles/Ground_grass_0005_tile.png", "Grass0005");
+    carregarTextura("/assets/images/Tiles/Ground_grass_0001_tile.png", "Grass1");
+    carregarTextura("/assets/images/Tiles/Ground_grass_0002_tile.png", "Grass2");
+    carregarTextura("/assets/images/Tiles/Ground_grass_0000_tile.png", "Grass0");
+    carregarTextura("/assets/images/Tiles/Ground_grass_0003_tile.png", "Grass3");
+    carregarTextura("/assets/images/Tiles/Ground_grass_0004_tile.png", "Grass4");
+    carregarTextura("/assets/images/Tiles/Ground_grass_0005_tile.png", "Grass5");
+    carregarTextura("/assets/images/Tiles/Ground_grass_0020_tile.png", "Grass20");
+    carregarTextura("/assets/images/Tiles/Ground_grass_0024_tile.png", "Grass24");
+    carregarTextura("/assets/images/Tiles/Ground_grass_0016_tile.png", "Grass16");
 
     /*Castle Textures*/
     carregarTextura("/assets/images/Backgrounds/Castle.png", "Castle");
@@ -99,11 +102,12 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     carregarTextura("/assets/images/User-interface/heart.png", "Heart");
     carregarTextura("/assets/images/User-interface/Leaderboard-bg.png", "Leaderboard-Bg");
 
-
     /* Door Textures */
     carregarTextura("/assets/images/Door/door-closed.png", "Door-Closed");
     carregarTextura("/assets/images/Door/door-opening.png", "Door-Opening");
     carregarTextura("/assets/images/Door/door-opened.png", "Door-Opened");
+
+    carregarTextura("/assets/images/General/box.png", "Box");
 }
 
 Gerenciador_Grafico::~Gerenciador_Grafico() {

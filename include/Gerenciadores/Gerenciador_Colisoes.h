@@ -1,6 +1,7 @@
 #pragma once
 #include "Entidades/Obstáculos/Plataforma.h"
 #include "Entidades/Obstáculos/Porta.h"
+#include "Entidades/Obstáculos/Caixa.h"
 #include "Listas/Lista_Entidades.h"
 #include "Entidades/Personagens/Inimigo.h"
 #include "Entidades/Personagens/Jogador.h"
@@ -38,14 +39,17 @@ public:
     sf::Vector2f calcularColisao(ent::Entidade* pe1, ent::Entidade* pe2) const;
     void limparListas();
 
+private:
     /* Tratamento de colisões */
     void tratarJogadorInimigo(ent::pers::Jogador* jogador, ent::pers::Inimigo* inimigo);
     void tratarInimigoInimigo(ent::pers::Inimigo* inimigo1, ent::pers::Inimigo* inimigo2);
-    void tratarPersonagemPlataforma(ent::pers::Personagem* personagem, ent::obs::Plataforma* plataforma);
+    void tratarEntidadePlataforma(ent::Entidade* entidade, ent::obs::Plataforma* plataforma);
     void tratarProjetilPersonagem(ent::prj::Projetil* projetil, ent::pers::Personagem* personagem);
-    void tratarProjetilPlataforma(ent::prj::Projetil* projetil, ent::obs::Plataforma* plataforma);
+    void tratarProjetilObstaculo(ent::prj::Projetil* projetil, ent::obs::Obstaculo* obstaculo);
     void tratarJogadorPorta(ent::pers::Jogador* jogador, ent::obs::Porta* porta);
+    void tratarPersonagemCaixa(ent::pers::Personagem* personagem, ent::obs::Caixa* caixa);
 
+public:
     void incluirEntidade(ent::Entidade* entidade);
 
 private:

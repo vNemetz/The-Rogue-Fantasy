@@ -39,6 +39,11 @@ void Personagem::mover() {
     sf::Vector2f ds(0.f, 0.f); // Guarda a variação de movimento atual
     dt = pGG->getDeltaTime(); // Guarda os segundos passados em dt
 
+    sf::Vector2f velocidadeAndar = velocidadeMaxima;
+
+    if (lento)
+        velocidadeAndar = velocidadeMaxima * lentidao;
+
     /* Atualiza o movimento horizontal */
     if (numVidas <= 0) {
         if (noChao) {
@@ -53,24 +58,24 @@ void Personagem::mover() {
 
     else if (movendoDireita && !movendoEsquerda) {
         if (correndo && noChao)
-            velocidade.x = velocidadeMaxima.x * 1.4f;
+            velocidade.x = velocidadeAndar.x * 1.4f;
 
         else if (correndo && !noChao && velocidade.x != 0.f)
             velocidade.x = velocidade.x;
         
         else
-            velocidade.x = velocidadeMaxima.x;
+            velocidade.x = velocidadeAndar.x;
     }
 
     else if (movendoEsquerda && !movendoDireita) {
         if (correndo && noChao)
-            velocidade.x = -velocidadeMaxima.x * 1.4f;
+            velocidade.x = -velocidadeAndar.x * 1.4f;
 
         else if (correndo && !noChao && velocidade.x != 0.f)
             velocidade.x = velocidade.x;
         
         else
-            velocidade.x = -velocidadeMaxima.x;
+            velocidade.x = -velocidadeAndar.x;
     }
 
     else {
@@ -78,13 +83,7 @@ void Personagem::mover() {
     }
 
     /* Atualiza o movimento vertical (aplica gravidade) */
-    if (!noChao) {
-        velocidade.y += GRAVIDADE * dt;
-    }
-
-    else {
-        velocidade.y = 0.f;
-    }
+    aplicarGravidade();
 
     ds += velocidade * dt;
     
@@ -237,6 +236,10 @@ bool Personagem::getLevandoDano() const {
 
 int Personagem::getPontos() const {
     return pontos;
+}
+
+void Personagem::setLentidao(float lentidao) {
+    this->lentidao = lentidao;
 }
 
 /* Animação */

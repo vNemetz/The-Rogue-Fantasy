@@ -9,9 +9,7 @@
 #include "Fabricas/Fabrica_Cavaleiro.h"
 #include "Fabricas/Fabrica_Jogador.h"
 #include "Fabricas/Fabrica_Porta.h"
-#include "Entidades/Obstáculos/Porta.h"
-#include "Entidades/Personagens/Inimigo.h"
-#include "Entidades/Obstáculos/Porta.h"
+#include "Fabricas/Fabrica_Caixa.h"
 
 
 fases::Fase::Fase() : 
@@ -48,13 +46,16 @@ fases::Fase::Fase(int nFase)
     registrarFabrica('a', new fact::Fabrica_Aranha(pJog1, pJog2, doisJogadores, tamanhoFase, &listaProjeteis));
     registrarFabrica('c', new fact::Fabrica_Cavaleiro(pJog1, pJog2, doisJogadores, tamanhoFase));
     registrarFabrica('d', new fact::Fabrica_Porta(tamanhoFase));
+    registrarFabrica('b', new fact::Fabrica_Caixa(tamanhoFase));
     registrarFabrica('/', new fact::Fabrica_Plataforma(numeroFase, 0, tamanhoFase));
     registrarFabrica('#', new fact::Fabrica_Plataforma(numeroFase, 1, tamanhoFase));
     registrarFabrica(';', new fact::Fabrica_Plataforma(numeroFase, 2, tamanhoFase));
     registrarFabrica('|', new fact::Fabrica_Plataforma(numeroFase, 3, tamanhoFase));
     registrarFabrica('@', new fact::Fabrica_Plataforma(numeroFase, 4, tamanhoFase));
     registrarFabrica('.', new fact::Fabrica_Plataforma(numeroFase, 5, tamanhoFase));
-    
+    registrarFabrica('(', new fact::Fabrica_Plataforma(numeroFase, 20, tamanhoFase));
+    registrarFabrica('-', new fact::Fabrica_Plataforma(numeroFase, 24, tamanhoFase));
+    registrarFabrica(')', new fact::Fabrica_Plataforma(numeroFase, 16, tamanhoFase));
 }
 
 
