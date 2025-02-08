@@ -59,7 +59,7 @@ void Gerenciador_Estados::inicializarEstados()
 void Gerenciador_Estados::requererEstado() 
 {
     if(pEstadoAtual){
-    pEstadoAtual->executar();
+        pEstadoAtual->executar();
     }
 
 }

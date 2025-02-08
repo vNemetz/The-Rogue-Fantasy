@@ -1,7 +1,5 @@
 #include "Estados/Menus/Menu.h"
 
-
-
 namespace menus{
 
 Menu::Menu(int min, int max, tipoEstado tipo):
@@ -43,12 +41,12 @@ Menu::~Menu()
 
 void Menu::alterarBotaoSelecionado(int unidade)
 {
-    if(unidade > 0 && botaoSelecionado != maximo && bufferTime > 0.13f){ 
+    if(unidade == 1 && botaoSelecionado != maximo && bufferTime > 0.13f){ 
         vetorBotoes[botaoSelecionado]->setTextura("Brown-Button");
         vetorBotoes[++botaoSelecionado]->setTextura("Yellow-Button");
         bufferTime = 0;
     }
-    else if(unidade < 0 && botaoSelecionado != minimo && bufferTime > 0.13f){
+    else if(unidade == (-1) && botaoSelecionado != minimo && bufferTime > 0.13f){
         vetorBotoes[botaoSelecionado]->setTextura("Brown-Button");
         vetorBotoes[--botaoSelecionado]->setTextura("Yellow-Button");
         bufferTime = 0;
