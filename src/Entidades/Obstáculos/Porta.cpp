@@ -1,6 +1,5 @@
 #include "Entidades/Obstáculos/Porta.h"
 #include "Entidades/Obstáculos/Obstaculo.h"
-#include "Entidades/Personagens/Jogador.h"
 
 namespace ent {
 namespace obs {
@@ -27,6 +26,9 @@ Porta::~Porta()
 bool Porta::aberta(false);
 
 void Porta::executar() {
+    aplicarGravidade();
+    mover();
+    
     atualizarEstado();
     atualizarElementosAnimacao();
 }

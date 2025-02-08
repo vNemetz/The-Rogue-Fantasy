@@ -1,33 +1,49 @@
 #include "Entidades/Obstáculos/Caixa.h"
 
+namespace ent {
+namespace obs {
 
-ent::obs::Caixa::Caixa():
-    Obstaculo()
+Caixa::Caixa()
+    : Caixa(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f))
 {
-
 }
 
-ent::obs::Caixa::Caixa(sf::Vector2f pos, sf::Vector2f tam, ID id):
-    Obstaculo(pos, tam, false, obstaculo)
+Caixa::Caixa(sf::Vector2f pos, sf::Vector2f tam)
+    : Obstaculo(pos, tam, false, caixa)
+    , movendo(false)
 {
-
+    setTextura("Box");
+    setFatorDeLentidao(0.5f);
 }
 
-ent::obs::Caixa::~Caixa()
+Caixa::~Caixa()
 {
-
 }
 
-void ent::obs::Caixa::setFatorDeLentidao(float lentidao)
-{
-    fatorDeLentidao = lentidao;
+void Caixa::executar() {
+    movendo = false;
+    aplicarGravidade();
+
+    mover();
 }
 
-float ent::obs::Caixa::getFatorDeLentidao() const
+void Caixa::setFatorDeLentidao(float fatorDeLentidao)
+{
+    this->fatorDeLentidao = fatorDeLentidao;
+}
+
+float Caixa::getFatorDeLentidao() const
 {
     return fatorDeLentidao;
 }
 
-void ent::obs::Caixa::executar(){
+bool Caixa::getMovendo() const {
+    return movendo;
+}
 
+void Caixa::setMovendo(bool movendo) {
+    this->movendo = movendo;
+}
+
+}
 }
