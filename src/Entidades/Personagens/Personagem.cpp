@@ -103,11 +103,11 @@ void Personagem::mover() {
     setPosition((ds + posicao));
 }
 
-void Personagem::sofrerDano(sf::Vector2f posicaoAtacante) {
+void Personagem::sofrerDano(sf::Vector2f posicaoAtacante, float dano) {
     if (!levandoDano) {
         levandoDano = true;
         tempoDano = 0.f;
-        numVidas--;
+        numVidas -= dano;
 
         /* Knockback */
         setPosition(posicao + sf::Vector2f(0.f, -15.f));

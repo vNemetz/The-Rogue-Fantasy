@@ -10,7 +10,7 @@ Projetil::Projetil()
 
 Projetil::Projetil(sf::Vector2f pos, sf::Vector2f esc, bool aDireita)
     : Entidade(pos, esc, projetil)
-    , dano(0)
+    , dano(0.f)
     , paraDireita(aDireita)
 {
 }
@@ -25,6 +25,14 @@ void Projetil::setParaDireita(bool paraDireita) {
 
 bool Projetil::getParaDireita() const {
     return paraDireita;
+}
+
+void Projetil::setDano(float dano) {
+    this->dano = dano;
+}
+
+float Projetil::getDano() const {
+    return dano;
 }
 
 }

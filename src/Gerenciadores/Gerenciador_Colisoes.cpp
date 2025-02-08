@@ -5,6 +5,7 @@
 #include "Entidades/Personagens/Jogador.h"
 #include "Entidades/Projeteis/Projetil.h"
 #include "Entidades/Obstáculos/Plataforma.h"
+#include "Entidades/Projeteis/Teia.h"
 #include <cmath>
 
 namespace ger {
@@ -281,8 +282,15 @@ void Gerenciador_Colisoes::tratarProjetilPersonagem(ent::prj::Projetil* projetil
     bool projetilADireita = projetil->getPosition().x > personagem->getPosition().x;
     sf::Vector2f ds = calcularColisao(personagem, projetil);
 
-    if (!(personagem->getAtacando() && ((personagem->getOlhandoDireita() && projetilADireita) || (!personagem->getOlhandoDireita() && !projetilADireita)) && (ds.x > ds.y)))
-        personagem->sofrerDano(projetil->getPosition());
+    // Se o personagem não estiver atacando a teia, sofre dano
+    if (!(personagem->getAtacando() && ((personagem->getOlhandoDireita() && projetilADireita) || (!personagem->getOlhandoDireita() && !projetilADireita)) && (ds.x > ds.y))) {
+        
+        // Se for uma teia, calcula o dano antes
+        if (dynamic_cast<ent::prj::Teia*>(projetil))
+            static_cast<ent::prj::Teia*>(projetil)->calcularDano();
+
+        personagem->sofrerDano(projetil->getPosition(), projetil->getDano());
+    }
     
     projetil->setParaDeletar(true);
 }

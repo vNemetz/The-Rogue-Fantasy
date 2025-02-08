@@ -63,7 +63,7 @@ public:
 
     /* Movimentação */
     virtual void mover();
-    void sofrerDano(sf::Vector2f posicaoAtacante);
+    void sofrerDano(sf::Vector2f posicaoAtacante, float dano = 1.f);
     bool getOlhandoDireita() const;
     
     /* Estado */
