@@ -6,7 +6,6 @@
 #include "Estados/Menus/Placar.h"
 
 
-
 namespace ger{
 Gerenciador_Estados* Gerenciador_Estados::instancia(nullptr);
 
@@ -16,6 +15,7 @@ pEstadoAtual(nullptr)
 , multijogador(false)
 {
     mapaEstados.clear();
+
     menus::Menu_Principal* menuPrincipal = new menus::Menu_Principal(this);
     mapaEstados.insert(std::pair<tipoEstado, Estado*>(menu, static_cast<Estado*>(menuPrincipal)));
     pEstadoAtual = mapaEstados[menu];
@@ -42,11 +42,17 @@ void Gerenciador_Estados::inicializarEstados()
     fases::Floresta* faseFloresta = new fases::Floresta();
     mapaEstados.insert(std::pair<tipoEstado, Estado*>(fase, static_cast<Estado*>(faseFloresta) ) );
 
-    menus::Menu_Pausa* menuPausa = new menus::Menu_Pausa(ger::Gerenciador_Estados::getInstancia());
+    menus::Menu_Pausa* menuPausa = new menus::Menu_Pausa(this);
     mapaEstados.insert(std::pair<tipoEstado, Estado*>(pausa, static_cast<Estado*>(menuPausa) ) );
 
-    menus::Placar* pPlacar = new menus::Placar(ger::Gerenciador_Estados::getInstancia());
+    menus::Placar* pPlacar = new menus::Placar(this);
     mapaEstados.insert(std::pair<tipoEstado, Estado*>( placar, static_cast<Estado*>(pPlacar) ) );
+
+    menus::Menu_Fim* pMenu_Fim = new menus::Menu_Fim(this);
+    mapaEstados.insert(std::pair<tipoEstado, Estado*>( fim, static_cast<Estado*>(pMenu_Fim) ) );
+
+    ger::Gerenciador_Input::getInstancia()->iniciarListaObservadores();
+
 
 }
 
@@ -59,6 +65,7 @@ void Gerenciador_Estados::requererEstado()
 }
 
 void Gerenciador_Estados::setEstadoAtual(tipoEstado tipo){
+    int pontos = 0;
     switch (tipo){
         case menu:
             pEstadoAtual = static_cast<Estado*>(mapaEstados[menu]);
@@ -74,7 +81,15 @@ void Gerenciador_Estados::setEstadoAtual(tipoEstado tipo){
             break;
         case placar:
             pEstadoAtual = static_cast<Estado*>(mapaEstados[placar]);
+            dynamic_cast<menus::Placar*>(pEstadoAtual)->construirPlacar();
             ger::Gerenciador_Input::getInstancia()->criarInputMapEstado(pausa);
+            break;
+        case fim:
+            pontos = dynamic_cast<fases::Fase*>(pEstadoAtual)->getPontuacao();
+            pEstadoAtual = static_cast<Estado*>(mapaEstados[fim]);
+            dynamic_cast<menus::Menu_Fim*>(pEstadoAtual)->setPontosParaIncrementar(pontos);
+            ger::Gerenciador_Input::getInstancia()->criarInputMapEstado(fim);
+            break;  
         default:
             break;
     }
@@ -97,7 +112,7 @@ Estado *ger::Gerenciador_Estados::getEstado(tipoEstado tipo)
         return mapaEstados[tipo];
 }
 
-void ger::Gerenciador_Estados::proximaFase(int numFase)
+void ger::Gerenciador_Estados::proximaFase(int numFase, int pontos)
 {
     if(numFase == 1){
             if(mapaEstados[fase]){
@@ -105,27 +120,40 @@ void ger::Gerenciador_Estados::proximaFase(int numFase)
             mapaEstados.erase(fase);
         }
         ger::Gerenciador_Colisoes::getInstancia()->limparListas();
-        fases::Castelo* faseCastelo = new fases::Castelo();
+        fases::Castelo* faseCastelo = new fases::Castelo(pontos);
         pEstadoAtual = faseCastelo;
 
         mapaEstados.insert(std::pair<tipoEstado, Estado*>(fase, static_cast<Estado*>(faseCastelo) ) );
         faseCastelo->setPGG(ger::Gerenciador_Grafico::getInstancia());
+
     }
 }
 
-void ger::Gerenciador_Estados::reiniciarJogo()
+void ger::Gerenciador_Estados::reiniciarJogo(int nFase)
 {
     ger::Gerenciador_Colisoes::getInstancia()->limparListas();
     if(mapaEstados[fase]){
         delete mapaEstados[fase];
         mapaEstados.erase(fase);
     }
-    fases::Floresta* faseFloresta = new fases::Floresta();
-    mapaEstados.insert(std::pair<tipoEstado, Estado*>(fase, static_cast<Estado*>(faseFloresta) ) );
-    faseFloresta->setPGG(ger::Gerenciador_Grafico::getInstancia());
-    
+    if( nFase == 0){
+        fases::Floresta* faseFloresta = new fases::Floresta();
+        mapaEstados.insert(std::pair<tipoEstado, Estado*>(fase, static_cast<Estado*>(faseFloresta) ) );
+        faseFloresta->setPGG(ger::Gerenciador_Grafico::getInstancia());
+    }
+    else if(nFase == 1){
+    fases::Castelo* faseCastelo = new fases::Castelo();
+    mapaEstados.insert(std::pair<tipoEstado, Estado*>(fase, static_cast<Estado*>(faseCastelo) ) );
+    faseCastelo->setPGG(ger::Gerenciador_Grafico::getInstancia());
+    }
+}
 
-    // fases::Castelo* faseCastelo = new fases::Castelo();
-    // mapaEstados.insert(std::pair<tipoEstado, Estado*>(fase, static_cast<Estado*>(faseCastelo) ) );
-    // faseCastelo->setPGG(ger::Gerenciador_Grafico::getInstancia());
+void ger::Gerenciador_Estados::setFaseSelecionada(int n)
+{
+    if(n == 0){
+        reiniciarJogo(0);
+    }
+    if(n == 1){
+        reiniciarJogo(1);
+    }
 }

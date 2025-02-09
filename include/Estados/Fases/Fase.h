@@ -19,6 +19,7 @@ protected:
 
     ger::Gerenciador_Estados* pEstados;
     
+    int pontos;
     static bool doisJogadores;
     ent::pers::Jogador* pJog1;
     ent::pers::Jogador* pJog2;
@@ -61,7 +62,11 @@ public:
     ent::pers::Jogador* getJogador2() const;
     float getTamanhoFase() const;
     int getNumeroFase() const;
+
+    int getPontuacao();
+    void setPontuacao(int pontos);
     
+    bool checaFimJogo();
     void executarEstado(tipoEstado tipo);
     static void setMultijogador(bool multi);
 

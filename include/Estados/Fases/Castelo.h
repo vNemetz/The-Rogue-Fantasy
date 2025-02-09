@@ -12,6 +12,7 @@ private:
 
 public:
     Castelo();
+    Castelo(int pts);
     ~Castelo();
 
     virtual void criarFundo();

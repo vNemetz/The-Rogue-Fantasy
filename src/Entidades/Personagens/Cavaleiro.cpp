@@ -55,13 +55,15 @@ void Cavaleiro::executar() {
 void Cavaleiro::atacar(Jogador* jogador) {
     parar();
 
-    if (jogador->getPosition().x > posicao.x)
-        olhandoDireita = true;
+        if(jogador){
+        if (jogador->getPosition().x > posicao.x)
+            olhandoDireita = true;
 
-    else
-        olhandoDireita = false;
+        else
+            olhandoDireita = false;
 
-    atacando = true;
+        atacando = true;
+    }
 }
 
 void Cavaleiro::parar() {

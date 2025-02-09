@@ -53,11 +53,13 @@ void Placar::limparTextos()
 {
     it = vetorTextos.begin();
     while(it != vetorTextos.end()){
-        delete *it;
-        *it = nullptr;
+        if(*it){
+            delete *it;
+            *it = nullptr;
+        }
         it++;
     }
-    
+    vetorTextos.clear();
 }
 
 void Placar::desenhar()
@@ -72,6 +74,8 @@ void Placar::desenhar()
 
  void Placar::construirPlacar()
 {
+    limparTextos();
+
     std::ifstream arquivo;
     std::string caminho = PROJECT_ROOT;
     caminho += "/data/Leaderboard.txt";
@@ -122,8 +126,8 @@ void Placar::desenhar()
             stringPontos += std::to_string(pontos);
         }
 
-        while(stringTexto.length() + stringPontos.length() < 85){
-            stringTexto += " .";
+        while(stringTexto.length() + stringPontos.length() < 70){
+            stringTexto += " ";
 
         }
         stringTexto += " ";
@@ -142,7 +146,8 @@ void Placar::desenharTextos()
 {
         it = vetorTextos.begin();
         while(it != vetorTextos.end()){
-            ger::Gerenciador_Grafico::getInstancia()->desenharTexto((*it)->getTexto());
+            if(*it)
+                ger::Gerenciador_Grafico::getInstancia()->desenharTexto((*it)->getTexto());
             it++;
         }
 }

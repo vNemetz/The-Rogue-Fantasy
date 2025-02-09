@@ -4,12 +4,23 @@
 
 
 fases::Castelo::Castelo():
-Fase(1)
+Castelo(0)
+
 {
     criarMapa();
     criarFundo();
     criarEntidades();
+    pJog1->setPontos(pontos);
+}
 
+fases::Castelo::Castelo(int pts):
+Fase(1)
+{
+    setPontuacao(pts);
+    criarMapa();
+    criarFundo();
+    criarEntidades();
+    pJog1->setPontos(pontos);
 }
 
 fases::Castelo::~Castelo()

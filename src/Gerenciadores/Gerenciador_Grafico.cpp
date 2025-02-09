@@ -252,7 +252,6 @@ sf::Texture* Gerenciador_Grafico::carregarTextura(std::string caminhoImagem, std
 sf::Texture* Gerenciador_Grafico::getTextura(std::string nomeImagem) {
     if (mapaTexturas.find(nomeImagem) != mapaTexturas.end()) {
         return mapaTexturas[nomeImagem];
-        std::cout<<"potato\n";
     }
 
     std::cerr << "ERRO ao achar imagem: " << nomeImagem << '\n';

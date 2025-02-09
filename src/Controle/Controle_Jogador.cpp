@@ -68,23 +68,28 @@ void Controle_Jogador::criarMapa()
    /* Inicializa os comandos do jogo */
     /* Jogador 1 - Comandos*/
     incluir_tecla(sf::Keyboard::Key::A, [this](bool pressionado) {
-        jogador1->atualizarMovimentacao(pressionado, "A");
+        if(jogador1)
+            jogador1->atualizarMovimentacao(pressionado, "A");
     });
 
     incluir_tecla(sf::Keyboard::Key::D, [this](bool pressionado) {
-        jogador1->atualizarMovimentacao(pressionado, "D");
+        if(jogador1)
+            jogador1->atualizarMovimentacao(pressionado, "D");
     });
 
     incluir_tecla(sf::Keyboard::Key::W, [this](bool pressionado) {
-        jogador1->atualizarMovimentacao(pressionado, "W");
+        if(jogador1)                
+            jogador1->atualizarMovimentacao(pressionado, "W");
     });
 
     incluir_tecla(sf::Keyboard::Key::LShift, [this](bool pressionado) {
-        jogador1->atualizarMovimentacao(pressionado, "LShift");
+        if(jogador1)
+            jogador1->atualizarMovimentacao(pressionado, "LShift");
     });
 
     incluir_tecla(sf::Keyboard::Key::Space, [this](bool pressionado) {
-        jogador1->atualizarMovimentacao(pressionado, "Space");
+        if(jogador1)
+            jogador1->atualizarMovimentacao(pressionado, "Space");
     });
 
     /* Jogador 2 - Comandos */
@@ -116,9 +121,10 @@ void Controle_Jogador::criarMapa()
     /*Esc para abrir o menu de pausa*/
     
     incluir_tecla(sf::Keyboard::Key::Escape, [this](bool pressionado) {
-        if(pFaseAtual)
+        if(pFaseAtual){
             pFaseAtual->setBufferTime(0);
             pFaseAtual->executarEstado(pausa);
+        }
     });
 }
 
