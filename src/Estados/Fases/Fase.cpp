@@ -55,9 +55,7 @@ fases::Fase::Fase(int nFase)
     registrarFabrica('|', new fact::Fabrica_Plataforma(numeroFase, 3, tamanhoFase));
     registrarFabrica('@', new fact::Fabrica_Plataforma(numeroFase, 4, tamanhoFase));
     registrarFabrica('.', new fact::Fabrica_Plataforma(numeroFase, 5, tamanhoFase));
-    registrarFabrica('(', new fact::Fabrica_Plataforma(numeroFase, 20, tamanhoFase));
-    registrarFabrica('-', new fact::Fabrica_Plataforma(numeroFase, 24, tamanhoFase));
-    registrarFabrica(')', new fact::Fabrica_Plataforma(numeroFase, 16, tamanhoFase));
+    registrarFabrica('*', new fact::Fabrica_Plataforma(numeroFase, 500, tamanhoFase));
 }
 
 

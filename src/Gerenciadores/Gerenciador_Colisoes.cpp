@@ -3,6 +3,7 @@
 #include "Listas/Lista_Entidades.h"
 #include "Entidades/Personagens/Personagem.h"
 #include "Entidades/Personagens/Jogador.h"
+#include "Entidades/Personagens/Aranha.h"
 #include "Entidades/Projeteis/Projetil.h"
 #include "Entidades/Projeteis/Teia.h"
 #include <cmath>
@@ -57,7 +58,7 @@ void Gerenciador_Colisoes::executar() {
                 tratarInimigoInimigo(inimigo, inimigo2);
 
             else if (inimigo->getPosition() == inimigo2->getPosition())
-                inimigo->setPosition(inimigo->getPosition() - sf::Vector2f(0.f, 0.5f));
+                inimigo->setPosition(inimigo->getPosition() - sf::Vector2f(0.f, 10.f));
         }
         
         for (int j = 0; j < listaJogadores.size(); j++) {
@@ -97,10 +98,13 @@ void Gerenciador_Colisoes::executar() {
                 if (obstaculo->getID() != plataforma && obstaculo2->getID() == plataforma)
                     tratarEntidadeEstatica(obstaculo, obstaculo2);
 
-                else if (obstaculo->getID() != plataforma && obstaculo2->getID() == caixa)
+                if (obstaculo->getID() == plataforma && obstaculo2->getID() != plataforma)
                     tratarEntidadeEstatica(obstaculo2, obstaculo);
 
-                else if (obstaculo->getID() == caixa && obstaculo2->getID() != plataforma)
+                else if (obstaculo->getID() == espinho && obstaculo2->getID() == caixa)
+                    tratarEntidadeEstatica(obstaculo2, obstaculo);
+
+                else if (obstaculo->getID() == caixa && obstaculo2->getID() == espinho)
                     tratarEntidadeEstatica(obstaculo, obstaculo2);
             }
         }
@@ -171,6 +175,11 @@ void Gerenciador_Colisoes::executar() {
                 if (obstaculo->getID() != porta)
                     tratarProjetilObstaculo(projetil, obstaculo);
             }
+        }
+
+        for (auto inimigo: listaInimigos) {
+            if (verificarColisao(projetil, inimigo) && !dynamic_cast<ent::pers::Aranha*>(inimigo))
+                projetil->setParaDeletar(true);
         }
     }
 }

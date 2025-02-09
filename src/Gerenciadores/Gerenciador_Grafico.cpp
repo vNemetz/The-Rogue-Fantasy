@@ -35,16 +35,15 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     carregarTextura("/assets/images/Tiles/Ground_grass_0003_tile.png", "Grass3");
     carregarTextura("/assets/images/Tiles/Ground_grass_0004_tile.png", "Grass4");
     carregarTextura("/assets/images/Tiles/Ground_grass_0005_tile.png", "Grass5");
-    carregarTextura("/assets/images/Tiles/Ground_grass_0020_tile.png", "Grass20");
-    carregarTextura("/assets/images/Tiles/Ground_grass_0024_tile.png", "Grass24");
-    carregarTextura("/assets/images/Tiles/Ground_grass_0016_tile.png", "Grass16");
+    carregarTextura("/assets/images/Tiles/floating-platform.png", "Grass500");
 
     /*Castle Textures*/
     carregarTextura("/assets/images/Backgrounds/Castle.png", "Castle");
-    carregarTextura("/assets/images/Tiles-castle/tile13.png", "Brick0001");
-    carregarTextura("/assets/images/Tiles-castle/tile8.png", "Brick0002");
-    carregarTextura("/assets/images/Tiles-castle/tile9.png", "Brick0003");
-    carregarTextura("/assets/images/Tiles-castle/tile12.png", "Brick0004");
+    carregarTextura("/assets/images/Tiles-castle/tile13.png", "Brick1");
+    carregarTextura("/assets/images/Tiles-castle/tile8.png", "Brick2");
+    carregarTextura("/assets/images/Tiles-castle/tile9.png", "Brick3");
+    carregarTextura("/assets/images/Tiles-castle/tile12.png", "Brick4");
+    carregarTextura("/assets/images/Tiles-castle/floating-platform.png", "Brick500");
 
     /* Rogue Textures */
     carregarTextura("/assets/images/Rogue/rogue-stand.png", "Rogue-Stand");
