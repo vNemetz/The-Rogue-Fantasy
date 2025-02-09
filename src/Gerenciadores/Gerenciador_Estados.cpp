@@ -172,7 +172,6 @@ void ger::Gerenciador_Estados::setFaseSelecionada(int n)
 }
 
 void ger::Gerenciador_Estados::gerenciarCarregamento(){
-    std::cout <<"entrou\n";
     std::string caminho = PROJECT_ROOT;
     caminho += "/data/savedGame.json";
     std::ifstream arquivo(caminho);
@@ -181,7 +180,6 @@ void ger::Gerenciador_Estados::gerenciarCarregamento(){
         std::cerr<< "ERRO ao carregar jogo\n";
         return;
     }
-    std::cout <<"criou json\n";
     json j;
 
     try{
@@ -193,7 +191,6 @@ void ger::Gerenciador_Estados::gerenciarCarregamento(){
     }
     if(j.contains("infosFase")){
         int nFase = j["infosFase"]["numeroFase"];
-        std::cout<<nFase;
         if(nFase == 0){
             if(mapaEstados[fase]){
                 delete mapaEstados[fase];

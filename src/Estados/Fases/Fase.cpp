@@ -361,7 +361,6 @@ void fases::Fase::carregarJogo(std::string caminho){
     listaObstaculos.limpar();
     listaProjeteis.limpar();
 
-    std::cout <<"Entrou em carregar jogo\n";
     if(!arquivo.is_open()){
         std::cerr<< "ERRO ao carregar jogo\n";
         return;
