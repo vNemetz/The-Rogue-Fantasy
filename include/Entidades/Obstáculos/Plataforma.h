@@ -5,6 +5,13 @@
 namespace ent {
 namespace obs {
 
+enum tipoPlataforma{
+    topoGrama = 0,
+    meioGrama,
+    topoTijolo,
+    meioTijolo
+};
+
 class Plataforma : public Obstaculo {
 private:
     int altura;
@@ -15,6 +22,9 @@ public:
     ~Plataforma();
 
     void executar();
+
+    tipoPlataforma getTipoPlataforma();
+    void setTipoPlataforma() const;
 };
 
 }

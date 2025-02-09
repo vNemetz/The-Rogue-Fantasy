@@ -13,7 +13,7 @@ Goblin::Goblin()
 }
 
 Goblin::Goblin(sf::Vector2f pos, sf::Vector2f tam)
-    : Inimigo(pos, tam)
+    : Inimigo(pos, tam, goblin)
     , tempoSemDetectar(0.f)
     , estadoIdle(PARADO)
 {

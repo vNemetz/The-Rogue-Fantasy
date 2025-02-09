@@ -5,23 +5,36 @@
 
 
 fases::Castelo::Castelo():
-Castelo(0)
+Castelo(0, false)
 
 {
-    criarMapa();
     criarFundo();
-    criarInimigos();
-    pJog1->setPontos(pontos);
+    if(!carregada){
+        criarMapa();
+        criarInimigos();
+        pJog1->setPontos(pontos);
+    }else{
+        std::string caminho = PROJECT_ROOT;
+        caminho += "/data/savedGame.json";
+        carregarJogo(caminho);
+    }
 }
 
-fases::Castelo::Castelo(int pts):
-Fase(1)
+fases::Castelo::Castelo(int pts,  bool carreg):
+Fase(1, carreg)
 {
-    setPontuacao(pts);
-    criarMapa();
     criarFundo();
-    criarInimigos();
-    pJog1->setPontos(pontos);
+    if(!carregada){
+        setPontuacao(pts);
+        criarMapa();
+        criarFundo();
+        criarInimigos();
+        pJog1->setPontos(pontos);
+    }else{
+        std::string caminho = PROJECT_ROOT;
+        caminho += "/data/savedGame.json";
+        carregarJogo(caminho);
+    }
 }
 
 fases::Castelo::~Castelo()

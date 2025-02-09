@@ -4,8 +4,11 @@
 #include "Listas/Lista_Entidades.h"
 #include "Entidades/Personagens/Jogador.h"
 #include "Estados/Estado.h"
-
 #include <unordered_map>
+
+/* Para o salvamento e carregamento de fase salva: */
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
 
 namespace ger{
     class Gerenciador_Estados;
@@ -16,6 +19,8 @@ class Fase : public Ente, public Estado{
 protected:
     int numeroFase;
     float tamanhoFase;
+
+    bool carregada;
 
     ger::Gerenciador_Estados* pEstados;
     
@@ -37,16 +42,18 @@ protected:
 
 public:
     Fase();
-    Fase(int nFase);
+    Fase(int nFase, bool carreg);
     ~Fase();
 
     /* Criação da Fase */
     virtual void criarFundo() = 0;
     virtual void criarMapa() = 0;
+    static void setMultijogador(bool multi);
 
     /* Criação de entidades */
     void registrarFabrica(char simbolo, fact::Fabrica_Entidades* fabrica);
-    void criarEntidade(char simbolo, const sf::Vector2i pos);
+
+    ent::Entidade* criarEntidade(char simbolo, const sf::Vector2i pos);
 
     /* Execução da Fase */
     void executar();
@@ -55,6 +62,7 @@ public:
     void atualizarObstaculos();
     void atualizarProjeteis();
 
+    bool checaFimJogo();
     virtual void checaObjetivo() = 0;
     
     /* Métodos Auxiliares */
@@ -62,13 +70,17 @@ public:
     ent::pers::Jogador* getJogador2() const;
     float getTamanhoFase() const;
     int getNumeroFase() const;
-
     int getPontuacao();
     void setPontuacao(int pontos);
     
-    bool checaFimJogo();
+    /* Para avisar o Gerenciador de Eventos qual estado executar: */
     void executarEstado(tipoEstado tipo);
-    static void setMultijogador(bool multi);
+
+    /* Salvamento e carregamento de fase: */
+
+    void salvarJogo(std::string caminho);
+    void carregarJogo(std::string caminho);
+
 
 };
 }

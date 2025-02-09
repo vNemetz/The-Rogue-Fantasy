@@ -9,7 +9,7 @@ Cavaleiro::Cavaleiro()
 }
 
 Cavaleiro::Cavaleiro(sf::Vector2f pos, sf::Vector2f tam)
-    : Inimigo(pos, tam)
+    : Inimigo(pos, tam, cavaleiro)
     , raioAtaque(160.f)
 {
     setTextura("Knight-Idle");

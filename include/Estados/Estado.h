@@ -6,6 +6,7 @@ enum tipoEstado{
     pausa,
     placar,
     salvar,
+    carregar,
     fim
 };
 namespace ger{

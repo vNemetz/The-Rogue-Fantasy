@@ -216,15 +216,41 @@ void Jogador::setCorpo() {
             tamanho.x = -tamanho.x;
     }
 }
-}
 
-int pers::Jogador::getPontos()
+
+/*Getters e Setters para SAVE*/
+
+int pers::Jogador::getPontos() const
 {
     return pontos;
 }
-}
 
-void ent::pers::Jogador::setPontos(int pts)
+
+void Jogador::setPontos(int pts)
 {
     pontos = pts;
+}
+
+bool Jogador::getEhJogador1() const
+{
+    return jogador1;
+}
+
+void Jogador::setEhJogador1(bool j1)
+{
+    jogador1 = j1;
+}
+
+bool Jogador::getPulando() const
+{
+    return pulando;
+}
+
+void Jogador::setPulando(bool pulo)
+{
+    pulando = pulo;
+}
+
+
+}
 }

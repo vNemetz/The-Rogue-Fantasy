@@ -16,7 +16,6 @@ public:
     Fabrica_Goblin();
     Fabrica_Goblin(ent::pers::Jogador* jog1, ent::pers::Jogador* jog2, bool doisJog, float tamanho);
     ~Fabrica_Goblin();
-
     ent::Entidade* criarEntidade(sf::Vector2f posicao) override;
 };
 

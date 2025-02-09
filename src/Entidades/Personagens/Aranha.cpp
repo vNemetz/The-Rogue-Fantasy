@@ -14,7 +14,7 @@ Aranha::Aranha()
 }
 
 Aranha::Aranha(sf::Vector2f pos, sf::Vector2f tam)
-    : Inimigo(pos, tam)
+    : Inimigo(pos, tam, aranha)
     , raioAtaque(800.f)
 {
     pontos = 200;

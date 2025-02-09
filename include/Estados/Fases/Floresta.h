@@ -10,7 +10,7 @@ private:
     std::vector<sf::Vector2i> aranhas;
 
 public:
-    Floresta();
+    Floresta(bool carreg);
     ~Floresta();
 
     virtual void criarFundo();

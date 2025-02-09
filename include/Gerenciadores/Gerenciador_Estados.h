@@ -37,6 +37,7 @@ public:
     void proximaFase(int numFase, int pontos);
     void reiniciarJogo(int nFase);
     void setFaseSelecionada(int n);
+    void gerenciarCarregamento();
     
 
 };
