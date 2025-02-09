@@ -135,7 +135,6 @@ void Gerenciador_Colisoes::executar() {
         for (int j = 0; j < listaJogadores.size(); j++) {
             ent::pers::Jogador* jogador = listaJogadores[j];
             if(jogador){
-
                 if (verificarColisao(obstaculo, jogador)) {
                     if (obstaculo->getID() == plataforma)
                         tratarEntidadeEstatica(jogador, obstaculo);
@@ -149,6 +148,7 @@ void Gerenciador_Colisoes::executar() {
                     else if (obstaculo->getID() == porta)
                         tratarJogadorPorta(jogador, static_cast<ent::obs::Porta*>(obstaculo));
                 }
+
             }
         }
     }
@@ -441,6 +441,7 @@ void Gerenciador_Colisoes::tratarPersonagemEspinho(ent::pers::Personagem* person
             personagem->setPosition(posicaoPers);
             personagem->setVelocidade(velocidadePers);
         }
+
     }
 }
 

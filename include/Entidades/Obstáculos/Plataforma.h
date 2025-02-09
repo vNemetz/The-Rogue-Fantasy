@@ -31,6 +31,7 @@ public:
     void setTipoPlataforma(tipoPlataforma tip);
     void aplicarEmpuxo();
 
+
 };
 
 }

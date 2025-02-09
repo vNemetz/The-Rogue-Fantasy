@@ -16,6 +16,7 @@ Fase(0, carreg)
         caminho += "/data/savedGame.json";
         carregarJogo(caminho);
     } 
+
 }
 
 fases::Floresta::~Floresta()

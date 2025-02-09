@@ -7,7 +7,6 @@ fases::Castelo::Castelo():
 Castelo(1, false)
 
 {
-
 }
 
 fases::Castelo::Castelo(int pts,  bool carreg):

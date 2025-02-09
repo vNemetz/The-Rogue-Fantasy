@@ -19,6 +19,7 @@
 
 
 
+
 fases::Fase::Fase() : 
     Ente()
     , Estado(fase)
