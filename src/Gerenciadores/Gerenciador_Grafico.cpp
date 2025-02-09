@@ -108,6 +108,7 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     carregarTextura("/assets/images/Door/door-opened.png", "Door-Opened");
 
     carregarTextura("/assets/images/General/box.png", "Box");
+    carregarTextura("/assets/images/General/big_spikes1.png", "Spikes");
 }
 
 Gerenciador_Grafico::~Gerenciador_Grafico() {

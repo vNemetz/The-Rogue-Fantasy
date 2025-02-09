@@ -13,7 +13,8 @@ enum ID {
     inimigo,
     projetil,
     porta,
-    caixa
+    caixa,
+    espinho
 };
 
 class Ente {

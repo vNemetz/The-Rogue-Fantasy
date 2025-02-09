@@ -10,6 +10,7 @@
 #include "Fabricas/Fabrica_Jogador.h"
 #include "Fabricas/Fabrica_Porta.h"
 #include "Fabricas/Fabrica_Caixa.h"
+#include "Fabricas/Fabrica_Espinho.h"
 
 
 fases::Fase::Fase() : 
@@ -47,6 +48,7 @@ fases::Fase::Fase(int nFase)
     registrarFabrica('c', new fact::Fabrica_Cavaleiro(pJog1, pJog2, doisJogadores, tamanhoFase));
     registrarFabrica('d', new fact::Fabrica_Porta(tamanhoFase));
     registrarFabrica('b', new fact::Fabrica_Caixa(tamanhoFase));
+    registrarFabrica('e', new fact::Fabrica_Espinho(tamanhoFase));
     registrarFabrica('/', new fact::Fabrica_Plataforma(numeroFase, 0, tamanhoFase));
     registrarFabrica('#', new fact::Fabrica_Plataforma(numeroFase, 1, tamanhoFase));
     registrarFabrica(';', new fact::Fabrica_Plataforma(numeroFase, 2, tamanhoFase));

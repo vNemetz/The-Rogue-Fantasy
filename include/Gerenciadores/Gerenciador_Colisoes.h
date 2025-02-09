@@ -1,8 +1,8 @@
 #pragma once
-#include "Entidades/Obstáculos/Plataforma.h"
+#include "Listas/Lista_Entidades.h"
 #include "Entidades/Obstáculos/Porta.h"
 #include "Entidades/Obstáculos/Caixa.h"
-#include "Listas/Lista_Entidades.h"
+#include "Entidades/Obstáculos/Espinho.h"
 #include "Entidades/Personagens/Inimigo.h"
 #include "Entidades/Personagens/Jogador.h"
 #include "Entidades/Projeteis/Projetil.h"
@@ -43,11 +43,12 @@ private:
     /* Tratamento de colisões */
     void tratarJogadorInimigo(ent::pers::Jogador* jogador, ent::pers::Inimigo* inimigo);
     void tratarInimigoInimigo(ent::pers::Inimigo* inimigo1, ent::pers::Inimigo* inimigo2);
-    void tratarEntidadePlataforma(ent::Entidade* entidade, ent::obs::Plataforma* plataforma);
+    void tratarEntidadeEstatica(ent::Entidade* dinamica, ent::Entidade* estatica);
     void tratarProjetilPersonagem(ent::prj::Projetil* projetil, ent::pers::Personagem* personagem);
     void tratarProjetilObstaculo(ent::prj::Projetil* projetil, ent::obs::Obstaculo* obstaculo);
     void tratarJogadorPorta(ent::pers::Jogador* jogador, ent::obs::Porta* porta);
     void tratarPersonagemCaixa(ent::pers::Personagem* personagem, ent::obs::Caixa* caixa);
+    void tratarPersonagemEspinho(ent::pers::Personagem* personagem, ent::obs::Espinho* espinho);
 
 public:
     void incluirEntidade(ent::Entidade* entidade);
