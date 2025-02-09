@@ -12,6 +12,7 @@
 #include "Fabricas/Fabrica_Caixa.h"
 #include "Fabricas/Fabrica_Espinho.h"
 #include "Entidades/Projeteis/Teia.h"
+#include "Entidades/Obstáculos/Plataforma.h"
 #include <fstream>
 
 
@@ -155,6 +156,7 @@ void fases::Fase::executar() {
         atualizarPersonagens();
         pColisoes->executar();
         checaObjetivo();
+
         if(doisJogadores){
             if(pJog1->getPontos() + pJog2->getPontos() > pontos){
                 pontos = pJog1->getPontos() + pJog2->getPontos();
@@ -162,13 +164,13 @@ void fases::Fase::executar() {
         }
         else{
             if(pJog1->getPontos() > pontos){
-                pontos = pJog1->getPontos();
+                    pontos = pJog1->getPontos();
 
             }
         }
     }    
     else{executarEstado(fim);}
-    if(numeroFase = 1 && listaInimigos.getTamanho() <= 0){
+    if(numeroFase == 1 && listaInimigos.getTamanho() <= 0){
         executarEstado(fim);
     }
 }
@@ -247,7 +249,8 @@ void fases::Fase::executarEstado(tipoEstado tipo){
             pEstados->setEstadoAtual(pausa);
             break;
         case fim:
-            pEstados->setEstadoAtual(fim);
+            if(pEstados)
+                pEstados->setEstadoAtual(fim);
             break;
         default:
             break;
@@ -264,9 +267,8 @@ void fases::Fase::salvarJogo(std::string caminho){
     json j;
 
     j["JOGO"] = tipoEstado::fase;
-    j["numeroFase"] = numeroFase;
-    if(doisJogadores)
-        j["doisJogadores"] = doisJogadores;
+    j["infosFase"]["numeroFase"] = numeroFase;
+    j["infosFase"]["doisJogadores"] = doisJogadores;
     
     /*Salvar Jogadores*/
     if(pJog1){
@@ -372,7 +374,12 @@ void fases::Fase::carregarJogo(std::string caminho){
     catch (const std::exception& e){
         std::cerr << "Erro ao processar JSON: " << e.what() <<"\n";
         return;
-    }        
+    }
+    if(j.contains("infosFase")){
+        numeroFase = j["infosFase"]["numeroFase"];
+        doisJogadores = j["infosFase"]["doisJogadores"];
+    }
+
     if(j.contains("Jogador1")){
         pJog1  = dynamic_cast<ent::pers::Jogador*>(criarEntidade('j', sf::Vector2i(0,0)));
         if(pJog1){
@@ -389,9 +396,7 @@ void fases::Fase::carregarJogo(std::string caminho){
             //listaJogadores.incluir(static_cast<ent::Entidade*>(pJog1));
         }
     }
-
-    if(j["doisJogadores"] == true){ 
-        this->doisJogadores = true;
+    if(doisJogadores){
         if(j.contains("Jogador2")){
             pJog2  = dynamic_cast<ent::pers::Jogador*>(criarEntidade('k', sf::Vector2i(0, 0)));
             if(pJog2){
@@ -422,6 +427,9 @@ void fases::Fase::carregarJogo(std::string caminho){
                     else if(tipo == ent::obs::tipoPlataforma::meioGrama){
                         pPlataforma= dynamic_cast<ent::obs::Plataforma*>(criarEntidade(('@'), sf::Vector2i(0, 0)));
                     }
+                    else if(tipo == ent::obs::tipoPlataforma::cantoGrama){
+                        pPlataforma= dynamic_cast<ent::obs::Plataforma*>(criarEntidade(('*'), sf::Vector2i(0, 0)));
+                    }
                 }
                 if(numeroFase == 1){
                 if(tipo == ent::obs::tipoPlataforma::topoTijolo){
@@ -434,6 +442,10 @@ void fases::Fase::carregarJogo(std::string caminho){
                 if(pPlataforma)
                 pPlataforma->setPosition(sf::Vector2f(dadoObstaculo["posicao"]["x"], dadoObstaculo["posicao"]["y"]));
                     //listaObstaculos.incluir(static_cast<ent::Entidade*>(plataforma));
+            }
+            else if(id == ID::caixa){
+                ent::obs::Caixa* pCaixa = dynamic_cast<ent::obs::Caixa*>(criarEntidade(('b'), sf::Vector2i(0, 0)));
+                pCaixa->setPosition(sf::Vector2f(dadoObstaculo["posicao"]["x"], dadoObstaculo["posicao"]["y"]));
             }
         }
     }

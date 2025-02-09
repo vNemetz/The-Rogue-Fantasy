@@ -285,7 +285,8 @@ void Gerenciador_Grafico::desenharEntidade(ent::Entidade *pE) const {
 }
 
 void Gerenciador_Grafico::desenhar(sf::RectangleShape *corpo) const {
-    pJanela->draw(*corpo);
+    if(corpo)
+        pJanela->draw(*corpo);
 }
 }
 
@@ -298,5 +299,6 @@ void ger::Gerenciador_Grafico::desenharSprite(sf::Sprite *pS) const
 
 void ger::Gerenciador_Grafico::desenharTexto(sf::Text* text) const
 {
-    pJanela->draw(*text);
+    if(text)
+        pJanela->draw(*text);
 }

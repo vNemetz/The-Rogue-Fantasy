@@ -26,7 +26,6 @@ Fase(1, carreg)
     if(!carregada){
         setPontuacao(pts);
         criarMapa();
-        criarFundo();
         criarEntidades();
         pJog1->setPontos(pontos);
     }else{

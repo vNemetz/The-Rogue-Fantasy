@@ -95,7 +95,7 @@ void Gerenciador_Estados::setEstadoAtual(tipoEstado tipo){
             pEstadoAtual = static_cast<Estado*>(mapaEstados[fim]);
             dynamic_cast<menus::Menu_Fim*>(pEstadoAtual)->setPontosParaIncrementar(pontos);
             ger::Gerenciador_Input::getInstancia()->criarInputMapEstado(fim);
-            break;  
+            break;
         case salvar:
             dynamic_cast<fases::Fase*>(mapaEstados[fase])->salvarJogo(caminho);
             setEstadoAtual(pausa);
@@ -191,10 +191,9 @@ void ger::Gerenciador_Estados::gerenciarCarregamento(){
         std::cerr << "Erro ao processar JSON: " << e.what() <<"\n";
         return;
     }
-    std::cout <<"passou try\n";
-    if(j.contains("numeroFase")){
-        int nFase = j["numeroFase"];
-
+    if(j.contains("infosFase")){
+        int nFase = j["infosFase"]["numeroFase"];
+        std::cout<<nFase;
         if(nFase == 0){
             if(mapaEstados[fase]){
                 delete mapaEstados[fase];
@@ -210,6 +209,7 @@ void ger::Gerenciador_Estados::gerenciarCarregamento(){
                 delete mapaEstados[fase];
                 mapaEstados.erase(fase);
             }
+            ger::Gerenciador_Colisoes::getInstancia()->limparListas();
             fases::Castelo* castelo = new fases::Castelo(0 ,true);
             mapaEstados.insert(std::pair<tipoEstado, Estado*>(fase, static_cast<fases::Fase*>(castelo)));
             castelo ->setPGG(ger::Gerenciador_Grafico::getInstancia());

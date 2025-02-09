@@ -8,8 +8,10 @@ namespace obs {
 enum tipoPlataforma{
     topoGrama = 0,
     meioGrama,
+    cantoGrama,
     topoTijolo,
-    meioTijolo
+    meioTijolo,
+    cantoTijolo
 };
 
 class Plataforma : public Obstaculo {
