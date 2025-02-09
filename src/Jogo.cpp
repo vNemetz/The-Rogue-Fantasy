@@ -26,7 +26,7 @@ void Jogo::executar() {
 
         gerGrafico->limpaJanela(); // Limpa a janela
         
-        gerEstados->requererEstado();
+        gerEstados->requererEstado();   //Executa o estado atual
         
         gerGrafico->updateDeltaTime(); // Atualiza o tempo
         gerGrafico->display(); // Exibe a janela

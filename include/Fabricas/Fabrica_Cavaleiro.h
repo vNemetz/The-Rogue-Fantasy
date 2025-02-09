@@ -18,6 +18,9 @@ public:
     ~Fabrica_Cavaleiro();
 
     ent::Entidade* criarEntidade(sf::Vector2f posicao) override;
+
+    void setJogador1(ent::pers::Jogador* j1);
+    void setJogador2(ent::pers::Jogador* j2);
 };
 
 }

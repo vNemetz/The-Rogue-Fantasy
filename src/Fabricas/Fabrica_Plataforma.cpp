@@ -1,6 +1,7 @@
 #include "Fabricas/Fabrica_Plataforma.h"
 #include "Entidades/Obstáculos/Plataforma.h"
 
+
 namespace fact {
 
 Fabrica_Plataforma::Fabrica_Plataforma()
@@ -25,11 +26,39 @@ ent::Entidade* Fabrica_Plataforma::criarEntidade(sf::Vector2f posicao) {
     plataforma->setTamanhoFase(tamanhoFase);
 
     // Configurar textura conforme o tipo
-    if (numeroFase == 0)
+    if(numeroFase == 0){
         plataforma->setTextura("Grass" + std::to_string(tipoPlataforma));
-
-    else if (numeroFase ==1)
+        switch (tipoPlataforma){
+            case 1 :
+                plataforma->setTipoPlataforma(ent::obs::tipoPlataforma::topoGrama);
+                break;
+            case 4:
+                plataforma->setTipoPlataforma(ent::obs::tipoPlataforma::meioGrama);
+                break;
+            case 500:
+                plataforma->setTipoPlataforma(ent::obs::tipoPlataforma::cantoGrama);
+                break;
+            default:
+                break;
+        }
+    }
+    else if(numeroFase ==1){
         plataforma->setTextura("Brick" + std::to_string(tipoPlataforma));
+        switch (tipoPlataforma){
+            case 1 :
+                plataforma->setTipoPlataforma(ent::obs::tipoPlataforma::topoTijolo);
+                break;
+            case 4:
+                plataforma->setTipoPlataforma(ent::obs::tipoPlataforma::meioTijolo);
+                break;
+            case 500:
+                plataforma->setTipoPlataforma(ent::obs::tipoPlataforma::cantoTijolo);
+                break;
+            default:
+                break;
+        }
+    }
+
 
     return static_cast<ent::Entidade*>(plataforma);
 }

@@ -11,6 +11,10 @@
 #include "Fabricas/Fabrica_Porta.h"
 #include "Fabricas/Fabrica_Caixa.h"
 #include "Fabricas/Fabrica_Espinho.h"
+#include "Entidades/Projeteis/Teia.h"
+#include "Entidades/Obstáculos/Plataforma.h"
+#include <fstream>
+
 
 
 
@@ -22,7 +26,7 @@ fases::Fase::Fase() :
 {
 }
 
-fases::Fase::Fase(int nFase)
+fases::Fase::Fase(int nFase, bool carreg)
     : Ente()
     , Estado(fase)
     , numeroFase(nFase)
@@ -32,6 +36,7 @@ fases::Fase::Fase(int nFase)
     , pJog1(nullptr)
     , pJog2(nullptr)
     , pontos(0)
+    , carregada(carreg)
 {
     if (numeroFase == 0)
         tamanhoFase = 8000.f;
@@ -44,8 +49,9 @@ fases::Fase::Fase(int nFase)
     registrarFabrica('j', new fact::Fabrica_Jogador(true, tamanhoFase));
     if (doisJogadores) registrarFabrica('k', new fact::Fabrica_Jogador(false, tamanhoFase));
 
-    criarEntidade('j', sf::Vector2i(0, 0));
-
+    if(!carregada){
+        criarEntidade('j', sf::Vector2i(0, 0));
+    }
     /* Criação do restante das Fábricas (Factory Method Design Pattern) */
     registrarFabrica('g', new fact::Fabrica_Goblin(pJog1, pJog2, doisJogadores, tamanhoFase));
     registrarFabrica('a', new fact::Fabrica_Aranha(pJog1, pJog2, doisJogadores, tamanhoFase, &listaProjeteis));
@@ -85,7 +91,7 @@ void fases::Fase::registrarFabrica(char simbolo, fact::Fabrica_Entidades* fabric
     fabricas[simbolo] = fabrica;
 }
 
-void fases::Fase::criarEntidade(char simbolo, const sf::Vector2i pos) {
+ent::Entidade* fases::Fase::criarEntidade(char simbolo, const sf::Vector2i pos) {
 
     auto it = fabricas.find(simbolo);
 
@@ -137,7 +143,9 @@ void fases::Fase::criarEntidade(char simbolo, const sf::Vector2i pos) {
                     pJog2->setPosition(sf::Vector2f(posicao.x + 200.f, posicao.y));
             }
         }
+        return entidade;
     }
+    return nullptr;
 }
 
 /* Execução da Fase */
@@ -149,6 +157,7 @@ void fases::Fase::executar() {
         atualizarPersonagens();
         pColisoes->executar();
         checaObjetivo();
+
         if(doisJogadores){
             if(pJog1->getPontos() + pJog2->getPontos() > pontos){
                 pontos = pJog1->getPontos() + pJog2->getPontos();
@@ -156,13 +165,13 @@ void fases::Fase::executar() {
         }
         else{
             if(pJog1->getPontos() > pontos){
-                pontos = pJog1->getPontos();
+                    pontos = pJog1->getPontos();
 
             }
         }
     }    
     else{executarEstado(fim);}
-    if(numeroFase = 1 && listaInimigos.getTamanho() <= 0){
+    if(numeroFase == 1 && listaInimigos.getTamanho() <= 0){
         executarEstado(fim);
     }
 }
@@ -241,14 +250,257 @@ void fases::Fase::executarEstado(tipoEstado tipo){
             pEstados->setEstadoAtual(pausa);
             break;
         case fim:
-            pEstados->setEstadoAtual(fim);
+            if(pEstados)
+                pEstados->setEstadoAtual(fim);
             break;
         default:
             break;
     }
 }
 
+
 void fases::Fase::setMultijogador(bool multi)
 {
     doisJogadores = multi;
+}
+
+void fases::Fase::salvarJogo(std::string caminho){
+    json j;
+
+    j["JOGO"] = tipoEstado::fase;
+    j["infosFase"]["numeroFase"] = numeroFase;
+    j["infosFase"]["doisJogadores"] = doisJogadores;
+    
+    /*Salvar Jogadores*/
+    if(pJog1){
+        j["Jogador1"]["posicao"]["x"] = pJog1->getPosition().x;
+        j["Jogador1"]["posicao"]["y"] = pJog1->getPosition().y;
+        j["Jogador1"]["ehJogador1"] = pJog1->getEhJogador1();
+        j["Jogador1"]["vidas"] = pJog1->getNumVidas();
+        j["Jogador1"]["pontos"] = pJog1->getPontos();
+        j["Jogador1"]["pulando"] = pJog1->getPulando();
+        j["Jogador1"]["estado"] = pJog1->getEstado();
+    }
+
+    if(doisJogadores){
+        if(pJog2){
+            j["Jogador2"]["posicao"]["x"] = pJog2->getPosition().x;
+            j["Jogador2"]["posicao"]["y"] = pJog2->getPosition().y;
+            j["Jogador2"]["ehJogador1"] = pJog2->getEhJogador1();
+            j["Jogador2"]["vidas"] = pJog2->getNumVidas();
+            j["Jogador2"]["pontos"] = pJog2->getPontos();
+            j["Jogador2"]["pulando"] = pJog2->getPulando();
+            j["Jogador2"]["estado"] = pJog2->getEstado();
+        }
+    }
+
+    /*Salvar obstáculos*/
+    for(auto it = listaObstaculos.begin(); it != listaObstaculos.end(); ++it){
+        if((*it)){
+            auto obstaculo = (*it);
+
+            json obs;
+
+            obs["tipo"] = obstaculo->getID();
+            obs["posicao"]["x"] = obstaculo->getPosition().x;
+            obs["posicao"]["y"] = obstaculo->getPosition().y;
+            if(obstaculo->getID() == ID::plataforma){
+                obs["tipoPlataforma"] = dynamic_cast<ent::obs::Plataforma*>(obstaculo)->getTipoPlataforma();
+            }
+            j["obstaculos"].push_back(obs);
+        }
+    }
+
+    /*Salvar inimigos*/
+    for(auto it = listaInimigos.begin(); it != listaInimigos.end(); ++it){
+        if(*it){
+            ent::pers::Inimigo* inimigo = dynamic_cast<ent::pers::Inimigo*>(*it);
+
+            json inim;
+
+            inim["tipo"] = inimigo->getTipoInimigo();
+            inim["posicao"]["x"] = inimigo->getPosition().x;
+            inim["posicao"]["y"] = inimigo->getPosition().y;
+            inim["vidas"] = inimigo->getNumVidas();
+            inim["estado"] = inimigo->getEstado();
+
+            j["inimigos"].push_back(inim);
+        }
+    }
+
+    /*Salvar Projéteis*/
+    for(auto it = listaProjeteis.begin(); it != listaProjeteis.end(); ++it){
+        if(*it){
+            ent::prj::Projetil* projetil = dynamic_cast<ent::prj::Projetil*>(*it);
+
+            json pjt;
+
+            pjt["posicao"]["x"] = projetil->getPosition().x;
+            pjt["posicao"]["y"] = projetil->getPosition().y;
+            pjt["aDireita"] = projetil->getParaDireita();
+
+            j["projeteis"].push_back(pjt);
+        }
+    }
+
+    //Abrir arquivo .json para escrita
+
+    std::ofstream arquivo(caminho, std::ofstream::trunc);
+    if (!arquivo.is_open()) {
+        std::cerr << "ERRO ao salvar jogo\n";
+    }
+    arquivo << j.dump(4);   //"4" é a indentação do arquivo (4 espaços)
+    arquivo.close();
+
+}
+
+void fases::Fase::carregarJogo(std::string caminho){
+    std::ifstream arquivo(caminho);
+    listaInimigos.limpar();
+    listaJogadores.limpar();
+    listaObstaculos.limpar();
+    listaProjeteis.limpar();
+
+    std::cout <<"Entrou em carregar jogo\n";
+    if(!arquivo.is_open()){
+        std::cerr<< "ERRO ao carregar jogo\n";
+        return;
+    }
+
+    json j;
+
+    try{
+        arquivo >> j;
+    }
+    catch (const std::exception& e){
+        std::cerr << "Erro ao processar JSON: " << e.what() <<"\n";
+        return;
+    }
+    if(j.contains("infosFase")){
+        numeroFase = j["infosFase"]["numeroFase"];
+        doisJogadores = j["infosFase"]["doisJogadores"];
+    }
+
+    if(j.contains("Jogador1")){
+        pJog1  = dynamic_cast<ent::pers::Jogador*>(criarEntidade('j', sf::Vector2i(0,0)));
+        if(pJog1){
+            pJog1->setPosition(sf::Vector2f(j["Jogador1"]["posicao"]["x"], j["Jogador1"]["posicao"]["y"]));
+            pJog1->setEhJogador1(j["Jogador1"]["ehJogador1"]);
+            pJog1->setNumVidas(j["Jogador1"]["vidas"]);
+            pJog1->setPontos(j["Jogador1"]["pontos"]);
+            pJog1->setPulando(j["Jogador1"]["pulando"]);
+            pJog1->setEstado(j["Jogador1"]["estado"]);
+
+
+            static_cast<fact::Fabrica_Goblin*>(fabricas['g'])->setJogador1(pJog1);
+            static_cast<fact::Fabrica_Aranha*>(fabricas['a'])->setJogador1(pJog1);
+            static_cast<fact::Fabrica_Cavaleiro*>(fabricas['c'])->setJogador1(pJog1);
+            //listaJogadores.incluir(static_cast<ent::Entidade*>(pJog1));
+        }
+    }
+    if(doisJogadores){
+        if(j.contains("Jogador2")){
+            pJog2  = dynamic_cast<ent::pers::Jogador*>(criarEntidade('k', sf::Vector2i(0, 0)));
+            if(pJog2){
+                pJog2->setPosition(sf::Vector2f(j["Jogador2"]["posicao"]["x"], j["Jogador2"]["posicao"]["y"]));
+                pJog2->setEhJogador1(j["Jogador2"]["ehJogador1"]);
+                pJog2->setNumVidas(j["Jogador2"]["vidas"]);
+                pJog2->setPontos(j["Jogador2"]["pontos"]);
+                pJog2->setPulando(j["Jogador2"]["pulando"]);
+                pJog2->setEstado(j["Jogador2"]["estado"]);
+                static_cast<fact::Fabrica_Goblin*>(fabricas['g'])->setJogador2(pJog2);
+                static_cast<fact::Fabrica_Aranha*>(fabricas['a'])->setJogador2(pJog2);
+                static_cast<fact::Fabrica_Cavaleiro*>(fabricas['c'])->setJogador2(pJog2);
+                //listaJogadores.incluir(static_cast<ent::Entidade*>(pJog2));
+            }
+        }
+    }
+
+    if(j.contains("obstaculos")){
+        for(const auto& dadoObstaculo : j["obstaculos"]){
+            ID id = dadoObstaculo["tipo"];
+
+            if(id == ID::plataforma){
+                ent::obs::tipoPlataforma tipo= dadoObstaculo["tipoPlataforma"];
+                ent::obs::Plataforma* pPlataforma = nullptr;
+                if(numeroFase == 0){
+                    if(tipo == ent::obs::tipoPlataforma::topoGrama){
+                        pPlataforma= dynamic_cast<ent::obs::Plataforma*>(criarEntidade(('#'), sf::Vector2i(0, 0)));
+                    }
+                    else if(tipo == ent::obs::tipoPlataforma::meioGrama){
+                        pPlataforma= dynamic_cast<ent::obs::Plataforma*>(criarEntidade(('@'), sf::Vector2i(0, 0)));
+                    }
+                    else if(tipo == ent::obs::tipoPlataforma::cantoGrama){
+                        pPlataforma= dynamic_cast<ent::obs::Plataforma*>(criarEntidade(('*'), sf::Vector2i(0, 0)));
+                    }
+                }
+                if(numeroFase == 1){
+                    if(tipo == ent::obs::tipoPlataforma::topoTijolo){
+                        pPlataforma= dynamic_cast<ent::obs::Plataforma*>(criarEntidade(('#'), sf::Vector2i(0, 0)));
+                    }
+                    else if(tipo == ent::obs::tipoPlataforma::meioTijolo){
+                        pPlataforma= dynamic_cast<ent::obs::Plataforma*>(criarEntidade(('@'), sf::Vector2i(0, 0)));
+                    }
+                    else if(tipo == ent::obs::tipoPlataforma::cantoTijolo){
+                        pPlataforma= dynamic_cast<ent::obs::Plataforma*>(criarEntidade(('*'), sf::Vector2i(0, 0)));
+                    }
+                }
+                if(pPlataforma)
+                pPlataforma->setPosition(sf::Vector2f(dadoObstaculo["posicao"]["x"], dadoObstaculo["posicao"]["y"]));
+            }
+            else if(id == ID::caixa){
+                ent::obs::Caixa* pCaixa = dynamic_cast<ent::obs::Caixa*>(criarEntidade(('b'), sf::Vector2i(0, 0)));
+                pCaixa->setPosition(sf::Vector2f(dadoObstaculo["posicao"]["x"], dadoObstaculo["posicao"]["y"]));
+            }
+            else if(id == ID::espinho){
+                ent::obs::Espinho* pEspinho = dynamic_cast<ent::obs::Espinho*>(criarEntidade('e', sf::Vector2i(0,0)));
+                pEspinho->setPosition(sf::Vector2f(dadoObstaculo["posicao"]["x"], dadoObstaculo["posicao"]["y"]));
+            }
+        }
+    }
+
+    if(j.contains("inimigos")){
+        for(const auto& dadoInimigo : j["inimigos"]){
+            ent::pers::tipoInimigo tipo = dadoInimigo["tipo"];
+
+            if(tipo == ent::pers::tipoInimigo::goblin){
+                ent::pers::Inimigo* goblin = dynamic_cast<ent::pers::Inimigo*>(criarEntidade(('g'), sf::Vector2i(0, 0)));
+                if(goblin){
+                    goblin->setPosition(sf::Vector2f(dadoInimigo["posicao"]["x"], dadoInimigo["posicao"]["y"]));
+                    goblin->setNumVidas(dadoInimigo["vidas"]);
+                    goblin->setEstado(dadoInimigo["estado"]);
+                }
+            }
+            else if(tipo == ent::pers::tipoInimigo::aranha){
+                ent::pers::Inimigo* aranha = dynamic_cast<ent::pers::Inimigo*>(criarEntidade(('a'), sf::Vector2i(0, 0)));
+                if(aranha){
+                    aranha->setPosition(sf::Vector2f(dadoInimigo["posicao"]["x"], dadoInimigo["posicao"]["y"]));
+                    aranha->setNumVidas(dadoInimigo["vidas"]);
+                    aranha->setEstado(dadoInimigo["estado"]);
+                }
+            }
+            else if(tipo == ent::pers::tipoInimigo::cavaleiro){
+                ent::pers::Inimigo* cavaleiro = dynamic_cast<ent::pers::Inimigo*>(criarEntidade(('c'), sf::Vector2i(0, 0)));
+                if(cavaleiro){
+                    cavaleiro->setPosition(sf::Vector2f(dadoInimigo["posicao"]["x"], dadoInimigo["posicao"]["y"]));
+                    cavaleiro->setNumVidas(dadoInimigo["vidas"]);
+                    cavaleiro->setEstado(dadoInimigo["estado"]);
+                }
+            }
+        }
+    }
+
+    if(j.contains("projeteis")){
+        for(const auto& dadoProjetil : j["projeteis"]){
+            if(dadoProjetil.is_null()){
+                continue;
+            }
+
+            ent::prj::Teia* teia = new ent::prj::Teia(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(1.7f, 1.7f), false);
+            teia->setPosition(sf::Vector2f(dadoProjetil["posicao"]["x"], dadoProjetil["posicao"]["y"]));
+            teia->setParaDireita(dadoProjetil["aDireita"]);
+
+            listaProjeteis.incluir(static_cast<ent::Entidade*>(teia));
+        }
+    }
 }

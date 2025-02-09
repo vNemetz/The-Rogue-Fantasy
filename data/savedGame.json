@@ -1,0 +1,1402 @@
+{
+    "JOGO": 0,
+    "Jogador1": {
+        "ehJogador1": true,
+        "estado": 3,
+        "pontos": 200,
+        "posicao": {
+            "x": 1997.2490234375,
+            "y": 365.0848693847656
+        },
+        "pulando": false,
+        "vidas": 4
+    },
+    "infosFase": {
+        "doisJogadores": false,
+        "numeroFase": 0
+    },
+    "inimigos": [
+        {
+            "estado": 6,
+            "posicao": {
+                "x": 4699.9990234375,
+                "y": 335.5176696777344
+            },
+            "tipo": 1,
+            "vidas": 2
+        },
+        {
+            "estado": 0,
+            "posicao": {
+                "x": 1082.022216796875,
+                "y": 551.5791015625
+            },
+            "tipo": 1,
+            "vidas": 2
+        },
+        {
+            "estado": 6,
+            "posicao": {
+                "x": 6289.5048828125,
+                "y": 551.5791015625
+            },
+            "tipo": 1,
+            "vidas": 2
+        },
+        {
+            "estado": 1,
+            "posicao": {
+                "x": 2358.637939453125,
+                "y": 551.1502075195313
+            },
+            "tipo": 1,
+            "vidas": 2
+        },
+        {
+            "estado": 6,
+            "posicao": {
+                "x": 6408.5048828125,
+                "y": 551.5791015625
+            },
+            "tipo": 1,
+            "vidas": 2
+        },
+        {
+            "estado": 6,
+            "posicao": {
+                "x": 4806.0,
+                "y": 572.4794311523438
+            },
+            "tipo": 2,
+            "vidas": 3
+        },
+        {
+            "estado": 4,
+            "posicao": {
+                "x": 3210.572509765625,
+                "y": 572.4794311523438
+            },
+            "tipo": 2,
+            "vidas": 3
+        }
+    ],
+    "obstaculos": [
+        {
+            "posicao": {
+                "x": 0.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 108.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 216.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 324.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 432.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 540.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 648.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 756.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 864.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 972.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 1080.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 1188.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 1296.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 1404.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 1512.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 1620.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 1728.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 1836.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 1944.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 2052.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 2160.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 2268.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 2376.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 2484.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 2592.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 2700.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 2808.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 2916.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 3024.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 3132.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 3240.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 3348.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 3456.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 3564.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 3672.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 3780.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 3888.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 3996.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 4104.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 4212.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 4320.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 4428.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 4536.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 4644.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 4752.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 4860.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 4968.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 5076.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 5184.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 5292.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 5400.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 5508.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 5616.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 5724.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 5832.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 5940.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 6048.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 6156.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 6264.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 6372.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 6480.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 6588.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 6696.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 6804.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 6912.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 7020.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 7128.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 7236.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 7344.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 7452.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 7560.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 7668.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 7776.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 7884.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 0.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 0.0,
+                "y": 648.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 0.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 0
+        },
+        {
+            "posicao": {
+                "x": 108.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 216.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 324.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 432.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 540.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 648.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 756.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 864.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 972.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 1080.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 1188.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 1296.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 1404.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 1512.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 1620.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 1728.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 1836.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 1944.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 2052.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 2160.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 2268.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 2376.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 2484.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 2592.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 2700.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 2808.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 2916.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 3024.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 3132.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 3240.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 3348.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 3456.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 3564.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 3672.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 3780.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 3888.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 3996.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 4104.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 4212.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 4320.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 4428.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 4536.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 4644.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 4752.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 4860.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 4968.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 5076.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 5184.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 5292.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 5400.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 5508.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 5616.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 5724.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 5832.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 5940.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 6048.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 6156.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 6264.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 6372.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 6480.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 6588.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 6696.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 6804.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 6912.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 7020.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 7128.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 7236.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 7344.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 7452.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 7560.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 7668.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 7776.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 7884.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 0.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 0.0,
+                "y": 702.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 1
+        },
+        {
+            "posicao": {
+                "x": 4752.0,
+                "y": 432.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 2
+        },
+        {
+            "posicao": {
+                "x": 3834.0,
+                "y": 432.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 2
+        },
+        {
+            "posicao": {
+                "x": 5940.0,
+                "y": 432.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 2
+        },
+        {
+            "posicao": {
+                "x": 756.0,
+                "y": 540.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 2
+        },
+        {
+            "posicao": {
+                "x": 6210.0,
+                "y": 324.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 2
+        },
+        {
+            "posicao": {
+                "x": 2268.0,
+                "y": 270.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 2
+        },
+        {
+            "posicao": {
+                "x": 4374.0,
+                "y": 270.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 2
+        },
+        {
+            "posicao": {
+                "x": 5292.0,
+                "y": 324.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 2
+        },
+        {
+            "posicao": {
+                "x": 1404.0,
+                "y": 378.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 2
+        },
+        {
+            "posicao": {
+                "x": 3186.0,
+                "y": 270.0
+            },
+            "tipo": 2,
+            "tipoPlataforma": 2
+        },
+        {
+            "posicao": {
+                "x": 6912.0,
+                "y": 548.0110473632813
+            },
+            "tipo": 6
+        },
+        {
+            "posicao": {
+                "x": 4050.0,
+                "y": 548.0110473632813
+            },
+            "tipo": 6
+        },
+        {
+            "posicao": {
+                "x": 2832.0,
+                "y": 548.0037841796875
+            },
+            "tipo": 6
+        }
+    ]
+}

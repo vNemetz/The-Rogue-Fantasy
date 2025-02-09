@@ -4,23 +4,25 @@
 
 
 fases::Castelo::Castelo():
-Castelo(0)
+Castelo(1, false)
 
 {
-    criarMapa();
-    criarFundo();
-    criarEntidades();
-    pJog1->setPontos(pontos);
 }
 
-fases::Castelo::Castelo(int pts):
-Fase(1)
+fases::Castelo::Castelo(int pts,  bool carreg):
+Fase(1, carreg)
 {
-    setPontuacao(pts);
-    criarMapa();
     criarFundo();
-    criarEntidades();
-    pJog1->setPontos(pontos);
+    if(!carregada){
+        setPontuacao(pts);
+        criarMapa();
+        criarEntidades();
+        pJog1->setPontos(pontos);
+    }else{
+        std::string caminho = PROJECT_ROOT;
+        caminho += "/data/savedGame.json";
+        carregarJogo(caminho);
+    }
 }
 
 fases::Castelo::~Castelo()

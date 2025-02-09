@@ -6,13 +6,14 @@ namespace ent {
 namespace pers {
 
 Inimigo::Inimigo()
-    : Inimigo(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f))
+    : Inimigo(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f), desconhecido)
 {
 }
 
-Inimigo::Inimigo(sf::Vector2f pos, sf::Vector2f tam) 
+Inimigo::Inimigo(sf::Vector2f pos, sf::Vector2f tam, tipoInimigo tipo) 
     : Personagem(pos, tam, inimigo)
     , nivel_maldade(1)
+    , tipo(tipo)
 {
 }
 
@@ -78,5 +79,13 @@ Jogador* Inimigo::jogadorMaisProximo() const {
     return jogadorMenosDistante;
 }
 
+void Inimigo::setTipoInimigo(tipoInimigo tipo)
+{
+    this->tipo = tipo;
 }
+
+tipoInimigo Inimigo::getTipoInimigo() const{
+    return (this->tipo);
+}
+} 
 }

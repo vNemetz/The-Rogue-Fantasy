@@ -3,13 +3,20 @@
 #include <iostream>
 #include <fstream>
 
-fases::Floresta::Floresta():
-Fase(0)
+fases::Floresta::Floresta(bool carreg):
+Fase(0, carreg)
 ,faseFinalizada(false)
 {
-    criarMapa();
     criarFundo();
-    criarEntidades();
+    if(!carregada){
+        criarMapa();
+        criarEntidades();
+    }else{
+        std::string caminho = PROJECT_ROOT;
+        caminho += "/data/savedGame.json";
+        carregarJogo(caminho);
+    } 
+
 }
 
 fases::Floresta::~Floresta()
@@ -140,7 +147,7 @@ void fases::Floresta::criarEntidades() {
 }
 
 void fases::Floresta::checaObjetivo(){
-    if(listaInimigos.getTamanho() == 0){
+    if(listaInimigos.getTamanho() <= 0){
         proximaFase();
     }
 }

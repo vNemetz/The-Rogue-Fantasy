@@ -62,16 +62,18 @@ void Gerenciador_Colisoes::executar() {
         }
         
         for (int j = 0; j < listaJogadores.size(); j++) {
-            ent::pers::Jogador* jogador = listaJogadores[j];
+            if(listaJogadores[j]){
+                ent::pers::Jogador* jogador = listaJogadores[j];
 
-            if (!jogador || jogador->getParaDeletar()) {
-                listaJogadores.erase(listaJogadores.begin() + j);
-                j--;
-                continue;
+                if (!jogador || jogador->getParaDeletar()) {
+                    listaJogadores.erase(listaJogadores.begin() + j);
+                    j--;
+                    continue;
+                }
+
+                if (verificarColisao(inimigo, jogador))
+                        tratarJogadorInimigo(jogador, inimigo);
             }
-
-            if (verificarColisao(inimigo, jogador))
-                    tratarJogadorInimigo(jogador, inimigo);
         }
     }
     
@@ -132,19 +134,20 @@ void Gerenciador_Colisoes::executar() {
 
         for (int j = 0; j < listaJogadores.size(); j++) {
             ent::pers::Jogador* jogador = listaJogadores[j];
+            if(jogador){
+                if (verificarColisao(obstaculo, jogador)) {
+                    if (obstaculo->getID() == plataforma)
+                        tratarEntidadeEstatica(jogador, obstaculo);
+                    
+                    else if (obstaculo->getID() == caixa)
+                        tratarPersonagemCaixa(jogador, static_cast<ent::obs::Caixa*>(obstaculo));
+                    
+                    else if (obstaculo->getID() == espinho)
+                        tratarPersonagemEspinho(jogador, static_cast<ent::obs::Espinho*>(obstaculo));
 
-            if (verificarColisao(obstaculo, jogador)) {
-                if (obstaculo->getID() == plataforma)
-                    tratarEntidadeEstatica(jogador, obstaculo);
-                
-                else if (obstaculo->getID() == caixa)
-                    tratarPersonagemCaixa(jogador, static_cast<ent::obs::Caixa*>(obstaculo));
-                
-                else if (obstaculo->getID() == espinho)
-                    tratarPersonagemEspinho(jogador, static_cast<ent::obs::Espinho*>(obstaculo));
-
-                else if (obstaculo->getID() == porta)
-                    tratarJogadorPorta(jogador, static_cast<ent::obs::Porta*>(obstaculo));
+                    else if (obstaculo->getID() == porta)
+                        tratarJogadorPorta(jogador, static_cast<ent::obs::Porta*>(obstaculo));
+                }
 
             }
         }
@@ -341,99 +344,104 @@ void Gerenciador_Colisoes::tratarJogadorPorta(ent::pers::Jogador* jogador, ent::
 }
 
 void Gerenciador_Colisoes::tratarPersonagemCaixa(ent::pers::Personagem* personagem, ent::obs::Caixa* caixa) {
-    sf::Vector2f posicaoCaixa = caixa->getPosition();
-    sf::Vector2f posicaoPers = personagem->getPosition();
-    sf::Vector2f velocidadePers = personagem->getVelocidade();
+    if(personagem && caixa){
+        sf::Vector2f posicaoCaixa = caixa->getPosition();
+        sf::Vector2f posicaoPers = personagem->getPosition();
+        sf::Vector2f velocidadePers = personagem->getVelocidade();
 
-    sf::Vector2f ds = calcularColisao(personagem, caixa);
+        sf::Vector2f ds = calcularColisao(personagem, caixa);
 
-    if (ds.x < 0.f && ds.y < 0.f) {
-        // Se a colisão é no eixo x
-        if (ds.x > ds.y) {
-            ds.x = ceil(ds.x);
+        if (ds.x < 0.f && ds.y < 0.f) {
+            // Se a colisão é no eixo x
+            if (ds.x > ds.y) {
+                ds.x = ceil(ds.x);
 
-            if (!caixa->getMovendo()) {
-                if (posicaoCaixa.x < personagem->getPosition().x)
-                    posicaoCaixa.x += ds.x;
+                if (!caixa->getMovendo()) {
+                    if (posicaoCaixa.x < personagem->getPosition().x)
+                        posicaoCaixa.x += ds.x;
 
-                else
-                    posicaoCaixa.x -= ds.x;
-                
+                    else
+                        posicaoCaixa.x -= ds.x;
+                    
 
-                personagem->setLentidao(caixa->getFatorDeLentidao());
-                personagem->setLento(true);
-                caixa->setMovendo(true);
-            }
+                    personagem->setLentidao(caixa->getFatorDeLentidao());
+                    personagem->setLento(true);
+                    caixa->setMovendo(true);
+                }
 
-            else {
-                if (posicaoCaixa.x < personagem->getPosition().x)
-                    posicaoPers.x -= ds.x;
+                else {
+                    if (posicaoCaixa.x < personagem->getPosition().x)
+                        posicaoPers.x -= ds.x;
 
-                else
-                    posicaoPers.x += ds.x;
-            }
-        }
-        
-        // Se a colisão é no eixo y
-        else {
-            ds.y = ceil(ds.y);
-            if (posicaoCaixa.y > personagem->getPosition().y) {
-                posicaoPers.y += ds.y;
-
-                personagem->setNoChao(true);
-            }
-
-            else {
-                posicaoCaixa.y -= ds.y;
-                caixa->setVelocidade(sf::Vector2f(caixa->getVelocidade().x, 0.f));
-            }
-        }
-    }
-
-    personagem->setPosition(posicaoPers);
-    personagem->setVelocidade(velocidadePers);
-    caixa->setPosition(posicaoCaixa);
-}
-
-void Gerenciador_Colisoes::tratarPersonagemEspinho(ent::pers::Personagem* personagem, ent::obs::Espinho* espinho) {
-    sf::Vector2f posicaoPers = personagem->getPosition();
-    sf::Vector2f velocidadePers = personagem->getVelocidade();
-    sf::Vector2f ds = calcularColisao(personagem, espinho);
-    
-    if (ds.x < 0.f && ds.y < 0.f) {
-        // Se a colisão é no eixo x
-        if (ds.x > ds.y) {
-            ds.x = ceil(ds.x);
-            if (posicaoPers.x < espinho->getPosition().x)
-                posicaoPers.x += ds.x;
-
-            else
-                posicaoPers.x -= ds.x;
-        }
-        
-        // Se a colisão é no eixo y
-        else {
-            ds.y = ceil(ds.y);
-            if (posicaoPers.y < espinho->getPosition().y) {
-                posicaoPers.y -= ds.y;
-                sf::Vector2f posicaoAtacante = espinho->getPosition();
-                posicaoAtacante.x += espinho->getTamanho().x / 2.f;
-
-                personagem->sofrerDano(posicaoAtacante);
-                return;
+                    else
+                        posicaoPers.x += ds.x;
+                }
             }
             
             // Se a colisão é no eixo y
             else {
-                posicaoPers.y -= ds.y;
-                
-                if (velocidadePers.y < 0)
-                    velocidadePers.y = 0;
+                ds.y = ceil(ds.y);
+                if (posicaoCaixa.y > personagem->getPosition().y) {
+                    posicaoPers.y += ds.y;
+
+                    personagem->setNoChao(true);
+                }
+
+                else {
+                    posicaoCaixa.y -= ds.y;
+                    caixa->setVelocidade(sf::Vector2f(caixa->getVelocidade().x, 0.f));
+                }
             }
         }
 
         personagem->setPosition(posicaoPers);
         personagem->setVelocidade(velocidadePers);
+        caixa->setPosition(posicaoCaixa);
+    }
+}
+
+void Gerenciador_Colisoes::tratarPersonagemEspinho(ent::pers::Personagem* personagem, ent::obs::Espinho* espinho) {
+    if(personagem && espinho){
+        sf::Vector2f posicaoPers = personagem->getPosition();
+        sf::Vector2f velocidadePers = personagem->getVelocidade();
+        sf::Vector2f ds = calcularColisao(personagem, espinho);
+        
+        if (ds.x < 0.f && ds.y < 0.f) {
+            // Se a colisão é no eixo x
+            if (ds.x > ds.y) {
+                ds.x = ceil(ds.x);
+                if (posicaoPers.x < espinho->getPosition().x)
+                    posicaoPers.x += ds.x;
+
+                else
+                    posicaoPers.x -= ds.x;
+            }
+            
+            // Se a colisão é no eixo y
+            else {
+                ds.y = ceil(ds.y);
+                if (posicaoPers.y < espinho->getPosition().y) {
+                    posicaoPers.y -= ds.y;
+                    sf::Vector2f posicaoAtacante = espinho->getPosition();
+                    posicaoAtacante.x += espinho->getTamanho().x / 2.f;
+
+                    personagem->sofrerDano(posicaoAtacante);
+                    return;
+                }
+                
+                // Se a colisão é no eixo y
+                else {
+                    posicaoPers.y -= ds.y;
+                    
+                    if (velocidadePers.y < 0)
+                        velocidadePers.y = 0;
+                }
+            }
+
+            personagem->setPosition(posicaoPers);
+            personagem->setVelocidade(velocidadePers);
+        }
+
     }
 }
 

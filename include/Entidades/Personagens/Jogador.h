@@ -36,9 +36,14 @@ public:
     /* Animação */
     void atualizarElementosAnimacao();
     void setCorpo();
-    int getPontos();
-    void setPontos(int pts);
 
+    /*Getters e Setters para SAVE*/
+    int getPontos() const;
+    void setPontos(int pts);
+    bool getEhJogador1() const;
+    void setEhJogador1(bool j1);
+    bool getPulando() const;
+    void setPulando(bool pulo);
 
 
 };

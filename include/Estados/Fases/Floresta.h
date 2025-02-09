@@ -12,7 +12,7 @@ private:
     std::vector<sf::Vector2i> caixas;
 
 public:
-    Floresta();
+    Floresta(bool carreg);
     ~Floresta();
 
     virtual void criarFundo();

@@ -5,6 +5,10 @@
 #include "Estados/Fases/Castelo.h"
 #include "Estados/Menus/Placar.h"
 
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
+#include <fstream>
+
 
 namespace ger{
 Gerenciador_Estados* Gerenciador_Estados::instancia(nullptr);
@@ -39,7 +43,7 @@ Gerenciador_Estados* Gerenciador_Estados::getInstancia(){
 
 void Gerenciador_Estados::inicializarEstados()
 {
-    fases::Floresta* faseFloresta = new fases::Floresta();
+    fases::Floresta* faseFloresta = new fases::Floresta(false);
     mapaEstados.insert(std::pair<tipoEstado, Estado*>(fase, static_cast<Estado*>(faseFloresta) ) );
 
     menus::Menu_Pausa* menuPausa = new menus::Menu_Pausa(this);
@@ -59,13 +63,15 @@ void Gerenciador_Estados::inicializarEstados()
 void Gerenciador_Estados::requererEstado() 
 {
     if(pEstadoAtual){
-    pEstadoAtual->executar();
+        pEstadoAtual->executar();
     }
 
 }
 
 void Gerenciador_Estados::setEstadoAtual(tipoEstado tipo){
     int pontos = 0;
+    std::string caminho = PROJECT_ROOT;
+    caminho += "/data/savedGame.json";
     switch (tipo){
         case menu:
             pEstadoAtual = static_cast<Estado*>(mapaEstados[menu]);
@@ -89,7 +95,14 @@ void Gerenciador_Estados::setEstadoAtual(tipoEstado tipo){
             pEstadoAtual = static_cast<Estado*>(mapaEstados[fim]);
             dynamic_cast<menus::Menu_Fim*>(pEstadoAtual)->setPontosParaIncrementar(pontos);
             ger::Gerenciador_Input::getInstancia()->criarInputMapEstado(fim);
-            break;  
+            break;
+        case salvar:
+            dynamic_cast<fases::Fase*>(mapaEstados[fase])->salvarJogo(caminho);
+            setEstadoAtual(pausa);
+            break;
+        case carregar:
+            gerenciarCarregamento();
+            break;
         default:
             break;
     }
@@ -120,7 +133,7 @@ void ger::Gerenciador_Estados::proximaFase(int numFase, int pontos)
             mapaEstados.erase(fase);
         }
         ger::Gerenciador_Colisoes::getInstancia()->limparListas();
-        fases::Castelo* faseCastelo = new fases::Castelo(pontos);
+        fases::Castelo* faseCastelo = new fases::Castelo(pontos, false);
         pEstadoAtual = faseCastelo;
 
         mapaEstados.insert(std::pair<tipoEstado, Estado*>(fase, static_cast<Estado*>(faseCastelo) ) );
@@ -137,12 +150,12 @@ void ger::Gerenciador_Estados::reiniciarJogo(int nFase)
         mapaEstados.erase(fase);
     }
     if( nFase == 0){
-        fases::Floresta* faseFloresta = new fases::Floresta();
+        fases::Floresta* faseFloresta = new fases::Floresta(false);
         mapaEstados.insert(std::pair<tipoEstado, Estado*>(fase, static_cast<Estado*>(faseFloresta) ) );
         faseFloresta->setPGG(ger::Gerenciador_Grafico::getInstancia());
     }
     else if(nFase == 1){
-    fases::Castelo* faseCastelo = new fases::Castelo();
+    fases::Castelo* faseCastelo = new fases::Castelo(0, false);
     mapaEstados.insert(std::pair<tipoEstado, Estado*>(fase, static_cast<Estado*>(faseCastelo) ) );
     faseCastelo->setPGG(ger::Gerenciador_Grafico::getInstancia());
     }
@@ -155,5 +168,52 @@ void ger::Gerenciador_Estados::setFaseSelecionada(int n)
     }
     if(n == 1){
         reiniciarJogo(1);
+    }
+}
+
+void ger::Gerenciador_Estados::gerenciarCarregamento(){
+    std::cout <<"entrou\n";
+    std::string caminho = PROJECT_ROOT;
+    caminho += "/data/savedGame.json";
+    std::ifstream arquivo(caminho);
+
+    if(!arquivo.is_open()){
+        std::cerr<< "ERRO ao carregar jogo\n";
+        return;
+    }
+    std::cout <<"criou json\n";
+    json j;
+
+    try{
+        arquivo >> j;
+    }
+    catch (const std::exception& e){
+        std::cerr << "Erro ao processar JSON: " << e.what() <<"\n";
+        return;
+    }
+    if(j.contains("infosFase")){
+        int nFase = j["infosFase"]["numeroFase"];
+        std::cout<<nFase;
+        if(nFase == 0){
+            if(mapaEstados[fase]){
+                delete mapaEstados[fase];
+                mapaEstados.erase(fase);
+            }
+            ger::Gerenciador_Colisoes::getInstancia()->limparListas();
+            fases::Floresta* floresta = new fases::Floresta(true);
+            mapaEstados.insert(std::pair<tipoEstado, Estado*>(fase, static_cast<fases::Fase*>(floresta)));
+            floresta->setPGG(ger::Gerenciador_Grafico::getInstancia());
+        }
+        else if(nFase == 1){
+            if(mapaEstados[fase]){
+                delete mapaEstados[fase];
+                mapaEstados.erase(fase);
+            }
+            ger::Gerenciador_Colisoes::getInstancia()->limparListas();
+            fases::Castelo* castelo = new fases::Castelo(0 ,true);
+            mapaEstados.insert(std::pair<tipoEstado, Estado*>(fase, static_cast<fases::Fase*>(castelo)));
+            castelo ->setPGG(ger::Gerenciador_Grafico::getInstancia());
+        }
+        setEstadoAtual(fase);
     }
 }

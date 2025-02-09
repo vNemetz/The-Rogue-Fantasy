@@ -13,7 +13,7 @@ Goblin::Goblin()
 }
 
 Goblin::Goblin(sf::Vector2f pos, sf::Vector2f tam)
-    : Inimigo(pos, tam)
+    : Inimigo(pos, tam, goblin)
     , tempoSemDetectar(0.f)
     , estadoIdle(PARADO)
 {
@@ -37,15 +37,18 @@ void Goblin::executar() {
         Jogador* jogadorMenosDistante = jogadorMaisProximo();
         float distancia = distanciaJogador(jogadorMenosDistante);
 
-        if (distancia <= raioDetect && (std::abs(jogadorMaisProximo()->getPosition().x - posicao.x) > 5.f)) {
-            persegueJogador(jogadorMenosDistante);
+        if(jogadorMenosDistante){
+            if (distancia <= raioDetect && (std::abs(jogadorMaisProximo()->getPosition().x - posicao.x) > 5.f)) {
+                persegueJogador(jogadorMenosDistante);
 
-            tempoSemDetectar = 0.f;
-            estadoIdle = PARADO;
-        }
 
-        else {
-            movimentoAleatorio();
+                tempoSemDetectar = 0.f;
+                estadoIdle = PARADO;
+            }
+
+            else {
+                movimentoAleatorio();
+            }
         }
     }
 

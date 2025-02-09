@@ -16,8 +16,10 @@ public:
     Fabrica_Goblin();
     Fabrica_Goblin(ent::pers::Jogador* jog1, ent::pers::Jogador* jog2, bool doisJog, float tamanho);
     ~Fabrica_Goblin();
-
     ent::Entidade* criarEntidade(sf::Vector2f posicao) override;
+
+    void setJogador1(ent::pers::Jogador* j1);
+    void setJogador2(ent::pers::Jogador* j2);
 };
 
 }
