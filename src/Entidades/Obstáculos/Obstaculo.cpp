@@ -17,5 +17,15 @@ Obstaculo::Obstaculo(sf::Vector2f pos, sf::Vector2f tam, bool dan, ID id)
 Obstaculo::~Obstaculo() {
 }
 
+void Obstaculo::mover() {
+    sf::Vector2f ds = posicao;
+    
+    dt = pGG->getDeltaTime();
+
+    ds += velocidade * dt;
+
+    setPosition(ds);
+}
+
 }
 }

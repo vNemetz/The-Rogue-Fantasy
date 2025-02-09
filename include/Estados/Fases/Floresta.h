@@ -8,6 +8,8 @@ private:
     bool faseFinalizada;
     std::vector<sf::Vector2i> goblins;
     std::vector<sf::Vector2i> aranhas;
+    std::vector<sf::Vector2i> plataformasVoadoras;
+    std::vector<sf::Vector2i> caixas;
 
 public:
     Floresta();
@@ -15,7 +17,7 @@ public:
 
     virtual void criarFundo();
     virtual void criarMapa();
-    void criarInimigos();
+    void criarEntidades();
 
     virtual void checaObjetivo();
     void proximaFase();

@@ -1,7 +1,6 @@
 #include "Estados/Fases/Castelo.h"
 #include <fstream>
 #include <iostream>
-#include "Entidades/Obstáculos/Porta.h"
 
 
 fases::Castelo::Castelo():
@@ -10,7 +9,7 @@ Castelo(0)
 {
     criarMapa();
     criarFundo();
-    criarInimigos();
+    criarEntidades();
     pJog1->setPontos(pontos);
 }
 
@@ -20,7 +19,7 @@ Fase(1)
     setPontuacao(pts);
     criarMapa();
     criarFundo();
-    criarInimigos();
+    criarEntidades();
     pJog1->setPontos(pontos);
 }
 
@@ -62,6 +61,12 @@ void fases::Castelo::criarMapa(){
                 else if (linha[i] == 'a')
                     aranhas.push_back(sf::Vector2i(i, j));
 
+                else if (linha[i] == '*')
+                    plataformasVoadoras.push_back(sf::Vector2i(i, j));
+
+                else if (linha[i] == 'e')
+                    espinhos.push_back(sf::Vector2i(i, j));
+
                 else
                     criarEntidade(linha[i], sf::Vector2i(i, j));
             }
@@ -76,9 +81,8 @@ void fases::Castelo::criarMapa(){
 {
 }
 
-void fases::Castelo::criarInimigos(){
+void fases::Castelo::criarEntidades(){
     // Randomiza a quantidade de inimigos, com um mínimo de 3 de cada
-
     if (cavaleiros.size() >= 3) {
         unsigned int quantidadeCavaleiros = (rand() % (cavaleiros.size() - 2)) + 3;
 
@@ -113,5 +117,41 @@ void fases::Castelo::criarInimigos(){
         for (auto aranha : aranhas) {
             criarEntidade('a', aranha);
         }
+    }
+
+    // Randomiza as Plataformas (pelo menos 3)
+    if (plataformasVoadoras.size() >= 3) {
+        unsigned int quantidadePlataformas = (rand() % (plataformasVoadoras.size() - 2)) + 3;
+
+        for (int i = 0; i < quantidadePlataformas; i++) {
+            unsigned int plataformaRandom = (rand() % plataformasVoadoras.size());
+
+            criarEntidade('*', plataformasVoadoras[plataformaRandom]);
+
+            plataformasVoadoras.erase(plataformasVoadoras.begin() + plataformaRandom);
+        }
+    }
+
+    else {
+        for (auto plataforma: plataformasVoadoras)
+            criarEntidade('*', plataforma);
+    }
+
+    // Randomiza os Espinhos (pelo menos 3)
+    if (espinhos.size() >= 3) {
+        unsigned int quantidadeEspinhos = (rand() % (espinhos.size() - 2)) + 3;
+
+        for (int i = 0; i < quantidadeEspinhos; i++) {
+            unsigned int espinhoRandom = (rand() % espinhos.size());
+
+            criarEntidade('e', espinhos[espinhoRandom]);
+
+            espinhos.erase(espinhos.begin() + espinhoRandom);
+        }
+    }
+
+    else {
+        for (auto espinho: espinhos)
+            criarEntidade('e', espinho);
     }
 }

@@ -8,6 +8,7 @@ namespace obs {
 class Plataforma : public Obstaculo {
 private:
     int altura;
+    float empuxo;
 
 public:
     Plataforma();
@@ -15,6 +16,7 @@ public:
     ~Plataforma();
 
     void executar();
+    void aplicarEmpuxo();
 };
 
 }

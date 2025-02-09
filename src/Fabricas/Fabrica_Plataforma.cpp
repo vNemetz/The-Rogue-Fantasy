@@ -25,10 +25,11 @@ ent::Entidade* Fabrica_Plataforma::criarEntidade(sf::Vector2f posicao) {
     plataforma->setTamanhoFase(tamanhoFase);
 
     // Configurar textura conforme o tipo
-    if(numeroFase == 0)
-        plataforma->setTextura("Grass000" + std::to_string(tipoPlataforma));
-    else if(numeroFase ==1)
-        plataforma->setTextura("Brick000" + std::to_string(tipoPlataforma));
+    if (numeroFase == 0)
+        plataforma->setTextura("Grass" + std::to_string(tipoPlataforma));
+
+    else if (numeroFase ==1)
+        plataforma->setTextura("Brick" + std::to_string(tipoPlataforma));
 
     return static_cast<ent::Entidade*>(plataforma);
 }

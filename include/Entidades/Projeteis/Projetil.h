@@ -8,7 +8,7 @@ namespace prj {
 
 class Projetil : public Entidade {
 protected:
-    int dano;
+    float dano;
     bool paraDireita;
 
 public:
@@ -20,6 +20,8 @@ public:
 
     void setParaDireita(bool paraDireita);
     bool getParaDireita() const;
+    void setDano(float dano);
+    float getDano() const;
 };
 
 }

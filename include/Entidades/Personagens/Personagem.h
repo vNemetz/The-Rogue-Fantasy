@@ -1,6 +1,7 @@
 #pragma once
 #include "Entidades/Entidade.h"
 #include "ElementosGraficos/Animacao.h"
+#include <SFML/System/Vector2.hpp>
 
 namespace ent {
 namespace pers{
@@ -43,8 +44,8 @@ protected:
     bool levandoDano;
     bool atacando;
     bool morto;
-
     bool podeAtacar;
+    float lentidao;
 
     /* Knockback - Constantes */
     const float knockbackHorizontal = 500.f;
@@ -62,7 +63,7 @@ public:
 
     /* Movimentação */
     virtual void mover();
-    void sofrerDano(sf::Vector2f posicaoAtacante);
+    void sofrerDano(sf::Vector2f posicaoAtacante, float dano = 1.f);
     bool getOlhandoDireita() const;
     
     /* Estado */
@@ -77,6 +78,7 @@ public:
     bool getAtacando() const;
     bool getLevandoDano() const;
     int getPontos() const;
+    void setLentidao(float lentidao);
 
     /* Animação */
     void atualizarAnimacao();

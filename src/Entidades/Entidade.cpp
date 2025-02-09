@@ -14,6 +14,7 @@ Entidade::Entidade(sf::Vector2f pos, sf::Vector2f esc, ID id)
     , velocidadeMaxima(0.f, 0.f)
     , dt(0.f)
     , noChao(false)
+    , lento(false)
     , posicao(pos)
     , escala(esc)
     , tamanho()
@@ -46,8 +47,22 @@ void Entidade::setVelocidadeMaxima(sf::Vector2f velocidadeMaxima) {
     velocidade.y = velocidadeMaxima.y;
 }
 
+sf::Vector2f Entidade::getVelocidadeMaxima() const {
+    return velocidadeMaxima;
+}
+
 void Entidade::salvarDataBuffer()
 {
+}
+
+void Entidade::aplicarGravidade() {
+    if (!noChao) {
+        velocidade.y += GRAVIDADE * dt;
+    }
+
+    else {
+        velocidade.y = 0.f;
+    }
 }
 
 bool Entidade::getNoChao() const {
@@ -56,6 +71,10 @@ bool Entidade::getNoChao() const {
 
 void Entidade::setNoChao(bool noChao) {
     this->noChao = noChao;
+}
+
+void Entidade::setLento(bool lento) {
+    this->lento = lento;
 }
 
 /* Gráficos */
