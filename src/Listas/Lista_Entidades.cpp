@@ -40,7 +40,11 @@ void Lista_Entidades::percorrer() {
         else {
             aux->executar();
             aux->desenhar();
+
+            /* Condições iniciais das entidades */
             aux->setNoChao(false);
+            aux->setLento(false);
+            
             //aux->desenharHitbox();
             ++it;
         }

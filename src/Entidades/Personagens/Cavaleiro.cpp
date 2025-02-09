@@ -35,7 +35,7 @@ void Cavaleiro::executar() {
         if (distancia <= raioAtaque)
             atacar(jogadorMenosDistante);
 
-        else if (distancia <= raioDetect)
+        else if (distancia <= raioDetect && (std::abs(jogadorMaisProximo()->getPosition().x - posicao.x) > 5.f))
             persegueJogador(jogadorMenosDistante);
 
         else
@@ -56,13 +56,13 @@ void Cavaleiro::atacar(Jogador* jogador) {
     parar();
 
         if(jogador){
-        if (jogador->getPosition().x > posicao.x)
-            olhandoDireita = true;
+            if (jogador->getPosition().x > posicao.x)
+                olhandoDireita = true;
 
-        else
-            olhandoDireita = false;
+            else
+                olhandoDireita = false;
 
-        atacando = true;
+            atacando = true;
     }
 }
 

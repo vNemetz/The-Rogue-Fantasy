@@ -1,6 +1,5 @@
 #include "Estados/Fases/Floresta.h"
 #include "Gerenciadores/Gerenciador_Estados.h"
-#include "Entidades/Obstáculos/Porta.h"
 #include <iostream>
 #include <fstream>
 
@@ -11,13 +10,12 @@ Fase(0, carreg)
     criarFundo();
     if(!carregada){
         criarMapa();
-        criarInimigos();
+        criarEntidades();
     }else{
         std::string caminho = PROJECT_ROOT;
         caminho += "/data/savedGame.json";
         carregarJogo(caminho);
-    }
-    
+    } 
 }
 
 fases::Floresta::~Floresta()
@@ -57,6 +55,12 @@ void fases::Floresta::criarMapa(){
                 else if (linha[i] == 'a')
                     aranhas.push_back(sf::Vector2i(i, j));
 
+                else if (linha[i] == '*')
+                    plataformasVoadoras.push_back(sf::Vector2i(i, j));
+
+                else if (linha[i] == 'b')
+                    caixas.push_back(sf::Vector2i(i, j));
+
                 else
                     criarEntidade(linha[i], sf::Vector2i(i, j));
             }
@@ -67,8 +71,8 @@ void fases::Floresta::criarMapa(){
     arquivoMapa.close();
 }
 
-void fases::Floresta::criarInimigos() {
-    // Randomiza a quantidade de inimigos, com um mínimo de 3 de cada
+void fases::Floresta::criarEntidades() {
+    // Randomiza os Goblins (pelo menos 3)
     if (goblins.size() >= 3) {
         unsigned int quantidadeGoblins = (rand() % (goblins.size() - 2)) + 3;
 
@@ -82,11 +86,11 @@ void fases::Floresta::criarInimigos() {
     }
 
     else {
-        for (auto goblin : goblins) {
+        for (auto goblin : goblins)
             criarEntidade('g', goblin);
-        }
     }
     
+    // Randomiza as Aranhas (pelo menos 3)
     if (aranhas.size() >= 3) {
         unsigned int quantidadeAranhas = (rand() % (aranhas.size() - 2)) + 3;
 
@@ -100,9 +104,44 @@ void fases::Floresta::criarInimigos() {
     }
 
     else {
-        for (auto aranha : aranhas) {
+        for (auto aranha : aranhas)
             criarEntidade('a', aranha);
+    }
+
+    // Randomiza as Plataformas (pelo menos 3)
+    if (plataformasVoadoras.size() >= 3) {
+        unsigned int quantidadePlataformas = (rand() % (plataformasVoadoras.size() - 2)) + 3;
+
+        for (int i = 0; i < quantidadePlataformas; i++) {
+            unsigned int plataformaRandom = (rand() % plataformasVoadoras.size());
+
+            criarEntidade('*', plataformasVoadoras[plataformaRandom]);
+
+            plataformasVoadoras.erase(plataformasVoadoras.begin() + plataformaRandom);
         }
+    }
+
+    else {
+        for (auto plataforma: plataformasVoadoras)
+            criarEntidade('*', plataforma);
+    }
+
+    // Randomiza as Caixas (pelo menos 3)
+    if (caixas.size() >= 3) {
+        unsigned int quantidadeCaixas = (rand() % (caixas.size() - 2)) + 3;
+
+        for (int i = 0; i < quantidadeCaixas; i++) {
+            unsigned int caixaRandom = (rand() % caixas.size());
+
+            criarEntidade('b', caixas[caixaRandom]);
+
+            caixas.erase(caixas.begin() + caixaRandom);
+        }
+    }
+
+    else {
+        for (auto caixa: caixas)
+            criarEntidade('b', caixa);
     }
 }
 

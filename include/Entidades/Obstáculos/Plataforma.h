@@ -8,14 +8,17 @@ namespace obs {
 enum tipoPlataforma{
     topoGrama = 0,
     meioGrama,
+    cantoGrama,
     topoTijolo,
-    meioTijolo
+    meioTijolo,
+    cantoTijolo
 };
 
 class Plataforma : public Obstaculo {
 private:
     tipoPlataforma tipo;
     int altura;
+    float empuxo;
 
 public:
     Plataforma();
@@ -26,6 +29,8 @@ public:
 
     tipoPlataforma getTipoPlataforma() const;
     void setTipoPlataforma(tipoPlataforma tip);
+    void aplicarEmpuxo();
+
 };
 
 }

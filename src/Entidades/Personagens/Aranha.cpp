@@ -75,6 +75,9 @@ void Aranha::atacar(Jogador* jogador) {
 
         else
             teia->setPosition(sf::Vector2f(posicao.x, posicao.y));
+        
+        sf::Vector2f posicaoInicial = sf::Vector2f(teia->getPosition().x, tamanho.y);
+        teia->setPosicaoInicial(posicaoInicial);
 
         listaProjeteis->incluir(teia);
         mediador->incluirEntidade(teia);
