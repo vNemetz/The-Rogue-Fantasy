@@ -7,16 +7,7 @@ fases::Castelo::Castelo():
 Castelo(1, false)
 
 {
-    criarFundo();
-    if(!carregada){
-        criarMapa();
-        criarEntidades();
-        pJog1->setPontos(pontos);
-    }else{
-        std::string caminho = PROJECT_ROOT;
-        caminho += "/data/savedGame.json";
-        carregarJogo(caminho);
-    }
+
 }
 
 fases::Castelo::Castelo(int pts,  bool carreg):

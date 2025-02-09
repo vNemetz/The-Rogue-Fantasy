@@ -37,15 +37,17 @@ void Goblin::executar() {
         Jogador* jogadorMenosDistante = jogadorMaisProximo();
         float distancia = distanciaJogador(jogadorMenosDistante);
 
-        if (distancia <= raioDetect && (std::abs(jogadorMaisProximo()->getPosition().x - posicao.x) > 5.f)) {
-            persegueJogador(jogadorMenosDistante);
+        if(jogadorMenosDistante){
+            if (distancia <= raioDetect && (std::abs(jogadorMaisProximo()->getPosition().x - posicao.x) > 5.f)) {
+                persegueJogador(jogadorMenosDistante);
 
-            tempoSemDetectar = 0.f;
-            estadoIdle = PARADO;
-        }
+                tempoSemDetectar = 0.f;
+                estadoIdle = PARADO;
+            }
 
-        else {
-            movimentoAleatorio();
+            else {
+                movimentoAleatorio();
+            }
         }
     }
 
