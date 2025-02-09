@@ -107,7 +107,7 @@ void fases::Floresta::criarInimigos() {
 }
 
 void fases::Floresta::checaObjetivo(){
-    if(listaInimigos.getTamanho() == 0){
+    if(listaInimigos.getTamanho() <= 0){
         proximaFase();
     }
 }

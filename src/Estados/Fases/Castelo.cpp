@@ -5,7 +5,7 @@
 
 
 fases::Castelo::Castelo():
-Castelo(0, false)
+Castelo(1, false)
 
 {
     criarFundo();

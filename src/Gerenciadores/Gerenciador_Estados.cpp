@@ -193,7 +193,6 @@ void ger::Gerenciador_Estados::gerenciarCarregamento(){
     }
     std::cout <<"passou try\n";
     if(j.contains("numeroFase")){
-        std::cout << "contem\n";
         int nFase = j["numeroFase"];
 
         if(nFase == 0){
@@ -201,6 +200,7 @@ void ger::Gerenciador_Estados::gerenciarCarregamento(){
                 delete mapaEstados[fase];
                 mapaEstados.erase(fase);
             }
+            ger::Gerenciador_Colisoes::getInstancia()->limparListas();
             fases::Floresta* floresta = new fases::Floresta(true);
             mapaEstados.insert(std::pair<tipoEstado, Estado*>(fase, static_cast<fases::Fase*>(floresta)));
             floresta->setPGG(ger::Gerenciador_Grafico::getInstancia());

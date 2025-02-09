@@ -6,6 +6,8 @@ falabunda
 rosan
 2200
 aaaa
+500
+skibdi
 100
 chales balduin
 100
@@ -16,5 +18,3 @@ vinicius
 freddy
 100
 nmtz
-100
-casca de bala

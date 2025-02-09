@@ -14,6 +14,7 @@ enum tipoPlataforma{
 
 class Plataforma : public Obstaculo {
 private:
+    tipoPlataforma tipo;
     int altura;
 
 public:
@@ -23,8 +24,8 @@ public:
 
     void executar();
 
-    tipoPlataforma getTipoPlataforma();
-    void setTipoPlataforma() const;
+    tipoPlataforma getTipoPlataforma() const;
+    void setTipoPlataforma(tipoPlataforma tip);
 };
 
 }

@@ -1,6 +1,7 @@
 #include "Entidades/Obstáculos/Plataforma.h"
 #include <cmath>
 
+
 namespace ent {
 namespace obs {
 
@@ -23,6 +24,15 @@ Plataforma::~Plataforma()
 void Plataforma::executar() {
 }
 
+tipoPlataforma Plataforma::getTipoPlataforma() const
+{
+    return (tipo);
+}
+
+void Plataforma::setTipoPlataforma(tipoPlataforma tip) 
+{
+    tipo = tip;
+}
 }
 }
 

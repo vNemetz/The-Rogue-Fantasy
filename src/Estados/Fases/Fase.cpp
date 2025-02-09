@@ -62,11 +62,12 @@ fases::Fase::Fase(int nFase, bool carreg)
     registrarFabrica('|', new fact::Fabrica_Plataforma(numeroFase, 3, tamanhoFase));
     registrarFabrica('@', new fact::Fabrica_Plataforma(numeroFase, 4, tamanhoFase));
     registrarFabrica('.', new fact::Fabrica_Plataforma(numeroFase, 5, tamanhoFase));
-    if(carregada){
+    /*if(carregada){
+        std::cout <<"carregando fase\n";
         std::string caminho =PROJECT_ROOT;
         caminho += "/data/savedGame.json";
         carregarJogo(caminho);
-    }
+    }*/
 }
 
 
@@ -304,7 +305,9 @@ void fases::Fase::salvarJogo(std::string caminho){
             obs["tipo"] = obstaculo->getID();
             obs["posicao"]["x"] = obstaculo->getPosition().x;
             obs["posicao"]["y"] = obstaculo->getPosition().y;
-            
+            if(obstaculo->getID() == ID::plataforma){
+                obs["tipoPlataforma"] = dynamic_cast<ent::obs::Plataforma*>(obstaculo)->getTipoPlataforma();
+            }
             j["obstaculos"].push_back(obs);
         }
     }
@@ -354,7 +357,12 @@ void fases::Fase::salvarJogo(std::string caminho){
 
 void fases::Fase::carregarJogo(std::string caminho){
     std::ifstream arquivo(caminho);
+    listaInimigos.limpar();
+    listaJogadores.limpar();
+    listaObstaculos.limpar();
+    listaProjeteis.limpar();
 
+    std::cout <<"Entrou em carregar jogo\n";
     if(!arquivo.is_open()){
         std::cerr<< "ERRO ao carregar jogo\n";
         return;
@@ -369,9 +377,8 @@ void fases::Fase::carregarJogo(std::string caminho){
         std::cerr << "Erro ao processar JSON: " << e.what() <<"\n";
         return;
     }        
-
     if(j.contains("Jogador1")){
-        pJog1  = dynamic_cast<ent::pers::Jogador*>(criarEntidade('j', sf::Vector2i(0, 0)));
+        pJog1  = dynamic_cast<ent::pers::Jogador*>(criarEntidade('j', sf::Vector2i(0,0)));
         if(pJog1){
             pJog1->setPosition(sf::Vector2f(j["Jogador1"]["posicao"]["x"], j["Jogador1"]["posicao"]["y"]));
             pJog1->setEhJogador1(j["Jogador1"]["ehJogador1"]);
@@ -380,11 +387,15 @@ void fases::Fase::carregarJogo(std::string caminho){
             pJog1->setPulando(j["Jogador1"]["pulando"]);
             pJog1->setEstado(j["Jogador1"]["estado"]);
 
+
+            static_cast<fact::Fabrica_Goblin*>(fabricas['g'])->setJogador1(pJog1);
+            static_cast<fact::Fabrica_Aranha*>(fabricas['a'])->setJogador1(pJog1);
             //listaJogadores.incluir(static_cast<ent::Entidade*>(pJog1));
         }
     }
 
-    if(j.contains("doisJogadores")){   
+    if(j["doisJogadores"] == true){ 
+        this->doisJogadores = true;
         if(j.contains("Jogador2")){
             pJog2  = dynamic_cast<ent::pers::Jogador*>(criarEntidade('k', sf::Vector2i(0, 0)));
             if(pJog2){
@@ -394,7 +405,8 @@ void fases::Fase::carregarJogo(std::string caminho){
                 pJog2->setPontos(j["Jogador2"]["pontos"]);
                 pJog2->setPulando(j["Jogador2"]["pulando"]);
                 pJog2->setEstado(j["Jogador2"]["estado"]);
-
+                static_cast<fact::Fabrica_Goblin*>(fabricas['g'])->setJogador2(pJog2);
+            static_cast<fact::Fabrica_Aranha*>(fabricas['a'])->setJogador2(pJog2);
                 //listaJogadores.incluir(static_cast<ent::Entidade*>(pJog2));
             }
         }
@@ -405,11 +417,27 @@ void fases::Fase::carregarJogo(std::string caminho){
             ID id = dadoObstaculo["tipo"];
 
             if(id == ID::plataforma){
-                ent::obs::Plataforma* plataforma= dynamic_cast<ent::obs::Plataforma*>(criarEntidade(('#'), sf::Vector2i(0, 0)));
-                if(plataforma){
-                    plataforma->setPosition(sf::Vector2f(dadoObstaculo["posicao"]["x"], dadoObstaculo["posicao"]["y"]));
-                    //listaObstaculos.incluir(static_cast<ent::Entidade*>(plataforma));
+                ent::obs::tipoPlataforma tipo= dadoObstaculo["tipoPlataforma"];
+                ent::obs::Plataforma* pPlataforma = nullptr;
+                if(numeroFase == 0){
+                    if(tipo == ent::obs::tipoPlataforma::topoGrama){
+                        pPlataforma= dynamic_cast<ent::obs::Plataforma*>(criarEntidade(('#'), sf::Vector2i(0, 0)));
+                    }
+                    else if(tipo == ent::obs::tipoPlataforma::meioGrama){
+                        pPlataforma= dynamic_cast<ent::obs::Plataforma*>(criarEntidade(('@'), sf::Vector2i(0, 0)));
+                    }
                 }
+                if(numeroFase == 1){
+                if(tipo == ent::obs::tipoPlataforma::topoTijolo){
+                    pPlataforma= dynamic_cast<ent::obs::Plataforma*>(criarEntidade(('@'), sf::Vector2i(0, 0)));
+                }
+                else if(tipo == ent::obs::tipoPlataforma::meioTijolo){
+                    pPlataforma= dynamic_cast<ent::obs::Plataforma*>(criarEntidade(('@'), sf::Vector2i(0, 0)));
+                }
+                }
+                if(pPlataforma)
+                pPlataforma->setPosition(sf::Vector2f(dadoObstaculo["posicao"]["x"], dadoObstaculo["posicao"]["y"]));
+                    //listaObstaculos.incluir(static_cast<ent::Entidade*>(plataforma));
             }
         }
     }

@@ -2,66 +2,66 @@
     "JOGO": 0,
     "Jogador1": {
         "ehJogador1": true,
-        "estado": 1,
+        "estado": 0,
         "pontos": 0,
         "posicao": {
-            "x": 1811.041015625,
-            "y": 384.5814514160156
+            "x": 270.0,
+            "y": 438.73876953125
         },
         "pulando": false,
-        "vidas": 9
+        "vidas": 10
     },
     "inimigos": [
         {
             "estado": 0,
             "posicao": {
-                "x": 3782.908203125,
-                "y": 389.2350158691406
+                "x": 1188.0,
+                "y": 387.289306640625
             },
-            "tipo": 1,
-            "vidas": 2
+            "tipo": 3,
+            "vidas": 5
         },
         {
             "estado": 0,
             "posicao": {
-                "x": 5937.09130859375,
-                "y": 389.2350158691406
+                "x": 4428.0,
+                "y": 387.289306640625
             },
-            "tipo": 1,
-            "vidas": 2
+            "tipo": 3,
+            "vidas": 5
         },
         {
             "estado": 0,
             "posicao": {
-                "x": 6639.09130859375,
-                "y": 389.2350158691406
+                "x": 2592.0,
+                "y": 387.289306640625
             },
-            "tipo": 1,
-            "vidas": 2
-        },
-        {
-            "estado": 6,
-            "posicao": {
-                "x": 6758.09130859375,
-                "y": 409.8468322753906
-            },
-            "tipo": 2,
-            "vidas": 3
-        },
-        {
-            "estado": 6,
-            "posicao": {
-                "x": 7128.0,
-                "y": 409.8468322753906
-            },
-            "tipo": 2,
-            "vidas": 3
+            "tipo": 3,
+            "vidas": 5
         },
         {
             "estado": 4,
             "posicao": {
-                "x": 2403.92919921875,
-                "y": 409.8468322753906
+                "x": 756.7119750976563,
+                "y": 464.289306640625
+            },
+            "tipo": 2,
+            "vidas": 3
+        },
+        {
+            "estado": 0,
+            "posicao": {
+                "x": 3942.0,
+                "y": 464.289306640625
+            },
+            "tipo": 2,
+            "vidas": 3
+        },
+        {
+            "estado": 0,
+            "posicao": {
+                "x": 2052.0,
+                "y": 464.289306640625
             },
             "tipo": 2,
             "vidas": 3
@@ -71,2720 +71,1586 @@
     "obstaculos": [
         {
             "posicao": {
-                "x": 7722.0,
-                "y": 270.0
+                "x": 2376.0,
+                "y": 324.0
             },
             "tipo": 6
         },
         {
             "posicao": {
                 "x": 0.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 108.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 216.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 324.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 432.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 540.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 648.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 756.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 864.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 972.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 1080.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 1188.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 1296.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 1404.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 1512.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 1620.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 1728.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 1836.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 1944.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 2052.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 2160.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 2268.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 2376.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 2484.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 2592.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 2700.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 2808.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 2916.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 3024.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 3132.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 3240.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 3348.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 3456.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 3564.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 3672.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 3780.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 3888.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 3996.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 4104.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 4212.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 4320.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 4428.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 4536.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 4644.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 4752.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 4860.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 4968.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5076.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5184.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5292.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5400.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5508.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5616.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5724.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5832.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5940.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6048.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6156.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6264.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6372.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6480.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6588.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6696.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6804.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6912.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7020.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7128.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7236.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7344.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7452.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7560.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7668.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7776.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7884.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7992.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 8100.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 8208.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 8316.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 8424.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 8532.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 8640.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 8748.0,
-                "y": 486.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 0.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 108.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 216.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 324.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 432.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 540.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 648.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 756.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 864.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 972.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 1080.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 1188.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 1296.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 1404.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 1512.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 1620.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 1728.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 1836.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 1944.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 2052.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 2160.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 2268.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 2376.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 2484.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 2592.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 2700.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 2808.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 2916.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 3024.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 3132.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 3240.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 3348.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 3456.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 3564.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 3672.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 3780.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 3888.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 3996.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 4104.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 4212.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 4320.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 4428.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 4536.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 4644.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 4752.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 4860.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 4968.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 5076.0,
                 "y": 540.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 5184.0,
                 "y": 540.0
             },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5292.0,
-                "y": 540.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5400.0,
-                "y": 540.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5508.0,
-                "y": 540.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5616.0,
-                "y": 540.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5724.0,
-                "y": 540.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5832.0,
-                "y": 540.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5940.0,
-                "y": 540.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6048.0,
-                "y": 540.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6156.0,
-                "y": 540.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6264.0,
-                "y": 540.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6372.0,
-                "y": 540.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6480.0,
-                "y": 540.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6588.0,
-                "y": 540.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6696.0,
-                "y": 540.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6804.0,
-                "y": 540.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6912.0,
-                "y": 540.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7020.0,
-                "y": 540.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7128.0,
-                "y": 540.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7236.0,
-                "y": 540.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7344.0,
-                "y": 540.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7452.0,
-                "y": 540.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7560.0,
-                "y": 540.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7668.0,
-                "y": 540.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7776.0,
-                "y": 540.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7884.0,
-                "y": 540.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7992.0,
-                "y": 540.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 8100.0,
-                "y": 540.0
-            },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 2
         },
         {
             "posicao": {
                 "x": 0.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 108.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 216.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 324.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 432.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 540.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 648.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 756.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 864.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 972.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 1080.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 1188.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 1296.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 1404.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 1512.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 1620.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 1728.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 1836.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 1944.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 2052.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 2160.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 2268.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 2376.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 2484.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 2592.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 2700.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 2808.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 2916.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 3024.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 3132.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 3240.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 3348.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 3456.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 3564.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 3672.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 3780.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 3888.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 3996.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 4104.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 4212.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 4320.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 4428.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 4536.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 4644.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 4752.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 4860.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 4968.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 5076.0,
                 "y": 594.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 5184.0,
                 "y": 594.0
             },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5292.0,
-                "y": 594.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5400.0,
-                "y": 594.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5508.0,
-                "y": 594.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5616.0,
-                "y": 594.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5724.0,
-                "y": 594.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5832.0,
-                "y": 594.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5940.0,
-                "y": 594.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6048.0,
-                "y": 594.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6156.0,
-                "y": 594.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6264.0,
-                "y": 594.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6372.0,
-                "y": 594.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6480.0,
-                "y": 594.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6588.0,
-                "y": 594.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6696.0,
-                "y": 594.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6804.0,
-                "y": 594.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6912.0,
-                "y": 594.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7020.0,
-                "y": 594.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7128.0,
-                "y": 594.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7236.0,
-                "y": 594.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7344.0,
-                "y": 594.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7452.0,
-                "y": 594.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7560.0,
-                "y": 594.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7668.0,
-                "y": 594.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7776.0,
-                "y": 594.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7884.0,
-                "y": 594.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7992.0,
-                "y": 594.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 8100.0,
-                "y": 594.0
-            },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 0.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 108.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 216.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 324.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 432.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 540.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 648.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 756.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 864.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 972.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 1080.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 1188.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 1296.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 1404.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 1512.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 1620.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 1728.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 1836.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 1944.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 2052.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 2160.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 2268.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 2376.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 2484.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 2592.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 2700.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 2808.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 2916.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 3024.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 3132.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 3240.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 3348.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 3456.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 3564.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 3672.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 3780.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 3888.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 3996.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 4104.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 4212.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 4320.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 4428.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 4536.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 4644.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 4752.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 4860.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 4968.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 5076.0,
                 "y": 648.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 5184.0,
                 "y": 648.0
             },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5292.0,
-                "y": 648.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5400.0,
-                "y": 648.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5508.0,
-                "y": 648.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5616.0,
-                "y": 648.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5724.0,
-                "y": 648.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5832.0,
-                "y": 648.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5940.0,
-                "y": 648.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6048.0,
-                "y": 648.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6156.0,
-                "y": 648.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6264.0,
-                "y": 648.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6372.0,
-                "y": 648.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6480.0,
-                "y": 648.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6588.0,
-                "y": 648.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6696.0,
-                "y": 648.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6804.0,
-                "y": 648.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6912.0,
-                "y": 648.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7020.0,
-                "y": 648.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7128.0,
-                "y": 648.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7236.0,
-                "y": 648.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7344.0,
-                "y": 648.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7452.0,
-                "y": 648.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7560.0,
-                "y": 648.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7668.0,
-                "y": 648.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7776.0,
-                "y": 648.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7884.0,
-                "y": 648.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7992.0,
-                "y": 648.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 8100.0,
-                "y": 648.0
-            },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 0.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 108.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 216.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 324.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 432.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 540.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 648.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 756.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 864.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 972.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 1080.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 1188.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 1296.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 1404.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 1512.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 1620.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 1728.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 1836.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 1944.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 2052.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 2160.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 2268.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 2376.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 2484.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 2592.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 2700.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 2808.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 2916.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 3024.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 3132.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 3240.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 3348.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 3456.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 3564.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 3672.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 3780.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 3888.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 3996.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 4104.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 4212.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 4320.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 4428.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 4536.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 4644.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 4752.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 4860.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 4968.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 5076.0,
                 "y": 702.0
             },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         },
         {
             "posicao": {
                 "x": 5184.0,
                 "y": 702.0
             },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5292.0,
-                "y": 702.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5400.0,
-                "y": 702.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5508.0,
-                "y": 702.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5616.0,
-                "y": 702.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5724.0,
-                "y": 702.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5832.0,
-                "y": 702.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 5940.0,
-                "y": 702.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6048.0,
-                "y": 702.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6156.0,
-                "y": 702.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6264.0,
-                "y": 702.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6372.0,
-                "y": 702.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6480.0,
-                "y": 702.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6588.0,
-                "y": 702.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6696.0,
-                "y": 702.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6804.0,
-                "y": 702.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 6912.0,
-                "y": 702.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7020.0,
-                "y": 702.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7128.0,
-                "y": 702.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7236.0,
-                "y": 702.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7344.0,
-                "y": 702.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7452.0,
-                "y": 702.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7560.0,
-                "y": 702.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7668.0,
-                "y": 702.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7776.0,
-                "y": 702.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7884.0,
-                "y": 702.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 7992.0,
-                "y": 702.0
-            },
-            "tipo": 2
-        },
-        {
-            "posicao": {
-                "x": 8100.0,
-                "y": 702.0
-            },
-            "tipo": 2
+            "tipo": 2,
+            "tipoPlataforma": 3
         }
     ],
     "projeteis": [
         {
             "aDireita": false,
             "posicao": {
-                "x": 2114.252685546875,
-                "y": 306.84417724609375
+                "x": 354.5821838378906,
+                "y": 367.91748046875
             }
         }
     ]

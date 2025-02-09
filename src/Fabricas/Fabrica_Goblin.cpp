@@ -3,6 +3,7 @@
 #include <iostream>
 
 
+
 namespace fact {
 
 Fabrica_Goblin::Fabrica_Goblin()
@@ -34,4 +35,18 @@ ent::Entidade *Fabrica_Goblin::criarEntidade(sf::Vector2f posicao)
     
     return static_cast<ent::Entidade*>(goblin);
 }
+}
+
+void fact::Fabrica_Goblin::setJogador1(ent::pers::Jogador *j1)
+{
+    if(j1){
+        pJog1 = j1;
+    }
+}
+
+void fact::Fabrica_Goblin::setJogador2(ent::pers::Jogador *j2)
+{
+        if(j2){
+        pJog2 = j2;
+    }
 }
