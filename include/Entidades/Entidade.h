@@ -20,6 +20,7 @@ protected:
     sf::Vector2f velocidadeMaxima;
     float dt;
     bool noChao;
+    bool lento;
     float tamanhoFase;
 
     bool paraDeletar;
@@ -40,12 +41,16 @@ public:
     //virtual void salvar() = 0;
     void salvarDataBuffer();
 
+    void aplicarGravidade();
+
     sf::Vector2f getVelocidade() const;
     void setVelocidade(sf::Vector2f velocidade);
     void setVelocidadeMaxima(sf::Vector2f velocidadeMaxima);
+    sf::Vector2f getVelocidadeMaxima() const;
     
     bool getNoChao() const;
     void setNoChao(bool noChao);
+    void setLento(bool lento);
     
     /* Gráficos */
     void setTextura(std::string nomeImagem);

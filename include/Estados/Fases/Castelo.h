@@ -7,6 +7,9 @@ class Castelo : public Fase{
 private:
     std::vector<sf::Vector2i> aranhas;
     std::vector<sf::Vector2i> cavaleiros;
+    std::vector<sf::Vector2i> plataformasVoadoras;
+    std::vector<sf::Vector2i> espinhos;
+
 public:
     Castelo();
     Castelo(int pts, bool carreg);
@@ -16,6 +19,6 @@ public:
     virtual void criarMapa();
 
     void checaObjetivo();
-    void criarInimigos();
+    void criarEntidades();
 };
 }

@@ -16,6 +16,7 @@ public:
     ~Obstaculo();
 
     virtual void executar() = 0;
+    void mover();
 };
 
 }

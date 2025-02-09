@@ -51,6 +51,7 @@ ent::Entidade* Fabrica_Plataforma::criarEntidade(sf::Vector2f posicao) {
                 break;
         }
     }
+
     return static_cast<ent::Entidade*>(plataforma);
 }
 

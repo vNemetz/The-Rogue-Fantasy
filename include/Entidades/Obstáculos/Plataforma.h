@@ -16,6 +16,7 @@ class Plataforma : public Obstaculo {
 private:
     tipoPlataforma tipo;
     int altura;
+    float empuxo;
 
 public:
     Plataforma();
@@ -26,6 +27,8 @@ public:
 
     tipoPlataforma getTipoPlataforma() const;
     void setTipoPlataforma(tipoPlataforma tip);
+    void aplicarEmpuxo();
+
 };
 
 }
