@@ -6,6 +6,10 @@ falabunda
 rosan
 2200
 aaaa
+1100
+aaa
+1000
+aaa
 500
 skibdi
 100
@@ -14,7 +18,3 @@ chales balduin
 vinic
 100
 vinicius
-100
-freddy
-100
-nmtz

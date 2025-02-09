@@ -33,4 +33,16 @@ ent::Entidade* Fabrica_Cavaleiro::criarEntidade(sf::Vector2f posicao) {
     return static_cast<ent::Entidade*>(cavaleiro);
 }
 
+void Fabrica_Cavaleiro::setJogador1(ent::pers::Jogador *j1)
+{
+    if(j1){
+        pJog1 = j1;
+    }
+}
+void Fabrica_Cavaleiro::setJogador2(ent::pers::Jogador *j2)
+{
+    if(j2){
+        pJog2 = j2;
+    }
+}
 }
