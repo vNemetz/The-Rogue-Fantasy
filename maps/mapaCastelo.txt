@@ -6,7 +6,7 @@
                                e                                         
                                *                              *               c
                                                                              *             c
-                *                                d                                       *
+                *                                                                        *        d        
                                                                                               
   j    *                                                                                
                a         e     c            e   a         c   e     a      c       a            
