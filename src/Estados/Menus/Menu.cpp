@@ -104,13 +104,7 @@ void Menu::desenharBotoes()
     }
 }
 
-void Menu::checarBotoes(){
-        for(it = vetorBotoes.begin(); it != vetorBotoes.end(); it++){
-            if(*it){
-                (*it)->checarApertado();
-            }
-        }
-}
+
 
 void Menu::desenhar()
 {

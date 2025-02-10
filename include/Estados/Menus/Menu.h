@@ -27,7 +27,6 @@ public:
     void adicionarBotao(std::string nomeImg, sf::Vector2f escala, std::string text, sf::Vector2f pos);    
     void desenharBotoes();
 
-    void checarBotoes();
     virtual void desenhar();
 
     virtual void executarEstado() = 0;

@@ -133,10 +133,6 @@ void Gerenciador_Input::setMenuFim(menus::Menu_Fim *pMenuFim)
 
 }
 
-void Gerenciador_Input::checarEstado() const
-{
-    pGerEstados->getEstadoAtual();
-}
 
 void Gerenciador_Input::criarInputMapEstado(tipoEstado tipoEstado)
 {

@@ -34,10 +34,6 @@ ElementosGraficos::Botao::~Botao()
     delete textoBotao;
 }
 
-void ElementosGraficos::Botao::alterarApertado()
-{
-    apertado = !apertado;
-}
 
 void ElementosGraficos::Botao::setEscala(sf::Vector2f escala)
 {
@@ -89,9 +85,4 @@ sf::Text* ElementosGraficos::Botao::getTexto() const
     return textoBotao;
     }return nullptr;
     
-}
-
-bool ElementosGraficos::Botao::checarApertado() const
-{
-    return false;
 }

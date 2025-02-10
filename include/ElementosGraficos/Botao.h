@@ -20,7 +20,6 @@ public:
     ~Botao();
 
 
-    void alterarApertado();
     void setEscala(sf::Vector2f escala);
     sf::Vector2u getTamanho() const;
     void setTextura(std::string nomeImagem);
@@ -30,7 +29,6 @@ public:
     void setTexto(std::string text, sf::Vector2f escala);
     sf::Text* getTexto() const;
 
-    bool checarApertado() const;
 
 };
 }

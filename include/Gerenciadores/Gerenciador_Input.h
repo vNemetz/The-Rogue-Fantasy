@@ -46,7 +46,6 @@ public:
     void setMenuPausa(menus::Menu_Pausa* pMenuPause);
     void setMenuFim(menus::Menu_Fim* pMenuFim);
 
-    void checarEstado() const;
      void criarInputMapEstado(tipoEstado tipoEstado); /*Cria o input map com base no estado atual*/
     void iniciarListaObservadores();
 

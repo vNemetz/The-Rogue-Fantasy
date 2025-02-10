@@ -51,10 +51,6 @@ sf::Vector2f Entidade::getVelocidadeMaxima() const {
     return velocidadeMaxima;
 }
 
-void Entidade::salvarDataBuffer()
-{
-}
-
 void Entidade::aplicarGravidade() {
     if (!noChao) {
         velocidade.y += GRAVIDADE * dt;
