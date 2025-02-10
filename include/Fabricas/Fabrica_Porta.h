@@ -15,5 +15,5 @@ public:
 
     ent::Entidade* criarEntidade(sf::Vector2f posicao) override;
 };
-
+    
 }
